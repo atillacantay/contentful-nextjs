@@ -1,0 +1,20 @@
+query mainNavigation($locale: String, $preview: Boolean) {
+  mainNavigationCollection(limit: 1, locale: $locale, preview: $preview) {
+    items {
+      __typename
+      sys {
+        id
+      }
+      itemsCollection {
+        items {
+          sys {
+            id
+          }
+          slug
+          title
+          pageName
+        }
+      }
+    }
+  }
+}

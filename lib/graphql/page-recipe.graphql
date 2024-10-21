@@ -1,0 +1,72 @@
+fragment PageRecipeFields on PageRecipe {
+  sys {
+    id
+  }
+  slug
+  title
+  description
+  category
+  cookingTimeMinutes
+  persons
+  difficulty
+  calories
+  image {
+    url
+    title
+    width
+    height
+  }
+  author {
+    name
+    avatar {
+      url
+      title
+      width
+      height
+    }
+  }
+  preparationStepsCollection {
+    items {
+      _id
+      sys {
+        id
+      }
+      image {
+        url
+        title
+        width
+        height
+      }
+      description
+    }
+  }
+  seo {
+    name
+    title
+    description
+    canonicalUrl
+    image {
+      title
+      description
+      contentType
+      url
+      width
+      height
+    }
+    noFollow
+    noIndex
+  }
+}
+
+query pageRecipe($slug: String!, $locale: String, $preview: Boolean) {
+  pageRecipeCollection(
+    limit: 1
+    locale: $locale
+    where: { slug: $slug }
+    preview: $preview
+  ) {
+    items {
+      ...PageRecipeFields
+    }
+  }
+}

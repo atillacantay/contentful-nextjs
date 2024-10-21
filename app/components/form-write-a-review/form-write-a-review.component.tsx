@@ -1,0 +1,333 @@
+"use client";
+
+import { clsxm } from "@/utils/twMerge.utils";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
+
+import Button from "@/components/common/button";
+import Modal from "@/components/common/modal";
+import Stack from "@/components/common/stack/stack.component";
+import Text from "@/components/common/typography/text";
+import Rate from "@/components/rate/rate.component";
+
+import useReviews from "@/hooks/useReviews";
+import IconAdd from "@/public/assets/icons/add.svg";
+import TrashIcon from "@/public/assets/icons/close.svg";
+import { ArgsFormWriteAReview } from "./form-write-a-review.interfaces";
+
+const FormWriteAReview = ({
+  buttonLabel,
+  modalLabel,
+  details,
+  formLabels,
+  className,
+  buttonClassName,
+  apiData: { authorId, parentId, relatedId, relatedObjectType, cultureCode },
+}: ArgsFormWriteAReview): JSX.Element => {
+  const [isFormWriteAReviewShown, setFormWriteAReviewShown] =
+    useState<boolean>(false);
+  const [rating, setRating] = useState<number>(0);
+  const [ingredients, setIngredients] = useState<number>(0);
+  const [accuracy, setAccuracy] = useState<number>(0);
+  const [difficulty, setDifficulty] = useState<number>(0);
+  const [taste, setTaste] = useState<number>(0);
+  const [imagesToUpload, setImagesToUpload] = useState<Record<string, File>>(
+    {}
+  );
+  const [userReview, setUserReview] = useState<string>("");
+  const { add } = useReviews();
+
+  const isValid = useMemo(
+    () =>
+      !!(
+        rating ||
+        accuracy ||
+        difficulty ||
+        taste ||
+        Object.keys(imagesToUpload).length ||
+        userReview.length
+      ),
+    [rating, accuracy, difficulty, taste, imagesToUpload, userReview]
+  );
+
+  const scores: [
+    string,
+    number,
+    React.Dispatch<React.SetStateAction<number>>
+  ][] = [
+    [formLabels.overallRating, rating, setRating],
+    [formLabels.ingredients, ingredients, setIngredients],
+    [formLabels.accuracy, accuracy, setAccuracy],
+    [formLabels.difficulty, difficulty, setDifficulty],
+    [formLabels.taste, taste, setTaste],
+  ];
+
+  const addImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = Array.from(e.target.files || []).slice(0, 1)[0];
+    if (file && file.size <= 5000000) {
+      // 5MB
+      const imageList = Object.entries(imagesToUpload).slice(-2);
+      const uri = URL.createObjectURL(file);
+      imageList.push([uri, file]);
+      setImagesToUpload(Object.fromEntries(imageList));
+    }
+  };
+
+  const removeImage = (src: string) => {
+    const list = [...Object.entries(imagesToUpload)];
+    const index = list.findIndex((imagesToUpload) => imagesToUpload[0] === src);
+    if (index < 0) return;
+    list.splice(index, 1);
+    setImagesToUpload(Object.fromEntries(list));
+  };
+
+  const clearAll = () => {
+    setRating(0);
+    setIngredients(0);
+    setAccuracy(0);
+    setDifficulty(0);
+    setTaste(0);
+    setImagesToUpload({});
+    setUserReview("");
+  };
+
+  useEffect(() => {
+    if (isFormWriteAReviewShown === false) clearAll();
+  }, [isFormWriteAReviewShown]);
+
+  const submit = () => {
+    if (!isValid) return;
+
+    add(
+      {
+        content: userReview,
+        ratingOverall: rating,
+        ratingIngredients: ingredients,
+        ratingAccuracy: accuracy,
+        ratingDifficulty: difficulty,
+        ratingTaste: taste,
+        authorId,
+        parentId,
+        relatedId,
+        relatedObjectType,
+        images: Object.values(imagesToUpload),
+      },
+      cultureCode
+    ).finally(() => {
+      setFormWriteAReviewShown(false);
+    });
+  };
+
+  const render = (
+    <div data-cmp="form-write-a-review" className={className}>
+      <>
+        <Button
+          variant="contained"
+          size="lg"
+          className={clsxm(
+            "inline text-white max-md:w-full bg-primary_red max-sm:py-4",
+            buttonClassName
+          )}
+          onClick={() => setFormWriteAReviewShown(true)}
+        >
+          {buttonLabel}
+        </Button>
+        {isFormWriteAReviewShown ? (
+          <Modal
+            show={isFormWriteAReviewShown}
+            title={modalLabel}
+            onClose={() => setFormWriteAReviewShown(false)}
+            align="middle"
+          >
+            <Modal.Body className="max-sm:bg-[rgb(250,250,250)] dark:max-sm:bg-goki_dark border-t dark:border-custom2_dark pt-10">
+              <div className="bg-light-600 pb-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
+                {details.imageURL ? (
+                  <img
+                    src={details.imageURL}
+                    alt={details.title}
+                    className="md:w-[100px] md:h-[100px] object-cover rounded-xl"
+                    sizes="(min-width: 768px) 200px, 100vw"
+                  />
+                ) : (
+                  <></>
+                )}
+                <div className="grow flex flex-col space-y-2 md:space-y-3">
+                  {details.rating ? (
+                    <Rate rate={details.rating} hideRateText>
+                      <Text
+                        size="sm"
+                        weight="light"
+                        className="ltr:ml-2 rtl:mr-2 leading-3"
+                      >
+                        {details.ratingLabel}
+                      </Text>
+                    </Rate>
+                  ) : (
+                    <></>
+                  )}
+                  <Text weight="semibold" size="sm">
+                    {details.title}
+                  </Text>
+                  <div className="flex items-center">
+                    {details.avatarURL ? (
+                      <div className="relative overflow-hidden bg-white dark:bg-goki_dark shadow-md shrink-0 rounded-full w-6 h-6">
+                        <img
+                          className="block w-full object-cover max-w-full h-full"
+                          src={details.avatarURL}
+                          alt={details.author}
+                          draggable="false"
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    <Text className="ltr:ml-2 rtl:mr-2 text-xs">
+                      {details.author}
+                    </Text>
+                  </div>
+                </div>
+              </div>
+
+              <>
+                {scores.map(([label, state, setState], key) => (
+                  <div
+                    className="py-8 max-sm:space-y-4 border-b dark:border-custom2_dark flex md:items-center max-sm:flex-col"
+                    key={"star-div" + key}
+                  >
+                    <Text weight="semibold" className="grow">
+                      {label}
+                    </Text>
+                    <div className="flex [&:hover_div:not(:hover)>svg]:text-[#FED236]">
+                      {[1, 2, 3, 4, 5].map((num, key) => (
+                        <div
+                          key={"star" + key}
+                          onClick={() => setState(num)}
+                          className={`ltr:pr-4 rtl:pl-4 [&:hover~div>svg]:!text-[#e8e8e8]`}
+                        >
+                          <svg
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`cursor-pointer hover:text-[#FED236] ${
+                              num <= state ? "text-[#FED236]" : "text-[#e8e8e8]"
+                            }`}
+                          >
+                            <g clipPath="url(#clip0_870_38290)">
+                              <path
+                                d="M14.3938 1.17313C14.6188 0.4745 15.2688 0 16 0C16.7313 0 17.3813 0.4745 17.6063 1.17313L20.7313 11H30.3375C31.2563 11 32 11.7438 32 12.6625C32 13.1938 31.7438 13.6938 31.2563 14.0063L23.1625 19.8937L26.3375 30.325C26.5938 31.1625 25.9688 32 25.1 32C24.8125 32 24.5312 31.9063 24.3062 31.725L16 25.2687L7.69375 31.725C7.46875 31.9063 7.13125 32 6.9 32C6.02875 32 5.40625 31.1625 5.65938 30.325L8.8375 19.8937L0.68875 14.0063C0.25625 13.6938 0 13.1938 0 12.6625C0 11.7438 0.74375 11 1.66188 11H11.2688L14.3938 1.17313Z"
+                                fill="currentColor"
+                              />
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_870_38290">
+                                <rect width="32" height="32" fill="white" />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </>
+
+              <div className="py-8 space-y-4 border-b dark:border-custom2_dark">
+                <Text weight="semibold">{formLabels.yourReview}</Text>
+                <textarea
+                  className=" w-full rounded-xl border border-[rgba(25,25,25,1)] p-4 dark:bg-custom2_dark dark:text-[rgba(255,255,255,0.5)] focus:outline-none"
+                  placeholder={formLabels.yourReviewInputPlaceholder}
+                  value={userReview}
+                  onChange={(e) => setUserReview(e.target.value)}
+                ></textarea>
+              </div>
+
+              <div className="py-8 space-y-4">
+                <Text weight="semibold">{formLabels.photos}</Text>
+                <Stack alignItems="center" spacing={4} className="mb-4">
+                  {Object.entries(imagesToUpload).map(([src], key) => (
+                    <span className="relative" key={key}>
+                      <img
+                        src={src}
+                        width={56}
+                        height={56}
+                        className="w-14 h-14 rounded-xl object-cover peer hover:filte hover:grayscale cursor-pointer"
+                        onClick={() => removeImage(src)}
+                      />
+                      <TrashIcon
+                        className="hidden peer-hover:block absolute top-[14px] left-[14px] text-white pointer-events-none"
+                        width={28}
+                        height={28}
+                      />
+                    </span>
+                  ))}
+                  {Object.entries(imagesToUpload)?.length > 2 ? (
+                    <></>
+                  ) : (
+                    <>
+                      <label
+                        htmlFor="input-file"
+                        className="inline-block rounded-full bg-primary_red_alt p-4 cursor-pointer !w-fit"
+                      >
+                        <IconAdd width={24} height={24} className="inline" />
+                        <span className="inline text-primary_red text-sm pl-1">
+                          {formLabels.photosUploadLimit}
+                        </span>
+                      </label>
+                      <input
+                        id="input-file"
+                        type="file"
+                        className="hidden"
+                        onChange={addImage}
+                        accept="image/png, image/jpeg, image/jpg"
+                        key={Object.entries(imagesToUpload)?.length}
+                      />
+                    </>
+                  )}
+                </Stack>
+              </div>
+            </Modal.Body>
+            <Modal.Footer className="justify-between border-t dark:border-custom2_dark">
+              <Button
+                className="text-primary_red underline cursor-pointer px-0"
+                onClick={clearAll}
+              >
+                {formLabels.clearAll}
+              </Button>
+              <Button
+                variant="contained"
+                className={clsxm(
+                  "place-self-end text-base",
+                  isValid && "bg-primary_red",
+                  !isValid && "bg-black/25 cursor-default"
+                )}
+                size="lg"
+                type="submit"
+                disabled={!isValid}
+                onClick={submit}
+              >
+                {formLabels.submit}
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        ) : (
+          <></>
+        )}
+      </>
+    </div>
+  );
+
+  return (
+    <>
+      {render}
+      {Array.from(
+        document?.getElementsByClassName("portal-form-write-a-review")
+      )?.map((el, key) =>
+        createPortal(render, el, `portal-form-write-a-review-${key}`)
+      )}
+    </>
+  );
+};
+
+export default FormWriteAReview;

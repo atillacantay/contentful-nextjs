@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../../template-marketing-webapp-nextjs"
+    },
+    {
+      "path": "../../kentico-portal"
+    }
+  ],
+  "settings": {}
+}

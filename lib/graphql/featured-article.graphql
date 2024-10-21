@@ -1,0 +1,39 @@
+fragment FeaturedArticleFields on FeaturedArticle {
+  article {
+    sys {
+      id
+      publishedAt
+    }
+    title
+    subtitle
+    slug
+    image {
+      url
+      description
+      width
+      height
+    }
+    readDurationInMin
+    author {
+      name
+      avatar {
+        url
+        description
+        width
+        height
+      }
+    }
+  }
+}
+
+query featuredArticleQuery($id: String!, $locale: String, $preview: Boolean) {
+  featuredArticle(id: $id, locale: $locale, preview: $preview) {
+    sys {
+      id
+    }
+    title
+    buttonText
+    buttonLink
+    ...FeaturedArticleFields
+  }
+}

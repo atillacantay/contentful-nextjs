@@ -1,0 +1,54 @@
+fragment PageArticleFields on PageArticle {
+  sys {
+    id
+  }
+  slug
+  title
+  subtitle
+  readDurationInMin
+  content
+  image {
+    url
+    title
+    width
+    height
+  }
+  author {
+    name
+    avatar {
+      url
+      title
+      width
+      height
+    }
+  }
+  seo {
+    name
+    title
+    description
+    canonicalUrl
+    image {
+      title
+      description
+      contentType
+      url
+      width
+      height
+    }
+    noFollow
+    noIndex
+  }
+}
+
+query pageArticle($slug: String!, $locale: String, $preview: Boolean) {
+  pageArticleCollection(
+    limit: 1
+    locale: $locale
+    where: { slug: $slug }
+    preview: $preview
+  ) {
+    items {
+      ...PageArticleFields
+    }
+  }
+}

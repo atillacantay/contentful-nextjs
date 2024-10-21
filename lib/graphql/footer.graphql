@@ -1,0 +1,39 @@
+query footer($locale: String, $preview: Boolean) {
+  footerCollection(limit: 1, locale: $locale, preview: $preview) {
+    items {
+      followLabel
+      socialItemsCollection {
+        items {
+          key
+          url
+        }
+      }
+      navigationLinks {
+        __typename
+        sys {
+          id
+        }
+        navigationLinkItemCollection {
+          items {
+            __typename
+            sys {
+              id
+            }
+            title
+            url
+            navigationLinkItemCollection {
+              items {
+                __typename
+                sys {
+                  id
+                }
+                title
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

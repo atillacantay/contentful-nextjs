@@ -1,0 +1,57 @@
+fragment ItemShowcaseFields on ItemShowcase {
+  title
+  buttonTitle
+  buttonLink
+  itemsCollection {
+    items {
+      ... on PageRecipe {
+        __typename
+        slug
+        title
+        description
+        publishedDate
+        image {
+          url
+          title
+          width
+          height
+        }
+        author {
+          name
+          avatar {
+            url
+            title
+            width
+            height
+          }
+        }
+      }
+      ... on PageArticle {
+        __typename
+        slug
+        title
+        image {
+          url
+          title
+          width
+          height
+        }
+        author {
+          name
+          avatar {
+            url
+            title
+            width
+            height
+          }
+        }
+      }
+    }
+  }
+}
+
+query itemShowcaseQuery($id: String!, $locale: String, $preview: Boolean) {
+  itemShowcase(id: $id, locale: $locale, preview: $preview) {
+    ...ItemShowcaseFields
+  }
+}

@@ -1,0 +1,11 @@
+query header($locale: String, $preview: Boolean) {
+  headerCollection(limit: 1, locale: $locale, preview: $preview) {
+    items {
+      _id
+      internalName
+      headerSearch
+      userMenu
+      navigationItems
+    }
+  }
+}

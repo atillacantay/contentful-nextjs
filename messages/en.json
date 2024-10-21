@@ -1,0 +1,35 @@
+{
+  "common": {
+    "homepage": "Homepage",
+    "logoImageAltText": "Logo",
+    "step": "Step",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "price": {
+    "free": "Free"
+  },
+  "navigation": {
+    "mobileMenuButton": "Open menu"
+  },
+  "time": {
+    "month": "Month"
+  },
+  "socials": {
+    "findUsOn": "Find us on",
+    "twitter": "Twitter",
+    "facebook": "Facebook",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram"
+  },
+  "legal": {
+    "copyright": "© Copyright {{ year }}"
+  },
+  "error": {
+    "code": "{{code}} error",
+    "componentNotFound": "Component not found.",
+    "somethingWentWrong": "Something went wrong, check your url and try again"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "common": {
+    "homepage": "الصفحة الرئيسية",
+    "logoImageAltText": "الشعار",
+    "step": "خطوة",
+    "days": "أيام",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "seconds": "ثواني"
+  },
+  "price": {
+    "free": "مجاني"
+  },
+  "navigation": {
+    "mobileMenuButton": "افتح القائمة"
+  },
+  "time": {
+    "month": "شهر"
+  },
+  "socials": {
+    "findUsOn": "تجدنا على",
+    "twitter": "تويتر",
+    "facebook": "فيسبوك",
+    "linkedin": "لينكدإن",
+    "instagram": "إنستغرام"
+  },
+  "legal": {
+    "copyright": "© حقوق النشر {{ year }}"
+  },
+  "error": {
+    "code": "خطأ {{code}}",
+    "componentNotFound": "المكون غير موجود",
+    "somethingWentWrong": "حدث خطأ ما، تحقق من عنوان URL الخاص بك وحاول مرة أخرى"
+  }
+}

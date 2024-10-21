@@ -1,0 +1,32 @@
+fragment SliderFields on Slider {
+  sliderItemCollection {
+    items {
+      internalName
+      type
+      title
+      subtitle
+      link
+      buttonText
+      image {
+        url
+        description
+        width
+        height
+      }
+      timerDate
+    }
+  }
+}
+
+query slider($id: String!, $locale: String, $preview: Boolean) {
+  sliderCollection(
+    limit: 1
+    locale: $locale
+    where: { sys: { id: $id } }
+    preview: $preview
+  ) {
+    items {
+      ...SliderFields
+    }
+  }
+}
