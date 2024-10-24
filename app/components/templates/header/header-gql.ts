@@ -3,7 +3,7 @@ import { client } from "lib/client";
 import { draftMode } from "next/headers";
 
 export async function getHeaderData(locale: string) {
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
   const headerQueryResult = await client.header({
     locale: locale,
     preview: isEnabled,

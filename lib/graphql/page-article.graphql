@@ -1,6 +1,7 @@
 fragment PageArticleFields on PageArticle {
   sys {
     id
+    publishedAt
   }
   slug
   title

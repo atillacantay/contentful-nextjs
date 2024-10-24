@@ -2,11 +2,13 @@
   "common": {
     "homepage": "Homepage",
     "logoImageAltText": "Logo",
-    "step": "Step",
+    "step": "Step {step}",
     "days": "Days",
     "hours": "Hours",
     "minutes": "Minutes",
-    "seconds": "Seconds"
+    "seconds": "Seconds",
+    "preparation": "Preparation",
+    "ingredients": "Ingredients"
   },
   "price": {
     "free": "Free"

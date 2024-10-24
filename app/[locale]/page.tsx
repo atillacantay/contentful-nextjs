@@ -8,18 +8,18 @@ import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
 interface HomePageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: HomePageProps): Promise<Metadata> {
-  return generatePageMetadata("home", "home", params.locale);
+  return generatePageMetadata("home", "home", (await params).locale);
 }
 
 const HomePage: NextPage<HomePageProps> = async ({ params }) => {
-  const { isEnabled } = draftMode();
-  const { locale } = params;
+  const { isEnabled } = await draftMode();
+  const { locale } = await params;
   const activeLocale = mapLocaleToContentfulLocale(locale as string);
   const data = await client.page({
     slug: "home",

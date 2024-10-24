@@ -135,7 +135,6 @@ const Slider = ({ slides }: { slides?: SliderItem[] }): JSX.Element => {
   return (
     <div data-cmp="slider-main">
       <Swiper
-        data-no-html
         autoHeight={true}
         rewind={true}
         navigation={true}
@@ -191,9 +190,7 @@ const Slider = ({ slides }: { slides?: SliderItem[] }): JSX.Element => {
                       </Text>
                       {slide.buttonText ? (
                         <Button
-                          as="a"
-                          onClick={(e) => e.stopPropagation()}
-                          href={slide.link || ""}
+                          type="button"
                           title={slide.buttonText}
                           fullWidth={true}
                           className="bg-red-600 w-60  text-white mt-3"
@@ -245,9 +242,7 @@ const Slider = ({ slides }: { slides?: SliderItem[] }): JSX.Element => {
                     </Text>
                     <TimerDisplay date={slide.timerDate as string} />
                     <Button
-                      as="a"
-                      onClick={(e) => e.stopPropagation()}
-                      href={slide.link}
+                      type="button"
                       title={slide.buttonText}
                       fullWidth={true}
                       className="bg-red-600 w-fit text-xs sm:w-96 sm:text-base text-white"

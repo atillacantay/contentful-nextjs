@@ -1,9 +1,9 @@
 "use client";
 
 import CardRecipe from "@/components/cards/card-recipe";
+import Section from "@/components/cft-components/cft-section/cft-section.component";
 import Stack from "@/components/common/stack";
 import FormIngredients from "@/components/form-ingredients";
-import Section from "@/components/section";
 import dynamic from "next/dynamic";
 import PreparationSteps from "./preparation-steps.component";
 import RecipeDetailHeader from "./recipe-detail-header.component";
@@ -38,14 +38,13 @@ const modelToCards = (cards: ICARD[]) =>
 const RecipeDetail = ({
   recipe,
   recipeDetailReviews,
-  formIngredients,
 }: {
   recipe: PageRecipe;
   recipeDetailReviews?: React.ComponentProps<typeof RecipeDetailReviews>;
-  formIngredients?: React.ComponentProps<typeof FormIngredients>;
 }): JSX.Element => {
   const preparationSteps =
     recipe.preparationStepsCollection?.items.filter(Boolean);
+  const ingredients = recipe.ingredientsCollection?.items.filter(Boolean);
 
   return (
     <>
@@ -60,7 +59,10 @@ const RecipeDetail = ({
         <div className="flex-1 max-lg:mx-4">
           <PreparationSteps preparationSteps={preparationSteps} />
         </div>
-        <FormIngredients {...formIngredients} />
+        <FormIngredients
+          servingSize={recipe.persons}
+          ingredients={ingredients}
+        />
       </Stack>
       <Section
         sectionTitle={{ title: "Related Topic" }}

@@ -7,11 +7,10 @@ import Text from "@/components/common/typography/text";
 import AddedShoppingList from "@/public/assets/icons/added-shopping-list.svg";
 import ShoppingList from "@/public/assets/icons/shopping-list.svg";
 
-import useIngredientShoppingList, {
-  ShoppingListIngredient,
-} from "@/hooks/useIngredientShoppingList";
+import useIngredientShoppingList from "@/hooks/useIngredientShoppingList";
 import decToFrac from "@/utils/decimalToFraction";
-import { Ingredient } from "./form-ingredients.interface";
+import { Ingredient } from "lib/__generated/sdk";
+// import { Ingredient } from "./form-ingredients.interface";
 
 interface IFormIngredientsList {
   ingredients: Ingredient[];
@@ -29,21 +28,21 @@ const FormIngredientsList = ({
   const { add } = useIngredientShoppingList();
   const [formIngredients] = useState(ingredients);
 
-  const addIngredientToShoppingList = async (ingredient: Ingredient) => {
-    const ingredientData: ShoppingListIngredient = {
-      userId: 4130, // will be implemented after authentication
-      ingredientId: ingredient.ingredientId,
-      quantity: ingredient.quantity * servingSize,
-      unit: ingredient.unit,
-    };
-    await add([ingredientData]);
-  };
+  // const addIngredientToShoppingList = async (ingredient: Ingredient) => {
+  //   const ingredientData: ShoppingListIngredient = {
+  //     userId: 4130, // will be implemented after authentication
+  //     ingredientId: ingredient.ingredientId,
+  //     quantity: ingredient.quantity * servingSize,
+  //     unit: ingredient.unit,
+  //   };
+  //   await add([ingredientData]);
+  // };
 
   return (
     <Stack as="ul" direction="col" spacing={4} className="max-lg:max-w-[430px]">
       {formIngredients?.map((ingredient) => (
         <Stack
-          key={ingredient.ingredientId}
+          key={ingredient._id}
           as="li"
           alignItems="center"
           justifyContent="between"

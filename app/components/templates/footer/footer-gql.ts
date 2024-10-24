@@ -3,7 +3,7 @@ import { client } from "lib/client";
 import { draftMode } from "next/headers";
 
 export async function getFooterData(locale: string) {
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
   const footerQuery = await client.footer({
     locale: locale,
     preview: isEnabled,

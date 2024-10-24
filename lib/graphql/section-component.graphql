@@ -1,0 +1,28 @@
+fragment SectionFields on Section {
+  sys {
+    id
+  }
+  title
+  buttonText
+  buttonLink
+  content {
+    ... on FeaturedArticle {
+      __typename
+      sys {
+        id
+      }
+    }
+    ... on ItemShowcase {
+      __typename
+      sys {
+        id
+      }
+    }
+  }
+}
+
+query sectionQuery($id: String!, $locale: String, $preview: Boolean) {
+  section(id: $id, locale: $locale, preview: $preview) {
+    ...SectionFields
+  }
+}

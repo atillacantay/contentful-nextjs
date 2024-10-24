@@ -7,23 +7,24 @@ import Star from "@/components/common/star";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 
+import { Link } from "@/i18n/routing";
 import ClockIcon from "@/public/assets/icons/time-outline.svg";
 import { clsxm } from "@/utils/twMerge.utils";
 import { useFormatter } from "next-intl";
-import { Link } from "../../../i18n/routing";
-import { IArticleOfDay } from "./article-of-day.interface";
+import type { IArticleOfDay } from "./article-of-day.interface";
 
 const ArticleOfDay = ({
   slug,
   title,
   subtitle,
-  sys: { publishedAt },
+  sys,
   readDurationInMin,
   author,
   image,
   contentBefore,
   verticalImage,
 }: IArticleOfDay): JSX.Element => {
+  const { publishedAt } = sys;
   const format = useFormatter();
 
   return (

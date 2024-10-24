@@ -17,7 +17,7 @@ const PreparationSteps = ({
   return (
     <>
       <Header as="h2" weight="medium" size="xxl" className="mb-8">
-        Preparation
+        {t("common.preparation")}
       </Header>
       <Stack
         direction="col"
@@ -31,16 +31,18 @@ const PreparationSteps = ({
             className={`${index > 0 ? "pt-8" : ""}`}
           >
             <Header as="h3" weight="medium">
-              {t("common.step")} {++index}
+              {t("common.step", { step: ++index })}
             </Header>
             <Text>{step?.description}</Text>
-            <ContentfulImage
-              className="block w-full rounded-xl"
-              src={step?.image?.url || ""}
-              width={step?.image?.width}
-              height={step?.image?.height}
-              alt={step?.image?.description}
-            />
+            {step.image && (
+              <ContentfulImage
+                className="block w-full rounded-xl"
+                src={step.image.url || ""}
+                width={step.image.width}
+                height={step.image.height}
+                alt={step.image.description}
+              />
+            )}
           </Stack>
         ))}
       </Stack>

@@ -4,7 +4,6 @@ import { getHeaderData } from "@/components/templates/header/header-gql";
 import { getMainNavigationData } from "@/components/templates/navigation/navigation-gql";
 import { ContentfulContentProvider } from "@/contentful-context";
 import { routing } from "@/i18n/routing";
-import "@/main.scss";
 import ReactQueryProvider from "@/providers/react-query-provider";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { clsxm } from "@/utils/twMerge.utils";
@@ -14,11 +13,10 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import "../main.scss";
 
-const Header = dynamic(
-  () =>
-    import("@/components/templates/header").then((module) => module.default),
-  { ssr: false }
+const Header = dynamic(() =>
+  import("@/components/templates/header").then((module) => module.default)
 );
 const Footer = dynamic(() =>
   import("@/components/templates/footer").then((module) => module.default)
@@ -47,11 +45,11 @@ export function generateStaticParams() {
 
 type LayoutProps = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function RootLayout({ children, params }: LayoutProps) {
-  const locale = params.locale;
+  const locale = (await params).locale;
   const activeLocale = mapLocaleToContentfulLocale(locale);
   const headerData = await getHeaderData(activeLocale);
   const footerData = await getFooterData(activeLocale);
@@ -63,7 +61,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
       <UserProvider>
         <body>
           <NextIntlClientProvider messages={messages}>
-            <Suspense fallback={<p>loading...</p>}>
+            <Suspense>
               <ReactQueryProvider>
                 <ContentfulContentProvider>
                   <div className={clsxm("group/layout")}>

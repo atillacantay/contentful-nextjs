@@ -3,7 +3,7 @@ import { client } from "lib/client";
 import { draftMode } from "next/headers";
 
 export async function getMainNavigationData(locale: string) {
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
   const mainNavigationQuery = await client.mainNavigation({
     locale: locale,
     preview: isEnabled,

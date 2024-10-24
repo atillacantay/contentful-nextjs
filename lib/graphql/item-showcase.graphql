@@ -1,7 +1,8 @@
 fragment ItemShowcaseFields on ItemShowcase {
-  title
-  buttonTitle
-  buttonLink
+  sys {
+    __typename
+    id
+  }
   itemsCollection {
     items {
       ... on PageRecipe {

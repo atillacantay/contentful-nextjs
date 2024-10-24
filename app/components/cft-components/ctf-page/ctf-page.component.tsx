@@ -13,7 +13,7 @@ const CtfPage = ({ page }: CftPageProps) => {
     <>
       {sections &&
         sections.map((section, index) => (
-          <ComponentResolver key={index} section={section} />
+          <ComponentResolver key={index} component={section} />
         ))}
     </>
   );

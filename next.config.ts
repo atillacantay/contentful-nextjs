@@ -1,18 +1,22 @@
-const createNextIntlPlugin = require("next-intl/plugin");
+import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   skipMiddlewareUrlNormalize: true,
   pageExtensions: ["ts", "tsx"],
+  sassOptions: {
+    quietDeps: true,
+    silenceDeprecations: ["legacy-js-api"],
+  },
   images: {
     loader: "custom",
     formats: ["image/avif", "image/webp"],
   },
-  webpack(config) {
+  webpack(config: any) {
     // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((rule) =>
+    const fileLoaderRule = config.module.rules.find((rule: any) =>
       rule.test?.test?.(".svg")
     );
 

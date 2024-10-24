@@ -41,7 +41,7 @@ export const generatePageMetadata = async (
     queryFn({
       slug: pageType,
       locale: activeLocale,
-      preview: draftMode().isEnabled,
+      preview: (await draftMode()).isEnabled,
     }),
   ]);
 

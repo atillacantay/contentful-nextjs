@@ -13,11 +13,11 @@ import FormIngredientsList from "./form-ingredients-list";
 import ChevronDown from "@/public/assets/icons/chevron-down-outline.svg";
 import ChevronUp from "@/public/assets/icons/chevron-up-outline.svg";
 
-import useIngredientShoppingList, {
-  ShoppingListIngredient,
-} from "@/hooks/useIngredientShoppingList";
+import useIngredientShoppingList from "@/hooks/useIngredientShoppingList";
 import { clsxm } from "@/utils/twMerge.utils";
-import { Ingredient } from "./form-ingredients.interface";
+import { Ingredient } from "lib/__generated/sdk";
+import { useTranslations } from "next-intl";
+// import { Ingredient } from "./form-ingredients.interface";
 
 interface IFormIngredients extends React.ComponentProps<"div"> {
   className?: string;
@@ -48,6 +48,7 @@ const FormIngredients = ({
   ...props
 }: IFormIngredients): JSX.Element => {
   const { add } = useIngredientShoppingList();
+  const t = useTranslations();
   const [isFooterOpen, setIsFooterOpen] = useState(false);
   const [servingSizeState, setServingSizeState] = useState(servingSize);
 
@@ -61,18 +62,18 @@ const FormIngredients = ({
     setServingSizeState((prevServingSize) => prevServingSize + 1);
   };
 
-  const addAllIngredientsToShoppingList = async () => {
-    const shoppingListIngredients: ShoppingListIngredient[] = ingredients.map(
-      (ingredient) => ({
-        userId: 4130, // will be implemented after authentication
-        ingredientId: ingredient.ingredientId,
-        quantity: ingredient.quantity * servingSizeState,
-        unit: ingredient.unit,
-      })
-    );
+  // const addAllIngredientsToShoppingList = async () => {
+  //   const shoppingListIngredients: ShoppingListIngredient[] = ingredients.map(
+  //     (ingredient) => ({
+  //       userId: 4130, // will be implemented after authentication
+  //       ingredientId: ingredient.ingredientId,
+  //       quantity: ingredient.quantity * servingSizeState,
+  //       unit: ingredient.unit,
+  //     })
+  //   );
 
-    await add(shoppingListIngredients);
-  };
+  //   await add(shoppingListIngredients);
+  // };
 
   const MobileFormIngredients = () => (
     <Stack
@@ -96,7 +97,7 @@ const FormIngredients = ({
         )}
       >
         <Stack direction="col">
-          <Text weight="medium">{textIngredients}</Text>
+          <Text weight="medium">{t("common.ingredients")}</Text>
 
           {servingSizeState ? (
             <Stack alignItems="center" className="gap-2">
@@ -151,7 +152,7 @@ const FormIngredients = ({
   return (
     <div data-cmp="form-ingredients" className="flex-1">
       {!noMobileView && (
-        <Stack className="lg:hidden" data-no-html>
+        <Stack className="lg:hidden">
           <MobileFormIngredients />
         </Stack>
       )}
@@ -162,7 +163,6 @@ const FormIngredients = ({
           !noMobileView && "hidden lg:block",
           "shadow-[0_0_30px_0_rgba(0,0,0,0.1)] p-4"
         )}
-        data-no-html
       >
         <Card.Header>
           <Stack
@@ -171,7 +171,7 @@ const FormIngredients = ({
             className="border-b-2 pb-4 border-[rgba(255,255,255,0.08)]"
           >
             <Header as="h3" weight="medium" size="xxl">
-              {textIngredients}
+              {t("common.ingredients")}
             </Header>
 
             {servingSizeState ? (
@@ -211,7 +211,7 @@ const FormIngredients = ({
             className="hidden bg-primary_red dark:bg-white dark:text-black"
             size="xl"
             fullWidth
-            onClick={addAllIngredientsToShoppingList}
+            // onClick={addAllIngredientsToShoppingList}
           >
             {textAddAllToShoppingList}
           </Button>

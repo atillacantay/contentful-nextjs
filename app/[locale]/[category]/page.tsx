@@ -8,18 +8,20 @@ import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
 interface CategoryPageProps {
-  params: { locale: string; category: string };
+  params: Promise<{ locale: string; category: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
-  return generatePageMetadata(params.category, params.category, params.locale);
+  const { locale, category } = await params;
+
+  return generatePageMetadata(category, category, locale);
 }
 
 const CategoryPage: NextPage<CategoryPageProps> = async ({ params }) => {
-  const { locale, category } = params;
-  const { isEnabled } = draftMode();
+  const { locale, category } = await params;
+  const { isEnabled } = await draftMode();
   const activeLocale = mapLocaleToContentfulLocale(locale as string);
   const data = await client.page({
     slug: category,

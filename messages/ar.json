@@ -2,11 +2,13 @@
   "common": {
     "homepage": "الصفحة الرئيسية",
     "logoImageAltText": "الشعار",
-    "step": "خطوة",
+    "step": "{step} خطوة",
     "days": "أيام",
     "hours": "ساعات",
     "minutes": "دقائق",
-    "seconds": "ثواني"
+    "seconds": "ثواني",
+    "preparation": "التحضير",
+    "ingredients": "مكونات"
   },
   "price": {
     "free": "مجاني"

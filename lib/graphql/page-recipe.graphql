@@ -40,6 +40,25 @@ fragment PageRecipeFields on PageRecipe {
       description
     }
   }
+  ingredientsCollection {
+    items {
+      _id
+      sys {
+        id
+      }
+      name
+      quantity
+      unitValue
+      unit
+      producedByGoody
+      image {
+        url
+        title
+        width
+        height
+      }
+    }
+  }
   seo {
     name
     title

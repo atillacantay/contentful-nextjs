@@ -1,12 +1,12 @@
 import { PageArticle } from "lib/__generated/sdk";
+import { ArticlesMagazines } from "./articles-magazines";
 
 interface CtfPageArticleProps {
   page: PageArticle;
 }
 
 const CtfPageArticle = ({ page }: CtfPageArticleProps) => {
-  console.log(page);
-  return <>article details</>;
+  return <ArticlesMagazines articleOfDay={page} />;
 };
 
 export default CtfPageArticle;

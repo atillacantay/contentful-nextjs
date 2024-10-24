@@ -42,7 +42,7 @@ const RecipeDetailHeader = ({
           src={image?.url || ""}
           width={image?.width}
           height={image?.height}
-          alt={image?.description}
+          alt={image?.description || author?.name || "User Avatar"}
         />
       </div>
       <div className="flex-1 max-lg:px-4">
@@ -76,6 +76,8 @@ const RecipeDetailHeader = ({
           <Avatar
             src={author?.avatar?.url || ""}
             size={8}
+            width={author?.avatar?.width}
+            height={author?.avatar?.height}
             rounded="full"
             alt={author?.avatar?.description || author?.name || "Author Avatar"}
           />

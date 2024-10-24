@@ -1,12 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "setup": "node ./lib/setup.js",
-    "graphql-codegen:generate": "graphql-codegen -r dotenv/config --config codegen.ts dotenv_config_path=.env.local",
-    "graphql-codegen:watch": "graphql-codegen --watch -r dotenv/config --config codegen.ts dotenv_config_path=.env.local"
+    "gql-codegen": "graphql-codegen -r dotenv/config --config codegen.ts dotenv_config_path=.env.local",
+    "gql-codegen:watch": "graphql-codegen --watch -r dotenv/config --config codegen.ts dotenv_config_path=.env.local"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
@@ -22,17 +22,19 @@
     "@types/node": "^20.5.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
-    "autoprefixer": "10.4.15",
+    "@types/rtl-detect": "^1.0.3",
+    "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "contentful-import": "^9.0.4",
     "date-fns": "2.30.0",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.0",
-    "next": "latest",
-    "next-intl": "^3.21.1",
-    "postcss": "8.4.31",
+    "next": "^15.0.1",
+    "next-intl": "^3.22.0",
+    "postcss": "^8.4.47",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rtl-detect": "^1.1.2",
     "swiper": "^11.1.14",
     "tailwind-merge": "^2.5.4",
     "tailwindcss": "^3.4.14",
@@ -40,6 +42,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "sass": "^1.79.5"
+    "sass": "^1.80.3",
+    "sass-loader": "^16.0.2"
   }
 }

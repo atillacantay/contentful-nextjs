@@ -19,7 +19,7 @@ const iconsMap: Record<string, any> = {
   foodies: FoodiesIcon,
   shop: ShoppingBagIcon,
   masterclass: MasterclassIcon,
-  articles: ArticlesIcon,
+  magazine: ArticlesIcon,
   pastapedia: PastapediaLogo,
 };
 
@@ -28,13 +28,16 @@ interface NavigationItemProps {
 }
 
 const NavigationItem = ({ item }: NavigationItemProps) => {
-  const { category, ...rest } = useParams<{ category: string }>();
+  const { category } = useParams<{ category: string }>();
   const pathname = usePathname();
   if (!item) return;
   const slug = item.slug || "";
   const url = `/${slug === "home" ? "" : slug}`;
   const pageName = item.pageName || "";
-  const selected = slug === category || (slug === "home" && pathname === `/`);
+  const selected =
+    slug === category ||
+    (slug === "home" && pathname === `/`) ||
+    (slug === "magazine" && category === "articles");
   const Icon = iconsMap[slug];
   const shouldUseLogo = ["pastapedia"].includes(slug);
 

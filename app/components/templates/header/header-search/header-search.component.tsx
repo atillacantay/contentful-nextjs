@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/common/button";
 import MobileSearch from "@/components/common/form-elements/mobile-search";
 import DesktopSearch from "@/components/common/form-elements/search";
@@ -10,8 +12,11 @@ import SearchIcon from "@/public/assets/icons/search.svg";
 import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
 import { clsxm } from "@/utils/twMerge.utils";
 import { extractCategoryFromUrl } from "@/utils/url.utils";
+import { useLocale } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { getLangDir } from "rtl-detect";
 
 const HeaderSearch = ({
   wrapperDivProps = {},
@@ -61,14 +66,17 @@ const HeaderSearch = ({
   >;
   searchPagePath: string;
 }) => {
+  const locale = useLocale();
+  const searchParams = useSearchParams();
   const windowSize = useWindowSize();
+  const direction = getLangDir(locale);
+
   const [isModalShown, setModalShown] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>(
-    new URL(window.location.href)?.searchParams?.get("searchText") || ""
+    searchParams?.get("searchText") || ""
   );
   const [searchFilter, setSearchFilter] = useState<string>(() => {
-    const paramSearchFilter =
-      new URL(window.location.href)?.searchParams?.get("searchFilter") || "";
+    const paramSearchFilter = searchParams?.get("searchFilter") || "";
     if (paramSearchFilter) return paramSearchFilter;
 
     const index = filterSettings
@@ -149,7 +157,7 @@ const HeaderSearch = ({
       );
   };
 
-  const isRTL = document.documentElement?.dir === "rtl";
+  const isRTL = direction === "rtl";
 
   const calcSearchModalPosition = () => ({
     width: `${desktopSearchInputRef.current?.clientWidth}px`,
@@ -305,7 +313,7 @@ const HeaderSearch = ({
       <div {...wrapperDivProps}>
         <form
           method="GET"
-          action={window.location.origin + searchPagePath}
+          action={window?.location.origin + searchPagePath}
           className="flex relative"
           onClick={() => setModalShown(true)}
         >

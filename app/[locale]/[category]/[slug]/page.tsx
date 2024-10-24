@@ -8,7 +8,7 @@ import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
 interface SlugPageProps {
-  params: { locale: string; slug: string; category: string };
+  params: Promise<{ locale: string; slug: string; category: string }>;
 }
 
 type QueryObjectKey = "pageRecipeCollection" | "pageArticleCollection";
@@ -31,21 +31,23 @@ const queryObjectKeyMap: Record<string, QueryObjectKey> = {
 export async function generateMetadata({
   params,
 }: SlugPageProps): Promise<Metadata> {
-  const queryObjectKey = queryObjectKeyMap[params.category];
-  const queryFunction = queryFunctionMap[params.category];
+  const { locale, slug, category } = await params;
+
+  const queryObjectKey = queryObjectKeyMap[category];
+  const queryFunction = queryFunctionMap[category];
 
   return generatePageMetadata(
-    params.slug,
-    `${params.category}/${params.slug}`,
-    params.locale,
+    slug,
+    `${category}/${slug}`,
+    locale,
     queryObjectKey,
     queryFunction
   );
 }
 
 const SlugPage: NextPage<SlugPageProps> = async ({ params }) => {
-  const { locale, slug, category } = params;
-  const { isEnabled } = draftMode();
+  const { locale, slug, category } = await params;
+  const { isEnabled } = await draftMode();
   const activeLocale = mapLocaleToContentfulLocale(locale as string);
   const queryFunction = queryFunctionMap[category];
 

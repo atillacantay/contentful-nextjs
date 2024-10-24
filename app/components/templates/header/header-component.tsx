@@ -3,22 +3,32 @@
 import Button from "@/components/common/button";
 import Stack from "@/components/common/stack";
 import { Text } from "@/components/common/typography";
-import NavigationDrawer from "@/components/navigation-drawer";
 import type { NavigationItem } from "@/components/navigation-drawer/navigation-drawer.types";
 import UserMenu from "@/components/user-menu";
 import HOConClickOutside from "@/hocs/HOConClickOutside";
 import { clsxm } from "@/utils/twMerge.utils";
-import { useRouter, useSelectedLayoutSegments } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
 import React, { useState } from "react";
-import HeaderSearch from "./header-search";
 import { IHeaderIconButton } from "./header.interfaces";
 
 // import { ReactComponent as FoodiesIcon } from "@/assets/icons/foodies.svg";
+import { useRouter } from "@/i18n/routing";
 import GlobeIcon from "@/public/assets/icons/globe.svg";
 import UserIcon from "@/public/assets/icons/user.svg";
 import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useLocale } from "next-intl";
+import dynamic from "next/dynamic";
+
+const NavigationDrawer = dynamic(
+  () =>
+    import("@/components/navigation-drawer").then((module) => module.default),
+  { ssr: false }
+);
+const HeaderSearch = dynamic(
+  () => import("./header-search").then((module) => module.default),
+  { ssr: false }
+);
 
 interface HeaderPropsInterface {
   userMenu: React.ComponentProps<typeof UserMenu>;
@@ -49,7 +59,7 @@ const HeaderComponent = ({
 
   const handleLocaleChange = async (event: any) => {
     const newLocale = event === "en" ? "ar" : "en";
-    push(`/${newLocale}/${urlSegments.join("/")}`);
+    push(`/${urlSegments.join("/")}`, { locale: newLocale });
   };
 
   const [userMenuOpen, setUserMenuOpen] = useState(false);
