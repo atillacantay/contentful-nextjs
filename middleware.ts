@@ -1,7 +1,17 @@
 import createMiddleware from "next-intl/middleware";
+import { type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
 
-export default createMiddleware(routing, { localeDetection: false });
+export default async function middleware(request: NextRequest) {
+  const handleI18nRouting = createMiddleware(routing, {
+    localeDetection: false,
+  });
+  const response = handleI18nRouting(request);
+
+  response.headers.set("x-current-path", request.nextUrl.pathname);
+
+  return response;
+}
 
 export const config = {
   // Match only internationalized pathnames

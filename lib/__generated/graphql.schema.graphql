@@ -98,6 +98,7 @@ type AssetLinkingCollections {
   ingredientCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): IngredientCollection
   pageArticleCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageArticleCollection
   pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
+  pageMagazineCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageRecipeCollection
   preparationStepCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PreparationStepCollection
   seoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SeoCollection
@@ -248,6 +249,7 @@ type ComponentAuthorLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageArticleCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageArticleCollectionOrder], preview: Boolean, skip: Int = 0): PageArticleCollection
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageBlogPostCollectionOrder], preview: Boolean, skip: Int = 0): PageBlogPostCollection
+  pageMagazineCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageMagazineCollectionOrder], preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
 }
 
@@ -271,6 +273,8 @@ enum ComponentAuthorLinkingCollectionsCardCollectionOrder {
 enum ComponentAuthorLinkingCollectionsPageArticleCollectionOrder {
   internalName_ASC
   internalName_DESC
+  rating_ASC
+  rating_DESC
   readDurationInMin_ASC
   readDurationInMin_DESC
   slug_ASC
@@ -296,6 +300,27 @@ enum ComponentAuthorLinkingCollectionsPageBlogPostCollectionOrder {
   publishedDate_DESC
   slug_ASC
   slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum ComponentAuthorLinkingCollectionsPageMagazineCollectionOrder {
+  description_ASC
+  description_DESC
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  subtitle_ASC
+  subtitle_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1019,6 +1044,15 @@ input ItemShowcaseItemsFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  rating: Float
+  rating_exists: Boolean
+  rating_gt: Float
+  rating_gte: Float
+  rating_in: [Float]
+  rating_lt: Float
+  rating_lte: Float
+  rating_not: Float
+  rating_not_in: [Float]
   seo_exists: Boolean
   slug: String
   slug_contains: String
@@ -1419,6 +1453,7 @@ type PageArticle implements Entry & _Node {
   image(locale: String, preview: Boolean): Asset
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): PageArticleLinkingCollections
+  rating(locale: String): Float
   readDurationInMin(locale: String): Int
   seo(locale: String, preview: Boolean, where: SeoFilter): Seo
   slug(locale: String): String
@@ -1455,6 +1490,15 @@ input PageArticleFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  rating: Float
+  rating_exists: Boolean
+  rating_gt: Float
+  rating_gte: Float
+  rating_in: [Float]
+  rating_lt: Float
+  rating_lte: Float
+  rating_not: Float
+  rating_not_in: [Float]
   readDurationInMin: Int
   readDurationInMin_exists: Boolean
   readDurationInMin_gt: Int
@@ -1525,6 +1569,8 @@ enum PageArticleLinkingCollectionsItemShowcaseCollectionOrder {
 enum PageArticleOrder {
   internalName_ASC
   internalName_DESC
+  rating_ASC
+  rating_DESC
   readDurationInMin_ASC
   readDurationInMin_DESC
   slug_ASC
@@ -1786,6 +1832,111 @@ enum PageLinkingCollectionsMainNavigationCollectionOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageMagazine)
+"""
+type PageMagazine implements Entry & _Node {
+  _id: ID!
+  author(locale: String, preview: Boolean, where: ComponentAuthorFilter): ComponentAuthor
+  content(locale: String): String
+  contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  image(locale: String, preview: Boolean): Asset
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): PageMagazineLinkingCollections
+  seo(locale: String, preview: Boolean, where: SeoFilter): Seo
+  slug(locale: String): String
+  subtitle(locale: String): String
+  sys: Sys!
+  title(locale: String): String
+}
+
+type PageMagazineCollection {
+  items: [PageMagazine]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input PageMagazineFilter {
+  AND: [PageMagazineFilter]
+  OR: [PageMagazineFilter]
+  author: cfComponentAuthorNestedFilter
+  author_exists: Boolean
+  content: String
+  content_contains: String
+  content_exists: Boolean
+  content_in: [String]
+  content_not: String
+  content_not_contains: String
+  content_not_in: [String]
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  image_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  seo: cfSeoNestedFilter
+  seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  subtitle: String
+  subtitle_contains: String
+  subtitle_exists: Boolean
+  subtitle_in: [String]
+  subtitle_not: String
+  subtitle_not_contains: String
+  subtitle_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type PageMagazineLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum PageMagazineOrder {
+  description_ASC
+  description_DESC
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  subtitle_ASC
+  subtitle_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum PageOrder {
@@ -2168,6 +2319,8 @@ type Query {
   pageBlogPost(id: String!, locale: String, preview: Boolean): PageBlogPost
   pageBlogPostCollection(limit: Int = 100, locale: String, order: [PageBlogPostOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostCollection
   pageCollection(limit: Int = 100, locale: String, order: [PageOrder], preview: Boolean, skip: Int = 0, where: PageFilter): PageCollection
+  pageMagazine(id: String!, locale: String, preview: Boolean): PageMagazine
+  pageMagazineCollection(limit: Int = 100, locale: String, order: [PageMagazineOrder], preview: Boolean, skip: Int = 0, where: PageMagazineFilter): PageMagazineCollection
   pageRecipe(id: String!, locale: String, preview: Boolean): PageRecipe
   pageRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeOrder], preview: Boolean, skip: Int = 0, where: PageRecipeFilter): PageRecipeCollection
   preparationStep(id: String!, locale: String, preview: Boolean): PreparationStep
@@ -2182,6 +2335,10 @@ type Query {
   sliderItemCollection(limit: Int = 100, locale: String, order: [SliderItemOrder], preview: Boolean, skip: Int = 0, where: SliderItemFilter): SliderItemCollection
   socialItem(id: String!, locale: String, preview: Boolean): SocialItem
   socialItemCollection(limit: Int = 100, locale: String, order: [SocialItemOrder], preview: Boolean, skip: Int = 0, where: SocialItemFilter): SocialItemCollection
+  tab(id: String!, locale: String, preview: Boolean): Tab
+  tabCollection(limit: Int = 100, locale: String, order: [TabOrder], preview: Boolean, skip: Int = 0, where: TabFilter): TabCollection
+  tabs(id: String!, locale: String, preview: Boolean): Tabs
+  tabsCollection(limit: Int = 100, locale: String, order: [TabsOrder], preview: Boolean, skip: Int = 0, where: TabsFilter): TabsCollection
 }
 
 interface ResourceLink {
@@ -2351,12 +2508,15 @@ type SeoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageArticleCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageArticleCollectionOrder], preview: Boolean, skip: Int = 0): PageArticleCollection
   pageCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageCollectionOrder], preview: Boolean, skip: Int = 0): PageCollection
+  pageMagazineCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageMagazineCollectionOrder], preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
 }
 
 enum SeoLinkingCollectionsPageArticleCollectionOrder {
   internalName_ASC
   internalName_DESC
+  rating_ASC
+  rating_DESC
   readDurationInMin_ASC
   readDurationInMin_DESC
   slug_ASC
@@ -2380,6 +2540,27 @@ enum SeoLinkingCollectionsPageCollectionOrder {
   pageName_DESC
   slug_ASC
   slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum SeoLinkingCollectionsPageMagazineCollectionOrder {
+  description_ASC
+  description_DESC
+  internalName_ASC
+  internalName_DESC
+  slug_ASC
+  slug_DESC
+  subtitle_ASC
+  subtitle_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -2792,6 +2973,177 @@ input SysFilter {
 }
 
 """
+[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/tab)
+"""
+type Tab implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  internalName(locale: String): String
+  key(locale: String): String
+  linkedFrom(allowedLocales: [String]): TabLinkingCollections
+  sys: Sys!
+  title(locale: String): String
+  url(locale: String): String
+}
+
+type TabCollection {
+  items: [Tab]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input TabFilter {
+  AND: [TabFilter]
+  OR: [TabFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  key: String
+  key_contains: String
+  key_exists: Boolean
+  key_in: [String]
+  key_not: String
+  key_not_contains: String
+  key_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+  url: String
+  url_contains: String
+  url_exists: Boolean
+  url_in: [String]
+  url_not: String
+  url_not_contains: String
+  url_not_in: [String]
+}
+
+type TabLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  tabsCollection(limit: Int = 100, locale: String, order: [TabLinkingCollectionsTabsCollectionOrder], preview: Boolean, skip: Int = 0): TabsCollection
+}
+
+enum TabLinkingCollectionsTabsCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum TabOrder {
+  internalName_ASC
+  internalName_DESC
+  key_ASC
+  key_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/tabs)
+"""
+type Tabs implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): TabsLinkingCollections
+  sys: Sys!
+  tabCollection(limit: Int = 100, locale: String, order: [TabsTabCollectionOrder], preview: Boolean, skip: Int = 0, where: TabFilter): TabsTabCollection
+}
+
+type TabsCollection {
+  items: [Tabs]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input TabsFilter {
+  AND: [TabsFilter]
+  OR: [TabsFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+  tab: cfTabNestedFilter
+  tabCollection_exists: Boolean
+}
+
+type TabsLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum TabsOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type TabsTabCollection {
+  items: [Tab]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum TabsTabCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  key_ASC
+  key_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
+}
+
+"""
 Represents a tag entity for finding and organizing content easily.
         Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-concepts
 """
@@ -2937,6 +3289,15 @@ input cfPageArticleNestedFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  rating: Float
+  rating_exists: Boolean
+  rating_gt: Float
+  rating_gte: Float
+  rating_in: [Float]
+  rating_lt: Float
+  rating_lte: Float
+  rating_not: Float
+  rating_not_in: [Float]
   readDurationInMin: Int
   readDurationInMin_exists: Boolean
   readDurationInMin_gt: Int
@@ -3207,6 +3568,41 @@ input cfSocialItemNestedFilter {
   url_not_in: [String]
 }
 
+input cfTabNestedFilter {
+  AND: [cfTabNestedFilter]
+  OR: [cfTabNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  key: String
+  key_contains: String
+  key_exists: Boolean
+  key_in: [String]
+  key_not: String
+  key_not_contains: String
+  key_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+  url: String
+  url_contains: String
+  url_exists: Boolean
+  url_in: [String]
+  url_not: String
+  url_not_contains: String
+  url_not_in: [String]
+}
+
 input cfitemsMultiTypeNestedFilter {
   AND: [cfitemsMultiTypeNestedFilter]
   OR: [cfitemsMultiTypeNestedFilter]
@@ -3220,6 +3616,15 @@ input cfitemsMultiTypeNestedFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  rating: Float
+  rating_exists: Boolean
+  rating_gt: Float
+  rating_gte: Float
+  rating_in: [Float]
+  rating_lt: Float
+  rating_lte: Float
+  rating_not: Float
+  rating_not_in: [Float]
   seo_exists: Boolean
   slug: String
   slug_contains: String

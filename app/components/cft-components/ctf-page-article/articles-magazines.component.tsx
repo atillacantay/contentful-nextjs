@@ -13,7 +13,7 @@ import { clsxm } from "@/utils/twMerge.utils";
 import { PageArticle } from "lib/__generated/sdk";
 import { SwiperSlide } from "swiper/react";
 
-export const ArticlesMagazines = ({
+const ArticlesMagazines = ({
   articleOfDay,
   type = "articles",
 }: {
@@ -22,6 +22,8 @@ export const ArticlesMagazines = ({
 }) => (
   <>
     <div className="container mx-auto max-sm:px-4 pt-6">
+      {/* <NavigationSub {...navigationSub} /> */}
+
       <div className="pt-4">
         <div
           className="flex flex-row flex-wrap items-baseline md:gap-[3.5rem] max-sm:gap-[1.5rem] group

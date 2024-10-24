@@ -1,5 +1,5 @@
 import { PageArticle } from "lib/__generated/sdk";
-import { ArticlesMagazines } from "./articles-magazines";
+import ArticlesMagazines from "./articles-magazines.component";
 
 interface CtfPageArticleProps {
   page: PageArticle;

@@ -10,6 +10,7 @@ fragment ItemShowcaseFields on ItemShowcase {
         slug
         title
         description
+        rating
         image {
           url
           title
@@ -30,6 +31,7 @@ fragment ItemShowcaseFields on ItemShowcase {
         __typename
         slug
         title
+        rating
         image {
           url
           title

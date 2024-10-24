@@ -21,7 +21,7 @@ import mediaChef from "@/public/assets/img/chef.png";
 import { clsxm } from "@/utils/twMerge.utils";
 import { SwiperSlide } from "swiper/react";
 
-export const ArticlePage = ({
+const ArticlePage = ({
   recipeDetailReviews,
   loggedOut,
 }: {

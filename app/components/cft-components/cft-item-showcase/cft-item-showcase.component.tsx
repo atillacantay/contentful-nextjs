@@ -1,37 +1,18 @@
 import CardArticle from "@/components/cards/card-article";
 import CardRecipe from "@/components/cards/card-recipe";
 import Grid from "@/components/common/grid";
-import type { TGridCols } from "@/components/common/grid/grid.interfaces";
+import type { ContentfulGenre, Genre, ICARD } from "@/types/common";
 import { clsxm } from "@/utils/twMerge.utils";
 import { ItemShowcase } from "lib/__generated/sdk";
-export interface ICARD {
-  genre:
-    | "PageRecipe"
-    | "masterclass"
-    | "shop"
-    | "article"
-    | "card-foodies"
-    | "profile-foodies";
-  header?: string;
-  description?: string;
-  star?: number;
-  reviews?: number;
-  mediaSrc?: string;
-  mediaAlt?: string;
-  textColor: string;
-  date?: string;
-  span?: TGridCols;
-  enrolled?: number;
-  lessons?: number;
-  followers?: number;
-  masterclass?: number;
-  recipe?: number;
-  [key: string]: any;
-}
+
+const genreMap: Record<ContentfulGenre, Genre> = {
+  PageRecipe: "recipe",
+  PageArticle: "article",
+};
 
 const cardComponents: Record<string, any> = {
-  PageRecipe: CardRecipe,
-  PageArticle: CardArticle,
+  recipe: CardRecipe,
+  article: CardArticle,
 };
 
 const getCardComponentByGenre = (card: ICARD): JSX.Element => {
@@ -39,7 +20,7 @@ const getCardComponentByGenre = (card: ICARD): JSX.Element => {
   return CardComponent ? <CardComponent {...card} /> : <></>;
 };
 
-const modelToCards = (cards: ICARD, className: string) =>
+const modelToCards = (cards: ICARD[], className: string) =>
   cards.map((card: ICARD, idx: number) => (
     <Grid.Item
       key={idx}
@@ -54,13 +35,13 @@ const modelToCards = (cards: ICARD, className: string) =>
 
 const CtfItemShowcase = (props: ItemShowcase) => {
   const { itemsCollection } = props;
-  const items = itemsCollection?.items.filter(Boolean);
+  const items = itemsCollection?.items.filter(Boolean) || [];
 
-  const mappedItems: ICARD[] = items?.map((item) => ({
-    genre: item.__typename,
+  const mappedItems: ICARD[] = items.map((item) => ({
+    genre: genreMap[item.__typename!],
     header: item.title,
     description: item.author?.name,
-    star: 5,
+    star: item.rating,
     media: item.image,
     authorImage: item.author?.avatar,
     url: item.slug,

@@ -1,55 +1,32 @@
-export interface Sys {
-  id: string;
-  spaceId: string;
-  environmentId: string;
-  locale: string;
-}
+import type { TGridCols } from "@/components/common/grid/grid.interfaces";
+import type { Asset } from "lib/__generated/sdk";
 
-export interface Entry {
-  __typename: string;
-  sys: Sys;
+export type Genre =
+  | "recipe"
+  | "masterclass"
+  | "shop"
+  | "article"
+  | "card-foodies"
+  | "profile-foodies";
+
+export type ContentfulGenre = "PageRecipe" | "PageArticle";
+
+export interface ICARD {
+  genre: Genre;
+  header?: string;
+  description?: string;
+  star?: number;
+  reviews?: number;
+  mediaSrc?: string;
+  mediaAlt?: string;
+  authorImage?: Asset;
+  textColor?: string;
+  date?: string;
+  span?: TGridCols;
+  enrolled?: number;
+  lessons?: number;
+  followers?: number;
+  masterclass?: number;
+  recipe?: number;
   [key: string]: any;
-}
-
-export interface SectionCollection {
-  items: Entry[];
-}
-
-export interface CftImage {
-  url: string;
-  description: string;
-  width: number;
-  height: number;
-}
-
-export interface CftPageCollectionItem {
-  slug: string;
-  title: string;
-  pageName: string;
-  sys: {
-    id: string;
-  };
-  sectionCollection?: SectionCollection;
-  seo?: {
-    name?: string;
-    title?: string;
-    image?: {
-      title?: string;
-      description?: string;
-      contentType?: string;
-      url?: string;
-      width?: string;
-      height?: string;
-    };
-    description?: string;
-    canonicalUrl?: string;
-    noFollow?: boolean;
-    noIndex?: boolean;
-  };
-}
-export interface CftPageCollection {
-  pageCollection: {
-    __typename: string;
-    items: CftPageCollectionItem[];
-  };
 }
