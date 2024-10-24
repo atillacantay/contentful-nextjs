@@ -1,7 +1,6 @@
 "use client";
 
 import CardRecipe from "@/components/cards/card-recipe";
-import Section from "@/components/cft-components/cft-section/cft-section.component";
 import Stack from "@/components/common/stack";
 import FormIngredients from "@/components/form-ingredients";
 import dynamic from "next/dynamic";
@@ -64,13 +63,13 @@ const RecipeDetail = ({
           ingredients={ingredients}
         />
       </Stack>
-      <Section
+      {/* <Section
         sectionTitle={{ title: "Related Topic" }}
         className="my-10 px-4 lg:container lg:mx-auto"
       >
-        <></>
-        {/* <WrapperSwiper>{modelToCards(CARDS)}</WrapperSwiper> */}
+        <WrapperSwiper>{modelToCards(CARDS)}</WrapperSwiper> 
       </Section>
+      */}
       <div className="px-4 lg:container lg:mx-auto mb-12 lg:mb-16">
         {/* <RecipeDetailReviews {...ModelRecipeDetailReviews} /> */}
       </div>

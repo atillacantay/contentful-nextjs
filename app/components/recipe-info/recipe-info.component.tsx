@@ -1,6 +1,7 @@
 import Grid from "@/components/common/grid";
 import Text from "@/components/common/typography/text";
 import { clsxm } from "@/utils/twMerge.utils";
+import { useTranslations } from "next-intl";
 import { IRecipeInfo, RecipeInfoItem } from "./recipe-info.interface";
 
 const GridItem = ({
@@ -28,6 +29,8 @@ const RecipeInfo = ({
   borderColor = "custom_divider4",
   className,
 }: IRecipeInfo): JSX.Element => {
+  const t = useTranslations();
+
   // Mapping of color names to Tailwind classes for dynamic styling
   const afterClasses: Record<string, string> = {
     custom_divider4: "lg:after:bg-custom_divider4",
@@ -48,7 +51,7 @@ const RecipeInfo = ({
 
   const items: RecipeInfoItem[] = [
     {
-      label: "Prep Time",
+      label: t("common.prepTime"),
       value: prepTime,
       className: clsxm(
         "pb-4 lg:pb-0 border-b lg:border-b-0 border-r rtl:border-l rtl:lg:border-l-0 rtl:border-r-0 lg:border-r-0",
@@ -56,19 +59,19 @@ const RecipeInfo = ({
       ),
     },
     {
-      label: "Serving",
+      label: t("common.numberOfServings"),
       value: serving,
       className: clsxm("pb-4 lg:pb-0 border-b lg:border-b-0", commonClasses),
     },
     {
-      label: "Level",
+      label: t("common.level"),
       value: level,
       className: clsxm(
         "pt-4 lg:pt-0 border-r rtl:border-l rtl:lg:border-l-0 rtl:border-r-0 lg:border-r-0",
         commonClasses
       ),
     },
-    { label: "Calories", value: calories, className: "pt-4 lg:pt-0" },
+    { label: t("common.calories"), value: calories, className: "pt-4 lg:pt-0" },
   ];
 
   return (

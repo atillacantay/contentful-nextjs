@@ -323,8 +323,8 @@ enum ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder {
   internalName_DESC
   persons_ASC
   persons_DESC
-  publishedDate_ASC
-  publishedDate_DESC
+  rating_ASC
+  rating_DESC
   slug_ASC
   slug_DESC
   sys_firstPublishedAt_ASC
@@ -927,8 +927,8 @@ enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
   internalName_DESC
   persons_ASC
   persons_DESC
-  publishedDate_ASC
-  publishedDate_DESC
+  rating_ASC
+  rating_DESC
   slug_ASC
   slug_DESC
   sys_firstPublishedAt_ASC
@@ -1823,7 +1823,7 @@ type PageRecipe implements Entry & _Node {
   linkedFrom(allowedLocales: [String]): PageRecipeLinkingCollections
   persons(locale: String): Int
   preparationStepsCollection(limit: Int = 100, locale: String, order: [PageRecipePreparationStepsCollectionOrder], preview: Boolean, skip: Int = 0, where: PreparationStepFilter): PageRecipePreparationStepsCollection
-  publishedDate(locale: String): DateTime
+  rating(locale: String): Float
   seo(locale: String, preview: Boolean, where: SeoFilter): Seo
   slug(locale: String): String
   sys: Sys!
@@ -1903,15 +1903,15 @@ input PageRecipeFilter {
   persons_not_in: [Int]
   preparationSteps: cfPreparationStepNestedFilter
   preparationStepsCollection_exists: Boolean
-  publishedDate: DateTime
-  publishedDate_exists: Boolean
-  publishedDate_gt: DateTime
-  publishedDate_gte: DateTime
-  publishedDate_in: [DateTime]
-  publishedDate_lt: DateTime
-  publishedDate_lte: DateTime
-  publishedDate_not: DateTime
-  publishedDate_not_in: [DateTime]
+  rating: Float
+  rating_exists: Boolean
+  rating_gt: Float
+  rating_gte: Float
+  rating_in: [Float]
+  rating_lt: Float
+  rating_lte: Float
+  rating_not: Float
+  rating_not_in: [Float]
   seo: cfSeoNestedFilter
   seo_exists: Boolean
   slug: String
@@ -1992,8 +1992,8 @@ enum PageRecipeOrder {
   internalName_DESC
   persons_ASC
   persons_DESC
-  publishedDate_ASC
-  publishedDate_DESC
+  rating_ASC
+  rating_DESC
   slug_ASC
   slug_DESC
   sys_firstPublishedAt_ASC
@@ -2099,8 +2099,8 @@ enum PreparationStepLinkingCollectionsPageRecipeCollectionOrder {
   internalName_DESC
   persons_ASC
   persons_DESC
-  publishedDate_ASC
-  publishedDate_DESC
+  rating_ASC
+  rating_DESC
   slug_ASC
   slug_DESC
   sys_firstPublishedAt_ASC
@@ -2407,8 +2407,8 @@ enum SeoLinkingCollectionsPageRecipeCollectionOrder {
   internalName_DESC
   persons_ASC
   persons_DESC
-  publishedDate_ASC
-  publishedDate_DESC
+  rating_ASC
+  rating_DESC
   slug_ASC
   slug_DESC
   sys_firstPublishedAt_ASC

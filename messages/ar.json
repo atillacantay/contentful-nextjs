@@ -2,13 +2,19 @@
   "common": {
     "homepage": "الصفحة الرئيسية",
     "logoImageAltText": "الشعار",
+    "save": "يحفظ",
     "step": "{step} خطوة",
     "days": "أيام",
     "hours": "ساعات",
     "minutes": "دقائق",
     "seconds": "ثواني",
     "preparation": "التحضير",
-    "ingredients": "مكونات"
+    "ingredients": "مكونات",
+    "prepTime": "وقت التحضير",
+    "numberOfServings": "عدد الحصص",
+    "level": "المستوى",
+    "calories": "سعرات حرارية",
+    "servingSize": "حجم الحصة"
   },
   "price": {
     "free": "مجاني"

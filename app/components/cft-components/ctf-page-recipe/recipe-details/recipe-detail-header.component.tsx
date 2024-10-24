@@ -12,6 +12,7 @@ import HeaderMini from "@/components/templates/header/header-mini-component";
 import Calendar from "@/public/assets/icons/calendar-clear-outline.svg";
 import Heart from "@/public/assets/icons/heart-outline.svg";
 import { PageRecipe } from "lib/__generated/sdk";
+import { useTranslations } from "next-intl";
 
 const RecipeDetailHeader = ({
   image,
@@ -22,7 +23,10 @@ const RecipeDetailHeader = ({
   persons,
   difficulty,
   calories,
+  rating,
 }: PageRecipe): JSX.Element => {
+  const t = useTranslations();
+
   return (
     <Stack direction="col" className="h-2/6 pb-8 lg:flex-row lg:gap-4">
       <div className="relative overflow-hidden lg:w-1/2 max-lg:mb-8 min-h-[150px]">
@@ -34,7 +38,6 @@ const RecipeDetailHeader = ({
           }}
         />
         <Stack className="absolute w-full lg:hidden">
-          <></>
           <HeaderMini />
         </Stack>
         <ContentfulImage
@@ -47,21 +50,24 @@ const RecipeDetailHeader = ({
       </div>
       <div className="flex-1 max-lg:px-4">
         <Stack alignItems="center" justifyContent="between" className="mb-4">
-          <Rate rate={3.9} hideRateText>
-            <Text
-              size="md"
-              weight="light"
-              className="ltr:ml-2 rtl:mr-2 leading-3"
-            >
-              3.9
-            </Text>
-          </Rate>
-          <Stack className="max-lg:hidden">
+          {rating && (
+            <Rate rate={rating} hideRateText>
+              <Text
+                size="md"
+                weight="light"
+                className="ltr:ml-2 rtl:mr-2 leading-3"
+              >
+                {rating}
+              </Text>
+            </Rate>
+          )}
+
+          <Stack className="max-lg:hidden ltr:ml-auto rtl:mr-auto">
             <Button
               className="font-medium text-primary_red"
               startIcon={<Heart fontSize={24} />}
             >
-              Save
+              {t("common.save")}
             </Button>
           </Stack>
         </Stack>

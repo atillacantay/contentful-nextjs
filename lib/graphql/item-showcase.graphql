@@ -10,7 +10,6 @@ fragment ItemShowcaseFields on ItemShowcase {
         slug
         title
         description
-        publishedDate
         image {
           url
           title

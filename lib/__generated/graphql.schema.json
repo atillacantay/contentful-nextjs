@@ -4232,13 +4232,13 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_ASC",
+            "name": "rating_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_DESC",
+            "name": "rating_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -9560,13 +9560,13 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_ASC",
+            "name": "rating_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_DESC",
+            "name": "rating_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -19765,7 +19765,7 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate",
+            "name": "rating",
             "description": null,
             "args": [
               {
@@ -19783,7 +19783,7 @@
             ],
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20853,11 +20853,11 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate",
+            "name": "rating",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -20865,7 +20865,7 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_exists",
+            "name": "rating_exists",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -20877,11 +20877,11 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_gt",
+            "name": "rating_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -20889,11 +20889,11 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_gte",
+            "name": "rating_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -20901,14 +20901,14 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_in",
+            "name": "rating_in",
             "description": null,
             "type": {
               "kind": "LIST",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "DateTime",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -20917,11 +20917,11 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_lt",
+            "name": "rating_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -20929,11 +20929,11 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_lte",
+            "name": "rating_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -20941,11 +20941,11 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_not",
+            "name": "rating_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -20953,14 +20953,14 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_not_in",
+            "name": "rating_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "DateTime",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -21709,13 +21709,13 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_ASC",
+            "name": "rating_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_DESC",
+            "name": "rating_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -22814,13 +22814,13 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_ASC",
+            "name": "rating_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_DESC",
+            "name": "rating_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -28919,13 +28919,13 @@
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_ASC",
+            "name": "rating_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "publishedDate_DESC",
+            "name": "rating_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null

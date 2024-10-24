@@ -66,7 +66,7 @@ const FormIngredients = ({
   //   const shoppingListIngredients: ShoppingListIngredient[] = ingredients.map(
   //     (ingredient) => ({
   //       userId: 4130, // will be implemented after authentication
-  //       ingredientId: ingredient.ingredientId,
+  //       ingredientId: ingredient._id,
   //       quantity: ingredient.quantity * servingSizeState,
   //       unit: ingredient.unit,
   //     })
@@ -101,7 +101,7 @@ const FormIngredients = ({
 
           {servingSizeState ? (
             <Stack alignItems="center" className="gap-2">
-              <Text size="sm">{textServingSize}</Text>
+              <Text size="sm">{t("common.servingSize")}</Text>
               <QuantitySelector
                 value={servingSizeState}
                 onDecrease={handleDecrease}
@@ -177,7 +177,8 @@ const FormIngredients = ({
             {servingSizeState ? (
               <div className="flex items-center gap-2">
                 <Text size="sm">
-                  {textServingSize} {noQuantitySelector && servingSizeState}
+                  {t("common.servingSize")}{" "}
+                  {noQuantitySelector && servingSizeState}
                 </Text>
                 {!noQuantitySelector && (
                   <QuantitySelector

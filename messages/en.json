@@ -2,13 +2,19 @@
   "common": {
     "homepage": "Homepage",
     "logoImageAltText": "Logo",
+    "save": "Save",
     "step": "Step {step}",
     "days": "Days",
     "hours": "Hours",
     "minutes": "Minutes",
     "seconds": "Seconds",
     "preparation": "Preparation",
-    "ingredients": "Ingredients"
+    "ingredients": "Ingredients",
+    "prepTime": "Prep Time",
+    "numberOfServings": "Number of Servings",
+    "level": "Level",
+    "calories": "Calories",
+    "servingSize": "Serving Size"
   },
   "price": {
     "free": "Free"

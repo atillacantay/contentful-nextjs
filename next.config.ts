@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
     loader: "custom",
     formats: ["image/avif", "image/webp"],
   },
+  experimental: {
+    turbo: {
+      rules: {
+        "*.svg": {
+          loaders: [{ loader: "@svgr/webpack", options: { icon: true } }],
+          as: "*.js",
+        },
+      },
+    },
+  },
   webpack(config: any) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule: any) =>

@@ -601,8 +601,8 @@ export enum ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder {
   InternalNameDesc = 'internalName_DESC',
   PersonsAsc = 'persons_ASC',
   PersonsDesc = 'persons_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -1371,8 +1371,8 @@ export enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
   InternalNameDesc = 'internalName_DESC',
   PersonsAsc = 'persons_ASC',
   PersonsDesc = 'persons_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -2699,7 +2699,7 @@ export type PageRecipe = Entry & _Node & {
   linkedFrom?: Maybe<PageRecipeLinkingCollections>;
   persons?: Maybe<Scalars['Int']['output']>;
   preparationStepsCollection?: Maybe<PageRecipePreparationStepsCollection>;
-  publishedDate?: Maybe<Scalars['DateTime']['output']>;
+  rating?: Maybe<Scalars['Float']['output']>;
   seo?: Maybe<Seo>;
   slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
@@ -2793,7 +2793,7 @@ export type PageRecipePreparationStepsCollectionArgs = {
 
 
 /** To create individual recipes [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageRecipe) */
-export type PageRecipePublishedDateArgs = {
+export type PageRecipeRatingArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2891,15 +2891,15 @@ export type PageRecipeFilter = {
   persons_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   preparationSteps?: InputMaybe<CfPreparationStepNestedFilter>;
   preparationStepsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  publishedDate?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  publishedDate_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  publishedDate_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_not?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  rating?: InputMaybe<Scalars['Float']['input']>;
+  rating_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  rating_gt?: InputMaybe<Scalars['Float']['input']>;
+  rating_gte?: InputMaybe<Scalars['Float']['input']>;
+  rating_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  rating_lt?: InputMaybe<Scalars['Float']['input']>;
+  rating_lte?: InputMaybe<Scalars['Float']['input']>;
+  rating_not?: InputMaybe<Scalars['Float']['input']>;
+  rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
   seo?: InputMaybe<CfSeoNestedFilter>;
   seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -2999,8 +2999,8 @@ export enum PageRecipeOrder {
   InternalNameDesc = 'internalName_DESC',
   PersonsAsc = 'persons_ASC',
   PersonsDesc = 'persons_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -3151,8 +3151,8 @@ export enum PreparationStepLinkingCollectionsPageRecipeCollectionOrder {
   InternalNameDesc = 'internalName_DESC',
   PersonsAsc = 'persons_ASC',
   PersonsDesc = 'persons_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -3984,8 +3984,8 @@ export enum SeoLinkingCollectionsPageRecipeCollectionOrder {
   InternalNameDesc = 'internalName_DESC',
   PersonsAsc = 'persons_ASC',
   PersonsDesc = 'persons_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
@@ -4994,7 +4994,7 @@ export type HeaderQueryVariables = Exact<{
 
 export type HeaderQuery = { __typename?: 'Query', headerCollection?: { __typename?: 'HeaderCollection', items: Array<{ __typename?: 'Header', _id: string, internalName?: string, headerSearch?: any, userMenu?: any, navigationItems?: any }> } };
 
-export type ItemShowcaseFieldsFragment = { __typename?: 'ItemShowcase', sys: { __typename: 'Sys', id: string }, itemsCollection?: { __typename?: 'ItemShowcaseItemsCollection', items: Array<{ __typename: 'PageArticle', slug?: string, title?: string, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageRecipe', slug?: string, title?: string, description?: string, publishedDate?: any, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } }> } };
+export type ItemShowcaseFieldsFragment = { __typename?: 'ItemShowcase', sys: { __typename: 'Sys', id: string }, itemsCollection?: { __typename?: 'ItemShowcaseItemsCollection', items: Array<{ __typename: 'PageArticle', slug?: string, title?: string, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageRecipe', slug?: string, title?: string, description?: string, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } }> } };
 
 export type ItemShowcaseQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5030,7 +5030,7 @@ export type PageArticleQuery = { __typename?: 'Query', pageArticleCollection?: {
       & PageArticleFieldsFragment
     )> } };
 
-export type PageRecipeFieldsFragment = { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, category?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, preparationStepsCollection?: { __typename?: 'PageRecipePreparationStepsCollection', items: Array<{ __typename?: 'PreparationStep', _id: string, description?: string, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, ingredientsCollection?: { __typename?: 'PageRecipeIngredientsCollection', items: Array<{ __typename?: 'Ingredient', _id: string, name?: string, quantity?: number, unitValue?: string, unit?: string, producedByGoody?: boolean, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
+export type PageRecipeFieldsFragment = { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, category?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, preparationStepsCollection?: { __typename?: 'PageRecipePreparationStepsCollection', items: Array<{ __typename?: 'PreparationStep', _id: string, description?: string, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, ingredientsCollection?: { __typename?: 'PageRecipeIngredientsCollection', items: Array<{ __typename?: 'Ingredient', _id: string, name?: string, quantity?: number, unitValue?: string, unit?: string, producedByGoody?: boolean, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
 
 export type PageRecipeQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -5128,7 +5128,6 @@ export const ItemShowcaseFieldsFragmentDoc = gql`
         slug
         title
         description
-        publishedDate
         image {
           url
           title
@@ -5226,6 +5225,7 @@ export const PageRecipeFieldsFragmentDoc = gql`
   persons
   difficulty
   calories
+  rating
   image {
     url
     title

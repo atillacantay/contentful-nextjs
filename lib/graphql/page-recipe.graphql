@@ -10,6 +10,7 @@ fragment PageRecipeFields on PageRecipe {
   persons
   difficulty
   calories
+  rating
   image {
     url
     title
