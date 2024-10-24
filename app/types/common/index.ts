@@ -5,11 +5,12 @@ export type Genre =
   | "recipe"
   | "masterclass"
   | "shop"
+  | "magazine"
   | "article"
   | "card-foodies"
   | "profile-foodies";
 
-export type ContentfulGenre = "PageRecipe" | "PageArticle";
+export type ContentfulGenre = "PageRecipe" | "PageArticle" | "PageMagazine";
 
 export interface ICARD {
   genre: Genre;

@@ -1,4 +1,5 @@
 import CardArticle from "@/components/cards/card-article";
+import CardMagazine from "@/components/cards/card-magazine";
 import CardRecipe from "@/components/cards/card-recipe";
 import Grid from "@/components/common/grid";
 import type { ContentfulGenre, Genre, ICARD } from "@/types/common";
@@ -8,11 +9,13 @@ import { ItemShowcase } from "lib/__generated/sdk";
 const genreMap: Record<ContentfulGenre, Genre> = {
   PageRecipe: "recipe",
   PageArticle: "article",
+  PageMagazine: "magazine",
 };
 
 const cardComponents: Record<string, any> = {
   recipe: CardRecipe,
   article: CardArticle,
+  magazine: CardMagazine,
 };
 
 const getCardComponentByGenre = (card: ICARD): JSX.Element => {
@@ -44,7 +47,8 @@ const CtfItemShowcase = (props: ItemShowcase) => {
     star: item.rating,
     media: item.image,
     authorImage: item.author?.avatar,
-    url: item.slug,
+    url: item.slug || item.flipBookUrl,
+    date: item.sys?.publishedAt,
   }));
 
   return (

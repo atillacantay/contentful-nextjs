@@ -8,7 +8,7 @@ export default async function middleware(request: NextRequest) {
   });
   const response = handleI18nRouting(request);
 
-  response.headers.set("x-current-path", request.nextUrl.pathname);
+  response.headers.set("x-pathname", request.nextUrl.pathname);
 
   return response;
 }

@@ -25,6 +25,12 @@ const FeaturedArticle = dynamic(() =>
   )
 );
 
+const FeaturedMagazine = dynamic(() =>
+  import("@/components/cft-components/cft-featured-magazine").then(
+    (module) => module.default
+  )
+);
+
 interface ComponentResolverProps {
   component: any;
 }
@@ -33,10 +39,11 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   section: Section,
   itemshowcase: ItemShowCase,
   featuredarticle: FeaturedArticle,
+  featuredmagazine: FeaturedMagazine,
 };
 
 const ComponentResolver: React.FC<ComponentResolverProps> = ({ component }) => {
-  const ResolvedComponent = componentMap[component?.__typename.toLowerCase()];
+  const ResolvedComponent = componentMap[component?.__typename?.toLowerCase()];
   if (!ResolvedComponent) {
     return null;
   }

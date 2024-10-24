@@ -1,0 +1,27 @@
+fragment FeaturedMagazineFields on FeaturedMagazine {
+  magazine {
+    sys {
+      id
+      publishedAt
+    }
+    title
+    subtitle
+    flipBookUrl
+    image {
+      url
+      description
+      width
+      height
+    }
+  }
+}
+
+query featuredMagazineQuery($id: String!, $locale: String, $preview: Boolean) {
+  featuredMagazine(id: $id, locale: $locale, preview: $preview) {
+    sys {
+      id
+      publishedAt
+    }
+    ...FeaturedMagazineFields
+  }
+}

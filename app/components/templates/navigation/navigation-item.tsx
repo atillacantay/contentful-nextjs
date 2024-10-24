@@ -37,7 +37,7 @@ const NavigationItem = ({ item }: NavigationItemProps) => {
   const selected =
     slug === category ||
     (slug === "home" && pathname === `/`) ||
-    (slug === "magazine" && category === "articles");
+    (slug === "magazines" && category === "articles");
   const Icon = iconsMap[slug];
   const shouldUseLogo = ["pastapedia"].includes(slug);
 

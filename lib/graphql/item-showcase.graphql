@@ -48,6 +48,23 @@ fragment ItemShowcaseFields on ItemShowcase {
           }
         }
       }
+      ... on PageMagazine {
+        __typename
+        sys {
+          id
+          publishedAt
+        }
+        title
+        subtitle
+        description
+        image {
+          url
+          title
+          width
+          height
+        }
+        flipBookUrl
+      }
     }
   }
 }

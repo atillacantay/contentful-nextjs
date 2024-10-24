@@ -1,9 +1,21 @@
+"use client";
+
 import Button from "@/components/common/button";
 import Stack from "@/components/common/stack";
 import { Header, Text } from "@/components/common/typography";
 import { Link } from "@/i18n/routing";
+import { useEffect } from "react";
 
-const NotFoundPage = async () => {
+const Error = ({
+  error,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) => {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
   return (
     <>
       <main>
@@ -50,4 +62,4 @@ const NotFoundPage = async () => {
   );
 };
 
-export default NotFoundPage;
+export default Error;

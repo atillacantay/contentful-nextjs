@@ -6,11 +6,7 @@ interface CtfPageRecipeProps {
 }
 
 const CtfPageRecipe = ({ page }: CtfPageRecipeProps) => {
-  return (
-    <>
-      <RecipeDetail recipe={page} />
-    </>
-  );
+  return <RecipeDetail recipe={page} />;
 };
 
 export default CtfPageRecipe;

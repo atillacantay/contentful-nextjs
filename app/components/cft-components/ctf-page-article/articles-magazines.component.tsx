@@ -70,7 +70,7 @@ const ArticlesMagazines = ({
       </div>
     </div>
     <div className="md:container md:mx-auto md:max-sm:px-4">
-      <div className="cursor-default mt-[2rem] [&_.image-section]:lg:w-[44%] [&_.body-section]:lg:w-[56%]">
+      <div className="cursor-default mt-8 [&_.image-section]:lg:w-[44%] [&_.body-section]:lg:w-[56%]">
         <ArticleOfDay
           {...articleOfDay}
           verticalImage={type === "magazines"}
