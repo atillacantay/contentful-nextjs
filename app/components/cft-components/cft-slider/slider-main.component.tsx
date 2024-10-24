@@ -145,7 +145,7 @@ const Slider = ({ slides }: { slides?: SliderItem[] }): JSX.Element => {
         }}
       >
         {slides?.map((slide, index): JSX.Element => {
-          const loadingType = index != 0 ? "lazy" : undefined;
+          const loadingType = index !== 0 ? "lazy" : "eager";
           if (slide.type === "banner")
             return (
               <SwiperSlide
