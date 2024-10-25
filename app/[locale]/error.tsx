@@ -33,7 +33,7 @@ const Error = ({
               as="h3"
               className="mb-4 text-7xl font-extrabold lg:text-9xl text-black"
             >
-              404
+              {error.name}
             </Header>
             <Text
               weight="bold"
@@ -41,10 +41,6 @@ const Error = ({
               className="mb-6 text-black md:text-4xl"
             >
               OOPS, THIS WAS NOT SUPPOSED TO HAPPEN…
-            </Text>
-            <Text size="lg" weight="light" className="mb-6 text-black/50">
-              Try Using The Search Box Above Or Return Home To Find What You’re
-              Looking For.
             </Text>
             <Button
               size="lg"

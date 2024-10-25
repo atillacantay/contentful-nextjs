@@ -18,13 +18,13 @@ const SectionTitle = ({
 }: ISectionTitle): JSX.Element => {
   return (
     <>
-      <Stack spacing={2} alignItems="end" className={className || ""}>
+      <Stack spacing={2} alignItems="end" className={clsxm(className)}>
         <Header
           as="h2"
-          weight="medium"
+          weight="semibold"
           size="xxl"
           className={clsxm(
-            "dark:text-white max-sm:text-md max-sm:w-full font-['FocoTrial-Bold']",
+            "dark:text-white max-sm:text-md max-sm:w-full sm:font-['FocoTrial-Bold']",
             textColor
           )}
         >

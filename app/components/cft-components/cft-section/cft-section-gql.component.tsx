@@ -33,7 +33,7 @@ const CtfSectionGql = async ({ id }: CtfSectionProps) => {
           btnLink: section.buttonLink,
         }}
         className={
-          typeName === "featuredarticle"
+          typeName && ["featuredarticle", "featuredrecipe"].includes(typeName)
             ? "md:container md:mx-auto pb-14"
             : "container mx-auto max-sm:px-4 pt-6 pb-14"
         }

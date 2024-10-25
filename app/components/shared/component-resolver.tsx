@@ -19,6 +19,12 @@ const ItemShowCase = dynamic(() =>
   )
 );
 
+const FeaturedRecipe = dynamic(() =>
+  import("@/components/cft-components/cft-featured-recipe").then(
+    (module) => module.default
+  )
+);
+
 const FeaturedArticle = dynamic(() =>
   import("@/components/cft-components/cft-featured-article").then(
     (module) => module.default
@@ -38,6 +44,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   slider: Slider,
   section: Section,
   itemshowcase: ItemShowCase,
+  featuredrecipe: FeaturedRecipe,
   featuredarticle: FeaturedArticle,
   featuredmagazine: FeaturedMagazine,
 };

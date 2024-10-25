@@ -6,6 +6,12 @@ fragment SectionFields on Section {
   buttonText
   buttonLink
   content {
+    ... on FeaturedRecipe {
+      __typename
+      sys {
+        id
+      }
+    }
     ... on FeaturedArticle {
       __typename
       sys {

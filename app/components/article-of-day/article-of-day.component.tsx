@@ -16,6 +16,7 @@ import type { IArticleOfDay } from "./article-of-day.interface";
 const ArticleOfDay = ({
   slug,
   title,
+  rating,
   subtitle,
   sys,
   readDurationInMin,
@@ -36,7 +37,7 @@ const ArticleOfDay = ({
           className="lg:flex-row lg:items-center flex"
         >
           <div className="lg:rounded-2xl overflow-hidden lg:w-2/3 image-section">
-            <Link href={`${slug}`} title={title}>
+            <Link href={`/articles/${slug}`} title={title}>
               <ContentfulImage
                 src={image?.url || ""}
                 alt={image?.description}
@@ -81,7 +82,7 @@ const ArticleOfDay = ({
                 as="h2"
                 weight="semibold"
                 size="xxl"
-                className={`text-white font-['FocoTrial-Bold'] leading-[30.89px]`}
+                className="text-white font-['FocoTrial-Bold'] leading-[30.89px]"
               >
                 {title}
               </Header>
@@ -108,18 +109,20 @@ const ArticleOfDay = ({
                     By {author?.name}
                   </Text>
                 </Stack>
-                <Stack
-                  className="justify-between text-xs rtl:flex-row-reverse"
-                  alignItems="end"
-                >
-                  <Star rate={5} value={5} fill="#FED236" />
-                  <Text
-                    className="ml-1 text-xs !leading-[9px] text-white"
-                    weight="light"
+                {rating && (
+                  <Stack
+                    className="justify-between text-xs rtl:flex-row-reverse"
+                    alignItems="end"
                   >
-                    3.9
-                  </Text>
-                </Stack>
+                    <Star rate={5} value={rating} fill="#FED236" />
+                    <Text
+                      className="ml-1 text-xs !leading-[9px] text-white"
+                      weight="light"
+                    >
+                      {rating}
+                    </Text>
+                  </Stack>
+                )}
               </Stack>
             </Stack>
             <Text className="mt-4 text-white" size="md" weight="light">
