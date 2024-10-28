@@ -2,33 +2,28 @@ import CardArticle from "@/components/cards/card-article";
 import CardMagazine from "@/components/cards/card-magazine";
 import CardRecipe from "@/components/cards/card-recipe";
 import Grid from "@/components/common/grid";
-import type { ContentfulGenre, Genre, ICARD } from "@/types/common";
 import { clsxm } from "@/utils/twMerge.utils";
-import { ItemShowcase } from "lib/__generated/sdk";
-
-const genreMap: Record<ContentfulGenre, Genre> = {
-  PageRecipe: "recipe",
-  PageArticle: "article",
-  PageMagazine: "magazine",
-};
+import { ItemShowcase, ItemShowcaseItemsItem } from "lib/__generated/sdk";
 
 const cardComponents: Record<string, any> = {
-  recipe: CardRecipe,
-  article: CardArticle,
-  magazine: CardMagazine,
+  PageRecipe: CardRecipe,
+  PageArticle: CardArticle,
+  PageMagazine: CardMagazine,
 };
 
-const getCardComponentByGenre = (card: ICARD): JSX.Element => {
-  const CardComponent = cardComponents[card.genre];
+const getCardComponentByGenre = (card: ItemShowcaseItemsItem): JSX.Element => {
+  const CardComponent = cardComponents[card.__typename!];
   return CardComponent ? <CardComponent {...card} /> : <></>;
 };
 
-const modelToCards = (cards: ICARD[], className: string) =>
-  cards.map((card: ICARD, idx: number) => (
+const modelToCards = (cards: ItemShowcaseItemsItem[], className: string) =>
+  cards.map((card: ItemShowcaseItemsItem, idx: number) => (
     <Grid.Item
       key={idx}
       className={clsxm(
-        "col-span-1 " + (card.genre === "masterclass" ? "lg:col-span-2" : ""),
+        "col-span-1 " + card.__typename === "PageMasterclass"
+          ? "lg:col-span-2"
+          : "",
         className
       )}
     >
@@ -40,21 +35,10 @@ const CtfItemShowcase = (props: ItemShowcase) => {
   const { itemsCollection } = props;
   const items = itemsCollection?.items.filter(Boolean) || [];
 
-  const mappedItems: ICARD[] = items.map((item) => ({
-    genre: genreMap[item.__typename!],
-    header: item.title,
-    description: item.author?.name,
-    star: item.rating,
-    media: item.image,
-    authorImage: item.author?.avatar,
-    url: item.slug || item.flipBookUrl,
-    date: item.sys?.publishedAt,
-  }));
-
   return (
     <>
       <Grid lg={5} md={2} col={1} spacing={4}>
-        {modelToCards(mappedItems, "show-x-items-on-mobile")}
+        {modelToCards(items, "show-x-items-on-mobile")}
       </Grid>
     </>
   );

@@ -10,8 +10,6 @@ export type Genre =
   | "card-foodies"
   | "profile-foodies";
 
-export type ContentfulGenre = "PageRecipe" | "PageArticle" | "PageMagazine";
-
 export interface ICARD {
   genre: Genre;
   header?: string;

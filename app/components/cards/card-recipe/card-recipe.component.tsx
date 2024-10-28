@@ -6,26 +6,30 @@ import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 import { Link } from "@/i18n/routing";
 import Recipe from "@/public/assets/icons/recipe.svg";
+import type { PageRecipe } from "lib/__generated/sdk";
+import { useTranslations } from "next-intl";
+
+interface RecipeCardProps extends PageRecipe {
+  textColor?: "black" | "white";
+}
 
 const RecipeCard = ({
-  genre,
-  header,
-  description,
-  textColor,
-  star,
-  media,
-  authorImage,
-  url = "#",
-  actions,
-  formSaveForLaterIcon,
-}: any): JSX.Element => {
+  title,
+  image,
+  slug,
+  author,
+  rating,
+  textColor = "black",
+}: RecipeCardProps): JSX.Element => {
+  const t = useTranslations();
+
   return (
     <Card className="rounded-2xl w-full lg:h-[338px] flex flex-col">
       <div className="absolute flex w-full justify-between top-3 z-10 px-3 items-center">
         <Badge
           color="white"
           startIcon={<Recipe />}
-          text={genre}
+          text={t("cards.recipe")}
           className=" px-4 py-2 bg-slate-200/30 backdrop-blur-sm shadow-[0_0_10px_rgba(0, 0, 0, 0.2)]"
         />
         {/* {actions ? (
@@ -38,51 +42,51 @@ const RecipeCard = ({
       </div>
 
       <Link
-        href={`/recipes/${url}`}
-        title={header}
+        href={`/recipes/${slug}`}
+        title={title}
         className="relative w-auto grow-1 h-[250px] object-cover"
       >
         <Card.Media
           className="h-full"
-          src={media?.url}
-          alt={media?.title}
-          width={media?.width}
-          height={media?.height}
+          src={image?.url || ""}
+          alt={image?.title || title || ""}
+          width={image?.width}
+          height={image?.height}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
       </Link>
 
       <Card.Content>
         <Stack spacing={2} direction="col">
-          <a href={url} title={header}>
+          <Link href={`/recipes/${slug}`} title={title}>
             <Header
               weight="semibold"
-              className={`text-[${textColor}] max-h-24 overflow-hidden whitespace-nowrap text-ellipsis`}
+              className={`text-primary_dark max-h-24 overflow-hidden whitespace-nowrap text-ellipsis`}
               size="md"
             >
-              {header}
+              {title}
             </Header>
-          </a>
+          </Link>
           <Stack direction="row" alignItems="center" justifyContent="between">
             <Stack direction="row" alignItems="center" className="gap-2">
               <img
-                src={authorImage?.url}
+                src={author?.avatar?.url}
                 width={24}
                 height={24}
                 className="rounded-full w-[24px] h-[24px]"
               />
               <Text className="text-xs" color={textColor}>
-                {description}
+                {author?.name}
               </Text>
             </Stack>
-            {!!star && (
+            {!!rating && (
               <Stack
                 className="justify-between text-xs gap-1"
                 alignItems="center"
               >
-                <Star rate={star} value={1} fill="#FED236" />
+                <Star rate={rating} value={1} fill="#FED236" />
                 <Text className="text-xs" color={textColor}>
-                  {star}
+                  {rating}
                 </Text>
               </Stack>
             )}

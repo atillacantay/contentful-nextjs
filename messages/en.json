@@ -16,6 +16,9 @@
     "calories": "Calories",
     "servingSize": "Serving Size"
   },
+  "cards": {
+    "recipe": "Recipe"
+  },
   "price": {
     "free": "Free"
   },

@@ -16,6 +16,9 @@
     "calories": "سعرات حرارية",
     "servingSize": "حجم الحصة"
   },
+  "cards": {
+    "recipe": "وصفة"
+  },
   "price": {
     "free": "مجاني"
   },

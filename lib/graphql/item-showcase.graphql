@@ -29,6 +29,10 @@ fragment ItemShowcaseFields on ItemShowcase {
       }
       ... on PageArticle {
         __typename
+        sys {
+          id
+          publishedAt
+        }
         slug
         title
         rating
