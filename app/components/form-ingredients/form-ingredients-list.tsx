@@ -9,7 +9,7 @@ import ShoppingList from "@/public/assets/icons/shopping-list.svg";
 
 import useIngredientShoppingList from "@/hooks/useIngredientShoppingList";
 import decToFrac from "@/utils/decimalToFraction";
-import { Ingredient } from "lib/__generated/sdk";
+import type { Ingredient } from "lib/__generated/sdk";
 // import { Ingredient } from "./form-ingredients.interface";
 
 interface IFormIngredientsList {

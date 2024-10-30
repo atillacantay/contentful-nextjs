@@ -1,6 +1,6 @@
 import ComponentResolver from "@/components/shared/component-resolver";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
-import { Section as SectionType } from "lib/__generated/sdk";
+import type { Section as SectionType } from "lib/__generated/sdk";
 import { client } from "lib/client";
 import { getLocale } from "next-intl/server";
 import { draftMode } from "next/headers";
@@ -34,6 +34,8 @@ const CtfSectionGql = async ({ id }: CtfSectionProps) => {
           btnTitle: section.buttonText,
           btnLink: section.buttonLink,
         }}
+        showXItemsOnMobile={3}
+        showMobileButton={true}
         sectionClassName={isFeaturedItem ? "max-sm:px-4" : ""}
         className={
           isFeaturedItem

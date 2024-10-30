@@ -1,4 +1,4 @@
-import { Query } from "lib/__generated/sdk";
+import type { Query } from "lib/__generated/sdk";
 import { client } from "lib/client";
 import { draftMode } from "next/headers";
 

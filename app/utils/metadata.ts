@@ -1,14 +1,15 @@
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
-import { Metadata } from "next";
-import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
 import {
   PageQuery,
   PageQueryVariables,
   PageRecipeQuery,
   PageRecipeQueryVariables,
-} from "../../lib/__generated/sdk";
-import { client } from "../../lib/client";
+  Query,
+} from "lib/__generated/sdk";
+import { client } from "lib/client";
+import { Metadata } from "next";
+import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
 
 const WebUrl = process.env.NEXT_PUBLIC_BASE_URL as string;
 
@@ -20,16 +21,11 @@ const generateUrl = (locale: string, slug: string) => {
   }
 };
 
-type QueryObjectKey =
-  | "pageCollection"
-  | "pageRecipeCollection"
-  | "pageArticleCollection";
-
 export const generatePageMetadata = async (
   pageType: string,
   slug: string,
   locale: string,
-  queryObjectKey: QueryObjectKey = "pageCollection",
+  queryObjectKey: keyof Query = "pageCollection",
   queryFunction?: (
     variables: PageRecipeQueryVariables | PageQueryVariables,
     requestHeaders?: HeadersInit | undefined

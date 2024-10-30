@@ -8,6 +8,9 @@ fragment ItemShowcaseFields on ItemShowcase {
       ... on PageRecipe {
         __typename
         slug
+        category {
+          slug
+        }
         title
         description
         rating

@@ -176,7 +176,6 @@ export type AssetLinkingCollections = {
   entryCollection?: Maybe<EntryCollection>;
   ingredientCollection?: Maybe<IngredientCollection>;
   pageArticleCollection?: Maybe<PageArticleCollection>;
-  pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
   pageMagazineCollection?: Maybe<PageMagazineCollection>;
   pageRecipeCollection?: Maybe<PageRecipeCollection>;
   pageShopCollection?: Maybe<PageShopCollection>;
@@ -211,14 +210,6 @@ export type AssetLinkingCollectionsIngredientCollectionArgs = {
 
 
 export type AssetLinkingCollectionsPageArticleCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type AssetLinkingCollectionsPageBlogPostCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -367,7 +358,6 @@ export type ComponentAuthorLinkingCollections = {
   __typename?: 'ComponentAuthorLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
   pageArticleCollection?: Maybe<PageArticleCollection>;
-  pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
   pageRecipeCollection?: Maybe<PageRecipeCollection>;
 };
 
@@ -384,15 +374,6 @@ export type ComponentAuthorLinkingCollectionsPageArticleCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Array<InputMaybe<ComponentAuthorLinkingCollectionsPageArticleCollectionOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type ComponentAuthorLinkingCollectionsPageBlogPostCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<ComponentAuthorLinkingCollectionsPageBlogPostCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -429,30 +410,9 @@ export enum ComponentAuthorLinkingCollectionsPageArticleCollectionOrder {
   TitleDesc = 'title_DESC'
 }
 
-export enum ComponentAuthorLinkingCollectionsPageBlogPostCollectionOrder {
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
-}
-
 export enum ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder {
   CaloriesAsc = 'calories_ASC',
   CaloriesDesc = 'calories_DESC',
-  CategoryAsc = 'category_ASC',
-  CategoryDesc = 'category_DESC',
   CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
   CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
   DescriptionAsc = 'description_ASC',
@@ -492,92 +452,6 @@ export enum ComponentAuthorOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
-}
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/componentCallToAction) */
-export type ComponentCallToAction = Entry & _Node & {
-  __typename?: 'ComponentCallToAction';
-  _id: Scalars['ID']['output'];
-  contentfulMetadata: ContentfulMetadata;
-  link?: Maybe<Scalars['String']['output']>;
-  linkedFrom?: Maybe<ComponentCallToActionLinkingCollections>;
-  sys: Sys;
-  text?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/componentCallToAction) */
-export type ComponentCallToActionLinkArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/componentCallToAction) */
-export type ComponentCallToActionLinkedFromArgs = {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/componentCallToAction) */
-export type ComponentCallToActionTextArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type ComponentCallToActionCollection = {
-  __typename?: 'ComponentCallToActionCollection';
-  items: Array<Maybe<ComponentCallToAction>>;
-  limit: Scalars['Int']['output'];
-  skip: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export type ComponentCallToActionFilter = {
-  AND?: InputMaybe<Array<InputMaybe<ComponentCallToActionFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<ComponentCallToActionFilter>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  link?: InputMaybe<Scalars['String']['input']>;
-  link_contains?: InputMaybe<Scalars['String']['input']>;
-  link_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  link_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  link_not?: InputMaybe<Scalars['String']['input']>;
-  link_not_contains?: InputMaybe<Scalars['String']['input']>;
-  link_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  sys?: InputMaybe<SysFilter>;
-  text?: InputMaybe<Scalars['String']['input']>;
-  text_contains?: InputMaybe<Scalars['String']['input']>;
-  text_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  text_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  text_not?: InputMaybe<Scalars['String']['input']>;
-  text_not_contains?: InputMaybe<Scalars['String']['input']>;
-  text_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type ComponentCallToActionLinkingCollections = {
-  __typename?: 'ComponentCallToActionLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-};
-
-
-export type ComponentCallToActionLinkingCollectionsEntryCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export enum ComponentCallToActionOrder {
-  LinkAsc = 'link_ASC',
-  LinkDesc = 'link_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TextAsc = 'text_ASC',
-  TextDesc = 'text_DESC'
 }
 
 export type ContentfulMetadata = {
@@ -961,6 +835,7 @@ export type Footer = Entry & _Node & {
   contentfulMetadata: ContentfulMetadata;
   followLabel?: Maybe<Scalars['String']['output']>;
   internalName?: Maybe<Scalars['String']['output']>;
+  legalLinksCollection?: Maybe<FooterLegalLinksCollection>;
   linkedFrom?: Maybe<FooterLinkingCollections>;
   navigationLinks?: Maybe<NavigationLinks>;
   socialItemsCollection?: Maybe<FooterSocialItemsCollection>;
@@ -977,6 +852,17 @@ export type FooterFollowLabelArgs = {
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/footer) */
 export type FooterInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/footer) */
+export type FooterLegalLinksCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<FooterLegalLinksCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NavigationLinkItemFilter>;
 };
 
 
@@ -1030,12 +916,39 @@ export type FooterFilter = {
   internalName_not?: InputMaybe<Scalars['String']['input']>;
   internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  legalLinks?: InputMaybe<CfNavigationLinkItemNestedFilter>;
+  legalLinksCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   navigationLinks?: InputMaybe<CfNavigationLinksNestedFilter>;
   navigationLinks_exists?: InputMaybe<Scalars['Boolean']['input']>;
   socialItems?: InputMaybe<CfSocialItemNestedFilter>;
   socialItemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   sys?: InputMaybe<SysFilter>;
 };
+
+export type FooterLegalLinksCollection = {
+  __typename?: 'FooterLegalLinksCollection';
+  items: Array<Maybe<NavigationLinkItem>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export enum FooterLegalLinksCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UrlAsc = 'url_ASC',
+  UrlDesc = 'url_DESC'
+}
 
 export type FooterLinkingCollections = {
   __typename?: 'FooterLinkingCollections';
@@ -1422,8 +1335,6 @@ export type IngredientLinkingCollectionsPageShopCollectionArgs = {
 export enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
   CaloriesAsc = 'calories_ASC',
   CaloriesDesc = 'calories_DESC',
-  CategoryAsc = 'category_ASC',
-  CategoryDesc = 'category_DESC',
   CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
   CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
   DescriptionAsc = 'description_ASC',
@@ -1740,7 +1651,6 @@ export type NavigationLinkItem = Entry & _Node & {
   _id: Scalars['ID']['output'];
   contentfulMetadata: ContentfulMetadata;
   internalName?: Maybe<Scalars['String']['output']>;
-  key?: Maybe<Scalars['String']['output']>;
   linkedFrom?: Maybe<NavigationLinkItemLinkingCollections>;
   navigationLinkItemCollection?: Maybe<NavigationLinkItemNavigationLinkItemCollection>;
   sys: Sys;
@@ -1751,12 +1661,6 @@ export type NavigationLinkItem = Entry & _Node & {
 
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinkItem) */
 export type NavigationLinkItemInternalNameArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinkItem) */
-export type NavigationLinkItemKeyArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1808,13 +1712,6 @@ export type NavigationLinkItemFilter = {
   internalName_not?: InputMaybe<Scalars['String']['input']>;
   internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  key?: InputMaybe<Scalars['String']['input']>;
-  key_contains?: InputMaybe<Scalars['String']['input']>;
-  key_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  key_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  key_not?: InputMaybe<Scalars['String']['input']>;
-  key_not_contains?: InputMaybe<Scalars['String']['input']>;
-  key_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   navigationLinkItem?: InputMaybe<CfNavigationLinkItemNestedFilter>;
   navigationLinkItemCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   sys?: InputMaybe<SysFilter>;
@@ -1837,6 +1734,7 @@ export type NavigationLinkItemFilter = {
 export type NavigationLinkItemLinkingCollections = {
   __typename?: 'NavigationLinkItemLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  footerCollection?: Maybe<FooterCollection>;
   navigationLinkItemCollection?: Maybe<NavigationLinkItemCollection>;
   navigationLinksCollection?: Maybe<NavigationLinksCollection>;
 };
@@ -1845,6 +1743,15 @@ export type NavigationLinkItemLinkingCollections = {
 export type NavigationLinkItemLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type NavigationLinkItemLinkingCollectionsFooterCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<NavigationLinkItemLinkingCollectionsFooterCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -1867,11 +1774,24 @@ export type NavigationLinkItemLinkingCollectionsNavigationLinksCollectionArgs = 
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export enum NavigationLinkItemLinkingCollectionsFooterCollectionOrder {
+  FollowLabelAsc = 'followLabel_ASC',
+  FollowLabelDesc = 'followLabel_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
 export enum NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
-  KeyAsc = 'key_ASC',
-  KeyDesc = 'key_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1910,8 +1830,6 @@ export type NavigationLinkItemNavigationLinkItemCollection = {
 export enum NavigationLinkItemNavigationLinkItemCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
-  KeyAsc = 'key_ASC',
-  KeyDesc = 'key_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1929,8 +1847,6 @@ export enum NavigationLinkItemNavigationLinkItemCollectionOrder {
 export enum NavigationLinkItemOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
-  KeyAsc = 'key_ASC',
-  KeyDesc = 'key_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -2052,8 +1968,6 @@ export type NavigationLinksNavigationLinkItemCollection = {
 export enum NavigationLinksNavigationLinkItemCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
-  KeyAsc = 'key_ASC',
-  KeyDesc = 'key_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -2381,297 +2295,6 @@ export enum PageArticleOrder {
   TitleDesc = 'title_DESC'
 }
 
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPost = Entry & _Node & {
-  __typename?: 'PageBlogPost';
-  _id: Scalars['ID']['output'];
-  author?: Maybe<ComponentAuthor>;
-  content?: Maybe<PageBlogPostContent>;
-  contentfulMetadata: ContentfulMetadata;
-  featuredImage?: Maybe<Asset>;
-  internalName?: Maybe<Scalars['String']['output']>;
-  linkedFrom?: Maybe<PageBlogPostLinkingCollections>;
-  publishedDate?: Maybe<Scalars['DateTime']['output']>;
-  relatedBlogPostsCollection?: Maybe<PageBlogPostRelatedBlogPostsCollection>;
-  seoFields?: Maybe<Entry>;
-  shortDescription?: Maybe<Scalars['String']['output']>;
-  slug?: Maybe<Scalars['String']['output']>;
-  sys: Sys;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostAuthorArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  where?: InputMaybe<ComponentAuthorFilter>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostContentArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostFeaturedImageArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostInternalNameArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostLinkedFromArgs = {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostPublishedDateArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostRelatedBlogPostsCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<PageBlogPostRelatedBlogPostsCollectionOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<PageBlogPostFilter>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostSeoFieldsArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostShortDescriptionArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostSlugArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost) */
-export type PageBlogPostTitleArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PageBlogPostCollection = {
-  __typename?: 'PageBlogPostCollection';
-  items: Array<Maybe<PageBlogPost>>;
-  limit: Scalars['Int']['output'];
-  skip: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export type PageBlogPostContent = {
-  __typename?: 'PageBlogPostContent';
-  json: Scalars['JSON']['output'];
-  links: PageBlogPostContentLinks;
-};
-
-export type PageBlogPostContentAssets = {
-  __typename?: 'PageBlogPostContentAssets';
-  block: Array<Maybe<Asset>>;
-  hyperlink: Array<Maybe<Asset>>;
-};
-
-export type PageBlogPostContentEntries = {
-  __typename?: 'PageBlogPostContentEntries';
-  block: Array<Maybe<Entry>>;
-  hyperlink: Array<Maybe<Entry>>;
-  inline: Array<Maybe<Entry>>;
-};
-
-export type PageBlogPostContentLinks = {
-  __typename?: 'PageBlogPostContentLinks';
-  assets: PageBlogPostContentAssets;
-  entries: PageBlogPostContentEntries;
-  resources: PageBlogPostContentResources;
-};
-
-export type PageBlogPostContentResources = {
-  __typename?: 'PageBlogPostContentResources';
-  block: Array<PageBlogPostContentResourcesBlock>;
-  hyperlink: Array<PageBlogPostContentResourcesHyperlink>;
-  inline: Array<PageBlogPostContentResourcesInline>;
-};
-
-export type PageBlogPostContentResourcesBlock = ResourceLink & {
-  __typename?: 'PageBlogPostContentResourcesBlock';
-  sys: ResourceSys;
-};
-
-export type PageBlogPostContentResourcesHyperlink = ResourceLink & {
-  __typename?: 'PageBlogPostContentResourcesHyperlink';
-  sys: ResourceSys;
-};
-
-export type PageBlogPostContentResourcesInline = ResourceLink & {
-  __typename?: 'PageBlogPostContentResourcesInline';
-  sys: ResourceSys;
-};
-
-export type PageBlogPostFilter = {
-  AND?: InputMaybe<Array<InputMaybe<PageBlogPostFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<PageBlogPostFilter>>>;
-  author?: InputMaybe<CfComponentAuthorNestedFilter>;
-  author_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  content_contains?: InputMaybe<Scalars['String']['input']>;
-  content_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  content_not_contains?: InputMaybe<Scalars['String']['input']>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  featuredImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  internalName?: InputMaybe<Scalars['String']['input']>;
-  internalName_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  internalName_not?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  publishedDate?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  publishedDate_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  publishedDate_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_not?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  relatedBlogPosts?: InputMaybe<CfPageBlogPostNestedFilter>;
-  relatedBlogPostsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  seoFields_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  shortDescription?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_contains?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  shortDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  shortDescription_not?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_not_contains?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  slug_contains?: InputMaybe<Scalars['String']['input']>;
-  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  slug_not?: InputMaybe<Scalars['String']['input']>;
-  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
-  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  title_contains?: InputMaybe<Scalars['String']['input']>;
-  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  title_not?: InputMaybe<Scalars['String']['input']>;
-  title_not_contains?: InputMaybe<Scalars['String']['input']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type PageBlogPostLinkingCollections = {
-  __typename?: 'PageBlogPostLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-  pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
-};
-
-
-export type PageBlogPostLinkingCollectionsEntryCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type PageBlogPostLinkingCollectionsPageBlogPostCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<PageBlogPostLinkingCollectionsPageBlogPostCollectionOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export enum PageBlogPostLinkingCollectionsPageBlogPostCollectionOrder {
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
-}
-
-export enum PageBlogPostOrder {
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
-}
-
-export type PageBlogPostRelatedBlogPostsCollection = {
-  __typename?: 'PageBlogPostRelatedBlogPostsCollection';
-  items: Array<Maybe<PageBlogPost>>;
-  limit: Scalars['Int']['output'];
-  skip: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export enum PageBlogPostRelatedBlogPostsCollectionOrder {
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  PublishedDateAsc = 'publishedDate_ASC',
-  PublishedDateDesc = 'publishedDate_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
-}
-
 export type PageCollection = {
   __typename?: 'PageCollection';
   items: Array<Maybe<Page>>;
@@ -2970,7 +2593,7 @@ export type PageRecipe = Entry & _Node & {
   _id: Scalars['ID']['output'];
   author?: Maybe<ComponentAuthor>;
   calories?: Maybe<Scalars['Int']['output']>;
-  category?: Maybe<Scalars['String']['output']>;
+  category?: Maybe<PageRecipeCategory>;
   contentfulMetadata: ContentfulMetadata;
   cookingTimeMinutes?: Maybe<Scalars['Int']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -3006,6 +2629,8 @@ export type PageRecipeCaloriesArgs = {
 /** To create individual recipes [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageRecipe) */
 export type PageRecipeCategoryArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<PageRecipeCategoryFilter>;
 };
 
 
@@ -3105,7 +2730,9 @@ export type PageRecipeCategory = Entry & _Node & {
   _id: Scalars['ID']['output'];
   contentfulMetadata: ContentfulMetadata;
   linkedFrom?: Maybe<PageRecipeCategoryLinkingCollections>;
+  sectionCollection?: Maybe<PageRecipeCategorySectionCollection>;
   seo?: Maybe<Seo>;
+  slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
 };
 
@@ -3117,10 +2744,27 @@ export type PageRecipeCategoryLinkedFromArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageRecipeCategory) */
+export type PageRecipeCategorySectionCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PageRecipeCategorySectionCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SectionFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageRecipeCategory) */
 export type PageRecipeCategorySeoArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<SeoFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageRecipeCategory) */
+export type PageRecipeCategorySlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PageRecipeCategoryCollection = {
@@ -3135,14 +2779,24 @@ export type PageRecipeCategoryFilter = {
   AND?: InputMaybe<Array<InputMaybe<PageRecipeCategoryFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageRecipeCategoryFilter>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  section?: InputMaybe<CfSectionNestedFilter>;
+  sectionCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   seo?: InputMaybe<CfSeoNestedFilter>;
   seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sys?: InputMaybe<SysFilter>;
 };
 
 export type PageRecipeCategoryLinkingCollections = {
   __typename?: 'PageRecipeCategoryLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageRecipeCollection?: Maybe<PageRecipeCollection>;
 };
 
 
@@ -3153,7 +2807,47 @@ export type PageRecipeCategoryLinkingCollectionsEntryCollectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+
+export type PageRecipeCategoryLinkingCollectionsPageRecipeCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder {
+  CaloriesAsc = 'calories_ASC',
+  CaloriesDesc = 'calories_DESC',
+  CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
+  CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  DifficultyAsc = 'difficulty_ASC',
+  DifficultyDesc = 'difficulty_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PersonsAsc = 'persons_ASC',
+  PersonsDesc = 'persons_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export enum PageRecipeCategoryOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -3162,6 +2856,33 @@ export enum PageRecipeCategoryOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export type PageRecipeCategorySectionCollection = {
+  __typename?: 'PageRecipeCategorySectionCollection';
+  items: Array<Maybe<Section>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export enum PageRecipeCategorySectionCollectionOrder {
+  ButtonLinkAsc = 'buttonLink_ASC',
+  ButtonLinkDesc = 'buttonLink_DESC',
+  ButtonTextAsc = 'buttonText_ASC',
+  ButtonTextDesc = 'buttonText_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
 }
 
 export type PageRecipeCollection = {
@@ -3186,13 +2907,8 @@ export type PageRecipeFilter = {
   calories_lte?: InputMaybe<Scalars['Int']['input']>;
   calories_not?: InputMaybe<Scalars['Int']['input']>;
   calories_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  category?: InputMaybe<Scalars['String']['input']>;
-  category_contains?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<CfPageRecipeCategoryNestedFilter>;
   category_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  category_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  category_not?: InputMaybe<Scalars['String']['input']>;
-  category_not_contains?: InputMaybe<Scalars['String']['input']>;
-  category_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   cookingTimeMinutes?: InputMaybe<Scalars['Int']['input']>;
   cookingTimeMinutes_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3357,8 +3073,6 @@ export enum PageRecipeLinkingCollectionsItemShowcaseCollectionOrder {
 export enum PageRecipeOrder {
   CaloriesAsc = 'calories_ASC',
   CaloriesDesc = 'calories_DESC',
-  CategoryAsc = 'category_ASC',
-  CategoryDesc = 'category_DESC',
   CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
   CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
   DescriptionAsc = 'description_ASC',
@@ -3713,8 +3427,6 @@ export type PreparationStepLinkingCollectionsPageRecipeCollectionArgs = {
 export enum PreparationStepLinkingCollectionsPageRecipeCollectionOrder {
   CaloriesAsc = 'calories_ASC',
   CaloriesDesc = 'calories_DESC',
-  CategoryAsc = 'category_ASC',
-  CategoryDesc = 'category_DESC',
   CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
   CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
   DescriptionAsc = 'description_ASC',
@@ -3763,8 +3475,6 @@ export type Query = {
   assetCollection?: Maybe<AssetCollection>;
   componentAuthor?: Maybe<ComponentAuthor>;
   componentAuthorCollection?: Maybe<ComponentAuthorCollection>;
-  componentCallToAction?: Maybe<ComponentCallToAction>;
-  componentCallToActionCollection?: Maybe<ComponentCallToActionCollection>;
   entryCollection?: Maybe<EntryCollection>;
   featuredArticle?: Maybe<FeaturedArticle>;
   featuredArticleCollection?: Maybe<FeaturedArticleCollection>;
@@ -3789,8 +3499,6 @@ export type Query = {
   page?: Maybe<Page>;
   pageArticle?: Maybe<PageArticle>;
   pageArticleCollection?: Maybe<PageArticleCollection>;
-  pageBlogPost?: Maybe<PageBlogPost>;
-  pageBlogPostCollection?: Maybe<PageBlogPostCollection>;
   pageCollection?: Maybe<PageCollection>;
   pageMagazine?: Maybe<PageMagazine>;
   pageMagazineCollection?: Maybe<PageMagazineCollection>;
@@ -3853,23 +3561,6 @@ export type QueryComponentAuthorCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<ComponentAuthorFilter>;
-};
-
-
-export type QueryComponentCallToActionArgs = {
-  id: Scalars['String']['input'];
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-export type QueryComponentCallToActionCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<ComponentCallToActionOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<ComponentCallToActionFilter>;
 };
 
 
@@ -4077,23 +3768,6 @@ export type QueryPageArticleCollectionArgs = {
 };
 
 
-export type QueryPageBlogPostArgs = {
-  id: Scalars['String']['input'];
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-export type QueryPageBlogPostCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<PageBlogPostOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<PageBlogPostFilter>;
-};
-
-
 export type QueryPageCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -4273,16 +3947,6 @@ export type QuerySocialItemCollectionArgs = {
   where?: InputMaybe<SocialItemFilter>;
 };
 
-export type ResourceLink = {
-  sys: ResourceSys;
-};
-
-export type ResourceSys = {
-  __typename?: 'ResourceSys';
-  linkType: Scalars['String']['output'];
-  urn: Scalars['String']['output'];
-};
-
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/section) */
 export type Section = Entry & _Node & {
   __typename?: 'Section';
@@ -4383,6 +4047,7 @@ export type SectionFilter = {
 export type SectionLinkingCollections = {
   __typename?: 'SectionLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  pageRecipeCategoryCollection?: Maybe<PageRecipeCategoryCollection>;
 };
 
 
@@ -4392,6 +4057,28 @@ export type SectionLinkingCollectionsEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
+
+
+export type SectionLinkingCollectionsPageRecipeCategoryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<SectionLinkingCollectionsPageRecipeCategoryCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum SectionLinkingCollectionsPageRecipeCategoryCollectionOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
 
 export enum SectionOrder {
   ButtonLinkAsc = 'buttonLink_ASC',
@@ -4673,6 +4360,8 @@ export enum SeoLinkingCollectionsPageMagazineCollectionOrder {
 }
 
 export enum SeoLinkingCollectionsPageRecipeCategoryCollectionOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -4686,8 +4375,6 @@ export enum SeoLinkingCollectionsPageRecipeCategoryCollectionOrder {
 export enum SeoLinkingCollectionsPageRecipeCollectionOrder {
   CaloriesAsc = 'calories_ASC',
   CaloriesDesc = 'calories_DESC',
-  CategoryAsc = 'category_ASC',
-  CategoryDesc = 'category_DESC',
   CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
   CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
   DescriptionAsc = 'description_ASC',
@@ -5340,13 +5027,6 @@ export type CfNavigationLinkItemNestedFilter = {
   internalName_not?: InputMaybe<Scalars['String']['input']>;
   internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  key?: InputMaybe<Scalars['String']['input']>;
-  key_contains?: InputMaybe<Scalars['String']['input']>;
-  key_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  key_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  key_not?: InputMaybe<Scalars['String']['input']>;
-  key_not_contains?: InputMaybe<Scalars['String']['input']>;
-  key_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   navigationLinkItemCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -5443,57 +5123,6 @@ export type CfPageArticleNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type CfPageBlogPostNestedFilter = {
-  AND?: InputMaybe<Array<InputMaybe<CfPageBlogPostNestedFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<CfPageBlogPostNestedFilter>>>;
-  author_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  content_contains?: InputMaybe<Scalars['String']['input']>;
-  content_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  content_not_contains?: InputMaybe<Scalars['String']['input']>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  featuredImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  internalName?: InputMaybe<Scalars['String']['input']>;
-  internalName_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  internalName_not?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  publishedDate?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  publishedDate_gt?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  publishedDate_lt?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_lte?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_not?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
-  relatedBlogPostsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  seoFields_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  shortDescription?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_contains?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  shortDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  shortDescription_not?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_not_contains?: InputMaybe<Scalars['String']['input']>;
-  shortDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  slug_contains?: InputMaybe<Scalars['String']['input']>;
-  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  slug_not?: InputMaybe<Scalars['String']['input']>;
-  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
-  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  sys?: InputMaybe<SysFilter>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  title_contains?: InputMaybe<Scalars['String']['input']>;
-  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  title_not?: InputMaybe<Scalars['String']['input']>;
-  title_not_contains?: InputMaybe<Scalars['String']['input']>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type CfPageMagazineNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfPageMagazineNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPageMagazineNestedFilter>>>;
@@ -5568,6 +5197,22 @@ export type CfPageNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type CfPageRecipeCategoryNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfPageRecipeCategoryNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfPageRecipeCategoryNestedFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  sectionCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
 export type CfPageRecipeNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfPageRecipeNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPageRecipeNestedFilter>>>;
@@ -5581,13 +5226,7 @@ export type CfPageRecipeNestedFilter = {
   calories_lte?: InputMaybe<Scalars['Int']['input']>;
   calories_not?: InputMaybe<Scalars['Int']['input']>;
   calories_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
-  category?: InputMaybe<Scalars['String']['input']>;
-  category_contains?: InputMaybe<Scalars['String']['input']>;
   category_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  category_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  category_not?: InputMaybe<Scalars['String']['input']>;
-  category_not_contains?: InputMaybe<Scalars['String']['input']>;
-  category_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   cookingTimeMinutes?: InputMaybe<Scalars['Int']['input']>;
   cookingTimeMinutes_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -5678,6 +5317,42 @@ export type CfPreparationStepNestedFilter = {
   internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sys?: InputMaybe<SysFilter>;
+};
+
+export type CfSectionNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfSectionNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfSectionNestedFilter>>>;
+  buttonLink?: InputMaybe<Scalars['String']['input']>;
+  buttonLink_contains?: InputMaybe<Scalars['String']['input']>;
+  buttonLink_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  buttonLink_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  buttonLink_not?: InputMaybe<Scalars['String']['input']>;
+  buttonLink_not_contains?: InputMaybe<Scalars['String']['input']>;
+  buttonLink_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  buttonText?: InputMaybe<Scalars['String']['input']>;
+  buttonText_contains?: InputMaybe<Scalars['String']['input']>;
+  buttonText_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  buttonText_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  buttonText_not?: InputMaybe<Scalars['String']['input']>;
+  buttonText_not_contains?: InputMaybe<Scalars['String']['input']>;
+  buttonText_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  content_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  internalName?: InputMaybe<Scalars['String']['input']>;
+  internalName_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  internalName_not?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type CfSeoNestedFilter = {
@@ -5850,7 +5525,7 @@ export type FeaturedMagazineQueryQuery = { __typename?: 'Query', featuredMagazin
     & FeaturedMagazineFieldsFragment
   ) };
 
-export type FeaturedRecipeFieldsFragment = { __typename?: 'FeaturedRecipe', recipe?: { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } } };
+export type FeaturedRecipeFieldsFragment = { __typename?: 'FeaturedRecipe', recipe?: { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } } };
 
 export type FeaturedRecipeQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5880,7 +5555,7 @@ export type HeaderQueryVariables = Exact<{
 
 export type HeaderQuery = { __typename?: 'Query', headerCollection?: { __typename?: 'HeaderCollection', items: Array<{ __typename?: 'Header', _id: string, internalName?: string, headerSearch?: any, userMenu?: any, navigationItems?: any }> } };
 
-export type ItemShowcaseFieldsFragment = { __typename?: 'ItemShowcase', sys: { __typename: 'Sys', id: string }, itemsCollection?: { __typename?: 'ItemShowcaseItemsCollection', items: Array<{ __typename: 'PageArticle', slug?: string, title?: string, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageMagazine', title?: string, subtitle?: string, description?: string, flipBookUrl?: string, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } | { __typename: 'PageRecipe', slug?: string, title?: string, description?: string, rating?: number, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageShop', slug?: string, name?: string, productNetWeight?: number, productUnit?: string, productIsNew?: boolean, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, ingredient?: { __typename?: 'Ingredient', name?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> } };
+export type ItemShowcaseFieldsFragment = { __typename?: 'ItemShowcase', sys: { __typename: 'Sys', id: string }, itemsCollection?: { __typename?: 'ItemShowcaseItemsCollection', items: Array<{ __typename: 'PageArticle', slug?: string, title?: string, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageMagazine', title?: string, subtitle?: string, description?: string, flipBookUrl?: string, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } | { __typename: 'PageRecipe', slug?: string, title?: string, description?: string, rating?: number, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageShop', slug?: string, name?: string, productNetWeight?: number, productUnit?: string, productIsNew?: boolean, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, ingredient?: { __typename?: 'Ingredient', name?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> } };
 
 export type ItemShowcaseQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -5916,7 +5591,21 @@ export type PageArticleQuery = { __typename?: 'Query', pageArticleCollection?: {
       & PageArticleFieldsFragment
     )> } };
 
-export type PageRecipeFieldsFragment = { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, category?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, preparationStepsCollection?: { __typename?: 'PageRecipePreparationStepsCollection', items: Array<{ __typename?: 'PreparationStep', _id: string, description?: string, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, ingredientsCollection?: { __typename?: 'PageRecipeIngredientsCollection', items: Array<{ __typename?: 'Ingredient', _id: string, name?: string, quantity?: number, unitValue?: string, unit?: string, producedByGoody?: boolean, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
+export type PageRecipeCategoryFieldsFragment = { __typename?: 'PageRecipeCategory', slug?: string, sys: { __typename?: 'Sys', id: string }, sectionCollection?: { __typename?: 'PageRecipeCategorySectionCollection', items: Array<{ __typename: 'Section', sys: { __typename?: 'Sys', id: string } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
+
+export type PageRecipeCategoryQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+}>;
+
+
+export type PageRecipeCategoryQuery = { __typename?: 'Query', pageRecipeCategoryCollection?: { __typename?: 'PageRecipeCategoryCollection', items: Array<(
+      { __typename?: 'PageRecipeCategory' }
+      & PageRecipeCategoryFieldsFragment
+    )> } };
+
+export type PageRecipeFieldsFragment = { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string }, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, preparationStepsCollection?: { __typename?: 'PageRecipePreparationStepsCollection', items: Array<{ __typename?: 'PreparationStep', _id: string, description?: string, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, ingredientsCollection?: { __typename?: 'PageRecipeIngredientsCollection', items: Array<{ __typename?: 'Ingredient', _id: string, name?: string, quantity?: number, unitValue?: string, unit?: string, producedByGoody?: boolean, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
 
 export type PageRecipeQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -5930,7 +5619,7 @@ export type PageRecipeQuery = { __typename?: 'Query', pageRecipeCollection?: { _
       & PageRecipeFieldsFragment
     )> } };
 
-export type PageFieldsFragment = { __typename?: 'Page', slug?: string, title?: string, pageName?: string, sys: { __typename?: 'Sys', id: string }, sectionCollection?: { __typename?: 'PageSectionCollection', items: Array<{ __typename: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } } | { __typename: 'ComponentCallToAction', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Footer', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Header', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Ingredient', sys: { __typename?: 'Sys', id: string } } | { __typename: 'ItemShowcase', sys: { __typename?: 'Sys', id: string } } | { __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string } } | { __typename: 'NavigationLinkItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'NavigationLinks', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Page', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageBlogPost', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipeCategory', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageShop', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PreparationStep', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Section', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Seo', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Slider', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SliderItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SocialItem', sys: { __typename?: 'Sys', id: string } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
+export type PageFieldsFragment = { __typename?: 'Page', slug?: string, title?: string, pageName?: string, sys: { __typename?: 'Sys', id: string }, sectionCollection?: { __typename?: 'PageSectionCollection', items: Array<{ __typename: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Footer', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Header', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Ingredient', sys: { __typename?: 'Sys', id: string } } | { __typename: 'ItemShowcase', sys: { __typename?: 'Sys', id: string } } | { __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string } } | { __typename: 'NavigationLinkItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'NavigationLinks', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Page', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipeCategory', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageShop', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PreparationStep', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Section', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Seo', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Slider', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SliderItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SocialItem', sys: { __typename?: 'Sys', id: string } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
 
 export type PageQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -5957,6 +5646,54 @@ export type SectionQueryQuery = { __typename?: 'Query', section?: (
     { __typename?: 'Section' }
     & SectionFieldsFragment
   ) };
+
+export type ComponentReferenceFields_ComponentAuthor_Fragment = { __typename: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_FeaturedArticle_Fragment = { __typename: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_FeaturedMagazine_Fragment = { __typename: 'FeaturedMagazine', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_FeaturedRecipe_Fragment = { __typename: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_Footer_Fragment = { __typename: 'Footer', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_Header_Fragment = { __typename: 'Header', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_Ingredient_Fragment = { __typename: 'Ingredient', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_ItemShowcase_Fragment = { __typename: 'ItemShowcase', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_MainNavigation_Fragment = { __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_NavigationLinkItem_Fragment = { __typename: 'NavigationLinkItem', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_NavigationLinks_Fragment = { __typename: 'NavigationLinks', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_Page_Fragment = { __typename: 'Page', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_PageArticle_Fragment = { __typename: 'PageArticle', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_PageMagazine_Fragment = { __typename: 'PageMagazine', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_PageRecipe_Fragment = { __typename: 'PageRecipe', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_PageRecipeCategory_Fragment = { __typename: 'PageRecipeCategory', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_PageShop_Fragment = { __typename: 'PageShop', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_PreparationStep_Fragment = { __typename: 'PreparationStep', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_Section_Fragment = { __typename: 'Section', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_Seo_Fragment = { __typename: 'Seo', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_Slider_Fragment = { __typename: 'Slider', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_SliderItem_Fragment = { __typename: 'SliderItem', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFields_SocialItem_Fragment = { __typename: 'SocialItem', sys: { __typename?: 'Sys', id: string } };
+
+export type ComponentReferenceFieldsFragment = ComponentReferenceFields_ComponentAuthor_Fragment | ComponentReferenceFields_FeaturedArticle_Fragment | ComponentReferenceFields_FeaturedMagazine_Fragment | ComponentReferenceFields_FeaturedRecipe_Fragment | ComponentReferenceFields_Footer_Fragment | ComponentReferenceFields_Header_Fragment | ComponentReferenceFields_Ingredient_Fragment | ComponentReferenceFields_ItemShowcase_Fragment | ComponentReferenceFields_MainNavigation_Fragment | ComponentReferenceFields_NavigationLinkItem_Fragment | ComponentReferenceFields_NavigationLinks_Fragment | ComponentReferenceFields_Page_Fragment | ComponentReferenceFields_PageArticle_Fragment | ComponentReferenceFields_PageMagazine_Fragment | ComponentReferenceFields_PageRecipe_Fragment | ComponentReferenceFields_PageRecipeCategory_Fragment | ComponentReferenceFields_PageShop_Fragment | ComponentReferenceFields_PreparationStep_Fragment | ComponentReferenceFields_Section_Fragment | ComponentReferenceFields_Seo_Fragment | ComponentReferenceFields_Slider_Fragment | ComponentReferenceFields_SliderItem_Fragment | ComponentReferenceFields_SocialItem_Fragment;
 
 export type SliderFieldsFragment = { __typename?: 'Slider', sliderItemCollection?: { __typename?: 'SliderSliderItemCollection', items: Array<{ __typename?: 'SliderItem', internalName?: string, type?: string, title?: string, subtitle?: string, link?: string, buttonText?: string, timerDate?: any, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } }> } };
 
@@ -6029,6 +5766,9 @@ export const FeaturedRecipeFieldsFragmentDoc = gql`
       publishedAt
     }
     slug
+    category {
+      slug
+    }
     title
     description
     cookingTimeMinutes
@@ -6065,6 +5805,9 @@ export const ItemShowcaseFieldsFragmentDoc = gql`
       ... on PageRecipe {
         __typename
         slug
+        category {
+          slug
+        }
         title
         description
         rating
@@ -6196,6 +5939,38 @@ export const PageArticleFieldsFragmentDoc = gql`
   }
 }
     `;
+export const PageRecipeCategoryFieldsFragmentDoc = gql`
+    fragment PageRecipeCategoryFields on PageRecipeCategory {
+  sys {
+    id
+  }
+  slug
+  sectionCollection {
+    items {
+      __typename
+      sys {
+        id
+      }
+    }
+  }
+  seo {
+    name
+    title
+    description
+    canonicalUrl
+    image {
+      title
+      description
+      contentType
+      url
+      width
+      height
+    }
+    noFollow
+    noIndex
+  }
+}
+    `;
 export const PageRecipeFieldsFragmentDoc = gql`
     fragment PageRecipeFields on PageRecipe {
   sys {
@@ -6204,7 +5979,9 @@ export const PageRecipeFieldsFragmentDoc = gql`
   slug
   title
   description
-  category
+  category {
+    slug
+  }
   cookingTimeMinutes
   persons
   difficulty
@@ -6338,6 +6115,14 @@ export const SectionFieldsFragmentDoc = gql`
         id
       }
     }
+  }
+}
+    `;
+export const ComponentReferenceFieldsFragmentDoc = gql`
+    fragment ComponentReferenceFields on Entry {
+  __typename
+  sys {
+    id
   }
 }
     `;
@@ -6492,6 +6277,20 @@ export const PageArticleDocument = gql`
   }
 }
     ${PageArticleFieldsFragmentDoc}`;
+export const PageRecipeCategoryDocument = gql`
+    query pageRecipeCategory($slug: String!, $locale: String, $preview: Boolean) {
+  pageRecipeCategoryCollection(
+    limit: 1
+    locale: $locale
+    where: {slug: $slug}
+    preview: $preview
+  ) {
+    items {
+      ...PageRecipeCategoryFields
+    }
+  }
+}
+    ${PageRecipeCategoryFieldsFragmentDoc}`;
 export const PageRecipeDocument = gql`
     query pageRecipe($slug: String!, $locale: String, $preview: Boolean) {
   pageRecipeCollection(
@@ -6572,6 +6371,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     pageArticle(variables: PageArticleQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageArticleQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageArticleQuery>(PageArticleDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageArticle', 'query', variables);
+    },
+    pageRecipeCategory(variables: PageRecipeCategoryQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageRecipeCategoryQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<PageRecipeCategoryQuery>(PageRecipeCategoryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageRecipeCategory', 'query', variables);
     },
     pageRecipe(variables: PageRecipeQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<PageRecipeQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<PageRecipeQuery>(PageRecipeDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'pageRecipe', 'query', variables);

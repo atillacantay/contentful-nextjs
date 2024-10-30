@@ -1,4 +1,4 @@
-import { PageArticle } from "lib/__generated/sdk";
+import type { PageArticle } from "lib/__generated/sdk";
 import ArticlePage from "./article-page.component";
 
 interface CtfPageArticleProps {

@@ -96,7 +96,6 @@ type AssetLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   ingredientCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): IngredientCollection
   pageArticleCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageArticleCollection
-  pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageMagazineCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageRecipeCollection
   pageShopCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageShopCollection
@@ -173,7 +172,6 @@ input ComponentAuthorFilter {
 type ComponentAuthorLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageArticleCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageArticleCollectionOrder], preview: Boolean, skip: Int = 0): PageArticleCollection
-  pageBlogPostCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageBlogPostCollectionOrder], preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
 }
 
@@ -200,30 +198,9 @@ enum ComponentAuthorLinkingCollectionsPageArticleCollectionOrder {
   title_DESC
 }
 
-enum ComponentAuthorLinkingCollectionsPageBlogPostCollectionOrder {
-  internalName_ASC
-  internalName_DESC
-  publishedDate_ASC
-  publishedDate_DESC
-  slug_ASC
-  slug_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-  title_ASC
-  title_DESC
-}
-
 enum ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder {
   calories_ASC
   calories_DESC
-  category_ASC
-  category_DESC
   cookingTimeMinutes_ASC
   cookingTimeMinutes_DESC
   description_ASC
@@ -263,65 +240,6 @@ enum ComponentAuthorOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
-}
-
-"""
-[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/componentCallToAction)
-"""
-type ComponentCallToAction implements Entry & _Node {
-  _id: ID!
-  contentfulMetadata: ContentfulMetadata!
-  link(locale: String): String
-  linkedFrom(allowedLocales: [String]): ComponentCallToActionLinkingCollections
-  sys: Sys!
-  text(locale: String): String
-}
-
-type ComponentCallToActionCollection {
-  items: [ComponentCallToAction]!
-  limit: Int!
-  skip: Int!
-  total: Int!
-}
-
-input ComponentCallToActionFilter {
-  AND: [ComponentCallToActionFilter]
-  OR: [ComponentCallToActionFilter]
-  contentfulMetadata: ContentfulMetadataFilter
-  link: String
-  link_contains: String
-  link_exists: Boolean
-  link_in: [String]
-  link_not: String
-  link_not_contains: String
-  link_not_in: [String]
-  sys: SysFilter
-  text: String
-  text_contains: String
-  text_exists: Boolean
-  text_in: [String]
-  text_not: String
-  text_not_contains: String
-  text_not_in: [String]
-}
-
-type ComponentCallToActionLinkingCollections {
-  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-}
-
-enum ComponentCallToActionOrder {
-  link_ASC
-  link_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-  text_ASC
-  text_DESC
 }
 
 type ContentfulMetadata {
@@ -611,6 +529,7 @@ type Footer implements Entry & _Node {
   contentfulMetadata: ContentfulMetadata!
   followLabel(locale: String): String
   internalName(locale: String): String
+  legalLinksCollection(limit: Int = 100, locale: String, order: [FooterLegalLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): FooterLegalLinksCollection
   linkedFrom(allowedLocales: [String]): FooterLinkingCollections
   navigationLinks(locale: String, preview: Boolean, where: NavigationLinksFilter): NavigationLinks
   socialItemsCollection(limit: Int = 100, locale: String, order: [FooterSocialItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: SocialItemFilter): FooterSocialItemsCollection
@@ -642,11 +561,37 @@ input FooterFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  legalLinks: cfNavigationLinkItemNestedFilter
+  legalLinksCollection_exists: Boolean
   navigationLinks: cfNavigationLinksNestedFilter
   navigationLinks_exists: Boolean
   socialItems: cfSocialItemNestedFilter
   socialItemsCollection_exists: Boolean
   sys: SysFilter
+}
+
+type FooterLegalLinksCollection {
+  items: [NavigationLinkItem]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum FooterLegalLinksCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
 }
 
 type FooterLinkingCollections {
@@ -951,8 +896,6 @@ type IngredientLinkingCollections {
 enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
   calories_ASC
   calories_DESC
-  category_ASC
-  category_DESC
   cookingTimeMinutes_ASC
   cookingTimeMinutes_DESC
   description_ASC
@@ -1201,7 +1144,6 @@ type NavigationLinkItem implements Entry & _Node {
   _id: ID!
   contentfulMetadata: ContentfulMetadata!
   internalName(locale: String): String
-  key(locale: String): String
   linkedFrom(allowedLocales: [String]): NavigationLinkItemLinkingCollections
   navigationLinkItemCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): NavigationLinkItemNavigationLinkItemCollection
   sys: Sys!
@@ -1227,13 +1169,6 @@ input NavigationLinkItemFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
-  key: String
-  key_contains: String
-  key_exists: Boolean
-  key_in: [String]
-  key_not: String
-  key_not_contains: String
-  key_not_in: [String]
   navigationLinkItem: cfNavigationLinkItemNestedFilter
   navigationLinkItemCollection_exists: Boolean
   sys: SysFilter
@@ -1255,15 +1190,29 @@ input NavigationLinkItemFilter {
 
 type NavigationLinkItemLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  footerCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemLinkingCollectionsFooterCollectionOrder], preview: Boolean, skip: Int = 0): FooterCollection
   navigationLinkItemCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinkItemCollection
   navigationLinksCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemLinkingCollectionsNavigationLinksCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinksCollection
+}
+
+enum NavigationLinkItemLinkingCollectionsFooterCollectionOrder {
+  followLabel_ASC
+  followLabel_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrder {
   internalName_ASC
   internalName_DESC
-  key_ASC
-  key_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1301,8 +1250,6 @@ type NavigationLinkItemNavigationLinkItemCollection {
 enum NavigationLinkItemNavigationLinkItemCollectionOrder {
   internalName_ASC
   internalName_DESC
-  key_ASC
-  key_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1320,8 +1267,6 @@ enum NavigationLinkItemNavigationLinkItemCollectionOrder {
 enum NavigationLinkItemOrder {
   internalName_ASC
   internalName_DESC
-  key_ASC
-  key_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1401,8 +1346,6 @@ type NavigationLinksNavigationLinkItemCollection {
 enum NavigationLinksNavigationLinkItemCollectionOrder {
   internalName_ASC
   internalName_DESC
-  key_ASC
-  key_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1580,195 +1523,6 @@ enum PageArticleOrder {
   slug_DESC
   subtitle_ASC
   subtitle_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-  title_ASC
-  title_DESC
-}
-
-"""
-To create individual blog posts [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageBlogPost)
-"""
-type PageBlogPost implements Entry & _Node {
-  _id: ID!
-  author(locale: String, preview: Boolean, where: ComponentAuthorFilter): ComponentAuthor
-  content(locale: String): PageBlogPostContent
-  contentfulMetadata: ContentfulMetadata!
-  featuredImage(locale: String, preview: Boolean): Asset
-  internalName(locale: String): String
-  linkedFrom(allowedLocales: [String]): PageBlogPostLinkingCollections
-  publishedDate(locale: String): DateTime
-  relatedBlogPostsCollection(limit: Int = 100, locale: String, order: [PageBlogPostRelatedBlogPostsCollectionOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostRelatedBlogPostsCollection
-  seoFields(locale: String, preview: Boolean): Entry
-  shortDescription(locale: String): String
-  slug(locale: String): String
-  sys: Sys!
-  title(locale: String): String
-}
-
-type PageBlogPostCollection {
-  items: [PageBlogPost]!
-  limit: Int!
-  skip: Int!
-  total: Int!
-}
-
-type PageBlogPostContent {
-  json: JSON!
-  links: PageBlogPostContentLinks!
-}
-
-type PageBlogPostContentAssets {
-  block: [Asset]!
-  hyperlink: [Asset]!
-}
-
-type PageBlogPostContentEntries {
-  block: [Entry]!
-  hyperlink: [Entry]!
-  inline: [Entry]!
-}
-
-type PageBlogPostContentLinks {
-  assets: PageBlogPostContentAssets!
-  entries: PageBlogPostContentEntries!
-  resources: PageBlogPostContentResources!
-}
-
-type PageBlogPostContentResources {
-  block: [PageBlogPostContentResourcesBlock!]!
-  hyperlink: [PageBlogPostContentResourcesHyperlink!]!
-  inline: [PageBlogPostContentResourcesInline!]!
-}
-
-type PageBlogPostContentResourcesBlock implements ResourceLink {
-  sys: ResourceSys!
-}
-
-type PageBlogPostContentResourcesHyperlink implements ResourceLink {
-  sys: ResourceSys!
-}
-
-type PageBlogPostContentResourcesInline implements ResourceLink {
-  sys: ResourceSys!
-}
-
-input PageBlogPostFilter {
-  AND: [PageBlogPostFilter]
-  OR: [PageBlogPostFilter]
-  author: cfComponentAuthorNestedFilter
-  author_exists: Boolean
-  content_contains: String
-  content_exists: Boolean
-  content_not_contains: String
-  contentfulMetadata: ContentfulMetadataFilter
-  featuredImage_exists: Boolean
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
-  publishedDate: DateTime
-  publishedDate_exists: Boolean
-  publishedDate_gt: DateTime
-  publishedDate_gte: DateTime
-  publishedDate_in: [DateTime]
-  publishedDate_lt: DateTime
-  publishedDate_lte: DateTime
-  publishedDate_not: DateTime
-  publishedDate_not_in: [DateTime]
-  relatedBlogPosts: cfPageBlogPostNestedFilter
-  relatedBlogPostsCollection_exists: Boolean
-  seoFields_exists: Boolean
-  shortDescription: String
-  shortDescription_contains: String
-  shortDescription_exists: Boolean
-  shortDescription_in: [String]
-  shortDescription_not: String
-  shortDescription_not_contains: String
-  shortDescription_not_in: [String]
-  slug: String
-  slug_contains: String
-  slug_exists: Boolean
-  slug_in: [String]
-  slug_not: String
-  slug_not_contains: String
-  slug_not_in: [String]
-  sys: SysFilter
-  title: String
-  title_contains: String
-  title_exists: Boolean
-  title_in: [String]
-  title_not: String
-  title_not_contains: String
-  title_not_in: [String]
-}
-
-type PageBlogPostLinkingCollections {
-  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageBlogPostCollection(limit: Int = 100, locale: String, order: [PageBlogPostLinkingCollectionsPageBlogPostCollectionOrder], preview: Boolean, skip: Int = 0): PageBlogPostCollection
-}
-
-enum PageBlogPostLinkingCollectionsPageBlogPostCollectionOrder {
-  internalName_ASC
-  internalName_DESC
-  publishedDate_ASC
-  publishedDate_DESC
-  slug_ASC
-  slug_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-  title_ASC
-  title_DESC
-}
-
-enum PageBlogPostOrder {
-  internalName_ASC
-  internalName_DESC
-  publishedDate_ASC
-  publishedDate_DESC
-  slug_ASC
-  slug_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-  title_ASC
-  title_DESC
-}
-
-type PageBlogPostRelatedBlogPostsCollection {
-  items: [PageBlogPost]!
-  limit: Int!
-  skip: Int!
-  total: Int!
-}
-
-enum PageBlogPostRelatedBlogPostsCollectionOrder {
-  internalName_ASC
-  internalName_DESC
-  publishedDate_ASC
-  publishedDate_DESC
-  slug_ASC
-  slug_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1983,7 +1737,7 @@ type PageRecipe implements Entry & _Node {
   _id: ID!
   author(locale: String, preview: Boolean, where: ComponentAuthorFilter): ComponentAuthor
   calories(locale: String): Int
-  category(locale: String): String
+  category(locale: String, preview: Boolean, where: PageRecipeCategoryFilter): PageRecipeCategory
   contentfulMetadata: ContentfulMetadata!
   cookingTimeMinutes(locale: String): Int
   description(locale: String): String
@@ -2008,7 +1762,9 @@ type PageRecipeCategory implements Entry & _Node {
   _id: ID!
   contentfulMetadata: ContentfulMetadata!
   linkedFrom(allowedLocales: [String]): PageRecipeCategoryLinkingCollections
+  sectionCollection(limit: Int = 100, locale: String, order: [PageRecipeCategorySectionCollectionOrder], preview: Boolean, skip: Int = 0, where: SectionFilter): PageRecipeCategorySectionCollection
   seo(locale: String, preview: Boolean, where: SeoFilter): Seo
+  slug(locale: String): String
   sys: Sys!
 }
 
@@ -2023,16 +1779,42 @@ input PageRecipeCategoryFilter {
   AND: [PageRecipeCategoryFilter]
   OR: [PageRecipeCategoryFilter]
   contentfulMetadata: ContentfulMetadataFilter
+  section: cfSectionNestedFilter
+  sectionCollection_exists: Boolean
   seo: cfSeoNestedFilter
   seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
   sys: SysFilter
 }
 
 type PageRecipeCategoryLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
 }
 
-enum PageRecipeCategoryOrder {
+enum PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder {
+  calories_ASC
+  calories_DESC
+  cookingTimeMinutes_ASC
+  cookingTimeMinutes_DESC
+  description_ASC
+  description_DESC
+  difficulty_ASC
+  difficulty_DESC
+  internalName_ASC
+  internalName_DESC
+  persons_ASC
+  persons_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -2041,6 +1823,47 @@ enum PageRecipeCategoryOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
+
+enum PageRecipeCategoryOrder {
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type PageRecipeCategorySectionCollection {
+  items: [Section]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum PageRecipeCategorySectionCollectionOrder {
+  buttonLink_ASC
+  buttonLink_DESC
+  buttonText_ASC
+  buttonText_DESC
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 type PageRecipeCollection {
@@ -2064,13 +1887,8 @@ input PageRecipeFilter {
   calories_lte: Int
   calories_not: Int
   calories_not_in: [Int]
-  category: String
-  category_contains: String
+  category: cfPageRecipeCategoryNestedFilter
   category_exists: Boolean
-  category_in: [String]
-  category_not: String
-  category_not_contains: String
-  category_not_in: [String]
   contentfulMetadata: ContentfulMetadataFilter
   cookingTimeMinutes: Int
   cookingTimeMinutes_exists: Boolean
@@ -2207,8 +2025,6 @@ enum PageRecipeLinkingCollectionsItemShowcaseCollectionOrder {
 enum PageRecipeOrder {
   calories_ASC
   calories_DESC
-  category_ASC
-  category_DESC
   cookingTimeMinutes_ASC
   cookingTimeMinutes_DESC
   description_ASC
@@ -2435,8 +2251,6 @@ type PreparationStepLinkingCollections {
 enum PreparationStepLinkingCollectionsPageRecipeCollectionOrder {
   calories_ASC
   calories_DESC
-  category_ASC
-  category_DESC
   cookingTimeMinutes_ASC
   cookingTimeMinutes_DESC
   description_ASC
@@ -2489,8 +2303,6 @@ type Query {
   assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
   componentAuthor(id: String!, locale: String, preview: Boolean): ComponentAuthor
   componentAuthorCollection(limit: Int = 100, locale: String, order: [ComponentAuthorOrder], preview: Boolean, skip: Int = 0, where: ComponentAuthorFilter): ComponentAuthorCollection
-  componentCallToAction(id: String!, locale: String, preview: Boolean): ComponentCallToAction
-  componentCallToActionCollection(limit: Int = 100, locale: String, order: [ComponentCallToActionOrder], preview: Boolean, skip: Int = 0, where: ComponentCallToActionFilter): ComponentCallToActionCollection
   entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
   featuredArticle(id: String!, locale: String, preview: Boolean): FeaturedArticle
   featuredArticleCollection(limit: Int = 100, locale: String, order: [FeaturedArticleOrder], preview: Boolean, skip: Int = 0, where: FeaturedArticleFilter): FeaturedArticleCollection
@@ -2515,8 +2327,6 @@ type Query {
   page(id: String!, locale: String, preview: Boolean): Page
   pageArticle(id: String!, locale: String, preview: Boolean): PageArticle
   pageArticleCollection(limit: Int = 100, locale: String, order: [PageArticleOrder], preview: Boolean, skip: Int = 0, where: PageArticleFilter): PageArticleCollection
-  pageBlogPost(id: String!, locale: String, preview: Boolean): PageBlogPost
-  pageBlogPostCollection(limit: Int = 100, locale: String, order: [PageBlogPostOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostCollection
   pageCollection(limit: Int = 100, locale: String, order: [PageOrder], preview: Boolean, skip: Int = 0, where: PageFilter): PageCollection
   pageMagazine(id: String!, locale: String, preview: Boolean): PageMagazine
   pageMagazineCollection(limit: Int = 100, locale: String, order: [PageMagazineOrder], preview: Boolean, skip: Int = 0, where: PageMagazineFilter): PageMagazineCollection
@@ -2538,15 +2348,6 @@ type Query {
   sliderItemCollection(limit: Int = 100, locale: String, order: [SliderItemOrder], preview: Boolean, skip: Int = 0, where: SliderItemFilter): SliderItemCollection
   socialItem(id: String!, locale: String, preview: Boolean): SocialItem
   socialItemCollection(limit: Int = 100, locale: String, order: [SocialItemOrder], preview: Boolean, skip: Int = 0, where: SocialItemFilter): SocialItemCollection
-}
-
-interface ResourceLink {
-  sys: ResourceSys!
-}
-
-type ResourceSys {
-  linkType: String!
-  urn: String!
 }
 
 """
@@ -2611,6 +2412,20 @@ input SectionFilter {
 
 type SectionLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageRecipeCategoryCollection(limit: Int = 100, locale: String, order: [SectionLinkingCollectionsPageRecipeCategoryCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCategoryCollection
+}
+
+enum SectionLinkingCollectionsPageRecipeCategoryCollectionOrder {
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum SectionOrder {
@@ -2775,6 +2590,8 @@ enum SeoLinkingCollectionsPageMagazineCollectionOrder {
 }
 
 enum SeoLinkingCollectionsPageRecipeCategoryCollectionOrder {
+  slug_ASC
+  slug_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -2788,8 +2605,6 @@ enum SeoLinkingCollectionsPageRecipeCategoryCollectionOrder {
 enum SeoLinkingCollectionsPageRecipeCollectionOrder {
   calories_ASC
   calories_DESC
-  category_ASC
-  category_DESC
   cookingTimeMinutes_ASC
   cookingTimeMinutes_DESC
   description_ASC
@@ -3293,13 +3108,6 @@ input cfNavigationLinkItemNestedFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
-  key: String
-  key_contains: String
-  key_exists: Boolean
-  key_in: [String]
-  key_not: String
-  key_not_contains: String
-  key_not_in: [String]
   navigationLinkItemCollection_exists: Boolean
   sys: SysFilter
   title: String
@@ -3396,57 +3204,6 @@ input cfPageArticleNestedFilter {
   title_not_in: [String]
 }
 
-input cfPageBlogPostNestedFilter {
-  AND: [cfPageBlogPostNestedFilter]
-  OR: [cfPageBlogPostNestedFilter]
-  author_exists: Boolean
-  content_contains: String
-  content_exists: Boolean
-  content_not_contains: String
-  contentfulMetadata: ContentfulMetadataFilter
-  featuredImage_exists: Boolean
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
-  publishedDate: DateTime
-  publishedDate_exists: Boolean
-  publishedDate_gt: DateTime
-  publishedDate_gte: DateTime
-  publishedDate_in: [DateTime]
-  publishedDate_lt: DateTime
-  publishedDate_lte: DateTime
-  publishedDate_not: DateTime
-  publishedDate_not_in: [DateTime]
-  relatedBlogPostsCollection_exists: Boolean
-  seoFields_exists: Boolean
-  shortDescription: String
-  shortDescription_contains: String
-  shortDescription_exists: Boolean
-  shortDescription_in: [String]
-  shortDescription_not: String
-  shortDescription_not_contains: String
-  shortDescription_not_in: [String]
-  slug: String
-  slug_contains: String
-  slug_exists: Boolean
-  slug_in: [String]
-  slug_not: String
-  slug_not_contains: String
-  slug_not_in: [String]
-  sys: SysFilter
-  title: String
-  title_contains: String
-  title_exists: Boolean
-  title_in: [String]
-  title_not: String
-  title_not_contains: String
-  title_not_in: [String]
-}
-
 input cfPageMagazineNestedFilter {
   AND: [cfPageMagazineNestedFilter]
   OR: [cfPageMagazineNestedFilter]
@@ -3521,6 +3278,22 @@ input cfPageNestedFilter {
   title_not_in: [String]
 }
 
+input cfPageRecipeCategoryNestedFilter {
+  AND: [cfPageRecipeCategoryNestedFilter]
+  OR: [cfPageRecipeCategoryNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  sectionCollection_exists: Boolean
+  seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+}
+
 input cfPageRecipeNestedFilter {
   AND: [cfPageRecipeNestedFilter]
   OR: [cfPageRecipeNestedFilter]
@@ -3534,13 +3307,7 @@ input cfPageRecipeNestedFilter {
   calories_lte: Int
   calories_not: Int
   calories_not_in: [Int]
-  category: String
-  category_contains: String
   category_exists: Boolean
-  category_in: [String]
-  category_not: String
-  category_not_contains: String
-  category_not_in: [String]
   contentfulMetadata: ContentfulMetadataFilter
   cookingTimeMinutes: Int
   cookingTimeMinutes_exists: Boolean
@@ -3631,6 +3398,42 @@ input cfPreparationStepNestedFilter {
   internalName_not_contains: String
   internalName_not_in: [String]
   sys: SysFilter
+}
+
+input cfSectionNestedFilter {
+  AND: [cfSectionNestedFilter]
+  OR: [cfSectionNestedFilter]
+  buttonLink: String
+  buttonLink_contains: String
+  buttonLink_exists: Boolean
+  buttonLink_in: [String]
+  buttonLink_not: String
+  buttonLink_not_contains: String
+  buttonLink_not_in: [String]
+  buttonText: String
+  buttonText_contains: String
+  buttonText_exists: Boolean
+  buttonText_in: [String]
+  buttonText_not: String
+  buttonText_not_contains: String
+  buttonText_not_in: [String]
+  content_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
 }
 
 input cfSeoNestedFilter {

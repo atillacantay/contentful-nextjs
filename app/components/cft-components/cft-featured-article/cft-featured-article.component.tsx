@@ -2,7 +2,7 @@ import ArticleOfDay from "@/components/article-of-day";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 import IconEye from "@/public/assets/icons/eye.svg";
-import { FeaturedArticle } from "lib/__generated/sdk";
+import type { FeaturedArticle } from "lib/__generated/sdk";
 import { headers } from "next/headers";
 
 const CtfFeaturedArticle = async (featuredArticle: FeaturedArticle) => {

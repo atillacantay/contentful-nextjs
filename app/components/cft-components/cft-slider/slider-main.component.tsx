@@ -8,7 +8,7 @@ import Text from "@/components/common/typography/text";
 
 import ContentfulImage from "@/components/cft-components/cft-image";
 import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
-import { SliderItem } from "lib/__generated/sdk";
+import type { SliderItem } from "lib/__generated/sdk";
 import { useTranslations } from "next-intl";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";

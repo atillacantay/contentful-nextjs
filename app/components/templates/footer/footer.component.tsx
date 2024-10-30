@@ -2,35 +2,34 @@ import Stack from "@/components/common/stack/index";
 import { Header, Text } from "@/components/common/typography";
 import ShareSocialMedia from "@/components/share-social-media";
 import { IShareSocialMedia } from "@/components/share-social-media/share-social-media.component";
+import { Link } from "@/i18n/routing";
 import ChevronDown from "@/public/assets/icons/chevron-down-outline.svg";
 import GlobeIcon from "@/public/assets/icons/globe.svg";
-import type { Maybe } from "graphql/jsutils/Maybe";
 import type {
   Footer as FooterType,
   NavigationLinkItem,
 } from "lib/__generated/sdk";
 
-const Footer = (props: Maybe<FooterType> | undefined) => {
+const Footer = (props: FooterType) => {
   const navigationLinks =
     props?.navigationLinks?.navigationLinkItemCollection?.items;
   const socialItems = props?.socialItemsCollection?.items;
   const followLabel = props?.followLabel;
 
   const renderNavigationLinks = (
-    links: Maybe<NavigationLinkItem>[]
+    links?: NavigationLinkItem[]
   ): JSX.Element[] => {
     return links
-      .map((link, idx) => {
-        if (!link) return null;
+      ?.map((link, idx) => {
         return (
           <li key={idx}>
-            <a
-              href={link.url || ""}
+            <Link
+              href={link?.url || ""}
               className="block pt-3 text-white/80 dark:text-white/80"
             >
-              {link.title}
-            </a>
-            {link.navigationLinkItemCollection && (
+              {link?.title}
+            </Link>
+            {link?.navigationLinkItemCollection && (
               <ul className="pl-4">
                 {renderNavigationLinks(link.navigationLinkItemCollection.items)}
               </ul>
@@ -44,12 +43,11 @@ const Footer = (props: Maybe<FooterType> | undefined) => {
   const renderFooter = () => {
     return navigationLinks
       ?.map((menu, idx) => {
-        if (!menu) return null;
         return (
           <Stack direction="col" key={idx}>
             <details className="w-full md:hidden">
               <summary className="relative flex w-full justify-between items-center cursor-pointer max-sm:gap-4">
-                <a href={menu.url || ""} target="_self">
+                <Link href={menu.url || ""} target="_self">
                   <Header
                     as="h3"
                     weight="medium"
@@ -60,17 +58,17 @@ const Footer = (props: Maybe<FooterType> | undefined) => {
                   >
                     {menu.title}
                   </Header>
-                </a>
+                </Link>
                 <ChevronDown className="size-4 ltr:float-right rtl:float-left" />
               </summary>
               <ul>
                 {renderNavigationLinks(
-                  menu.navigationLinkItemCollection?.items || []
+                  menu.navigationLinkItemCollection?.items
                 )}
               </ul>
             </details>
             <div className="hidden md:flex flex-col items-stretch justify-start max-sm:gap-4">
-              <a href={menu.url || ""} target="_self">
+              <Link href={menu.url || ""} target="_self">
                 <Header
                   as="h3"
                   weight="medium"
@@ -81,10 +79,10 @@ const Footer = (props: Maybe<FooterType> | undefined) => {
                 >
                   {menu.title}
                 </Header>
-              </a>
+              </Link>
               <ul>
                 {renderNavigationLinks(
-                  menu.navigationLinkItemCollection?.items || []
+                  menu.navigationLinkItemCollection?.items
                 )}
               </ul>
             </div>
@@ -147,28 +145,28 @@ const Footer = (props: Maybe<FooterType> | undefined) => {
               {" "}
               Language:{" "}
             </Text>
-            <a href="#" target="_self">
+            <Link href="#" target="_self">
               <Text className="text-white/80 dark:text-white/80" weight="light">
                 {" "}
                 English
               </Text>
-            </a>
+            </Link>
           </Stack>
           <Stack
             className="pt-4 lg:flex-row lg:items-center lg:py-4 py-6  text-base  px-4 md:px-0 lg:gap-12 text-white/80 dark:text-white/80"
             direction="col"
             spacing={4}
           >
-            <a href="#" target="_self">
+            <Link href="#" target="_self">
               <Text as="span" className="text-white/80 dark:text-white/80">
                 Privacy Policy
               </Text>
-            </a>
-            <a href="#" target="_self">
+            </Link>
+            <Link href="#" target="_self">
               <Text as="span" className="text-white/80 dark:text-white/80">
                 Terms & Conditions
               </Text>
-            </a>
+            </Link>
             <Text
               as="span"
               className="lg:order-first text-white/80 dark:text-white/80"
@@ -180,14 +178,14 @@ const Footer = (props: Maybe<FooterType> | undefined) => {
               className="hidden md:flex lg:ml-auto lg:rtl:mr-auto lg:rtl:ml-0 text-white"
               spacing={2}
             >
-              <a href="#" target="_self">
+              <Link href="#" target="_self">
                 <Text
                   className="text-white/80 dark:text-white/80"
                   weight="light"
                 >
                   English
                 </Text>
-              </a>
+              </Link>
               <GlobeIcon
                 width={24}
                 height={24}

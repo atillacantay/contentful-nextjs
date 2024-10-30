@@ -1,4 +1,4 @@
-import { FeaturedRecipe } from "lib/__generated/sdk";
+import type { FeaturedRecipe } from "lib/__generated/sdk";
 import RecipeOfDay from "../../recipe-of-day";
 
 const CtfFeaturedRecipe = async (featuredRecipe: FeaturedRecipe) => {

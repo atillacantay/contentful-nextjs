@@ -5,7 +5,9 @@ fragment PageRecipeFields on PageRecipe {
   slug
   title
   description
-  category
+  category {
+    slug
+  }
   cookingTimeMinutes
   persons
   difficulty

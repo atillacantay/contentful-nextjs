@@ -1,4 +1,4 @@
-import { PageRecipe } from "lib/__generated/sdk";
+import type { PageRecipe } from "lib/__generated/sdk";
 import RecipeDetail from "./recipe-details";
 
 interface CtfPageRecipeProps {

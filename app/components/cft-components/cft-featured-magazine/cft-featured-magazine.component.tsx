@@ -5,7 +5,7 @@ import Stack from "@/components/common/stack";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 import { Link } from "@/i18n/routing";
-import { FeaturedMagazine } from "lib/__generated/sdk";
+import type { FeaturedMagazine } from "lib/__generated/sdk";
 import { useFormatter } from "next-intl";
 
 const CtfFeaturedMagazine = (featuredMagazine: FeaturedMagazine) => {

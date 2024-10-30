@@ -11,7 +11,7 @@ import HeaderMini from "@/components/templates/header/header-mini-component";
 
 import Calendar from "@/public/assets/icons/calendar-clear-outline.svg";
 import Heart from "@/public/assets/icons/heart-outline.svg";
-import { PageRecipe } from "lib/__generated/sdk";
+import type { PageRecipe } from "lib/__generated/sdk";
 import { useTranslations } from "next-intl";
 
 const RecipeDetailHeader = ({

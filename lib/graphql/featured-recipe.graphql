@@ -5,6 +5,9 @@ fragment FeaturedRecipeFields on FeaturedRecipe {
       publishedAt
     }
     slug
+    category {
+      slug
+    }
     title
     description
     cookingTimeMinutes

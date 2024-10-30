@@ -15,7 +15,7 @@ import ChevronUp from "@/public/assets/icons/chevron-up-outline.svg";
 
 import useIngredientShoppingList from "@/hooks/useIngredientShoppingList";
 import { clsxm } from "@/utils/twMerge.utils";
-import { Ingredient } from "lib/__generated/sdk";
+import type { Ingredient } from "lib/__generated/sdk";
 import { useTranslations } from "next-intl";
 // import { Ingredient } from "./form-ingredients.interface";
 

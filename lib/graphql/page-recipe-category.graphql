@@ -1,0 +1,43 @@
+fragment PageRecipeCategoryFields on PageRecipeCategory {
+  sys {
+    id
+  }
+  slug
+  sectionCollection {
+    items {
+      __typename
+      sys {
+        id
+      }
+    }
+  }
+  seo {
+    name
+    title
+    description
+    canonicalUrl
+    image {
+      title
+      description
+      contentType
+      url
+      width
+      height
+    }
+    noFollow
+    noIndex
+  }
+}
+
+query pageRecipeCategory($slug: String!, $locale: String, $preview: Boolean) {
+  pageRecipeCategoryCollection(
+    limit: 1
+    locale: $locale
+    where: { slug: $slug }
+    preview: $preview
+  ) {
+    items {
+      ...PageRecipeCategoryFields
+    }
+  }
+}

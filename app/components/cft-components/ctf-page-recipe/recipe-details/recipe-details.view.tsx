@@ -9,7 +9,7 @@ import RecipeDetailHeader from "./recipe-detail-header.component";
 import RecipeDetailReviews from "./recipe-detail-reviews.component";
 
 import type { ICARD } from "@/components/cft-components/cft-item-showcase/cft-item-showcase.component";
-import { PageRecipe } from "lib/__generated/sdk";
+import type { PageRecipe } from "lib/__generated/sdk";
 
 const SwiperSlide = dynamic(() =>
   import("swiper/react").then((module) => module.SwiperSlide)

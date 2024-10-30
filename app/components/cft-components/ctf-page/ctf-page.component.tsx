@@ -1,5 +1,5 @@
 import ComponentResolver from "@/components/shared/component-resolver";
-import { Page } from "lib/__generated/sdk";
+import type { Page } from "lib/__generated/sdk";
 
 interface CftPageProps {
   page: Page;

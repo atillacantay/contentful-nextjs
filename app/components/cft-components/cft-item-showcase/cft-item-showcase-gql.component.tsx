@@ -1,5 +1,5 @@
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
-import { ItemShowcase } from "lib/__generated/sdk";
+import type { ItemShowcase } from "lib/__generated/sdk";
 import { client } from "lib/client";
 import { getLocale } from "next-intl/server";
 import { draftMode } from "next/headers";

@@ -10,7 +10,7 @@ import WrapperSwiper from "@/components/wrapper-swiper";
 // import IconEye from "@/public/assets/icons/eye.svg";
 import media from "@/public/assets/img/avatar.jpg";
 import { clsxm } from "@/utils/twMerge.utils";
-import { PageArticle } from "lib/__generated/sdk";
+import type { PageArticle } from "lib/__generated/sdk";
 import { SwiperSlide } from "swiper/react";
 
 const ArticlesMagazines = ({

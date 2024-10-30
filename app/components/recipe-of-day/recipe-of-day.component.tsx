@@ -7,7 +7,7 @@ import Star from "@/components/common/star";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 import RecipeInfo from "@/components/recipe-info";
-import { PageRecipe } from "lib/__generated/sdk";
+import type { PageRecipe } from "lib/__generated/sdk";
 import { useFormatter } from "next-intl";
 
 const RecipeOfDay = ({

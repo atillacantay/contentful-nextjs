@@ -1,4 +1,4 @@
-import { PageArticle } from "lib/__generated/sdk";
+import type { PageArticle } from "lib/__generated/sdk";
 
 export interface IArticleOfDay extends PageArticle {
   textColor?: string;

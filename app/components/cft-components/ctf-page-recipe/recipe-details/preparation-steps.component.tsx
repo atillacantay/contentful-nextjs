@@ -2,11 +2,11 @@ import ContentfulImage from "@/components/cft-components/cft-image";
 import Stack from "@/components/common/stack";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
-import { Maybe, PreparationStep } from "lib/__generated/sdk";
+import type { PreparationStep } from "lib/__generated/sdk";
 import { useTranslations } from "next-intl";
 
 interface PreparationStepsProps {
-  preparationSteps?: Maybe<PreparationStep>[];
+  preparationSteps?: PreparationStep[];
 }
 
 const PreparationSteps = ({

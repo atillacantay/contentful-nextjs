@@ -10,7 +10,7 @@ import PastapediaLogo from "@/public/assets/icons/pastapedia-logo.svg";
 import RecipeIcon from "@/public/assets/icons/recipe.svg";
 import ShoppingBagIcon from "@/public/assets/icons/shopping-bag.svg";
 import { clsxm } from "@/utils/twMerge.utils";
-import { Maybe, Page } from "lib/__generated/sdk";
+import type { Page } from "lib/__generated/sdk";
 import { useParams } from "next/navigation";
 
 const iconsMap: Record<string, any> = {
@@ -24,7 +24,7 @@ const iconsMap: Record<string, any> = {
 };
 
 interface NavigationItemProps {
-  item: Maybe<Page>;
+  item: Page;
 }
 
 const NavigationItem = ({ item }: NavigationItemProps) => {

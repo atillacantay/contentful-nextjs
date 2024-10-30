@@ -16,12 +16,14 @@ interface RecipeCardProps extends PageRecipe {
 const RecipeCard = ({
   title,
   image,
+  category,
   slug,
   author,
   rating,
   textColor = "black",
 }: RecipeCardProps): JSX.Element => {
   const t = useTranslations();
+  const url = `/recipes/${category ? `${category.slug}/` : ""}${slug}`;
 
   return (
     <Card className="rounded-2xl w-full lg:h-[338px] flex flex-col">
@@ -42,7 +44,7 @@ const RecipeCard = ({
       </div>
 
       <Link
-        href={`/recipes/${slug}`}
+        href={url}
         title={title}
         className="relative w-auto grow-1 h-[250px] object-cover"
       >
@@ -58,7 +60,7 @@ const RecipeCard = ({
 
       <Card.Content>
         <Stack spacing={2} direction="col">
-          <Link href={`/recipes/${slug}`} title={title}>
+          <Link href={url} title={title}>
             <Header
               weight="semibold"
               className={`text-primary_dark max-h-24 overflow-hidden whitespace-nowrap text-ellipsis`}
