@@ -17,7 +17,8 @@
     "servingSize": "حجم الحصة"
   },
   "cards": {
-    "recipe": "وصفة"
+    "recipe": "وصفة",
+    "shop": "متجر"
   },
   "price": {
     "free": "مجاني"

@@ -99,6 +99,7 @@ type AssetLinkingCollections {
   pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
   pageMagazineCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageRecipeCollection
+  pageShopCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageShopCollection
   preparationStepCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PreparationStepCollection
   seoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SeoCollection
   sliderItemCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SliderItemCollection
@@ -944,6 +945,7 @@ input IngredientFilter {
 type IngredientLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [IngredientLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
+  pageShopCollection(limit: Int = 100, locale: String, order: [IngredientLinkingCollectionsPageShopCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCollection
 }
 
 enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
@@ -975,6 +977,29 @@ enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
+}
+
+enum IngredientLinkingCollectionsPageShopCollectionOrder {
+  name_ASC
+  name_DESC
+  productIsNew_ASC
+  productIsNew_DESC
+  productNetWeight_ASC
+  productNetWeight_DESC
+  productUnit_ASC
+  productUnit_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum IngredientOrder {
@@ -1045,25 +1070,11 @@ input ItemShowcaseItemsFilter {
   OR: [ItemShowcaseItemsFilter]
   contentfulMetadata: ContentfulMetadataFilter
   image_exists: Boolean
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
   seo_exists: Boolean
   sys: SysFilter
-  title: String
-  title_contains: String
-  title_exists: Boolean
-  title_in: [String]
-  title_not: String
-  title_not_contains: String
-  title_not_in: [String]
 }
 
-union ItemShowcaseItemsItem = PageArticle | PageMagazine | PageRecipe
+union ItemShowcaseItemsItem = PageArticle | PageMagazine | PageRecipe | PageShop
 
 type ItemShowcaseLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
@@ -2254,6 +2265,127 @@ type PageSectionCollection {
 }
 
 """
+[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageShop)
+"""
+type PageShop implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  image(locale: String, preview: Boolean): Asset
+  ingredient(locale: String, preview: Boolean, where: IngredientFilter): Ingredient
+  linkedFrom(allowedLocales: [String]): PageShopLinkingCollections
+  name(locale: String): String
+  productIsNew(locale: String): Boolean
+  productNetWeight(locale: String): Int
+  productUnit(locale: String): String
+  rating(locale: String): Float
+  seo(locale: String, preview: Boolean, where: SeoFilter): Seo
+  slug(locale: String): String
+  sys: Sys!
+}
+
+type PageShopCollection {
+  items: [PageShop]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input PageShopFilter {
+  AND: [PageShopFilter]
+  OR: [PageShopFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  image_exists: Boolean
+  ingredient: cfIngredientNestedFilter
+  ingredient_exists: Boolean
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  productIsNew: Boolean
+  productIsNew_exists: Boolean
+  productIsNew_not: Boolean
+  productNetWeight: Int
+  productNetWeight_exists: Boolean
+  productNetWeight_gt: Int
+  productNetWeight_gte: Int
+  productNetWeight_in: [Int]
+  productNetWeight_lt: Int
+  productNetWeight_lte: Int
+  productNetWeight_not: Int
+  productNetWeight_not_in: [Int]
+  productUnit: String
+  productUnit_contains: String
+  productUnit_exists: Boolean
+  productUnit_in: [String]
+  productUnit_not: String
+  productUnit_not_contains: String
+  productUnit_not_in: [String]
+  rating: Float
+  rating_exists: Boolean
+  rating_gt: Float
+  rating_gte: Float
+  rating_in: [Float]
+  rating_lt: Float
+  rating_lte: Float
+  rating_not: Float
+  rating_not_in: [Float]
+  seo: cfSeoNestedFilter
+  seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+}
+
+type PageShopLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  itemShowcaseCollection(limit: Int = 100, locale: String, order: [PageShopLinkingCollectionsItemShowcaseCollectionOrder], preview: Boolean, skip: Int = 0): ItemShowcaseCollection
+}
+
+enum PageShopLinkingCollectionsItemShowcaseCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum PageShopOrder {
+  name_ASC
+  name_DESC
+  productIsNew_ASC
+  productIsNew_DESC
+  productNetWeight_ASC
+  productNetWeight_DESC
+  productUnit_ASC
+  productUnit_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
 [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/preparationStep)
 """
 type PreparationStep implements Entry & _Node {
@@ -2392,6 +2524,8 @@ type Query {
   pageRecipeCategory(id: String!, locale: String, preview: Boolean): PageRecipeCategory
   pageRecipeCategoryCollection(limit: Int = 100, locale: String, order: [PageRecipeCategoryOrder], preview: Boolean, skip: Int = 0, where: PageRecipeCategoryFilter): PageRecipeCategoryCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeOrder], preview: Boolean, skip: Int = 0, where: PageRecipeFilter): PageRecipeCollection
+  pageShop(id: String!, locale: String, preview: Boolean): PageShop
+  pageShopCollection(limit: Int = 100, locale: String, order: [PageShopOrder], preview: Boolean, skip: Int = 0, where: PageShopFilter): PageShopCollection
   preparationStep(id: String!, locale: String, preview: Boolean): PreparationStep
   preparationStepCollection(limit: Int = 100, locale: String, order: [PreparationStepOrder], preview: Boolean, skip: Int = 0, where: PreparationStepFilter): PreparationStepCollection
   section(id: String!, locale: String, preview: Boolean): Section
@@ -2576,6 +2710,7 @@ type SeoLinkingCollections {
   pageMagazineCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageMagazineCollectionOrder], preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCategoryCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageRecipeCategoryCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCategoryCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
+  pageShopCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageShopCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCollection
 }
 
 enum SeoLinkingCollectionsPageArticleCollectionOrder {
@@ -2679,6 +2814,29 @@ enum SeoLinkingCollectionsPageRecipeCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
+}
+
+enum SeoLinkingCollectionsPageShopCollectionOrder {
+  name_ASC
+  name_DESC
+  productIsNew_ASC
+  productIsNew_DESC
+  productNetWeight_ASC
+  productNetWeight_DESC
+  productUnit_ASC
+  productUnit_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum SeoOrder {
@@ -3613,20 +3771,6 @@ input cfitemsMultiTypeNestedFilter {
   OR: [cfitemsMultiTypeNestedFilter]
   contentfulMetadata: ContentfulMetadataFilter
   image_exists: Boolean
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
   seo_exists: Boolean
   sys: SysFilter
-  title: String
-  title_contains: String
-  title_exists: Boolean
-  title_in: [String]
-  title_not: String
-  title_not_contains: String
-  title_not_in: [String]
 }

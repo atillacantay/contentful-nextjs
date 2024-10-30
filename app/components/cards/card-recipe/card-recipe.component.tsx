@@ -79,12 +79,12 @@ const RecipeCard = ({
                 {author?.name}
               </Text>
             </Stack>
-            {!!rating && (
+            {rating && (
               <Stack
                 className="justify-between text-xs gap-1"
                 alignItems="center"
               >
-                <Star rate={rating} value={1} fill="#FED236" />
+                <Star rate={5} value={rating} fill="#FED236" />
                 <Text className="text-xs" color={textColor}>
                   {rating}
                 </Text>

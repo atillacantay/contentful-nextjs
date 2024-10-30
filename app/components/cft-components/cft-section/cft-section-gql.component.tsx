@@ -23,6 +23,8 @@ const CtfSectionGql = async ({ id }: CtfSectionProps) => {
 
   const section = data?.section as SectionType;
   const typeName = section.content?.__typename?.toLocaleLowerCase();
+  const isFeaturedItem =
+    typeName && ["featuredarticle", "featuredrecipe"].includes(typeName);
 
   return (
     <>
@@ -32,8 +34,9 @@ const CtfSectionGql = async ({ id }: CtfSectionProps) => {
           btnTitle: section.buttonText,
           btnLink: section.buttonLink,
         }}
+        sectionClassName={isFeaturedItem ? "max-sm:px-4" : ""}
         className={
-          typeName && ["featuredarticle", "featuredrecipe"].includes(typeName)
+          isFeaturedItem
             ? "md:container md:mx-auto pb-14"
             : "container mx-auto max-sm:px-4 pt-6 pb-14"
         }

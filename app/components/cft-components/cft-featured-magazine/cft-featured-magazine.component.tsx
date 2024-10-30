@@ -57,7 +57,7 @@ const CtfFeaturedMagazine = (featuredMagazine: FeaturedMagazine) => {
                   <Stack direction="row" spacing={2} className="items-center">
                     <Text
                       size="sm"
-                      className="lg:order-first ltr:border-r rtl:border-l ltr:pr-2 rtl:pl-2 text-white"
+                      className="lg:order-first text-white"
                       weight="light"
                     >
                       {format.dateTime(new Date(publishedAt), {

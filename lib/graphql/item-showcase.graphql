@@ -69,6 +69,28 @@ fragment ItemShowcaseFields on ItemShowcase {
         }
         flipBookUrl
       }
+      ... on PageShop {
+        __typename
+        sys {
+          id
+          publishedAt
+        }
+        slug
+        name
+        productNetWeight
+        productUnit
+        ingredient {
+          name
+        }
+        productIsNew
+        rating
+        image {
+          url
+          title
+          width
+          height
+        }
+      }
     }
   }
 }

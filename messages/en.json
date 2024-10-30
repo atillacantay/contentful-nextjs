@@ -17,7 +17,8 @@
     "servingSize": "Serving Size"
   },
   "cards": {
-    "recipe": "Recipe"
+    "recipe": "Recipe",
+    "shop": "Shop"
   },
   "price": {
     "free": "Free"
