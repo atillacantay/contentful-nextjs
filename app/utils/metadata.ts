@@ -14,11 +14,10 @@ import { notFound } from "next/navigation";
 const WebUrl = process.env.NEXT_PUBLIC_BASE_URL as string;
 
 const generateUrl = (locale: string, slug: string) => {
-  if (locale === "en-US") {
-    return new URL(slug, process.env.NEXT_PUBLIC_BASE_URL!).toString();
-  } else {
-    return new URL(locale, process.env.NEXT_PUBLIC_BASE_URL!).toString();
-  }
+  return new URL(
+    `${locale}/${slug}`,
+    process.env.NEXT_PUBLIC_BASE_URL!
+  ).toString();
 };
 
 export const generatePageMetadata = async (
@@ -65,7 +64,7 @@ export const generatePageMetadata = async (
       languages: {
         "en-US": "/en",
         "ar-SA": "/ar",
-        "x-default": "/",
+        "x-default": "/ar",
       },
     },
     openGraph: {
