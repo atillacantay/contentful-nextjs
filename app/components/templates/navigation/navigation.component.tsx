@@ -27,9 +27,6 @@ const MainNavigation = (props: Maybe<MainNavigationType> | undefined) => {
       <ul className="lg:container mx-auto flex items-center justify-around space-x-0 capitalize">
         {navigations?.map((item) => (
           <Fragment key={item?.sys.id}>
-            {/* {item.isLogo && (
-                <div className="hidden md:block border-l border-custom_divider h-6" />
-              )} */}
             <NavigationItem item={item} />
           </Fragment>
         ))}

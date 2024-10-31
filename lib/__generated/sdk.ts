@@ -845,6 +845,7 @@ export type Footer = Entry & _Node & {
   internalName?: Maybe<Scalars['String']['output']>;
   legalLinksCollection?: Maybe<FooterLegalLinksCollection>;
   linkedFrom?: Maybe<FooterLinkingCollections>;
+  menuLinksCollection?: Maybe<FooterMenuLinksCollection>;
   navigationLinks?: Maybe<NavigationLinks>;
   socialItemsCollection?: Maybe<FooterSocialItemsCollection>;
   sys: Sys;
@@ -877,6 +878,17 @@ export type FooterLegalLinksCollectionArgs = {
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/footer) */
 export type FooterLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/footer) */
+export type FooterMenuLinksCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<FooterMenuLinksCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<NavigationLinkItemFilter>;
 };
 
 
@@ -926,6 +938,8 @@ export type FooterFilter = {
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   legalLinks?: InputMaybe<CfNavigationLinkItemNestedFilter>;
   legalLinksCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  menuLinks?: InputMaybe<CfNavigationLinkItemNestedFilter>;
+  menuLinksCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   navigationLinks?: InputMaybe<CfNavigationLinksNestedFilter>;
   navigationLinks_exists?: InputMaybe<Scalars['Boolean']['input']>;
   socialItems?: InputMaybe<CfSocialItemNestedFilter>;
@@ -970,6 +984,31 @@ export type FooterLinkingCollectionsEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
+
+export type FooterMenuLinksCollection = {
+  __typename?: 'FooterMenuLinksCollection';
+  items: Array<Maybe<NavigationLinkItem>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export enum FooterMenuLinksCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UrlAsc = 'url_ASC',
+  UrlDesc = 'url_DESC'
+}
 
 export enum FooterOrder {
   FollowLabelAsc = 'followLabel_ASC',
@@ -5603,7 +5642,7 @@ export type FooterQueryVariables = Exact<{
 }>;
 
 
-export type FooterQuery = { __typename?: 'Query', footerCollection?: { __typename?: 'FooterCollection', items: Array<{ __typename?: 'Footer', followLabel?: string, socialItemsCollection?: { __typename?: 'FooterSocialItemsCollection', items: Array<{ __typename?: 'SocialItem', key?: string, url?: string }> }, navigationLinks?: { __typename: 'NavigationLinks', sys: { __typename?: 'Sys', id: string }, navigationLinkItemCollection?: { __typename?: 'NavigationLinksNavigationLinkItemCollection', items: Array<{ __typename: 'NavigationLinkItem', title?: string, url?: string, sys: { __typename?: 'Sys', id: string }, navigationLinkItemCollection?: { __typename?: 'NavigationLinkItemNavigationLinkItemCollection', items: Array<{ __typename: 'NavigationLinkItem', title?: string, url?: string, sys: { __typename?: 'Sys', id: string } }> } }> } } }> } };
+export type FooterQuery = { __typename?: 'Query', footerCollection?: { __typename?: 'FooterCollection', items: Array<{ __typename?: 'Footer', followLabel?: string, socialItemsCollection?: { __typename?: 'FooterSocialItemsCollection', items: Array<{ __typename?: 'SocialItem', key?: string, url?: string }> }, menuLinksCollection?: { __typename?: 'FooterMenuLinksCollection', items: Array<{ __typename?: 'NavigationLinkItem', url?: string, title?: string, navigationLinkItemCollection?: { __typename?: 'NavigationLinkItemNavigationLinkItemCollection', items: Array<{ __typename?: 'NavigationLinkItem', title?: string, url?: string }> } }> }, legalLinksCollection?: { __typename?: 'FooterLegalLinksCollection', items: Array<{ __typename?: 'NavigationLinkItem', url?: string, title?: string }> } }> } };
 
 export type HeaderQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -6251,30 +6290,22 @@ export const FooterDocument = gql`
           url
         }
       }
-      navigationLinks {
-        __typename
-        sys {
-          id
-        }
-        navigationLinkItemCollection {
-          items {
-            __typename
-            sys {
-              id
-            }
-            title
-            url
-            navigationLinkItemCollection {
-              items {
-                __typename
-                sys {
-                  id
-                }
-                title
-                url
-              }
+      menuLinksCollection {
+        items {
+          url
+          title
+          navigationLinkItemCollection {
+            items {
+              title
+              url
             }
           }
+        }
+      }
+      legalLinksCollection {
+        items {
+          url
+          title
         }
       }
     }

@@ -8,30 +8,22 @@ query footer($locale: String, $preview: Boolean) {
           url
         }
       }
-      navigationLinks {
-        __typename
-        sys {
-          id
-        }
-        navigationLinkItemCollection {
-          items {
-            __typename
-            sys {
-              id
-            }
-            title
-            url
-            navigationLinkItemCollection {
-              items {
-                __typename
-                sys {
-                  id
-                }
-                title
-                url
-              }
+      menuLinksCollection {
+        items {
+          url
+          title
+          navigationLinkItemCollection {
+            items {
+              title
+              url
             }
           }
+        }
+      }
+      legalLinksCollection {
+        items {
+          url
+          title
         }
       }
     }

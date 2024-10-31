@@ -5,36 +5,16 @@ import ShareSocialMedia from "@/components/share-social-media";
 import { IShareSocialMedia } from "@/components/share-social-media/share-social-media.component";
 import { Link } from "@/i18n/routing";
 import ChevronDown from "@/public/assets/icons/chevron-down-outline.svg";
-import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
 import type {
   Footer as FooterType,
   NavigationLinkItem,
 } from "lib/__generated/sdk";
-import { useLocale, useTranslations } from "next-intl";
-import { redirect } from "next/navigation";
 
 const Footer = (props: FooterType) => {
-  const t = useTranslations();
-  const locale = useLocale();
-
-  const handleLocaleChange = async (event: any) => {
-    const newLocale = event === "en" ? "ar" : "en";
-    redirect(`/${newLocale}`);
-  };
-
-  const handleEvent = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
-    event.preventDefault();
-
-    pushEventToDataLayer(EventKeys.LANGUAGE_CHANGED, { language: locale });
-    handleLocaleChange(locale);
-  };
-
-  const navigationLinks =
-    props?.navigationLinks?.navigationLinkItemCollection?.items;
-  const socialItems = props?.socialItemsCollection?.items;
+  const navigationLinks = props?.menuLinksCollection?.items.filter(Boolean);
+  const socialItems = props?.socialItemsCollection?.items.filter(Boolean);
   const followLabel = props?.followLabel;
+  const legalLinks = props?.legalLinksCollection?.items.filter(Boolean);
 
   const renderNavigationLinks = (
     links?: NavigationLinkItem[]
@@ -177,16 +157,13 @@ const Footer = (props: FooterType) => {
             direction="col"
             spacing={4}
           >
-            <Link href="#" target="_self">
-              <Text as="span" className="text-white/80 dark:text-white/80">
-                Privacy Policy
-              </Text>
-            </Link>
-            <Link href="#" target="_self">
-              <Text as="span" className="text-white/80 dark:text-white/80">
-                Terms & Conditions
-              </Text>
-            </Link>
+            {legalLinks?.map((legalLink) => (
+              <Link key={legalLink._id} href={legalLink.url || ""}>
+                <Text as="span" className="text-white/80 dark:text-white/80">
+                  {legalLink.title}
+                </Text>
+              </Link>
+            ))}
             <Text
               as="span"
               className="lg:order-first text-white/80 dark:text-white/80"

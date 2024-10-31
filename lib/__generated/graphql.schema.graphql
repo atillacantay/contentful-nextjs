@@ -539,6 +539,7 @@ type Footer implements Entry & _Node {
   internalName(locale: String): String
   legalLinksCollection(limit: Int = 100, locale: String, order: [FooterLegalLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): FooterLegalLinksCollection
   linkedFrom(allowedLocales: [String]): FooterLinkingCollections
+  menuLinksCollection(limit: Int = 100, locale: String, order: [FooterMenuLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): FooterMenuLinksCollection
   navigationLinks(locale: String, preview: Boolean, where: NavigationLinksFilter): NavigationLinks
   socialItemsCollection(limit: Int = 100, locale: String, order: [FooterSocialItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: SocialItemFilter): FooterSocialItemsCollection
   sys: Sys!
@@ -571,6 +572,8 @@ input FooterFilter {
   internalName_not_in: [String]
   legalLinks: cfNavigationLinkItemNestedFilter
   legalLinksCollection_exists: Boolean
+  menuLinks: cfNavigationLinkItemNestedFilter
+  menuLinksCollection_exists: Boolean
   navigationLinks: cfNavigationLinksNestedFilter
   navigationLinks_exists: Boolean
   socialItems: cfSocialItemNestedFilter
@@ -604,6 +607,30 @@ enum FooterLegalLinksCollectionOrder {
 
 type FooterLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+type FooterMenuLinksCollection {
+  items: [NavigationLinkItem]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum FooterMenuLinksCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
 }
 
 enum FooterOrder {
