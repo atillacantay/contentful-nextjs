@@ -1,16 +1,36 @@
+import LanguageChanger from "@/components/common/language-changer";
 import Stack from "@/components/common/stack/index";
 import { Header, Text } from "@/components/common/typography";
 import ShareSocialMedia from "@/components/share-social-media";
 import { IShareSocialMedia } from "@/components/share-social-media/share-social-media.component";
 import { Link } from "@/i18n/routing";
 import ChevronDown from "@/public/assets/icons/chevron-down-outline.svg";
-import GlobeIcon from "@/public/assets/icons/globe.svg";
+import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
 import type {
   Footer as FooterType,
   NavigationLinkItem,
 } from "lib/__generated/sdk";
+import { useLocale, useTranslations } from "next-intl";
+import { redirect } from "next/navigation";
 
 const Footer = (props: FooterType) => {
+  const t = useTranslations();
+  const locale = useLocale();
+
+  const handleLocaleChange = async (event: any) => {
+    const newLocale = event === "en" ? "ar" : "en";
+    redirect(`/${newLocale}`);
+  };
+
+  const handleEvent = (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
+    event.preventDefault();
+
+    pushEventToDataLayer(EventKeys.LANGUAGE_CHANGED, { language: locale });
+    handleLocaleChange(locale);
+  };
+
   const navigationLinks =
     props?.navigationLinks?.navigationLinkItemCollection?.items;
   const socialItems = props?.socialItemsCollection?.items;
@@ -174,25 +194,7 @@ const Footer = (props: FooterType) => {
               &copy; {new Date().getFullYear()} Goody Kitchen All rights
               Reserved
             </Text>
-            <Stack
-              className="hidden md:flex lg:ml-auto lg:rtl:mr-auto lg:rtl:ml-0 text-white"
-              spacing={2}
-            >
-              <Link href="#" target="_self">
-                <Text
-                  className="text-white/80 dark:text-white/80"
-                  weight="light"
-                >
-                  English
-                </Text>
-              </Link>
-              <GlobeIcon
-                width={24}
-                height={24}
-                fill="white"
-                className="opacity-80"
-              />
-            </Stack>
+            <LanguageChanger />
           </Stack>
         </div>
       </footer>

@@ -17,7 +17,7 @@ import GlobeIcon from "@/public/assets/icons/globe.svg";
 import UserIcon from "@/public/assets/icons/user.svg";
 import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 
 const NavigationDrawer = dynamic(
@@ -32,10 +32,6 @@ const HeaderSearch = dynamic(
 
 interface HeaderPropsInterface {
   userMenu: React.ComponentProps<typeof UserMenu>;
-  websiteLangURL: string;
-  websiteLangLabel: string;
-  cultureNameShort: string;
-  cultureNameShortLabel: string;
   shopPagePath: string;
   headerSearch: Omit<
     React.ComponentProps<typeof HeaderSearch>,
@@ -46,19 +42,20 @@ interface HeaderPropsInterface {
 
 const HeaderComponent = ({
   userMenu,
-  websiteLangURL,
-  websiteLangLabel,
-  cultureNameShortLabel,
   headerSearch,
   navigationItems,
 }: HeaderPropsInterface) => {
-  const locale = useLocale();
+  const t = useTranslations();
+  const currentLocale = useLocale();
   const { push } = useRouter();
   const { user } = useUser();
   const urlSegments = useSelectedLayoutSegments();
 
-  const handleLocaleChange = async (event: any) => {
-    const newLocale = event === "en" ? "ar" : "en";
+  const handleLocaleChange = async () => {
+    const newLocale = currentLocale === "en" ? "ar" : "en";
+
+    pushEventToDataLayer(EventKeys.LANGUAGE_CHANGED, { language: newLocale });
+
     push(`/${urlSegments.join("/")}`, { locale: newLocale });
   };
 
@@ -66,15 +63,6 @@ const HeaderComponent = ({
 
   const toggleUserMenu = (): void => {
     setUserMenuOpen((state) => !state);
-  };
-
-  const handleEvent = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
-    event.preventDefault();
-
-    pushEventToDataLayer(EventKeys.LANGUAGE_CHANGED, { language: locale });
-    handleLocaleChange(locale);
   };
 
   const HeaderIconButton = ({
@@ -124,14 +112,15 @@ const HeaderComponent = ({
             "
         alignItems="center"
       >
-        <a
-          href={websiteLangURL}
-          onClick={handleEvent}
-          className="flex items-center gap-2 cursor-pointer"
+        <Stack
+          onClick={handleLocaleChange}
+          spacing={2}
+          alignItems="center"
+          className="cursor-pointer"
         >
-          <Text weight="light">{websiteLangLabel}</Text>
+          <Text weight="light">{t("common.oppositeLanguage")}</Text>
           <GlobeIcon fontSize={24} className="text-black dark:text-white" />
-        </a>
+        </Stack>
 
         <HOConClickOutside on={() => setUserMenuOpen(false)}>
           <div>
@@ -200,9 +189,9 @@ const HeaderComponent = ({
         className="md:hidden space-x-4 rtl:space-x-reverse"
         alignItems="center"
       >
-        <a href={websiteLangURL} onClick={handleEvent}>
-          <Text className="uppercase">{cultureNameShortLabel}</Text>
-        </a>
+        <Text className="uppercase" onClick={handleLocaleChange}>
+          {t("common.oppositeLanguageShort")}
+        </Text>
 
         <div className="border-r border-custom_divider dark:border-custom2_dark  h-4" />
 

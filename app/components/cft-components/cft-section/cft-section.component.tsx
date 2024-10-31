@@ -4,7 +4,7 @@ import type { ISectionTitle } from "@/components/section-title/section-title.int
 import { clsxm } from "@/utils/twMerge.utils";
 import { ReactNode } from "react";
 
-interface ISection {
+export interface ISection {
   sectionTitle: ISectionTitle;
   children: ReactNode;
   className?: string;

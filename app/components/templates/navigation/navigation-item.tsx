@@ -19,7 +19,7 @@ const iconsMap: Record<string, any> = {
   foodies: FoodiesIcon,
   shop: ShoppingBagIcon,
   masterclass: MasterclassIcon,
-  magazine: ArticlesIcon,
+  magazines: ArticlesIcon,
   pastapedia: PastapediaLogo,
 };
 

@@ -372,6 +372,10 @@ enum FeaturedArticleLinkingCollectionsSectionCollectionOrder {
   buttonText_DESC
   internalName_ASC
   internalName_DESC
+  showMobileButton_ASC
+  showMobileButton_DESC
+  showXItemsOnMobile_ASC
+  showXItemsOnMobile_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -496,6 +500,10 @@ enum FeaturedRecipeLinkingCollectionsSectionCollectionOrder {
   buttonText_DESC
   internalName_ASC
   internalName_DESC
+  showMobileButton_ASC
+  showMobileButton_DESC
+  showXItemsOnMobile_ASC
+  showXItemsOnMobile_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1031,6 +1039,10 @@ enum ItemShowcaseLinkingCollectionsSectionCollectionOrder {
   buttonText_DESC
   internalName_ASC
   internalName_DESC
+  showMobileButton_ASC
+  showMobileButton_DESC
+  showXItemsOnMobile_ASC
+  showXItemsOnMobile_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1854,6 +1866,10 @@ enum PageRecipeCategorySectionCollectionOrder {
   buttonText_DESC
   internalName_ASC
   internalName_DESC
+  showMobileButton_ASC
+  showMobileButton_DESC
+  showXItemsOnMobile_ASC
+  showXItemsOnMobile_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -2361,6 +2377,8 @@ type Section implements Entry & _Node {
   contentfulMetadata: ContentfulMetadata!
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): SectionLinkingCollections
+  showMobileButton(locale: String): Boolean
+  showXItemsOnMobile(locale: String): Int
   sys: Sys!
   title(locale: String): String
 }
@@ -2400,6 +2418,18 @@ input SectionFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  showMobileButton: Boolean
+  showMobileButton_exists: Boolean
+  showMobileButton_not: Boolean
+  showXItemsOnMobile: Int
+  showXItemsOnMobile_exists: Boolean
+  showXItemsOnMobile_gt: Int
+  showXItemsOnMobile_gte: Int
+  showXItemsOnMobile_in: [Int]
+  showXItemsOnMobile_lt: Int
+  showXItemsOnMobile_lte: Int
+  showXItemsOnMobile_not: Int
+  showXItemsOnMobile_not_in: [Int]
   sys: SysFilter
   title: String
   title_contains: String
@@ -2435,6 +2465,10 @@ enum SectionOrder {
   buttonText_DESC
   internalName_ASC
   internalName_DESC
+  showMobileButton_ASC
+  showMobileButton_DESC
+  showXItemsOnMobile_ASC
+  showXItemsOnMobile_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -3426,6 +3460,18 @@ input cfSectionNestedFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  showMobileButton: Boolean
+  showMobileButton_exists: Boolean
+  showMobileButton_not: Boolean
+  showXItemsOnMobile: Int
+  showXItemsOnMobile_exists: Boolean
+  showXItemsOnMobile_gt: Int
+  showXItemsOnMobile_gte: Int
+  showXItemsOnMobile_in: [Int]
+  showXItemsOnMobile_lt: Int
+  showXItemsOnMobile_lte: Int
+  showXItemsOnMobile_not: Int
+  showXItemsOnMobile_not_in: [Int]
   sys: SysFilter
   title: String
   title_contains: String

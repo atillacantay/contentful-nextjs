@@ -612,6 +612,10 @@ export enum FeaturedArticleLinkingCollectionsSectionCollectionOrder {
   ButtonTextDesc = 'buttonText_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  ShowMobileButtonAsc = 'showMobileButton_ASC',
+  ShowMobileButtonDesc = 'showMobileButton_DESC',
+  ShowXItemsOnMobileAsc = 'showXItemsOnMobile_ASC',
+  ShowXItemsOnMobileDesc = 'showXItemsOnMobile_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -803,6 +807,10 @@ export enum FeaturedRecipeLinkingCollectionsSectionCollectionOrder {
   ButtonTextDesc = 'buttonText_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  ShowMobileButtonAsc = 'showMobileButton_ASC',
+  ShowMobileButtonDesc = 'showMobileButton_DESC',
+  ShowXItemsOnMobileAsc = 'showXItemsOnMobile_ASC',
+  ShowXItemsOnMobileDesc = 'showXItemsOnMobile_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1511,6 +1519,10 @@ export enum ItemShowcaseLinkingCollectionsSectionCollectionOrder {
   ButtonTextDesc = 'buttonText_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  ShowMobileButtonAsc = 'showMobileButton_ASC',
+  ShowMobileButtonDesc = 'showMobileButton_DESC',
+  ShowXItemsOnMobileAsc = 'showXItemsOnMobile_ASC',
+  ShowXItemsOnMobileDesc = 'showXItemsOnMobile_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -2873,6 +2885,10 @@ export enum PageRecipeCategorySectionCollectionOrder {
   ButtonTextDesc = 'buttonText_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  ShowMobileButtonAsc = 'showMobileButton_ASC',
+  ShowMobileButtonDesc = 'showMobileButton_DESC',
+  ShowXItemsOnMobileAsc = 'showXItemsOnMobile_ASC',
+  ShowXItemsOnMobileDesc = 'showXItemsOnMobile_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -3957,6 +3973,8 @@ export type Section = Entry & _Node & {
   contentfulMetadata: ContentfulMetadata;
   internalName?: Maybe<Scalars['String']['output']>;
   linkedFrom?: Maybe<SectionLinkingCollections>;
+  showMobileButton?: Maybe<Scalars['Boolean']['output']>;
+  showXItemsOnMobile?: Maybe<Scalars['Int']['output']>;
   sys: Sys;
   title?: Maybe<Scalars['String']['output']>;
 };
@@ -3990,6 +4008,18 @@ export type SectionInternalNameArgs = {
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/section) */
 export type SectionLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/section) */
+export type SectionShowMobileButtonArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/section) */
+export type SectionShowXItemsOnMobileArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -4034,6 +4064,18 @@ export type SectionFilter = {
   internalName_not?: InputMaybe<Scalars['String']['input']>;
   internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  showMobileButton?: InputMaybe<Scalars['Boolean']['input']>;
+  showMobileButton_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  showMobileButton_not?: InputMaybe<Scalars['Boolean']['input']>;
+  showXItemsOnMobile?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  showXItemsOnMobile_gt?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_gte?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  showXItemsOnMobile_lt?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_lte?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_not?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -4087,6 +4129,10 @@ export enum SectionOrder {
   ButtonTextDesc = 'buttonText_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  ShowMobileButtonAsc = 'showMobileButton_ASC',
+  ShowMobileButtonDesc = 'showMobileButton_DESC',
+  ShowXItemsOnMobileAsc = 'showXItemsOnMobile_ASC',
+  ShowXItemsOnMobileDesc = 'showXItemsOnMobile_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -5345,6 +5391,18 @@ export type CfSectionNestedFilter = {
   internalName_not?: InputMaybe<Scalars['String']['input']>;
   internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  showMobileButton?: InputMaybe<Scalars['Boolean']['input']>;
+  showMobileButton_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  showMobileButton_not?: InputMaybe<Scalars['Boolean']['input']>;
+  showXItemsOnMobile?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  showXItemsOnMobile_gt?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_gte?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  showXItemsOnMobile_lt?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_lte?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_not?: InputMaybe<Scalars['Int']['input']>;
+  showXItemsOnMobile_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -5633,7 +5691,7 @@ export type PageQuery = { __typename?: 'Query', pageCollection?: { __typename?: 
       & PageFieldsFragment
     )> } };
 
-export type SectionFieldsFragment = { __typename?: 'Section', title?: string, buttonText?: string, buttonLink?: string, sys: { __typename?: 'Sys', id: string }, content?: { __typename: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'ItemShowcase', sys: { __typename?: 'Sys', id: string } } };
+export type SectionFieldsFragment = { __typename?: 'Section', title?: string, buttonText?: string, buttonLink?: string, showXItemsOnMobile?: number, showMobileButton?: boolean, sys: { __typename?: 'Sys', id: string }, content?: { __typename: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'ItemShowcase', sys: { __typename?: 'Sys', id: string } } };
 
 export type SectionQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6096,6 +6154,8 @@ export const SectionFieldsFragmentDoc = gql`
   title
   buttonText
   buttonLink
+  showXItemsOnMobile
+  showMobileButton
   content {
     ... on FeaturedRecipe {
       __typename

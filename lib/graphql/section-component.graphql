@@ -5,6 +5,8 @@ fragment SectionFields on Section {
   title
   buttonText
   buttonLink
+  showXItemsOnMobile
+  showMobileButton
   content {
     ... on FeaturedRecipe {
       __typename

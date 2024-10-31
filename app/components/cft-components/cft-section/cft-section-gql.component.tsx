@@ -4,7 +4,7 @@ import type { Section as SectionType } from "lib/__generated/sdk";
 import { client } from "lib/client";
 import { getLocale } from "next-intl/server";
 import { draftMode } from "next/headers";
-import Section from "./cft-section.component";
+import Section, { type ISection } from "./cft-section.component";
 
 interface CtfSectionProps {
   id: string;
@@ -34,8 +34,10 @@ const CtfSectionGql = async ({ id }: CtfSectionProps) => {
           btnTitle: section.buttonText,
           btnLink: section.buttonLink,
         }}
-        showXItemsOnMobile={3}
-        showMobileButton={true}
+        showXItemsOnMobile={
+          section.showXItemsOnMobile as ISection["showXItemsOnMobile"]
+        }
+        showMobileButton={section.showMobileButton}
         sectionClassName={isFeaturedItem ? "max-sm:px-4" : ""}
         className={
           isFeaturedItem

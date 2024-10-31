@@ -1,5 +1,7 @@
 {
   "common": {
+    "oppositeLanguage": "العربية",
+    "oppositeLanguageShort": "ع",
     "homepage": "Homepage",
     "logoImageAltText": "Logo",
     "save": "Save",
