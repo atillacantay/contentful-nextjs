@@ -1,11 +1,14 @@
 import Stack from "@/components/common/stack";
 import FormIngredients from "@/components/form-ingredients";
+import type { PageRecipe } from "lib/__generated/sdk";
+import dynamic from "next/dynamic";
 import PreparationSteps from "./preparation-steps.component";
 import RecipeDetailHeader from "./recipe-detail-header.component";
 import RecipeDetailReviews from "./recipe-detail-reviews.component";
 
-import type { PageRecipe } from "lib/__generated/sdk";
-import RelatedRecipes from "./related-recipes.component";
+const RelatedRecipes = dynamic(() =>
+  import("./related-recipes.component").then((module) => module.default)
+);
 
 const RecipeDetail = ({
   recipe,
