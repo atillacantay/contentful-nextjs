@@ -1,4 +1,5 @@
 import Logo from "@/components/common/logo";
+import { Link } from "@/i18n/routing";
 import HeaderComponent from "./header-component";
 
 const Header = (props: any): JSX.Element => {
@@ -19,9 +20,9 @@ const Header = (props: any): JSX.Element => {
         "
       >
         <div className="container mx-auto flex flex-row">
-          <a href="/en" title="Gooody Kitchen">
+          <Link href="/" title="Goody Kitchen">
             <Logo className="h-[40px] md:h-[48px]" />
-          </a>
+          </Link>
           <HeaderComponent {...props} />
         </div>
       </div>

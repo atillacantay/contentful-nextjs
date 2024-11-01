@@ -6221,7 +6221,7 @@ export type MainNavigationQueryVariables = Exact<{
 }>;
 
 
-export type MainNavigationQuery = { __typename?: 'Query', mainNavigationCollection?: { __typename?: 'MainNavigationCollection', items: Array<{ __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string }, itemsCollection?: { __typename?: 'MainNavigationItemsCollection', items: Array<{ __typename?: 'Page', slug?: string, title?: string, pageName?: string, sys: { __typename?: 'Sys', id: string } }> } }> } };
+export type MainNavigationQuery = { __typename?: 'Query', mainNavigationCollection?: { __typename?: 'MainNavigationCollection', items: Array<{ __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string }, itemsCollection?: { __typename?: 'MainNavigationItemsCollection', items: Array<{ __typename?: 'Page', _id: string, slug?: string, title?: string, pageName?: string, sys: { __typename?: 'Sys', id: string } }> } }> } };
 
 export type PageArticleFieldsFragment = { __typename?: 'PageArticle', slug?: string, title?: string, subtitle?: string, readDurationInMin?: number, content?: string, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
 
@@ -7039,6 +7039,7 @@ export const MainNavigationDocument = gql`
       }
       itemsCollection {
         items {
+          _id
           sys {
             id
           }
