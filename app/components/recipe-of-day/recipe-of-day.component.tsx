@@ -83,7 +83,7 @@ const RecipeOfDay = ({
                   >
                     <Star rate={5} value={rating} fill="#FED236" />
                     <Text className="ltr:ml-1 rtl:mr-1 text-xs text-white">
-                      {rating}
+                      {format.number(rating)}
                     </Text>
                   </Stack>
                 )}
