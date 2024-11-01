@@ -69,6 +69,9 @@ export default async function RootLayout({ children, params }: LayoutProps) {
                       {headerData && (
                         <Header
                           {...headerData}
+                          navigationItems={headerNavigationData?.itemsCollection?.items.filter(
+                            Boolean
+                          )}
                           userMenu={{ ...headerData.userMenu, isAuth: false }}
                         />
                       )}

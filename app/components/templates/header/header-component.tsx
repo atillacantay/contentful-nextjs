@@ -3,7 +3,6 @@
 import Button from "@/components/common/button";
 import Stack from "@/components/common/stack";
 import { Text } from "@/components/common/typography";
-import type { NavigationItem } from "@/components/navigation-drawer/navigation-drawer.types";
 import UserMenu from "@/components/user-menu";
 import HOConClickOutside from "@/hocs/HOConClickOutside";
 import { clsxm } from "@/utils/twMerge.utils";
@@ -17,6 +16,7 @@ import GlobeIcon from "@/public/assets/icons/globe.svg";
 import UserIcon from "@/public/assets/icons/user.svg";
 import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { Page } from "lib/__generated/sdk";
 import { useLocale, useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 
@@ -37,7 +37,7 @@ interface HeaderPropsInterface {
     React.ComponentProps<typeof HeaderSearch>,
     "wrapperDivProps"
   >;
-  navigationItems: NavigationItem[];
+  navigationItems: Page[];
 }
 
 const HeaderComponent = ({

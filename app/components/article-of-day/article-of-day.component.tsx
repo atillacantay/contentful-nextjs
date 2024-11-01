@@ -119,7 +119,7 @@ const ArticleOfDay = ({
                       className="ml-1 text-xs !leading-[9px] text-white"
                       weight="light"
                     >
-                      {rating}
+                      {format.number(rating)}
                     </Text>
                   </Stack>
                 )}
