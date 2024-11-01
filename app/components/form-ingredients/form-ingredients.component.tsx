@@ -128,8 +128,6 @@ const FormIngredients = ({
             <FormIngredientsList
               ingredients={ingredients}
               servingSize={servingSizeState}
-              labelAdd={labelAdd}
-              labelAdded={labelAdded}
             />
           </Stack>
         )}
@@ -201,8 +199,6 @@ const FormIngredients = ({
             <FormIngredientsList
               ingredients={ingredients}
               servingSize={servingSizeState}
-              labelAdd={labelAdd}
-              labelAdded={labelAdded}
             />
           </div>
           <Button
