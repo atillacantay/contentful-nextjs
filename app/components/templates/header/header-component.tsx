@@ -10,8 +10,8 @@ import { clsxm } from "@/utils/twMerge.utils";
 import { useSelectedLayoutSegments } from "next/navigation";
 import React, { useState } from "react";
 import { IHeaderIconButton } from "./header.interfaces";
-
 // import { ReactComponent as FoodiesIcon } from "@/assets/icons/foodies.svg";
+import ContentfulImage from "@/components/cft-components/cft-image";
 import { useRouter } from "@/i18n/routing";
 import GlobeIcon from "@/public/assets/icons/globe.svg";
 import UserIcon from "@/public/assets/icons/user.svg";
@@ -127,7 +127,7 @@ const HeaderComponent = ({
             {(() => {
               if (user && user.picture)
                 return (
-                  <img
+                  <ContentfulImage
                     src={user.picture}
                     width={32}
                     height={32}
@@ -163,7 +163,7 @@ const HeaderComponent = ({
                       fill="#C42929"
                       fontSize={12}
                     >
-                      {user.name?.[0] + user.name?.[1] || ""}
+                      {user.name[0] + user.name[1] || ""}
                     </text>
                   </svg>
                 );

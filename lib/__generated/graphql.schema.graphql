@@ -540,7 +540,7 @@ type Footer implements Entry & _Node {
   legalLinksCollection(limit: Int = 100, locale: String, order: [FooterLegalLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): FooterLegalLinksCollection
   linkedFrom(allowedLocales: [String]): FooterLinkingCollections
   menuLinksCollection(limit: Int = 100, locale: String, order: [FooterMenuLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): FooterMenuLinksCollection
-  navigationLinks(locale: String, preview: Boolean, where: NavigationLinksFilter): NavigationLinks
+  navigationLinks(locale: String, preview: Boolean): Entry
   socialItemsCollection(limit: Int = 100, locale: String, order: [FooterSocialItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: SocialItemFilter): FooterSocialItemsCollection
   sys: Sys!
 }
@@ -574,7 +574,6 @@ input FooterFilter {
   legalLinksCollection_exists: Boolean
   menuLinks: cfNavigationLinkItemNestedFilter
   menuLinksCollection_exists: Boolean
-  navigationLinks: cfNavigationLinksNestedFilter
   navigationLinks_exists: Boolean
   socialItems: cfSocialItemNestedFilter
   socialItemsCollection_exists: Boolean
@@ -1231,7 +1230,6 @@ type NavigationLinkItemLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   footerCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemLinkingCollectionsFooterCollectionOrder], preview: Boolean, skip: Int = 0): FooterCollection
   navigationLinkItemCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinkItemCollection
-  navigationLinksCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemLinkingCollectionsNavigationLinksCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinksCollection
 }
 
 enum NavigationLinkItemLinkingCollectionsFooterCollectionOrder {
@@ -1264,19 +1262,6 @@ enum NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrder {
   title_DESC
   url_ASC
   url_DESC
-}
-
-enum NavigationLinkItemLinkingCollectionsNavigationLinksCollectionOrder {
-  internalName_ASC
-  internalName_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
 }
 
 type NavigationLinkItemNavigationLinkItemCollection {
@@ -1318,98 +1303,6 @@ enum NavigationLinkItemOrder {
   title_DESC
   url_ASC
   url_DESC
-}
-
-"""
-[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinks)
-"""
-type NavigationLinks implements Entry & _Node {
-  _id: ID!
-  contentfulMetadata: ContentfulMetadata!
-  internalName(locale: String): String
-  linkedFrom(allowedLocales: [String]): NavigationLinksLinkingCollections
-  navigationLinkItemCollection(limit: Int = 100, locale: String, order: [NavigationLinksNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): NavigationLinksNavigationLinkItemCollection
-  sys: Sys!
-}
-
-type NavigationLinksCollection {
-  items: [NavigationLinks]!
-  limit: Int!
-  skip: Int!
-  total: Int!
-}
-
-input NavigationLinksFilter {
-  AND: [NavigationLinksFilter]
-  OR: [NavigationLinksFilter]
-  contentfulMetadata: ContentfulMetadataFilter
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
-  navigationLinkItem: cfNavigationLinkItemNestedFilter
-  navigationLinkItemCollection_exists: Boolean
-  sys: SysFilter
-}
-
-type NavigationLinksLinkingCollections {
-  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  footerCollection(limit: Int = 100, locale: String, order: [NavigationLinksLinkingCollectionsFooterCollectionOrder], preview: Boolean, skip: Int = 0): FooterCollection
-}
-
-enum NavigationLinksLinkingCollectionsFooterCollectionOrder {
-  followLabel_ASC
-  followLabel_DESC
-  internalName_ASC
-  internalName_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-}
-
-type NavigationLinksNavigationLinkItemCollection {
-  items: [NavigationLinkItem]!
-  limit: Int!
-  skip: Int!
-  total: Int!
-}
-
-enum NavigationLinksNavigationLinkItemCollectionOrder {
-  internalName_ASC
-  internalName_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
-  title_ASC
-  title_DESC
-  url_ASC
-  url_DESC
-}
-
-enum NavigationLinksOrder {
-  internalName_ASC
-  internalName_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
 }
 
 """
@@ -1788,6 +1681,7 @@ type PageRecipe implements Entry & _Node {
   persons(locale: String): Int
   preparationStepsCollection(limit: Int = 100, locale: String, order: [PageRecipePreparationStepsCollectionOrder], preview: Boolean, skip: Int = 0, where: PreparationStepFilter): PageRecipePreparationStepsCollection
   rating(locale: String): Float
+  relatedRecipesCollection(limit: Int = 100, locale: String, order: [PageRecipeRelatedRecipesCollectionOrder], preview: Boolean, skip: Int = 0, where: PageRecipeFilter): PageRecipeRelatedRecipesCollection
   seo(locale: String, preview: Boolean, where: SeoFilter): Seo
   slug(locale: String): String
   sys: Sys!
@@ -1986,6 +1880,8 @@ input PageRecipeFilter {
   rating_lte: Float
   rating_not: Float
   rating_not_in: [Float]
+  relatedRecipes: cfPageRecipeNestedFilter
+  relatedRecipesCollection_exists: Boolean
   seo: cfSeoNestedFilter
   seo_exists: Boolean
   slug: String
@@ -2037,6 +1933,7 @@ type PageRecipeLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   featuredRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeLinkingCollectionsFeaturedRecipeCollectionOrder], preview: Boolean, skip: Int = 0): FeaturedRecipeCollection
   itemShowcaseCollection(limit: Int = 100, locale: String, order: [PageRecipeLinkingCollectionsItemShowcaseCollectionOrder], preview: Boolean, skip: Int = 0): ItemShowcaseCollection
+  pageRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
 }
 
 enum PageRecipeLinkingCollectionsFeaturedRecipeCollectionOrder {
@@ -2063,6 +1960,35 @@ enum PageRecipeLinkingCollectionsItemShowcaseCollectionOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
+}
+
+enum PageRecipeLinkingCollectionsPageRecipeCollectionOrder {
+  calories_ASC
+  calories_DESC
+  cookingTimeMinutes_ASC
+  cookingTimeMinutes_DESC
+  description_ASC
+  description_DESC
+  difficulty_ASC
+  difficulty_DESC
+  internalName_ASC
+  internalName_DESC
+  persons_ASC
+  persons_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 enum PageRecipeOrder {
@@ -2114,6 +2040,42 @@ enum PageRecipePreparationStepsCollectionOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
+}
+
+type PageRecipeRelatedRecipesCollection {
+  items: [PageRecipe]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum PageRecipeRelatedRecipesCollectionOrder {
+  calories_ASC
+  calories_DESC
+  cookingTimeMinutes_ASC
+  cookingTimeMinutes_DESC
+  description_ASC
+  description_DESC
+  difficulty_ASC
+  difficulty_DESC
+  internalName_ASC
+  internalName_DESC
+  persons_ASC
+  persons_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 type PageSectionCollection {
@@ -2365,8 +2327,6 @@ type Query {
   mainNavigationCollection(limit: Int = 100, locale: String, order: [MainNavigationOrder], preview: Boolean, skip: Int = 0, where: MainNavigationFilter): MainNavigationCollection
   navigationLinkItem(id: String!, locale: String, preview: Boolean): NavigationLinkItem
   navigationLinkItemCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): NavigationLinkItemCollection
-  navigationLinks(id: String!, locale: String, preview: Boolean): NavigationLinks
-  navigationLinksCollection(limit: Int = 100, locale: String, order: [NavigationLinksOrder], preview: Boolean, skip: Int = 0, where: NavigationLinksFilter): NavigationLinksCollection
   page(id: String!, locale: String, preview: Boolean): Page
   pageArticle(id: String!, locale: String, preview: Boolean): PageArticle
   pageArticleCollection(limit: Int = 100, locale: String, order: [PageArticleOrder], preview: Boolean, skip: Int = 0, where: PageArticleFilter): PageArticleCollection
@@ -3187,21 +3147,6 @@ input cfNavigationLinkItemNestedFilter {
   url_not_in: [String]
 }
 
-input cfNavigationLinksNestedFilter {
-  AND: [cfNavigationLinksNestedFilter]
-  OR: [cfNavigationLinksNestedFilter]
-  contentfulMetadata: ContentfulMetadataFilter
-  internalName: String
-  internalName_contains: String
-  internalName_exists: Boolean
-  internalName_in: [String]
-  internalName_not: String
-  internalName_not_contains: String
-  internalName_not_in: [String]
-  navigationLinkItemCollection_exists: Boolean
-  sys: SysFilter
-}
-
 input cfPageArticleNestedFilter {
   AND: [cfPageArticleNestedFilter]
   OR: [cfPageArticleNestedFilter]
@@ -3421,6 +3366,7 @@ input cfPageRecipeNestedFilter {
   rating_lte: Float
   rating_not: Float
   rating_not_in: [Float]
+  relatedRecipesCollection_exists: Boolean
   seo_exists: Boolean
   slug: String
   slug_contains: String

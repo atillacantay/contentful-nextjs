@@ -16,7 +16,8 @@
     "numberOfServings": "عدد الحصص",
     "level": "المستوى",
     "calories": "سعرات حرارية",
-    "servingSize": "حجم الحصة"
+    "servingSize": "حجم الحصة",
+    "relatedTopics": "موضوع ذات صلة"
   },
   "cards": {
     "recipe": "وصفة",

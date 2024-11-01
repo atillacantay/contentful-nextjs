@@ -75,14 +75,6 @@ const WrapperSwiper = ({
           </div>
         </SwiperReact>
       )}
-
-      <div
-        data-cmp="wrapper-slider"
-        data-cmp-props={[uniqueId]}
-        className="hidden"
-      >
-        {""}
-      </div>
     </>
   );
 };

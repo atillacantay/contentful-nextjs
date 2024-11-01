@@ -846,7 +846,7 @@ export type Footer = Entry & _Node & {
   legalLinksCollection?: Maybe<FooterLegalLinksCollection>;
   linkedFrom?: Maybe<FooterLinkingCollections>;
   menuLinksCollection?: Maybe<FooterMenuLinksCollection>;
-  navigationLinks?: Maybe<NavigationLinks>;
+  navigationLinks?: Maybe<Entry>;
   socialItemsCollection?: Maybe<FooterSocialItemsCollection>;
   sys: Sys;
 };
@@ -896,7 +896,6 @@ export type FooterMenuLinksCollectionArgs = {
 export type FooterNavigationLinksArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
-  where?: InputMaybe<NavigationLinksFilter>;
 };
 
 
@@ -940,7 +939,6 @@ export type FooterFilter = {
   legalLinksCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   menuLinks?: InputMaybe<CfNavigationLinkItemNestedFilter>;
   menuLinksCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  navigationLinks?: InputMaybe<CfNavigationLinksNestedFilter>;
   navigationLinks_exists?: InputMaybe<Scalars['Boolean']['input']>;
   socialItems?: InputMaybe<CfSocialItemNestedFilter>;
   socialItemsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1787,7 +1785,6 @@ export type NavigationLinkItemLinkingCollections = {
   entryCollection?: Maybe<EntryCollection>;
   footerCollection?: Maybe<FooterCollection>;
   navigationLinkItemCollection?: Maybe<NavigationLinkItemCollection>;
-  navigationLinksCollection?: Maybe<NavigationLinksCollection>;
 };
 
 
@@ -1812,15 +1809,6 @@ export type NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionArgs
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Array<InputMaybe<NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type NavigationLinkItemLinkingCollectionsNavigationLinksCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<NavigationLinkItemLinkingCollectionsNavigationLinksCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -1855,19 +1843,6 @@ export enum NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrde
   TitleDesc = 'title_DESC',
   UrlAsc = 'url_ASC',
   UrlDesc = 'url_DESC'
-}
-
-export enum NavigationLinkItemLinkingCollectionsNavigationLinksCollectionOrder {
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 export type NavigationLinkItemNavigationLinkItemCollection = {
@@ -1910,140 +1885,6 @@ export enum NavigationLinkItemOrder {
   TitleDesc = 'title_DESC',
   UrlAsc = 'url_ASC',
   UrlDesc = 'url_DESC'
-}
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinks) */
-export type NavigationLinks = Entry & _Node & {
-  __typename?: 'NavigationLinks';
-  _id: Scalars['ID']['output'];
-  contentfulMetadata: ContentfulMetadata;
-  internalName?: Maybe<Scalars['String']['output']>;
-  linkedFrom?: Maybe<NavigationLinksLinkingCollections>;
-  navigationLinkItemCollection?: Maybe<NavigationLinksNavigationLinkItemCollection>;
-  sys: Sys;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinks) */
-export type NavigationLinksInternalNameArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinks) */
-export type NavigationLinksLinkedFromArgs = {
-  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinks) */
-export type NavigationLinksNavigationLinkItemCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<NavigationLinksNavigationLinkItemCollectionOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<NavigationLinkItemFilter>;
-};
-
-export type NavigationLinksCollection = {
-  __typename?: 'NavigationLinksCollection';
-  items: Array<Maybe<NavigationLinks>>;
-  limit: Scalars['Int']['output'];
-  skip: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export type NavigationLinksFilter = {
-  AND?: InputMaybe<Array<InputMaybe<NavigationLinksFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<NavigationLinksFilter>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  internalName?: InputMaybe<Scalars['String']['input']>;
-  internalName_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  internalName_not?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  navigationLinkItem?: InputMaybe<CfNavigationLinkItemNestedFilter>;
-  navigationLinkItemCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  sys?: InputMaybe<SysFilter>;
-};
-
-export type NavigationLinksLinkingCollections = {
-  __typename?: 'NavigationLinksLinkingCollections';
-  entryCollection?: Maybe<EntryCollection>;
-  footerCollection?: Maybe<FooterCollection>;
-};
-
-
-export type NavigationLinksLinkingCollectionsEntryCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-
-export type NavigationLinksLinkingCollectionsFooterCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<NavigationLinksLinkingCollectionsFooterCollectionOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-export enum NavigationLinksLinkingCollectionsFooterCollectionOrder {
-  FollowLabelAsc = 'followLabel_ASC',
-  FollowLabelDesc = 'followLabel_DESC',
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
-}
-
-export type NavigationLinksNavigationLinkItemCollection = {
-  __typename?: 'NavigationLinksNavigationLinkItemCollection';
-  items: Array<Maybe<NavigationLinkItem>>;
-  limit: Scalars['Int']['output'];
-  skip: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export enum NavigationLinksNavigationLinkItemCollectionOrder {
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
-}
-
-export enum NavigationLinksOrder {
-  InternalNameAsc = 'internalName_ASC',
-  InternalNameDesc = 'internalName_DESC',
-  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
-  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
-  SysIdAsc = 'sys_id_ASC',
-  SysIdDesc = 'sys_id_DESC',
-  SysPublishedAtAsc = 'sys_publishedAt_ASC',
-  SysPublishedAtDesc = 'sys_publishedAt_DESC',
-  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/page) */
@@ -2656,6 +2497,7 @@ export type PageRecipe = Entry & _Node & {
   persons?: Maybe<Scalars['Int']['output']>;
   preparationStepsCollection?: Maybe<PageRecipePreparationStepsCollection>;
   rating?: Maybe<Scalars['Float']['output']>;
+  relatedRecipesCollection?: Maybe<PageRecipeRelatedRecipesCollection>;
   seo?: Maybe<Seo>;
   slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
@@ -2753,6 +2595,17 @@ export type PageRecipePreparationStepsCollectionArgs = {
 /** To create individual recipes [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageRecipe) */
 export type PageRecipeRatingArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** To create individual recipes [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageRecipe) */
+export type PageRecipeRelatedRecipesCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PageRecipeRelatedRecipesCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<PageRecipeFilter>;
 };
 
 
@@ -3018,6 +2871,8 @@ export type PageRecipeFilter = {
   rating_lte?: InputMaybe<Scalars['Float']['input']>;
   rating_not?: InputMaybe<Scalars['Float']['input']>;
   rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  relatedRecipes?: InputMaybe<CfPageRecipeNestedFilter>;
+  relatedRecipesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   seo?: InputMaybe<CfSeoNestedFilter>;
   seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -3071,6 +2926,7 @@ export type PageRecipeLinkingCollections = {
   entryCollection?: Maybe<EntryCollection>;
   featuredRecipeCollection?: Maybe<FeaturedRecipeCollection>;
   itemShowcaseCollection?: Maybe<ItemShowcaseCollection>;
+  pageRecipeCollection?: Maybe<PageRecipeCollection>;
 };
 
 
@@ -3099,6 +2955,15 @@ export type PageRecipeLinkingCollectionsItemShowcaseCollectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+
+export type PageRecipeLinkingCollectionsPageRecipeCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PageRecipeLinkingCollectionsPageRecipeCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export enum PageRecipeLinkingCollectionsFeaturedRecipeCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
@@ -3123,6 +2988,35 @@ export enum PageRecipeLinkingCollectionsItemShowcaseCollectionOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export enum PageRecipeLinkingCollectionsPageRecipeCollectionOrder {
+  CaloriesAsc = 'calories_ASC',
+  CaloriesDesc = 'calories_DESC',
+  CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
+  CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  DifficultyAsc = 'difficulty_ASC',
+  DifficultyDesc = 'difficulty_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PersonsAsc = 'persons_ASC',
+  PersonsDesc = 'persons_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
 }
 
 export enum PageRecipeOrder {
@@ -3175,6 +3069,43 @@ export enum PageRecipePreparationStepsCollectionOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export type PageRecipeRelatedRecipesCollection = {
+  __typename?: 'PageRecipeRelatedRecipesCollection';
+  items: Array<Maybe<PageRecipe>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export enum PageRecipeRelatedRecipesCollectionOrder {
+  CaloriesAsc = 'calories_ASC',
+  CaloriesDesc = 'calories_DESC',
+  CookingTimeMinutesAsc = 'cookingTimeMinutes_ASC',
+  CookingTimeMinutesDesc = 'cookingTimeMinutes_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  DifficultyAsc = 'difficulty_ASC',
+  DifficultyDesc = 'difficulty_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  PersonsAsc = 'persons_ASC',
+  PersonsDesc = 'persons_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
 }
 
 export type PageSectionCollection = {
@@ -3549,8 +3480,6 @@ export type Query = {
   mainNavigationCollection?: Maybe<MainNavigationCollection>;
   navigationLinkItem?: Maybe<NavigationLinkItem>;
   navigationLinkItemCollection?: Maybe<NavigationLinkItemCollection>;
-  navigationLinks?: Maybe<NavigationLinks>;
-  navigationLinksCollection?: Maybe<NavigationLinksCollection>;
   page?: Maybe<Page>;
   pageArticle?: Maybe<PageArticle>;
   pageArticleCollection?: Maybe<PageArticleCollection>;
@@ -3779,23 +3708,6 @@ export type QueryNavigationLinkItemCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<NavigationLinkItemFilter>;
-};
-
-
-export type QueryNavigationLinksArgs = {
-  id: Scalars['String']['input'];
-  locale?: InputMaybe<Scalars['String']['input']>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-export type QueryNavigationLinksCollectionArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  locale?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Array<InputMaybe<NavigationLinksOrder>>>;
-  preview?: InputMaybe<Scalars['Boolean']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<NavigationLinksFilter>;
 };
 
 
@@ -5130,21 +5042,6 @@ export type CfNavigationLinkItemNestedFilter = {
   url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type CfNavigationLinksNestedFilter = {
-  AND?: InputMaybe<Array<InputMaybe<CfNavigationLinksNestedFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<CfNavigationLinksNestedFilter>>>;
-  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
-  internalName?: InputMaybe<Scalars['String']['input']>;
-  internalName_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  internalName_not?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
-  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  navigationLinkItemCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  sys?: InputMaybe<SysFilter>;
-};
-
 export type CfPageArticleNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfPageArticleNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfPageArticleNestedFilter>>>;
@@ -5364,6 +5261,7 @@ export type CfPageRecipeNestedFilter = {
   rating_lte?: InputMaybe<Scalars['Float']['input']>;
   rating_not?: InputMaybe<Scalars['Float']['input']>;
   rating_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  relatedRecipesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   seo_exists?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   slug_contains?: InputMaybe<Scalars['String']['input']>;
@@ -5642,7 +5540,7 @@ export type FooterQueryVariables = Exact<{
 }>;
 
 
-export type FooterQuery = { __typename?: 'Query', footerCollection?: { __typename?: 'FooterCollection', items: Array<{ __typename?: 'Footer', followLabel?: string, socialItemsCollection?: { __typename?: 'FooterSocialItemsCollection', items: Array<{ __typename?: 'SocialItem', key?: string, url?: string }> }, menuLinksCollection?: { __typename?: 'FooterMenuLinksCollection', items: Array<{ __typename?: 'NavigationLinkItem', url?: string, title?: string, navigationLinkItemCollection?: { __typename?: 'NavigationLinkItemNavigationLinkItemCollection', items: Array<{ __typename?: 'NavigationLinkItem', title?: string, url?: string }> } }> }, legalLinksCollection?: { __typename?: 'FooterLegalLinksCollection', items: Array<{ __typename?: 'NavigationLinkItem', url?: string, title?: string }> } }> } };
+export type FooterQuery = { __typename?: 'Query', footerCollection?: { __typename?: 'FooterCollection', items: Array<{ __typename?: 'Footer', followLabel?: string, socialItemsCollection?: { __typename?: 'FooterSocialItemsCollection', items: Array<{ __typename?: 'SocialItem', key?: string, url?: string }> }, menuLinksCollection?: { __typename?: 'FooterMenuLinksCollection', items: Array<{ __typename?: 'NavigationLinkItem', url?: string, title?: string, navigationLinkItemCollection?: { __typename?: 'NavigationLinkItemNavigationLinkItemCollection', items: Array<{ __typename?: 'NavigationLinkItem', title?: string, url?: string }> } }> }, legalLinksCollection?: { __typename?: 'FooterLegalLinksCollection', items: Array<{ __typename?: 'NavigationLinkItem', _id: string, url?: string, title?: string }> } }> } };
 
 export type HeaderQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -5702,7 +5600,12 @@ export type PageRecipeCategoryQuery = { __typename?: 'Query', pageRecipeCategory
       & PageRecipeCategoryFieldsFragment
     )> } };
 
-export type PageRecipeFieldsFragment = { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string }, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, preparationStepsCollection?: { __typename?: 'PageRecipePreparationStepsCollection', items: Array<{ __typename?: 'PreparationStep', _id: string, description?: string, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, ingredientsCollection?: { __typename?: 'PageRecipeIngredientsCollection', items: Array<{ __typename?: 'Ingredient', _id: string, name?: string, quantity?: number, unitValue?: string, unit?: string, producedByGoody?: boolean, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
+export type RelatedRecipeFieldsFragment = { __typename: 'PageRecipe', _id: string, slug?: string, title?: string, description?: string, rating?: number, sys: { __typename?: 'Sys', id: string }, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } };
+
+export type PageRecipeFieldsFragment = { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string }, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, preparationStepsCollection?: { __typename?: 'PageRecipePreparationStepsCollection', items: Array<{ __typename?: 'PreparationStep', _id: string, description?: string, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, ingredientsCollection?: { __typename?: 'PageRecipeIngredientsCollection', items: Array<{ __typename?: 'Ingredient', _id: string, name?: string, quantity?: number, unitValue?: string, unit?: string, producedByGoody?: boolean, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> }, relatedRecipesCollection?: { __typename?: 'PageRecipeRelatedRecipesCollection', items: Array<(
+      { __typename?: 'PageRecipe' }
+      & RelatedRecipeFieldsFragment
+    )> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
 
 export type PageRecipeQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -5716,7 +5619,7 @@ export type PageRecipeQuery = { __typename?: 'Query', pageRecipeCollection?: { _
       & PageRecipeFieldsFragment
     )> } };
 
-export type PageFieldsFragment = { __typename?: 'Page', slug?: string, title?: string, pageName?: string, sys: { __typename?: 'Sys', id: string }, sectionCollection?: { __typename?: 'PageSectionCollection', items: Array<{ __typename: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Footer', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Header', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Ingredient', sys: { __typename?: 'Sys', id: string } } | { __typename: 'ItemShowcase', sys: { __typename?: 'Sys', id: string } } | { __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string } } | { __typename: 'NavigationLinkItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'NavigationLinks', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Page', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipeCategory', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageShop', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PreparationStep', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Section', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Seo', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Slider', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SliderItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SocialItem', sys: { __typename?: 'Sys', id: string } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
+export type PageFieldsFragment = { __typename?: 'Page', slug?: string, title?: string, pageName?: string, sys: { __typename?: 'Sys', id: string }, sectionCollection?: { __typename?: 'PageSectionCollection', items: Array<{ __typename: 'ComponentAuthor', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Footer', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Header', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Ingredient', sys: { __typename?: 'Sys', id: string } } | { __typename: 'ItemShowcase', sys: { __typename?: 'Sys', id: string } } | { __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string } } | { __typename: 'NavigationLinkItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Page', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageArticle', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageMagazine', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipe', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageRecipeCategory', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PageShop', sys: { __typename?: 'Sys', id: string } } | { __typename: 'PreparationStep', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Section', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Seo', sys: { __typename?: 'Sys', id: string } } | { __typename: 'Slider', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SliderItem', sys: { __typename?: 'Sys', id: string } } | { __typename: 'SocialItem', sys: { __typename?: 'Sys', id: string } }> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
 
 export type PageQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -5764,8 +5667,6 @@ export type ComponentReferenceFields_MainNavigation_Fragment = { __typename: 'Ma
 
 export type ComponentReferenceFields_NavigationLinkItem_Fragment = { __typename: 'NavigationLinkItem', sys: { __typename?: 'Sys', id: string } };
 
-export type ComponentReferenceFields_NavigationLinks_Fragment = { __typename: 'NavigationLinks', sys: { __typename?: 'Sys', id: string } };
-
 export type ComponentReferenceFields_Page_Fragment = { __typename: 'Page', sys: { __typename?: 'Sys', id: string } };
 
 export type ComponentReferenceFields_PageArticle_Fragment = { __typename: 'PageArticle', sys: { __typename?: 'Sys', id: string } };
@@ -5790,7 +5691,7 @@ export type ComponentReferenceFields_SliderItem_Fragment = { __typename: 'Slider
 
 export type ComponentReferenceFields_SocialItem_Fragment = { __typename: 'SocialItem', sys: { __typename?: 'Sys', id: string } };
 
-export type ComponentReferenceFieldsFragment = ComponentReferenceFields_ComponentAuthor_Fragment | ComponentReferenceFields_FeaturedArticle_Fragment | ComponentReferenceFields_FeaturedMagazine_Fragment | ComponentReferenceFields_FeaturedRecipe_Fragment | ComponentReferenceFields_Footer_Fragment | ComponentReferenceFields_Header_Fragment | ComponentReferenceFields_Ingredient_Fragment | ComponentReferenceFields_ItemShowcase_Fragment | ComponentReferenceFields_MainNavigation_Fragment | ComponentReferenceFields_NavigationLinkItem_Fragment | ComponentReferenceFields_NavigationLinks_Fragment | ComponentReferenceFields_Page_Fragment | ComponentReferenceFields_PageArticle_Fragment | ComponentReferenceFields_PageMagazine_Fragment | ComponentReferenceFields_PageRecipe_Fragment | ComponentReferenceFields_PageRecipeCategory_Fragment | ComponentReferenceFields_PageShop_Fragment | ComponentReferenceFields_PreparationStep_Fragment | ComponentReferenceFields_Section_Fragment | ComponentReferenceFields_Seo_Fragment | ComponentReferenceFields_Slider_Fragment | ComponentReferenceFields_SliderItem_Fragment | ComponentReferenceFields_SocialItem_Fragment;
+export type ComponentReferenceFieldsFragment = ComponentReferenceFields_ComponentAuthor_Fragment | ComponentReferenceFields_FeaturedArticle_Fragment | ComponentReferenceFields_FeaturedMagazine_Fragment | ComponentReferenceFields_FeaturedRecipe_Fragment | ComponentReferenceFields_Footer_Fragment | ComponentReferenceFields_Header_Fragment | ComponentReferenceFields_Ingredient_Fragment | ComponentReferenceFields_ItemShowcase_Fragment | ComponentReferenceFields_MainNavigation_Fragment | ComponentReferenceFields_NavigationLinkItem_Fragment | ComponentReferenceFields_Page_Fragment | ComponentReferenceFields_PageArticle_Fragment | ComponentReferenceFields_PageMagazine_Fragment | ComponentReferenceFields_PageRecipe_Fragment | ComponentReferenceFields_PageRecipeCategory_Fragment | ComponentReferenceFields_PageShop_Fragment | ComponentReferenceFields_PreparationStep_Fragment | ComponentReferenceFields_Section_Fragment | ComponentReferenceFields_Seo_Fragment | ComponentReferenceFields_Slider_Fragment | ComponentReferenceFields_SliderItem_Fragment | ComponentReferenceFields_SocialItem_Fragment;
 
 export type SliderFieldsFragment = { __typename?: 'Slider', sliderItemCollection?: { __typename?: 'SliderSliderItemCollection', items: Array<{ __typename?: 'SliderItem', internalName?: string, type?: string, title?: string, subtitle?: string, link?: string, buttonText?: string, timerDate?: any, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } }> } };
 
@@ -6068,6 +5969,37 @@ export const PageRecipeCategoryFieldsFragmentDoc = gql`
   }
 }
     `;
+export const RelatedRecipeFieldsFragmentDoc = gql`
+    fragment RelatedRecipeFields on PageRecipe {
+  __typename
+  sys {
+    id
+  }
+  _id
+  slug
+  title
+  description
+  category {
+    slug
+  }
+  rating
+  image {
+    url
+    title
+    width
+    height
+  }
+  author {
+    name
+    avatar {
+      url
+      title
+      width
+      height
+    }
+  }
+}
+    `;
 export const PageRecipeFieldsFragmentDoc = gql`
     fragment PageRecipeFields on PageRecipe {
   sys {
@@ -6131,6 +6063,11 @@ export const PageRecipeFieldsFragmentDoc = gql`
         width
         height
       }
+    }
+  }
+  relatedRecipesCollection {
+    items {
+      ...RelatedRecipeFields
     }
   }
   seo {
@@ -6304,6 +6241,7 @@ export const FooterDocument = gql`
       }
       legalLinksCollection {
         items {
+          _id
           url
           title
         }
@@ -6395,7 +6333,8 @@ export const PageRecipeDocument = gql`
     }
   }
 }
-    ${PageRecipeFieldsFragmentDoc}`;
+    ${PageRecipeFieldsFragmentDoc}
+${RelatedRecipeFieldsFragmentDoc}`;
 export const PageDocument = gql`
     query page($slug: String!, $locale: String, $preview: Boolean) {
   pageCollection(

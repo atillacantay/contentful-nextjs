@@ -16,7 +16,8 @@
     "numberOfServings": "Number of Servings",
     "level": "Level",
     "calories": "Calories",
-    "servingSize": "Serving Size"
+    "servingSize": "Serving Size",
+    "relatedTopics": "Related Topics"
   },
   "cards": {
     "recipe": "Recipe",

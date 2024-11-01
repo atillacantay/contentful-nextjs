@@ -1,3 +1,33 @@
+fragment RelatedRecipeFields on PageRecipe {
+  __typename
+  sys {
+    id
+  }
+  _id
+  slug
+  title
+  description
+  category {
+    slug
+  }
+  rating
+  image {
+    url
+    title
+    width
+    height
+  }
+  author {
+    name
+    avatar {
+      url
+      title
+      width
+      height
+    }
+  }
+}
+
 fragment PageRecipeFields on PageRecipe {
   sys {
     id
@@ -60,6 +90,11 @@ fragment PageRecipeFields on PageRecipe {
         width
         height
       }
+    }
+  }
+  relatedRecipesCollection {
+    items {
+      ...RelatedRecipeFields
     }
   }
   seo {
