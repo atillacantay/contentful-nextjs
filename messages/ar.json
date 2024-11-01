@@ -20,7 +20,17 @@
     "relatedTopics": "موضوع ذات صلة",
     "add": "يضيف",
     "added": "تمت الإضافة",
-    "addAllToShoppingList": "أضف الكل إلى قائمة التسوق"
+    "addAllToShoppingList": "أضف الكل إلى قائمة التسوق",
+    "other": "اخرى",
+    "nutritionalFacts": "معلومات غذائية",
+    "size": "مقاس",
+    "specialty": "التخصص",
+    "storageRequirements": "متطلبات التخزين",
+    "carbs": "الكربوهيدرات",
+    "fat": "الدهون",
+    "protein": "البروتينات",
+    "sugar": "السكريات",
+    "fiber": "الألياف"
   },
   "cards": {
     "recipe": "وصفة",

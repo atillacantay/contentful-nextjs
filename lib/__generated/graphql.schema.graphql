@@ -924,7 +924,6 @@ input IngredientFilter {
 type IngredientLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [IngredientLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
-  pageShopCollection(limit: Int = 100, locale: String, order: [IngredientLinkingCollectionsPageShopCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCollection
 }
 
 enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
@@ -954,29 +953,6 @@ enum IngredientLinkingCollectionsPageRecipeCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-}
-
-enum IngredientLinkingCollectionsPageShopCollectionOrder {
-  name_ASC
-  name_DESC
-  productIsNew_ASC
-  productIsNew_DESC
-  productNetWeight_ASC
-  productNetWeight_DESC
-  productUnit_ASC
-  productUnit_DESC
-  rating_ASC
-  rating_DESC
-  slug_ASC
-  slug_DESC
-  sys_firstPublishedAt_ASC
-  sys_firstPublishedAt_DESC
-  sys_id_ASC
-  sys_id_DESC
-  sys_publishedAt_ASC
-  sys_publishedAt_DESC
-  sys_publishedVersion_ASC
-  sys_publishedVersion_DESC
 }
 
 enum IngredientOrder {
@@ -2090,18 +2066,198 @@ type PageSectionCollection {
 """
 type PageShop implements Entry & _Node {
   _id: ID!
+  alsoViewedCollection(limit: Int = 100, locale: String, order: [PageShopAlsoViewedCollectionOrder], preview: Boolean, skip: Int = 0, where: PageShopFilter): PageShopAlsoViewedCollection
+  calories(locale: String): String
+  carbs(locale: String): String
+  category(locale: String, preview: Boolean, where: PageShopCategoryFilter): PageShopCategory
   contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
+  fat(locale: String): String
+  fiber(locale: String): String
   image(locale: String, preview: Boolean): Asset
-  ingredient(locale: String, preview: Boolean, where: IngredientFilter): Ingredient
+  imagesCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): AssetCollection
+  ingredients(locale: String): String
   linkedFrom(allowedLocales: [String]): PageShopLinkingCollections
   name(locale: String): String
+  productBuyButtonLink(locale: String): String
   productIsNew(locale: String): Boolean
   productNetWeight(locale: String): Int
   productUnit(locale: String): String
+  protein(locale: String): String
   rating(locale: String): Float
   seo(locale: String, preview: Boolean, where: SeoFilter): Seo
   slug(locale: String): String
+  specialty(locale: String): String
+  storageRequirements(locale: String): String
+  sugar(locale: String): String
   sys: Sys!
+}
+
+type PageShopAlsoViewedCollection {
+  items: [PageShop]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum PageShopAlsoViewedCollectionOrder {
+  calories_ASC
+  calories_DESC
+  carbs_ASC
+  carbs_DESC
+  fat_ASC
+  fat_DESC
+  fiber_ASC
+  fiber_DESC
+  name_ASC
+  name_DESC
+  productBuyButtonLink_ASC
+  productBuyButtonLink_DESC
+  productIsNew_ASC
+  productIsNew_DESC
+  productNetWeight_ASC
+  productNetWeight_DESC
+  productUnit_ASC
+  productUnit_DESC
+  protein_ASC
+  protein_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sugar_ASC
+  sugar_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageShopCategory)
+"""
+type PageShopCategory implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  linkedFrom(allowedLocales: [String]): PageShopCategoryLinkingCollections
+  sectionCollection(limit: Int = 100, locale: String, order: [PageShopCategorySectionCollectionOrder], preview: Boolean, skip: Int = 0, where: SectionFilter): PageShopCategorySectionCollection
+  seo(locale: String, preview: Boolean, where: SeoFilter): Seo
+  slug(locale: String): String
+  sys: Sys!
+}
+
+type PageShopCategoryCollection {
+  items: [PageShopCategory]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input PageShopCategoryFilter {
+  AND: [PageShopCategoryFilter]
+  OR: [PageShopCategoryFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  section: cfSectionNestedFilter
+  sectionCollection_exists: Boolean
+  seo: cfSeoNestedFilter
+  seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+}
+
+type PageShopCategoryLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  pageShopCollection(limit: Int = 100, locale: String, order: [PageShopCategoryLinkingCollectionsPageShopCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCollection
+}
+
+enum PageShopCategoryLinkingCollectionsPageShopCollectionOrder {
+  calories_ASC
+  calories_DESC
+  carbs_ASC
+  carbs_DESC
+  fat_ASC
+  fat_DESC
+  fiber_ASC
+  fiber_DESC
+  name_ASC
+  name_DESC
+  productBuyButtonLink_ASC
+  productBuyButtonLink_DESC
+  productIsNew_ASC
+  productIsNew_DESC
+  productNetWeight_ASC
+  productNetWeight_DESC
+  productUnit_ASC
+  productUnit_DESC
+  protein_ASC
+  protein_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sugar_ASC
+  sugar_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum PageShopCategoryOrder {
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type PageShopCategorySectionCollection {
+  items: [Section]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+enum PageShopCategorySectionCollectionOrder {
+  buttonLink_ASC
+  buttonLink_DESC
+  buttonText_ASC
+  buttonText_DESC
+  internalName_ASC
+  internalName_DESC
+  showMobileButton_ASC
+  showMobileButton_DESC
+  showXItemsOnMobile_ASC
+  showXItemsOnMobile_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
 }
 
 type PageShopCollection {
@@ -2114,10 +2270,55 @@ type PageShopCollection {
 input PageShopFilter {
   AND: [PageShopFilter]
   OR: [PageShopFilter]
+  alsoViewed: cfPageShopNestedFilter
+  alsoViewedCollection_exists: Boolean
+  calories: String
+  calories_contains: String
+  calories_exists: Boolean
+  calories_in: [String]
+  calories_not: String
+  calories_not_contains: String
+  calories_not_in: [String]
+  carbs: String
+  carbs_contains: String
+  carbs_exists: Boolean
+  carbs_in: [String]
+  carbs_not: String
+  carbs_not_contains: String
+  carbs_not_in: [String]
+  category: cfPageShopCategoryNestedFilter
+  category_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  fat: String
+  fat_contains: String
+  fat_exists: Boolean
+  fat_in: [String]
+  fat_not: String
+  fat_not_contains: String
+  fat_not_in: [String]
+  fiber: String
+  fiber_contains: String
+  fiber_exists: Boolean
+  fiber_in: [String]
+  fiber_not: String
+  fiber_not_contains: String
+  fiber_not_in: [String]
   image_exists: Boolean
-  ingredient: cfIngredientNestedFilter
-  ingredient_exists: Boolean
+  imagesCollection_exists: Boolean
+  ingredients: String
+  ingredients_contains: String
+  ingredients_exists: Boolean
+  ingredients_in: [String]
+  ingredients_not: String
+  ingredients_not_contains: String
+  ingredients_not_in: [String]
   name: String
   name_contains: String
   name_exists: Boolean
@@ -2125,6 +2326,13 @@ input PageShopFilter {
   name_not: String
   name_not_contains: String
   name_not_in: [String]
+  productBuyButtonLink: String
+  productBuyButtonLink_contains: String
+  productBuyButtonLink_exists: Boolean
+  productBuyButtonLink_in: [String]
+  productBuyButtonLink_not: String
+  productBuyButtonLink_not_contains: String
+  productBuyButtonLink_not_in: [String]
   productIsNew: Boolean
   productIsNew_exists: Boolean
   productIsNew_not: Boolean
@@ -2144,6 +2352,13 @@ input PageShopFilter {
   productUnit_not: String
   productUnit_not_contains: String
   productUnit_not_in: [String]
+  protein: String
+  protein_contains: String
+  protein_exists: Boolean
+  protein_in: [String]
+  protein_not: String
+  protein_not_contains: String
+  protein_not_in: [String]
   rating: Float
   rating_exists: Boolean
   rating_gt: Float
@@ -2162,12 +2377,34 @@ input PageShopFilter {
   slug_not: String
   slug_not_contains: String
   slug_not_in: [String]
+  specialty: String
+  specialty_contains: String
+  specialty_exists: Boolean
+  specialty_in: [String]
+  specialty_not: String
+  specialty_not_contains: String
+  specialty_not_in: [String]
+  storageRequirements: String
+  storageRequirements_contains: String
+  storageRequirements_exists: Boolean
+  storageRequirements_in: [String]
+  storageRequirements_not: String
+  storageRequirements_not_contains: String
+  storageRequirements_not_in: [String]
+  sugar: String
+  sugar_contains: String
+  sugar_exists: Boolean
+  sugar_in: [String]
+  sugar_not: String
+  sugar_not_contains: String
+  sugar_not_in: [String]
   sys: SysFilter
 }
 
 type PageShopLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   itemShowcaseCollection(limit: Int = 100, locale: String, order: [PageShopLinkingCollectionsItemShowcaseCollectionOrder], preview: Boolean, skip: Int = 0): ItemShowcaseCollection
+  pageShopCollection(limit: Int = 100, locale: String, order: [PageShopLinkingCollectionsPageShopCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCollection
 }
 
 enum PageShopLinkingCollectionsItemShowcaseCollectionOrder {
@@ -2183,19 +2420,70 @@ enum PageShopLinkingCollectionsItemShowcaseCollectionOrder {
   sys_publishedVersion_DESC
 }
 
-enum PageShopOrder {
+enum PageShopLinkingCollectionsPageShopCollectionOrder {
+  calories_ASC
+  calories_DESC
+  carbs_ASC
+  carbs_DESC
+  fat_ASC
+  fat_DESC
+  fiber_ASC
+  fiber_DESC
   name_ASC
   name_DESC
+  productBuyButtonLink_ASC
+  productBuyButtonLink_DESC
   productIsNew_ASC
   productIsNew_DESC
   productNetWeight_ASC
   productNetWeight_DESC
   productUnit_ASC
   productUnit_DESC
+  protein_ASC
+  protein_DESC
   rating_ASC
   rating_DESC
   slug_ASC
   slug_DESC
+  sugar_ASC
+  sugar_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum PageShopOrder {
+  calories_ASC
+  calories_DESC
+  carbs_ASC
+  carbs_DESC
+  fat_ASC
+  fat_DESC
+  fiber_ASC
+  fiber_DESC
+  name_ASC
+  name_DESC
+  productBuyButtonLink_ASC
+  productBuyButtonLink_DESC
+  productIsNew_ASC
+  productIsNew_DESC
+  productNetWeight_ASC
+  productNetWeight_DESC
+  productUnit_ASC
+  productUnit_DESC
+  protein_ASC
+  protein_DESC
+  rating_ASC
+  rating_DESC
+  slug_ASC
+  slug_DESC
+  sugar_ASC
+  sugar_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -2338,6 +2626,8 @@ type Query {
   pageRecipeCategoryCollection(limit: Int = 100, locale: String, order: [PageRecipeCategoryOrder], preview: Boolean, skip: Int = 0, where: PageRecipeCategoryFilter): PageRecipeCategoryCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeOrder], preview: Boolean, skip: Int = 0, where: PageRecipeFilter): PageRecipeCollection
   pageShop(id: String!, locale: String, preview: Boolean): PageShop
+  pageShopCategory(id: String!, locale: String, preview: Boolean): PageShopCategory
+  pageShopCategoryCollection(limit: Int = 100, locale: String, order: [PageShopCategoryOrder], preview: Boolean, skip: Int = 0, where: PageShopCategoryFilter): PageShopCategoryCollection
   pageShopCollection(limit: Int = 100, locale: String, order: [PageShopOrder], preview: Boolean, skip: Int = 0, where: PageShopFilter): PageShopCollection
   preparationStep(id: String!, locale: String, preview: Boolean): PreparationStep
   preparationStepCollection(limit: Int = 100, locale: String, order: [PreparationStepOrder], preview: Boolean, skip: Int = 0, where: PreparationStepFilter): PreparationStepCollection
@@ -2430,9 +2720,23 @@ input SectionFilter {
 type SectionLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageRecipeCategoryCollection(limit: Int = 100, locale: String, order: [SectionLinkingCollectionsPageRecipeCategoryCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCategoryCollection
+  pageShopCategoryCollection(limit: Int = 100, locale: String, order: [SectionLinkingCollectionsPageShopCategoryCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCategoryCollection
 }
 
 enum SectionLinkingCollectionsPageRecipeCategoryCollectionOrder {
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum SectionLinkingCollectionsPageShopCategoryCollectionOrder {
   slug_ASC
   slug_DESC
   sys_firstPublishedAt_ASC
@@ -2546,6 +2850,7 @@ type SeoLinkingCollections {
   pageMagazineCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageMagazineCollectionOrder], preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCategoryCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageRecipeCategoryCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCategoryCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
+  pageShopCategoryCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageShopCategoryCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCategoryCollection
   pageShopCollection(limit: Int = 100, locale: String, order: [SeoLinkingCollectionsPageShopCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCollection
 }
 
@@ -2652,19 +2957,46 @@ enum SeoLinkingCollectionsPageRecipeCollectionOrder {
   title_DESC
 }
 
+enum SeoLinkingCollectionsPageShopCategoryCollectionOrder {
+  slug_ASC
+  slug_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
 enum SeoLinkingCollectionsPageShopCollectionOrder {
+  calories_ASC
+  calories_DESC
+  carbs_ASC
+  carbs_DESC
+  fat_ASC
+  fat_DESC
+  fiber_ASC
+  fiber_DESC
   name_ASC
   name_DESC
+  productBuyButtonLink_ASC
+  productBuyButtonLink_DESC
   productIsNew_ASC
   productIsNew_DESC
   productNetWeight_ASC
   productNetWeight_DESC
   productUnit_ASC
   productUnit_DESC
+  protein_ASC
+  protein_DESC
   rating_ASC
   rating_DESC
   slug_ASC
   slug_DESC
+  sugar_ASC
+  sugar_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -3383,6 +3715,153 @@ input cfPageRecipeNestedFilter {
   title_not: String
   title_not_contains: String
   title_not_in: [String]
+}
+
+input cfPageShopCategoryNestedFilter {
+  AND: [cfPageShopCategoryNestedFilter]
+  OR: [cfPageShopCategoryNestedFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  sectionCollection_exists: Boolean
+  seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  sys: SysFilter
+}
+
+input cfPageShopNestedFilter {
+  AND: [cfPageShopNestedFilter]
+  OR: [cfPageShopNestedFilter]
+  alsoViewedCollection_exists: Boolean
+  calories: String
+  calories_contains: String
+  calories_exists: Boolean
+  calories_in: [String]
+  calories_not: String
+  calories_not_contains: String
+  calories_not_in: [String]
+  carbs: String
+  carbs_contains: String
+  carbs_exists: Boolean
+  carbs_in: [String]
+  carbs_not: String
+  carbs_not_contains: String
+  carbs_not_in: [String]
+  category_exists: Boolean
+  contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
+  fat: String
+  fat_contains: String
+  fat_exists: Boolean
+  fat_in: [String]
+  fat_not: String
+  fat_not_contains: String
+  fat_not_in: [String]
+  fiber: String
+  fiber_contains: String
+  fiber_exists: Boolean
+  fiber_in: [String]
+  fiber_not: String
+  fiber_not_contains: String
+  fiber_not_in: [String]
+  image_exists: Boolean
+  imagesCollection_exists: Boolean
+  ingredients: String
+  ingredients_contains: String
+  ingredients_exists: Boolean
+  ingredients_in: [String]
+  ingredients_not: String
+  ingredients_not_contains: String
+  ingredients_not_in: [String]
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
+  productBuyButtonLink: String
+  productBuyButtonLink_contains: String
+  productBuyButtonLink_exists: Boolean
+  productBuyButtonLink_in: [String]
+  productBuyButtonLink_not: String
+  productBuyButtonLink_not_contains: String
+  productBuyButtonLink_not_in: [String]
+  productIsNew: Boolean
+  productIsNew_exists: Boolean
+  productIsNew_not: Boolean
+  productNetWeight: Int
+  productNetWeight_exists: Boolean
+  productNetWeight_gt: Int
+  productNetWeight_gte: Int
+  productNetWeight_in: [Int]
+  productNetWeight_lt: Int
+  productNetWeight_lte: Int
+  productNetWeight_not: Int
+  productNetWeight_not_in: [Int]
+  productUnit: String
+  productUnit_contains: String
+  productUnit_exists: Boolean
+  productUnit_in: [String]
+  productUnit_not: String
+  productUnit_not_contains: String
+  productUnit_not_in: [String]
+  protein: String
+  protein_contains: String
+  protein_exists: Boolean
+  protein_in: [String]
+  protein_not: String
+  protein_not_contains: String
+  protein_not_in: [String]
+  rating: Float
+  rating_exists: Boolean
+  rating_gt: Float
+  rating_gte: Float
+  rating_in: [Float]
+  rating_lt: Float
+  rating_lte: Float
+  rating_not: Float
+  rating_not_in: [Float]
+  seo_exists: Boolean
+  slug: String
+  slug_contains: String
+  slug_exists: Boolean
+  slug_in: [String]
+  slug_not: String
+  slug_not_contains: String
+  slug_not_in: [String]
+  specialty: String
+  specialty_contains: String
+  specialty_exists: Boolean
+  specialty_in: [String]
+  specialty_not: String
+  specialty_not_contains: String
+  specialty_not_in: [String]
+  storageRequirements: String
+  storageRequirements_contains: String
+  storageRequirements_exists: Boolean
+  storageRequirements_in: [String]
+  storageRequirements_not: String
+  storageRequirements_not_contains: String
+  storageRequirements_not_in: [String]
+  sugar: String
+  sugar_contains: String
+  sugar_exists: Boolean
+  sugar_in: [String]
+  sugar_not: String
+  sugar_not_contains: String
+  sugar_not_in: [String]
+  sys: SysFilter
 }
 
 input cfPreparationStepNestedFilter {

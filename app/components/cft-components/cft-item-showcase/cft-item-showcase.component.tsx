@@ -38,11 +38,9 @@ const CtfItemShowcase = (props: ItemShowcase) => {
   const items = itemsCollection?.items.filter(Boolean) || [];
 
   return (
-    <>
-      <Grid lg={5} md={2} col={1} spacing={4}>
-        {modelToCards(items, "show-x-items-on-mobile")}
-      </Grid>
-    </>
+    <Grid lg={5} md={2} col={1} spacing={4}>
+      {modelToCards(items, "show-x-items-on-mobile")}
+    </Grid>
   );
 };
 

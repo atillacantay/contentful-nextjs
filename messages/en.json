@@ -20,7 +20,17 @@
     "relatedTopics": "Related Topics",
     "add": "Add",
     "added": "Added",
-    "addAllToShoppingList": "Add All To Shopping List"
+    "addAllToShoppingList": "Add All To Shopping List",
+    "other": "Other",
+    "nutritionalFacts": "Nutritional Facts",
+    "size": "Size",
+    "specialty": "Specialty",
+    "storageRequirements": "Storage Requirements",
+    "carbs": "Carbs",
+    "fat": "Fat",
+    "protein": "Protein",
+    "sugar": "Sugar",
+    "fiber": "Fiber"
   },
   "cards": {
     "recipe": "Recipe",

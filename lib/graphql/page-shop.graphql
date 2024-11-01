@@ -1,0 +1,97 @@
+fragment AlsoViewedFields on PageShop {
+  __typename
+  sys {
+    id
+    publishedAt
+  }
+  slug
+  category {
+    slug
+  }
+  name
+  description
+  productNetWeight
+  productUnit
+  rating
+  image {
+    url
+    title
+    width
+    height
+  }
+}
+
+fragment PageShopFields on PageShop {
+  __typename
+  sys {
+    id
+    publishedAt
+  }
+  slug
+  category {
+    slug
+  }
+  name
+  description
+  productNetWeight
+  productUnit
+  ingredients
+  specialty
+  storageRequirements
+  calories
+  carbs
+  fat
+  protein
+  sugar
+  fiber
+  productIsNew
+  rating
+  image {
+    url
+    title
+    width
+    height
+  }
+  imagesCollection {
+    items {
+      url
+      title
+      width
+      height
+    }
+  }
+  alsoViewedCollection {
+    items {
+      ...AlsoViewedFields
+    }
+  }
+  seo {
+    name
+    title
+    description
+    canonicalUrl
+    image {
+      title
+      description
+      contentType
+      url
+      width
+      height
+    }
+    noFollow
+    noIndex
+  }
+}
+
+query pageShop($slug: String!, $locale: String, $preview: Boolean) {
+  pageShopCollection(
+    limit: 1
+    locale: $locale
+    where: { slug: $slug }
+    preview: $preview
+  ) {
+    items {
+      ...PageShopFields
+    }
+  }
+}

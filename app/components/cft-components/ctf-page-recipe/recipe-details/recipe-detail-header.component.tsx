@@ -45,7 +45,8 @@ const RecipeDetailHeader = ({
           src={image?.url || ""}
           width={image?.width}
           height={image?.height}
-          alt={image?.description || author?.name || "User Avatar"}
+          priority
+          alt={image?.description || title || "Recipe Image"}
         />
       </div>
       <div className="flex-1 max-lg:px-4">

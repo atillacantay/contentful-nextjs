@@ -79,12 +79,12 @@ fragment ItemShowcaseFields on ItemShowcase {
           publishedAt
         }
         slug
+        category {
+          slug
+        }
         name
         productNetWeight
         productUnit
-        ingredient {
-          name
-        }
         productIsNew
         rating
         image {

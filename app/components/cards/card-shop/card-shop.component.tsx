@@ -19,6 +19,7 @@ interface CardShopProps extends PageShop {
 const CardShop = ({
   name,
   slug,
+  category,
   rating,
   productNetWeight,
   productUnit,
@@ -26,6 +27,7 @@ const CardShop = ({
   textColor,
 }: CardShopProps): JSX.Element => {
   const t = useTranslations();
+  const url = `/shop/${category ? `${category.slug}/` : ""}${slug}`;
 
   return (
     <Card className="rounded-2xl w-full  lg:h-[338px] flex flex-col justify-between">
@@ -40,7 +42,7 @@ const CardShop = ({
       </div>
 
       <Link
-        href={`/shop/${slug}`}
+        href={url}
         title={name}
         className="relative w-auto object-cover !h-[234px] grow"
       >
@@ -55,7 +57,7 @@ const CardShop = ({
       </Link>
       <Card.Content className="border-t border-[rgba(25, 25, 25, 0.14)]">
         <Stack spacing={2} direction="col">
-          <Link href={`/shop/${slug}`} title={name}>
+          <Link href={url} title={name}>
             <Header
               weight="semibold"
               className={`text-[${textColor}] max-h-24 overflow-hidden whitespace-nowrap text-ellipsis`}

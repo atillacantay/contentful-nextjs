@@ -1,7 +1,9 @@
 import CtfPageArticle from "@/components/cft-components/ctf-page-article";
 import CtfPageRecipe from "@/components/cft-components/ctf-page-recipe";
+import CtfPageShop from "@/components/cft-components/ctf-page-shop";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { generatePageMetadata } from "@/utils/metadata";
+import { Query } from "lib/__generated/sdk";
 import { client } from "lib/client";
 import { Metadata, NextPage } from "next";
 import { draftMode } from "next/headers";
@@ -11,20 +13,21 @@ interface SlugPageProps {
   params: Promise<{ locale: string; slug: string[]; category: string }>;
 }
 
-type QueryObjectKey = "pageRecipeCollection" | "pageArticleCollection";
-
 const componentMap: Record<string, any> = {
   recipes: CtfPageRecipe,
+  shop: CtfPageShop,
   articles: CtfPageArticle,
 };
 
 const queryFunctionMap: Record<string, any> = {
   recipes: client.pageRecipe,
+  shop: client.pageShop,
   articles: client.pageArticle,
 };
 
-const queryObjectKeyMap: Record<string, QueryObjectKey> = {
+const queryObjectKeyMap: Record<string, keyof Query> = {
   recipes: "pageRecipeCollection",
+  shop: "pageShopCollection",
   articles: "pageArticleCollection",
 };
 

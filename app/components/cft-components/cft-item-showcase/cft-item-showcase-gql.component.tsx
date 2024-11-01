@@ -22,11 +22,7 @@ const CtfItemShowcaseGql = async ({ id }: CftPageProps) => {
 
   const itemShowcase = data?.itemShowcase as ItemShowcase;
 
-  return (
-    <>
-      <CtfItemShowcase {...itemShowcase} />
-    </>
-  );
+  return <CtfItemShowcase {...itemShowcase} />;
 };
 
 export default CtfItemShowcaseGql;
