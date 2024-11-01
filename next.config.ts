@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   skipMiddlewareUrlNormalize: true,
   pageExtensions: ["ts", "tsx"],
+  trailingSlash: true,
   sassOptions: {
     quietDeps: true,
     silenceDeprecations: ["legacy-js-api"],

@@ -1,7 +1,7 @@
 import Grid from "@/components/common/grid";
 import Text from "@/components/common/typography/text";
 import { clsxm } from "@/utils/twMerge.utils";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { IRecipeInfo, RecipeInfoItem } from "./recipe-info.interface";
 
 const GridItem = ({
@@ -30,6 +30,7 @@ const RecipeInfo = ({
   className,
 }: IRecipeInfo): JSX.Element => {
   const t = useTranslations();
+  const format = useFormatter();
 
   // Mapping of color names to Tailwind classes for dynamic styling
   const afterClasses: Record<string, string> = {
@@ -52,7 +53,7 @@ const RecipeInfo = ({
   const items: RecipeInfoItem[] = [
     {
       label: t("common.prepTime"),
-      value: prepTime,
+      value: format.number(Number(prepTime)),
       className: clsxm(
         "pb-4 lg:pb-0 border-b lg:border-b-0 border-r rtl:border-l rtl:lg:border-l-0 rtl:border-r-0 lg:border-r-0",
         commonClasses
@@ -60,7 +61,7 @@ const RecipeInfo = ({
     },
     {
       label: t("common.numberOfServings"),
-      value: serving,
+      value: format.number(Number(serving)),
       className: clsxm("pb-4 lg:pb-0 border-b lg:border-b-0", commonClasses),
     },
     {
@@ -71,7 +72,11 @@ const RecipeInfo = ({
         commonClasses
       ),
     },
-    { label: t("common.calories"), value: calories, className: "pt-4 lg:pt-0" },
+    {
+      label: t("common.calories"),
+      value: format.number(Number(calories)),
+      className: "pt-4 lg:pt-0",
+    },
   ];
 
   return (

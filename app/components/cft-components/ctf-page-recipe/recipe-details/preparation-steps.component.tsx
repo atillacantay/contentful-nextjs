@@ -3,7 +3,7 @@ import Stack from "@/components/common/stack";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 import type { PreparationStep } from "lib/__generated/sdk";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 interface PreparationStepsProps {
   preparationSteps?: PreparationStep[];
@@ -13,6 +13,7 @@ const PreparationSteps = ({
   preparationSteps,
 }: PreparationStepsProps): JSX.Element => {
   const t = useTranslations();
+  const format = useFormatter();
 
   return (
     <>
@@ -31,7 +32,7 @@ const PreparationSteps = ({
             className={`${index > 0 ? "pt-8" : ""}`}
           >
             <Header as="h3" weight="medium">
-              {t("common.step", { step: ++index })}
+              {t("common.step", { step: format.number(++index) })}
             </Header>
             <Text>{step?.description}</Text>
             {step.image && (

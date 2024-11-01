@@ -12,22 +12,6 @@ const WrapperSwiper = dynamic(
   { ssr: false }
 );
 
-const cardComponents: Record<string, any> = {
-  PageRecipe: CardRecipe,
-};
-
-const getCardComponentByGenre = (card: PageRecipe): JSX.Element => {
-  const CardComponent = cardComponents[card.__typename!];
-  return CardComponent ? <CardComponent {...card} /> : <></>;
-};
-
-const modelToCards = (cards: PageRecipe[]) =>
-  cards.map((card: PageRecipe) => (
-    <SwiperSlide key={card._id} className="!w-[20%] max-sm:!w-[90%]">
-      {getCardComponentByGenre(card)}
-    </SwiperSlide>
-  ));
-
 const RelatedRecipes = ({
   relatedRecipes,
 }: {
@@ -41,7 +25,13 @@ const RelatedRecipes = ({
         sectionTitle={{ title: t("common.relatedTopics") }}
         className="my-10 px-4 lg:container lg:mx-auto"
       >
-        <WrapperSwiper>{modelToCards(relatedRecipes)}</WrapperSwiper>
+        <WrapperSwiper>
+          {relatedRecipes?.map((card: PageRecipe) => (
+            <SwiperSlide key={card._id} className="!w-[20%] max-sm:!w-[90%]">
+              <CardRecipe {...card} />
+            </SwiperSlide>
+          ))}
+        </WrapperSwiper>
       </Section>
     )
   );

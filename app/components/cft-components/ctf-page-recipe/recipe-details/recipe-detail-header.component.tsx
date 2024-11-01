@@ -12,7 +12,7 @@ import HeaderMini from "@/components/templates/header/header-mini-component";
 import Calendar from "@/public/assets/icons/calendar-clear-outline.svg";
 import Heart from "@/public/assets/icons/heart-outline.svg";
 import type { PageRecipe } from "lib/__generated/sdk";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 const RecipeDetailHeader = ({
   image,
@@ -26,6 +26,7 @@ const RecipeDetailHeader = ({
   rating,
 }: PageRecipe): JSX.Element => {
   const t = useTranslations();
+  const format = useFormatter();
 
   return (
     <Stack direction="col" className="h-2/6 pb-8 lg:flex-row lg:gap-4">
@@ -58,7 +59,7 @@ const RecipeDetailHeader = ({
                 weight="light"
                 className="ltr:ml-2 rtl:mr-2 leading-3"
               >
-                {rating}
+                {format.number(rating)}
               </Text>
             </Rate>
           )}

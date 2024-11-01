@@ -8,7 +8,7 @@ import Text from "@/components/common/typography/text";
 import Rate from "@/components/rate";
 import Heart from "@/public/assets/icons/heart-outline.svg";
 import type { PageShop } from "lib/__generated/sdk";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { Fragment } from "react";
 import AlsoViewedProducts from "./also-viewed-products.component";
 import ProductImage from "./product-image.component";
@@ -19,6 +19,8 @@ interface ShopDetailsProps {
 
 const ShopDetails = ({ product }: ShopDetailsProps) => {
   const t = useTranslations();
+  const format = useFormatter();
+
   const {
     name,
     rating,
@@ -38,46 +40,52 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
   const alsoViewedProducts = alsoViewedCollection?.items.filter(Boolean);
 
   const propertiesMap = new Map([
-    [productNetWeight?.toString(), "common.size"],
+    [format.number(Number(productNetWeight)), "common.size"],
     [ingredients, "common.ingredients"],
     [specialty, "common.specialty"],
     [storageRequirements, "common.storageRequirements"],
   ]);
 
   const nutritionsMap = new Map([
-    [calories, "common.calories"],
-    [carbs, "common.carbs"],
-    [fat, "common.fat"],
-    [protein, "common.protein"],
-    [sugar, "common.sugar"],
-    [fiber, "common.fiber"],
+    [format.number(Number(calories)), "common.calories"],
+    [format.number(Number(carbs)), "common.carbs"],
+    [format.number(Number(fat)), "common.fat"],
+    [format.number(Number(protein)), "common.protein"],
+    [format.number(Number(sugar)), "common.sugar"],
+    [format.number(Number(fiber)), "common.fiber"],
   ]);
 
   const collapsibleMenu: CollapsibleMenuItem[] = [
     {
       key: "other",
       header: t("common.other"),
-      content: Array.from(propertiesMap.entries()).map(([value, label]) => (
-        <Fragment key={label}>
-          <b>{t(label)}</b>
-          <br />
-          <Markdown body={value} />
-          <br />
-        </Fragment>
-      )),
+      content: Array.from(propertiesMap.entries()).map(
+        ([value, label]) =>
+          value && (
+            <Fragment key={label}>
+              <b>{t(label)}</b>
+              <br />
+              <Markdown body={value} />
+              <br />
+            </Fragment>
+          )
+      ),
     },
     {
       key: "nutritional-facts",
       header: t("common.nutritionalFacts"),
-      content: Array.from(nutritionsMap.entries()).map(([value, label]) => (
-        <Fragment key={label}>
-          <ul className="list-disc space-y-2 list-inside">
-            <li>
-              {t(label)} <b>{value}</b>
-            </li>
-          </ul>
-        </Fragment>
-      )),
+      content: Array.from(nutritionsMap.entries()).map(
+        ([value, label]) =>
+          value && (
+            <Fragment key={label}>
+              <ul className="list-disc space-y-2 list-inside">
+                <li>
+                  {t(label)} <b>{value}</b>
+                </li>
+              </ul>
+            </Fragment>
+          )
+      ),
     },
   ];
 
