@@ -1,3 +1,5 @@
+"use client";
+
 import CardRecipe from "@/components/cards/card-recipe";
 import Section from "@/components/cft-components/cft-section/cft-section.component";
 import type { PageRecipe } from "lib/__generated/sdk";
@@ -5,8 +7,9 @@ import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { SwiperSlide } from "swiper/react";
 
-const WrapperSwiper = dynamic(() =>
-  import("@/components/wrapper-swiper").then((module) => module.default)
+const WrapperSwiper = dynamic(
+  () => import("@/components/wrapper-swiper").then((module) => module.default),
+  { ssr: false }
 );
 
 const cardComponents: Record<string, any> = {

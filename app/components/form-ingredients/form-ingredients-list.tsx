@@ -10,21 +10,18 @@ import ShoppingList from "@/public/assets/icons/shopping-list.svg";
 import useIngredientShoppingList from "@/hooks/useIngredientShoppingList";
 import decToFrac from "@/utils/decimalToFraction";
 import type { Ingredient } from "lib/__generated/sdk";
-// import { Ingredient } from "./form-ingredients.interface";
+import { useTranslations } from "next-intl";
 
 interface IFormIngredientsList {
   ingredients: Ingredient[];
   servingSize: number;
-  labelAdd: string;
-  labelAdded: string;
 }
 
 const FormIngredientsList = ({
   ingredients,
   servingSize,
-  labelAdd,
-  labelAdded,
 }: IFormIngredientsList): JSX.Element => {
+  const t = useTranslations();
   const { add } = useIngredientShoppingList();
   const [formIngredients] = useState(ingredients);
 
@@ -49,25 +46,23 @@ const FormIngredientsList = ({
           spacing={4}
         >
           <Text as="span">
-            {servingSize ? (
+            {servingSize && ingredient.quantity ? (
               <>
-                <span data-quantity={ingredient.quantity}>
-                  {decToFrac(ingredient.quantity * servingSize)}
-                </span>{" "}
-                <span data-unit={ingredient.unitValue}>{ingredient.unit}</span>{" "}
+                <span>{decToFrac(ingredient.quantity * servingSize)}</span>{" "}
+                <span>{ingredient.unit}</span>{" "}
               </>
             ) : (
               <></>
             )}
             {ingredient.name}
           </Text>
-          {ingredient.isAdded ? (
+          {true ? (
             <Button
               variant="text"
               className="hidden text-positive px-2"
               startIcon={<AddedShoppingList />}
             >
-              {labelAdded}
+              {t("common.added")}
             </Button>
           ) : (
             <Button
@@ -75,9 +70,9 @@ const FormIngredientsList = ({
               className="hidden text-primary_red dark:text-primary_red_dark"
               size="sm"
               startIcon={<ShoppingList />}
-              onClick={() => addIngredientToShoppingList(ingredient)}
+              // onClick={() => addIngredientToShoppingList(ingredient)}
             >
-              {labelAdd}
+              {t("common.add")}
             </Button>
           )}
         </Stack>

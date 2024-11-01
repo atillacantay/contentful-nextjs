@@ -17,7 +17,10 @@
     "level": "Level",
     "calories": "Calories",
     "servingSize": "Serving Size",
-    "relatedTopics": "Related Topics"
+    "relatedTopics": "Related Topics",
+    "add": "Add",
+    "added": "Added",
+    "addAllToShoppingList": "Add All To Shopping List"
   },
   "cards": {
     "recipe": "Recipe",

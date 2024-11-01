@@ -28,7 +28,6 @@ interface IFormIngredients extends React.ComponentProps<"div"> {
   textIngredients: string;
   textAddIngredientsToShoppingList?: string;
   textServingSize: string;
-  textAddAllToShoppingList: string;
   labelAdd: string;
   labelAdded: string;
 }
@@ -42,7 +41,6 @@ const FormIngredients = ({
   textIngredients,
   textServingSize,
   textAddIngredientsToShoppingList,
-  textAddAllToShoppingList,
   labelAdd,
   labelAdded,
   ...props
@@ -143,7 +141,7 @@ const FormIngredients = ({
           size="xl"
           fullWidth
         >
-          {textAddAllToShoppingList}
+          {t("common.addAllToShoppingList")}
         </Button>
       </Stack>
     </Stack>
@@ -214,7 +212,7 @@ const FormIngredients = ({
             fullWidth
             // onClick={addAllIngredientsToShoppingList}
           >
-            {textAddAllToShoppingList}
+            {t("common.addAllToShoppingList")}
           </Button>
         </Card.Content>
       </Card>

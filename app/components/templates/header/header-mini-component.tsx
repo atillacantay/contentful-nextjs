@@ -1,3 +1,5 @@
+"use client";
+
 import ButtonIcon from "@/components/common/button/button-icon.component";
 import Stack from "@/components/common/stack";
 

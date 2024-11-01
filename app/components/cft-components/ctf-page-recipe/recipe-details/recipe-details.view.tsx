@@ -1,5 +1,3 @@
-"use client";
-
 import Stack from "@/components/common/stack";
 import FormIngredients from "@/components/form-ingredients";
 import PreparationSteps from "./preparation-steps.component";

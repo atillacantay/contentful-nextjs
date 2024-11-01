@@ -17,7 +17,10 @@
     "level": "المستوى",
     "calories": "سعرات حرارية",
     "servingSize": "حجم الحصة",
-    "relatedTopics": "موضوع ذات صلة"
+    "relatedTopics": "موضوع ذات صلة",
+    "add": "يضيف",
+    "added": "تمت الإضافة",
+    "addAllToShoppingList": "أضف الكل إلى قائمة التسوق"
   },
   "cards": {
     "recipe": "وصفة",
