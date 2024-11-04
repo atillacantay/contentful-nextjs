@@ -8,7 +8,7 @@ import Text from "@/components/common/typography/text";
 import { Link } from "@/i18n/routing";
 import Shop from "@/public/assets/icons/shopping-bag.svg";
 import { PageShop } from "lib/__generated/sdk";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 // import FormSaveForLaterIcon from "../form-save-for-later-icon";
 // import { ModelFormSaveForLaterIcon } from "../form-save-for-later-icon/form-save-for-later-icon.model";
 
@@ -27,6 +27,7 @@ const CardShop = ({
   textColor,
 }: CardShopProps): JSX.Element => {
   const t = useTranslations();
+  const locale = useLocale();
   const format = useFormatter();
   const url = `/shop/${category ? `${category.slug}/` : ""}${slug}`;
 
@@ -83,7 +84,9 @@ const CardShop = ({
               >
                 <Star rate={5} value={rating} fill="#FED236" />
                 <Text className="text-xs" color={textColor}>
-                  {format.number(rating)}
+                  {format.number(rating, {
+                    numberingSystem: locale === "ar" ? "arab" : undefined,
+                  })}
                 </Text>
               </Stack>
             )}

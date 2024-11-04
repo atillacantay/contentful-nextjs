@@ -10,7 +10,7 @@ import Text from "@/components/common/typography/text";
 import { Link } from "@/i18n/routing";
 import ClockIcon from "@/public/assets/icons/time-outline.svg";
 import { clsxm } from "@/utils/twMerge.utils";
-import { useFormatter } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import type { IArticleOfDay } from "./article-of-day.interface";
 
 const ArticleOfDay = ({
@@ -27,6 +27,7 @@ const ArticleOfDay = ({
 }: IArticleOfDay): JSX.Element => {
   const { firstPublishedAt } = sys;
   const format = useFormatter();
+  const t = useTranslations();
 
   return (
     <Card className="bg-[#C42929] rounded-none lg:rounded-2xl">
@@ -73,9 +74,7 @@ const ArticleOfDay = ({
                 </Text>
                 <ClockIcon className={`text-white text-lg`} />
                 <Text size="sm" weight="light" className="text-white">
-                  {readDurationInMin === 1
-                    ? `${readDurationInMin} min Read`
-                    : `${readDurationInMin} mins Read`}
+                  {t("common.readInMinutes", { duration: readDurationInMin })}
                 </Text>
               </Stack>
               <Header

@@ -5,7 +5,7 @@ import Text from "@/components/common/typography/text";
 
 import { Link } from "@/i18n/routing";
 import type { PageArticle } from "lib/__generated/sdk";
-import { useFormatter } from "next-intl";
+import { useFormatter, useLocale } from "next-intl";
 // import FormSaveForLaterIcon from "../form-save-for-later-icon";
 // import { ModelFormSaveForLaterIcon } from "../form-save-for-later-icon/form-save-for-later-icon.model";
 
@@ -21,6 +21,7 @@ const CardArticle = ({
   textColor = "white",
 }: CardArticleProps): JSX.Element => {
   const format = useFormatter();
+  const locale = useLocale();
   const { firstPublishedAt } = sys;
 
   return (
@@ -53,6 +54,7 @@ const CardArticle = ({
                 year: "numeric",
                 month: "long",
                 day: "numeric",
+                numberingSystem: locale === "ar" ? "arab" : undefined,
               })}
             </Text>
           )}

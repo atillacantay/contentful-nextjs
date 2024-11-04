@@ -7,7 +7,7 @@ import Text from "@/components/common/typography/text";
 import { Link } from "@/i18n/routing";
 import Recipe from "@/public/assets/icons/recipe.svg";
 import type { PageRecipe } from "lib/__generated/sdk";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 
 interface RecipeCardProps extends PageRecipe {
   textColor?: "black" | "white";
@@ -23,6 +23,7 @@ const RecipeCard = ({
   textColor = "black",
 }: RecipeCardProps): JSX.Element => {
   const t = useTranslations();
+  const locale = useLocale();
   const format = useFormatter();
   const url = `/recipes/${category ? `${category.slug}/` : ""}${slug}`;
 
@@ -89,7 +90,9 @@ const RecipeCard = ({
               >
                 <Star rate={5} value={rating} fill="#FED236" />
                 <Text className="text-xs" color={textColor}>
-                  {format.number(rating)}
+                  {format.number(rating, {
+                    numberingSystem: locale === "ar" ? "arab" : undefined,
+                  })}
                 </Text>
               </Stack>
             )}
