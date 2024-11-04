@@ -30,7 +30,9 @@
     "fat": "الدهون",
     "protein": "البروتينات",
     "sugar": "السكريات",
-    "fiber": "الألياف"
+    "fiber": "الألياف",
+    "readInMinutes": "دقائق القراءة {duration}",
+    "overAllRating": "إجمالي {rating}"
   },
   "cards": {
     "recipe": "وصفة",

@@ -1916,6 +1916,7 @@ export type PageArticle = Entry & _Node & {
   author?: Maybe<ComponentAuthor>;
   content?: Maybe<Scalars['String']['output']>;
   contentfulMetadata: ContentfulMetadata;
+  featuredArticlesCollection?: Maybe<PageArticleFeaturedArticlesCollection>;
   image?: Maybe<Asset>;
   internalName?: Maybe<Scalars['String']['output']>;
   linkedFrom?: Maybe<PageArticleLinkingCollections>;
@@ -1940,6 +1941,17 @@ export type PageArticleAuthorArgs = {
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageArticle) */
 export type PageArticleContentArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageArticle) */
+export type PageArticleFeaturedArticlesCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PageArticleFeaturedArticlesCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<PageArticleFilter>;
 };
 
 
@@ -2007,6 +2019,37 @@ export type PageArticleCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type PageArticleFeaturedArticlesCollection = {
+  __typename?: 'PageArticleFeaturedArticlesCollection';
+  items: Array<Maybe<PageArticle>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export enum PageArticleFeaturedArticlesCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
+  ReadDurationInMinAsc = 'readDurationInMin_ASC',
+  ReadDurationInMinDesc = 'readDurationInMin_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type PageArticleFilter = {
   AND?: InputMaybe<Array<InputMaybe<PageArticleFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<PageArticleFilter>>>;
@@ -2020,6 +2063,8 @@ export type PageArticleFilter = {
   content_not_contains?: InputMaybe<Scalars['String']['input']>;
   content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  featuredArticles?: InputMaybe<CfPageArticleNestedFilter>;
+  featuredArticlesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   image_exists?: InputMaybe<Scalars['Boolean']['input']>;
   internalName?: InputMaybe<Scalars['String']['input']>;
   internalName_contains?: InputMaybe<Scalars['String']['input']>;
@@ -2077,6 +2122,7 @@ export type PageArticleLinkingCollections = {
   entryCollection?: Maybe<EntryCollection>;
   featuredArticleCollection?: Maybe<FeaturedArticleCollection>;
   itemShowcaseCollection?: Maybe<ItemShowcaseCollection>;
+  pageArticleCollection?: Maybe<PageArticleCollection>;
 };
 
 
@@ -2105,6 +2151,15 @@ export type PageArticleLinkingCollectionsItemShowcaseCollectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+
+export type PageArticleLinkingCollectionsPageArticleCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PageArticleLinkingCollectionsPageArticleCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export enum PageArticleLinkingCollectionsFeaturedArticleCollectionOrder {
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
@@ -2129,6 +2184,29 @@ export enum PageArticleLinkingCollectionsItemShowcaseCollectionOrder {
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export enum PageArticleLinkingCollectionsPageArticleCollectionOrder {
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  RatingAsc = 'rating_ASC',
+  RatingDesc = 'rating_DESC',
+  ReadDurationInMinAsc = 'readDurationInMin_ASC',
+  ReadDurationInMinDesc = 'readDurationInMin_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
 }
 
 export enum PageArticleOrder {
@@ -5558,6 +5636,7 @@ export type CfPageArticleNestedFilter = {
   content_not_contains?: InputMaybe<Scalars['String']['input']>;
   content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  featuredArticlesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   image_exists?: InputMaybe<Scalars['Boolean']['input']>;
   internalName?: InputMaybe<Scalars['String']['input']>;
   internalName_contains?: InputMaybe<Scalars['String']['input']>;
@@ -6143,7 +6222,7 @@ export type CfitemsMultiTypeNestedFilter = {
   sys?: InputMaybe<SysFilter>;
 };
 
-export type FeaturedArticleFieldsFragment = { __typename?: 'FeaturedArticle', article?: { __typename?: 'PageArticle', title?: string, subtitle?: string, slug?: string, rating?: number, readDurationInMin?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } } };
+export type FeaturedArticleFieldsFragment = { __typename?: 'FeaturedArticle', article?: { __typename?: 'PageArticle', title?: string, subtitle?: string, slug?: string, rating?: number, readDurationInMin?: number, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } } };
 
 export type FeaturedArticleQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6153,11 +6232,11 @@ export type FeaturedArticleQueryQueryVariables = Exact<{
 
 
 export type FeaturedArticleQueryQuery = { __typename?: 'Query', featuredArticle?: (
-    { __typename?: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string, publishedAt?: any } }
+    { __typename?: 'FeaturedArticle', sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any } }
     & FeaturedArticleFieldsFragment
   ) };
 
-export type FeaturedMagazineFieldsFragment = { __typename?: 'FeaturedMagazine', magazine?: { __typename?: 'PageMagazine', title?: string, subtitle?: string, flipBookUrl?: string, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } };
+export type FeaturedMagazineFieldsFragment = { __typename?: 'FeaturedMagazine', magazine?: { __typename?: 'PageMagazine', title?: string, subtitle?: string, flipBookUrl?: string, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } };
 
 export type FeaturedMagazineQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6167,11 +6246,11 @@ export type FeaturedMagazineQueryQueryVariables = Exact<{
 
 
 export type FeaturedMagazineQueryQuery = { __typename?: 'Query', featuredMagazine?: (
-    { __typename?: 'FeaturedMagazine', sys: { __typename?: 'Sys', id: string, publishedAt?: any } }
+    { __typename?: 'FeaturedMagazine', sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any } }
     & FeaturedMagazineFieldsFragment
   ) };
 
-export type FeaturedRecipeFieldsFragment = { __typename?: 'FeaturedRecipe', recipe?: { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } } };
+export type FeaturedRecipeFieldsFragment = { __typename?: 'FeaturedRecipe', recipe?: { __typename?: 'PageRecipe', slug?: string, title?: string, description?: string, cookingTimeMinutes?: number, persons?: number, difficulty?: string, calories?: number, rating?: number, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, description?: string, width?: number, height?: number } } } };
 
 export type FeaturedRecipeQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6181,7 +6260,7 @@ export type FeaturedRecipeQueryQueryVariables = Exact<{
 
 
 export type FeaturedRecipeQueryQuery = { __typename?: 'Query', featuredRecipe?: (
-    { __typename?: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string, publishedAt?: any } }
+    { __typename?: 'FeaturedRecipe', sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any } }
     & FeaturedRecipeFieldsFragment
   ) };
 
@@ -6201,7 +6280,7 @@ export type HeaderQueryVariables = Exact<{
 
 export type HeaderQuery = { __typename?: 'Query', headerCollection?: { __typename?: 'HeaderCollection', items: Array<{ __typename?: 'Header', _id: string, internalName?: string, headerSearch?: any, userMenu?: any, navigationItems?: any }> } };
 
-export type ItemShowcaseFieldsFragment = { __typename?: 'ItemShowcase', sys: { __typename: 'Sys', id: string }, itemsCollection?: { __typename?: 'ItemShowcaseItemsCollection', items: Array<{ __typename: 'PageArticle', slug?: string, title?: string, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageMagazine', title?: string, subtitle?: string, description?: string, flipBookUrl?: string, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } | { __typename: 'PageRecipe', slug?: string, title?: string, description?: string, rating?: number, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageShop', slug?: string, name?: string, productNetWeight?: number, productUnit?: string, productIsNew?: boolean, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, category?: { __typename?: 'PageShopCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> } };
+export type ItemShowcaseFieldsFragment = { __typename?: 'ItemShowcase', sys: { __typename: 'Sys', id: string }, itemsCollection?: { __typename?: 'ItemShowcaseItemsCollection', items: Array<{ __typename: 'PageArticle', slug?: string, title?: string, rating?: number, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageMagazine', title?: string, subtitle?: string, description?: string, flipBookUrl?: string, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } | { __typename: 'PageRecipe', slug?: string, title?: string, description?: string, rating?: number, category?: { __typename?: 'PageRecipeCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } } } | { __typename: 'PageShop', slug?: string, name?: string, productNetWeight?: number, productUnit?: string, productIsNew?: boolean, rating?: number, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, category?: { __typename?: 'PageShopCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }> } };
 
 export type ItemShowcaseQueryQueryVariables = Exact<{
   id: Scalars['String']['input'];
@@ -6223,7 +6302,12 @@ export type MainNavigationQueryVariables = Exact<{
 
 export type MainNavigationQuery = { __typename?: 'Query', mainNavigationCollection?: { __typename?: 'MainNavigationCollection', items: Array<{ __typename: 'MainNavigation', sys: { __typename?: 'Sys', id: string }, itemsCollection?: { __typename?: 'MainNavigationItemsCollection', items: Array<{ __typename?: 'Page', _id: string, slug?: string, title?: string, pageName?: string, sys: { __typename?: 'Sys', id: string } }> } }> } };
 
-export type PageArticleFieldsFragment = { __typename?: 'PageArticle', slug?: string, title?: string, subtitle?: string, readDurationInMin?: number, content?: string, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
+export type FeaturedArticleShortFieldsFragment = { __typename?: 'PageArticle', _id: string, slug?: string, title?: string, subtitle?: string, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } };
+
+export type PageArticleFieldsFragment = { __typename?: 'PageArticle', slug?: string, title?: string, subtitle?: string, readDurationInMin?: number, content?: string, rating?: number, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, author?: { __typename?: 'ComponentAuthor', name?: string, avatar?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } }, featuredArticlesCollection?: { __typename?: 'PageArticleFeaturedArticlesCollection', items: Array<(
+      { __typename?: 'PageArticle' }
+      & FeaturedArticleShortFieldsFragment
+    )> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
 
 export type PageArticleQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -6270,9 +6354,9 @@ export type PageRecipeQuery = { __typename?: 'Query', pageRecipeCollection?: { _
       & PageRecipeFieldsFragment
     )> } };
 
-export type AlsoViewedFieldsFragment = { __typename: 'PageShop', slug?: string, name?: string, description?: string, productNetWeight?: number, productUnit?: string, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, category?: { __typename?: 'PageShopCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } };
+export type AlsoViewedFieldsFragment = { __typename: 'PageShop', slug?: string, name?: string, description?: string, productNetWeight?: number, productUnit?: string, rating?: number, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, category?: { __typename?: 'PageShopCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number } };
 
-export type PageShopFieldsFragment = { __typename: 'PageShop', slug?: string, name?: string, description?: string, productNetWeight?: number, productUnit?: string, ingredients?: string, specialty?: string, storageRequirements?: string, calories?: string, carbs?: string, fat?: string, protein?: string, sugar?: string, fiber?: string, productIsNew?: boolean, rating?: number, sys: { __typename?: 'Sys', id: string, publishedAt?: any }, category?: { __typename?: 'PageShopCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }> }, alsoViewedCollection?: { __typename?: 'PageShopAlsoViewedCollection', items: Array<(
+export type PageShopFieldsFragment = { __typename: 'PageShop', slug?: string, name?: string, description?: string, productNetWeight?: number, productUnit?: string, ingredients?: string, specialty?: string, storageRequirements?: string, calories?: string, carbs?: string, fat?: string, protein?: string, sugar?: string, fiber?: string, productIsNew?: boolean, rating?: number, sys: { __typename?: 'Sys', id: string, firstPublishedAt?: any }, category?: { __typename?: 'PageShopCategory', slug?: string }, image?: { __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }, imagesCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url?: string, title?: string, width?: number, height?: number }> }, alsoViewedCollection?: { __typename?: 'PageShopAlsoViewedCollection', items: Array<(
       { __typename?: 'PageShop' }
       & AlsoViewedFieldsFragment
     )> }, seo?: { __typename?: 'Seo', name?: string, title?: string, description?: string, canonicalUrl?: string, noFollow?: boolean, noIndex?: boolean, image?: { __typename?: 'Asset', title?: string, description?: string, contentType?: string, url?: string, width?: number, height?: number } } };
@@ -6384,7 +6468,7 @@ export const FeaturedArticleFieldsFragmentDoc = gql`
   article {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     title
     subtitle
@@ -6414,7 +6498,7 @@ export const FeaturedMagazineFieldsFragmentDoc = gql`
   magazine {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     title
     subtitle
@@ -6433,7 +6517,7 @@ export const FeaturedRecipeFieldsFragmentDoc = gql`
   recipe {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     slug
     category {
@@ -6501,7 +6585,7 @@ export const ItemShowcaseFieldsFragmentDoc = gql`
         __typename
         sys {
           id
-          publishedAt
+          firstPublishedAt
         }
         slug
         title
@@ -6526,7 +6610,7 @@ export const ItemShowcaseFieldsFragmentDoc = gql`
         __typename
         sys {
           id
-          publishedAt
+          firstPublishedAt
         }
         title
         subtitle
@@ -6543,7 +6627,7 @@ export const ItemShowcaseFieldsFragmentDoc = gql`
         __typename
         sys {
           id
-          publishedAt
+          firstPublishedAt
         }
         slug
         category {
@@ -6565,17 +6649,36 @@ export const ItemShowcaseFieldsFragmentDoc = gql`
   }
 }
     `;
+export const FeaturedArticleShortFieldsFragmentDoc = gql`
+    fragment FeaturedArticleShortFields on PageArticle {
+  sys {
+    id
+    firstPublishedAt
+  }
+  _id
+  slug
+  title
+  subtitle
+  image {
+    url
+    title
+    width
+    height
+  }
+}
+    `;
 export const PageArticleFieldsFragmentDoc = gql`
     fragment PageArticleFields on PageArticle {
   sys {
     id
-    publishedAt
+    firstPublishedAt
   }
   slug
   title
   subtitle
   readDurationInMin
   content
+  rating
   image {
     url
     title
@@ -6589,6 +6692,11 @@ export const PageArticleFieldsFragmentDoc = gql`
       title
       width
       height
+    }
+  }
+  featuredArticlesCollection {
+    items {
+      ...FeaturedArticleShortFields
     }
   }
   seo {
@@ -6765,7 +6873,7 @@ export const AlsoViewedFieldsFragmentDoc = gql`
   __typename
   sys {
     id
-    publishedAt
+    firstPublishedAt
   }
   slug
   category {
@@ -6789,7 +6897,7 @@ export const PageShopFieldsFragmentDoc = gql`
   __typename
   sys {
     id
-    publishedAt
+    firstPublishedAt
   }
   slug
   category {
@@ -6947,7 +7055,7 @@ export const FeaturedArticleQueryDocument = gql`
   featuredArticle(id: $id, locale: $locale, preview: $preview) {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     ...FeaturedArticleFields
   }
@@ -6958,7 +7066,7 @@ export const FeaturedMagazineQueryDocument = gql`
   featuredMagazine(id: $id, locale: $locale, preview: $preview) {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     ...FeaturedMagazineFields
   }
@@ -6969,7 +7077,7 @@ export const FeaturedRecipeQueryDocument = gql`
   featuredRecipe(id: $id, locale: $locale, preview: $preview) {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     ...FeaturedRecipeFields
   }
@@ -7065,7 +7173,8 @@ export const PageArticleDocument = gql`
     }
   }
 }
-    ${PageArticleFieldsFragmentDoc}`;
+    ${PageArticleFieldsFragmentDoc}
+${FeaturedArticleShortFieldsFragmentDoc}`;
 export const PageRecipeCategoryDocument = gql`
     query pageRecipeCategory($slug: String!, $locale: String, $preview: Boolean) {
   pageRecipeCategoryCollection(

@@ -21,7 +21,7 @@ const CardArticle = ({
   textColor = "white",
 }: CardArticleProps): JSX.Element => {
   const format = useFormatter();
-  const { publishedAt } = sys;
+  const { firstPublishedAt } = sys;
 
   return (
     <Card className="rounded-2xl w-full h-[338px]">
@@ -30,7 +30,7 @@ const CardArticle = ({
       </div>
 
       <Link
-        href={`/articles/${slug}`}
+        href={`/magazines/${slug}`}
         title={title}
         className="relative w-full h-full object-cover before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.3)] before:z-1"
       >
@@ -47,16 +47,16 @@ const CardArticle = ({
         className={`absolute bottom-0 text-white bg-gradient-to-b from-transparent to-gray`}
       >
         <Stack spacing={2} direction="col">
-          {publishedAt && (
+          {firstPublishedAt && (
             <Text size="sm" color={textColor}>
-              {format.dateTime(new Date(publishedAt), {
+              {format.dateTime(new Date(firstPublishedAt), {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
             </Text>
           )}
-          <Link href={`/articles/${slug}`} title={title}>
+          <Link href={`/magazines/${slug}`} title={title}>
             <Header weight="semibold" color={textColor} size="md">
               {title}
             </Header>

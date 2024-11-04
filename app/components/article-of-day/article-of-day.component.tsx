@@ -25,7 +25,7 @@ const ArticleOfDay = ({
   contentBefore,
   verticalImage,
 }: IArticleOfDay): JSX.Element => {
-  const { publishedAt } = sys;
+  const { firstPublishedAt } = sys;
   const format = useFormatter();
 
   return (
@@ -65,7 +65,7 @@ const ArticleOfDay = ({
                   className="lg:order-first ltr:border-r rtl:border-l ltr:pr-2 rtl:pl-2 text-white"
                   weight="light"
                 >
-                  {format.dateTime(new Date(publishedAt), {
+                  {format.dateTime(new Date(firstPublishedAt), {
                     year: "numeric",
                     month: "short",
                     day: "numeric",

@@ -1,13 +1,31 @@
+fragment FeaturedArticleShortFields on PageArticle {
+  sys {
+    id
+    firstPublishedAt
+  }
+  _id
+  slug
+  title
+  subtitle
+  image {
+    url
+    title
+    width
+    height
+  }
+}
+
 fragment PageArticleFields on PageArticle {
   sys {
     id
-    publishedAt
+    firstPublishedAt
   }
   slug
   title
   subtitle
   readDurationInMin
   content
+  rating
   image {
     url
     title
@@ -21,6 +39,11 @@ fragment PageArticleFields on PageArticle {
       title
       width
       height
+    }
+  }
+  featuredArticlesCollection {
+    items {
+      ...FeaturedArticleShortFields
     }
   }
   seo {

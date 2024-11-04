@@ -13,7 +13,7 @@ const CtfFeaturedMagazine = (featuredMagazine: FeaturedMagazine) => {
 
   const { sys, title, subtitle, flipBookUrl, image } =
     featuredMagazine.magazine;
-  const { publishedAt } = sys;
+  const { firstPublishedAt } = sys;
   const format = useFormatter();
 
   return (
@@ -60,7 +60,7 @@ const CtfFeaturedMagazine = (featuredMagazine: FeaturedMagazine) => {
                       className="lg:order-first text-white"
                       weight="light"
                     >
-                      {format.dateTime(new Date(publishedAt), {
+                      {format.dateTime(new Date(firstPublishedAt), {
                         year: "numeric",
                         month: "short",
                         day: "numeric",

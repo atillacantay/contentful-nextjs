@@ -34,7 +34,7 @@ fragment ItemShowcaseFields on ItemShowcase {
         __typename
         sys {
           id
-          publishedAt
+          firstPublishedAt
         }
         slug
         title
@@ -59,7 +59,7 @@ fragment ItemShowcaseFields on ItemShowcase {
         __typename
         sys {
           id
-          publishedAt
+          firstPublishedAt
         }
         title
         subtitle
@@ -76,7 +76,7 @@ fragment ItemShowcaseFields on ItemShowcase {
         __typename
         sys {
           id
-          publishedAt
+          firstPublishedAt
         }
         slug
         category {

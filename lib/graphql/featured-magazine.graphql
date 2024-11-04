@@ -2,7 +2,7 @@ fragment FeaturedMagazineFields on FeaturedMagazine {
   magazine {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     title
     subtitle
@@ -20,7 +20,7 @@ query featuredMagazineQuery($id: String!, $locale: String, $preview: Boolean) {
   featuredMagazine(id: $id, locale: $locale, preview: $preview) {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     ...FeaturedMagazineFields
   }

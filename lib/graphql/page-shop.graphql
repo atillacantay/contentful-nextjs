@@ -2,7 +2,7 @@ fragment AlsoViewedFields on PageShop {
   __typename
   sys {
     id
-    publishedAt
+    firstPublishedAt
   }
   slug
   category {
@@ -25,7 +25,7 @@ fragment PageShopFields on PageShop {
   __typename
   sys {
     id
-    publishedAt
+    firstPublishedAt
   }
   slug
   category {

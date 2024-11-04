@@ -2,7 +2,7 @@ fragment FeaturedRecipeFields on FeaturedRecipe {
   recipe {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     slug
     category {
@@ -37,7 +37,7 @@ query featuredRecipeQuery($id: String!, $locale: String, $preview: Boolean) {
   featuredRecipe(id: $id, locale: $locale, preview: $preview) {
     sys {
       id
-      publishedAt
+      firstPublishedAt
     }
     ...FeaturedRecipeFields
   }

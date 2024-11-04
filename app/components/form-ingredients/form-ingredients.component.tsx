@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ComponentProps, useState } from "react";
 
 import Button from "@/components/common/button";
 import Card from "@/components/common/card";
@@ -17,19 +17,13 @@ import useIngredientShoppingList from "@/hooks/useIngredientShoppingList";
 import { clsxm } from "@/utils/twMerge.utils";
 import type { Ingredient } from "lib/__generated/sdk";
 import { useTranslations } from "next-intl";
-// import { Ingredient } from "./form-ingredients.interface";
 
-interface IFormIngredients extends React.ComponentProps<"div"> {
+interface IFormIngredients extends ComponentProps<"div"> {
   className?: string;
   noQuantitySelector?: boolean;
   servingSize: number;
   ingredients: Ingredient[];
   noMobileView?: boolean;
-  textIngredients: string;
-  textAddIngredientsToShoppingList?: string;
-  textServingSize: string;
-  labelAdd: string;
-  labelAdded: string;
 }
 
 const FormIngredients = ({
@@ -38,11 +32,6 @@ const FormIngredients = ({
   noQuantitySelector,
   ingredients,
   noMobileView,
-  textIngredients,
-  textServingSize,
-  textAddIngredientsToShoppingList,
-  labelAdd,
-  labelAdded,
   ...props
 }: IFormIngredients): JSX.Element => {
   const { add } = useIngredientShoppingList();
@@ -190,11 +179,6 @@ const FormIngredients = ({
           </Stack>
         </Card.Header>
         <Card.Content>
-          {textAddIngredientsToShoppingList && (
-            <Header as="h3" weight="medium" className="mb-4">
-              {textAddIngredientsToShoppingList}
-            </Header>
-          )}
           <div className="mb-8">
             <FormIngredientsList
               ingredients={ingredients}

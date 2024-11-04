@@ -23,7 +23,7 @@ const RecipeOfDay = ({
   calories,
 }: PageRecipe): JSX.Element => {
   const format = useFormatter();
-  const { publishedAt } = sys;
+  const { firstPublishedAt } = sys;
 
   return (
     <Card className="bg-primary rounded-none lg:rounded-2xl">
@@ -49,7 +49,7 @@ const RecipeOfDay = ({
               className="border-b border-custom_divider4 pb-4"
             >
               <Text size="sm" className="lg:order-first pr-2 text-white">
-                {format.dateTime(new Date(publishedAt), {
+                {format.dateTime(new Date(firstPublishedAt), {
                   year: "numeric",
                   month: "short",
                   day: "numeric",

@@ -30,7 +30,9 @@
     "fat": "Fat",
     "protein": "Protein",
     "sugar": "Sugar",
-    "fiber": "Fiber"
+    "fiber": "Fiber",
+    "readInMinutes": "{duration} Mins Read",
+    "overAllRating": "{rating} Overall"
   },
   "cards": {
     "recipe": "Recipe",

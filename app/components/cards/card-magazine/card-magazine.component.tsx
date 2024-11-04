@@ -18,7 +18,7 @@ const CardMagazine = ({
   sys,
   textColor = "white",
 }: CardMagazineProps): JSX.Element => {
-  const { publishedAt } = sys;
+  const { firstPublishedAt } = sys;
   const format = useFormatter();
 
   return (
@@ -42,9 +42,9 @@ const CardMagazine = ({
         className={`absolute bottom-0 text-[${textColor}] bg-gradient-to-b from-transparent to-gray`}
       >
         <Stack spacing={2} direction="col">
-          {publishedAt && (
+          {firstPublishedAt && (
             <Text size="sm" color={textColor}>
-              {format.dateTime(new Date(publishedAt), {
+              {format.dateTime(new Date(firstPublishedAt), {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
