@@ -1,5 +1,6 @@
 "use client";
 
+import { AllReviewsResponse } from "@/api/all-reviews/[slug]/route";
 import CardReview from "@/components/card-review";
 import Button from "@/components/common/button";
 import Modal from "@/components/common/modal";
@@ -11,28 +12,54 @@ import ReviewHistogram from "@/components/review-histogram/review-histogram.comp
 import CloseIcon from "@/public/assets/icons/close.svg";
 import SortDescIcon from "@/public/assets/icons/sort-desc.svg";
 import { clsxm } from "@/utils/twMerge.utils";
+import type { RecipeReview } from "lib/__generated/sdk";
+import { getReviews } from "lib/api/reviews";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { IAllReviews, IReview } from "./all-reviews.interfaces";
+import { IAllReviews } from "./all-reviews.interfaces";
 
 const LIMIT_PER_LOAD = 5;
 
 const AllReviews = ({
+  recipe,
+  allReviewsCount,
   modalLabel,
-  reviews,
-  labelSortAsc,
-  labelSortDesc,
-  buttonLabel,
-  stars,
-  reviewDetails,
   className,
   buttonClassName,
 }: IAllReviews): JSX.Element => {
+  const t = useTranslations();
+  const format = useFormatter();
+  const locale = useLocale();
   const [isAllReviewsModalOpen, setIsAllReviewsModalOpen] =
     useState<boolean>(false);
+  const [reviews, setReviews] = useState<RecipeReview[]>([]);
+  const [stars, setStars] = useState<AllReviewsResponse["stars"]>([]);
+  const [reviewDetails, setReviewDetails] = useState<
+    AllReviewsResponse["reviewDetails"]
+  >([]);
+
   const refReviews = useRef<HTMLDivElement>(null);
   const [sort, setSort] = useState<string>("desc");
   const [limit, setLimit] = useState<number>(LIMIT_PER_LOAD);
+
+  useEffect(() => {
+    const getAllReviews = async () => {
+      if (recipe.slug) {
+        const data = await getReviews({
+          slug: recipe.slug,
+          limit,
+        });
+        setReviews(data.reviews);
+        setStars(data.stars);
+        setReviewDetails(data.reviewDetails);
+      }
+    };
+
+    if (isAllReviewsModalOpen) {
+      getAllReviews();
+    }
+  }, [isAllReviewsModalOpen]);
 
   const SortInput = ({ className }: { className: string }) => (
     <div className={"relative " + className}>
@@ -43,8 +70,8 @@ const AllReviews = ({
         value={sort}
         onChange={(e) => setSort(e.target.value)}
       >
-        <option value="desc">{labelSortDesc}</option>
-        <option value="asc">{labelSortAsc}</option>
+        <option value="desc">{t("common.labelSortDesc")}</option>
+        <option value="asc">{t("common.labelSortAsc")}</option>
       </select>
       <SortDescIcon
         className=":w-[40px] absolute top-[22px] ltr:right-6 rtl:left-6 pointer-events-none scale-y-[-1] peer-has-[option:first-child:checked]:!scale-y-[1]"
@@ -58,7 +85,7 @@ const AllReviews = ({
     () =>
       reviews
         ?.sort(
-          (reviewA: IReview, reviewB: IReview) => reviewB.rate - reviewA.rate
+          (reviewA, reviewB) => reviewB.ratingOverall - reviewA.ratingOverall
         )
         .sort(() => {
           if (sort === "desc") return 0;
@@ -102,7 +129,11 @@ const AllReviews = ({
           className={clsxm("text-primary_red font-medium", buttonClassName)}
           onClick={() => setIsAllReviewsModalOpen(true)}
         >
-          {buttonLabel}
+          {t("common.showAllReviewsWithCount", {
+            count: format.number(Number(allReviewsCount), {
+              numberingSystem: locale === "ar" ? "arab" : undefined,
+            }),
+          })}
         </Button>
 
         <Modal
@@ -151,8 +182,8 @@ const AllReviews = ({
                       <Text>{reviewDetail.label}</Text>
                       <Stack alignItems="center" className="gap-1">
                         <Star
-                          rate={reviewDetail.rate}
-                          value={reviewDetail.rate}
+                          rate={Number(reviewDetail.rate)}
+                          value={Number(reviewDetail.rate)}
                           className="w-3 h-3 !text-secondary_yellow"
                         />
                         <Text>{reviewDetail.rate}</Text>
@@ -166,18 +197,12 @@ const AllReviews = ({
 
               <Stack
                 direction="col"
-                className="divide-y divide-custom_divider2 dark:divide-custom2_dark  px-4 md:px-8 pt-7"
+                className="divide-y divide-custom_divider2 dark:divide-custom2_dark px-4 md:px-8 pt-7"
               >
-                {sortedReviews.map((review, index) => (
+                {sortedReviews.map((review) => (
                   <CardReview
-                    key={index}
-                    userName={review.userName}
-                    comment={review.comment}
-                    rate={review.rate}
-                    showImages={review.showImages}
-                    assets={review.images}
-                    created={review.created}
-                    avatarUrl={review.avatarUrl}
+                    key={review._id}
+                    {...review}
                     className="!shadow-none lg:bg-transparent my-4 p-0"
                     contentClassName="max-sm:p-1"
                   />

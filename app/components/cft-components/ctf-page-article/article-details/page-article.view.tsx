@@ -75,7 +75,7 @@ const ArticlePage = async ({ article }: { article: PageArticle }) => {
                   weight="light"
                   className="ltr:ml-2 rtl:mr-2 leading-3"
                 >
-                  {t("common.overAllRating", {
+                  {t("common.overallRatingWithCount", {
                     rating: format.number(Number(rating)),
                   })}
                 </Text>

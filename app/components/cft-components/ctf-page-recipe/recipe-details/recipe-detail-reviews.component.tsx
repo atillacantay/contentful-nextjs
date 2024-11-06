@@ -1,28 +1,45 @@
-import AllReviews from "@/components/all-reviews/all-reviews.component";
 import CardReview from "@/components/card-review";
 import Stack from "@/components/common/stack";
 import Star from "@/components/common/star";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
-import FormWriteAReview from "@/components/form-write-a-review/form-write-a-review.component";
-
-import { reviews } from "@/components/all-reviews/all-reviews.model";
 import { clsxm } from "@/utils/twMerge.utils";
+import type { PageRecipe, RecipeReview } from "lib/__generated/sdk";
+import { useFormatter, useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+
+const FormWriteAReview = dynamic(
+  () => import("@/components/form-write-a-review")
+);
+const AllReviews = dynamic(() => import("@/components/all-reviews"));
+
+interface RecipeDetailReviewsProps {
+  recipe: PageRecipe;
+  allReviews?: RecipeReview[];
+  allReviewsCount?: number;
+}
 
 const RecipeDetailReviews = ({
-  formWriteAReview,
+  recipe,
   allReviews,
-}: {
-  formWriteAReview: React.ComponentProps<typeof FormWriteAReview>;
-  allReviews: React.ComponentProps<typeof AllReviews>;
-}): JSX.Element => {
+  allReviewsCount,
+}: RecipeDetailReviewsProps): JSX.Element => {
+  const { rating } = recipe;
+  const format = useFormatter();
+  const t = useTranslations();
+
   const ActionButtons = () => (
     <>
-      <FormWriteAReview {...formWriteAReview} modalLabel="Write a Review" />
-      <AllReviews
-        {...allReviews}
-        modalLabel={`All Reviews (${reviews.length})`}
-      />
+      <FormWriteAReview recipe={recipe} modalLabel={t("common.writeAReview")} />
+      {allReviewsCount && allReviewsCount > 3 ? (
+        <AllReviews
+          recipe={recipe}
+          allReviewsCount={allReviewsCount}
+          modalLabel={t("common.allReviews", {
+            count: format.number(Number(allReviewsCount)),
+          })}
+        />
+      ) : null}
     </>
   );
 
@@ -31,27 +48,27 @@ const RecipeDetailReviews = ({
       <Stack alignItems="center" className="mb-8">
         <Stack spacing={2} className="flex-1">
           <Header as="h3" weight="medium" size="xxl">
-            Reviews
+            {t("common.reviews")}
           </Header>
-          <Stack alignItems="center" className="flex-1">
-            <Star rate={5} value={5} fill="#FED236" />
-            <Text weight="medium" className="ml-1 rtl:mr-1">
-              {3.9}
-            </Text>
-          </Stack>
+
+          {rating && (
+            <Stack alignItems="center" className="flex-1">
+              <Star rate={5} value={rating} fill="#FED236" />
+              <Text weight="medium" className="ml-1 rtl:mr-1">
+                {format.number(rating)}
+              </Text>
+            </Stack>
+          )}
         </Stack>
         <Stack spacing={2} alignItems="center" className="hidden md:flex">
           <ActionButtons />
         </Stack>
       </Stack>
       <Stack spacing={4} direction="row">
-        {reviews.slice(0, 3).map((review, index) => (
+        {allReviews?.map((review, index) => (
           <CardReview
-            userName={review.userName}
-            comment="abc"
-            rate={review.rate}
-            showImages={false}
-            avatarUrl={review.avatarUrl}
+            key={review._id}
+            {...review}
             className={clsxm(
               "grow",
               index && "max-sm:hidden",

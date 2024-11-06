@@ -1,0 +1,60 @@
+fragment RecipeReviewFields on RecipeReview {
+  sys {
+    __typename
+    id
+    firstPublishedAt
+  }
+  _id
+  recipe {
+    _id
+    sys {
+      id
+    }
+  }
+  author {
+    name
+    avatar {
+      url
+      description
+      width
+      height
+    }
+  }
+  content
+  isApproved
+  imagesCollection {
+    items {
+      sys {
+        id
+      }
+      url
+      description
+      width
+      height
+    }
+  }
+  ratingOverall
+  ratingIngredients
+  ratingAccuracy
+  ratingDifficulty
+  ratingTaste
+}
+
+query recipeReviews(
+  $slug: String!
+  $locale: String
+  $preview: Boolean
+  $limit: Int
+) {
+  recipeReviewCollection(
+    locale: $locale
+    limit: $limit
+    where: { recipe: { slug: $slug } }
+    preview: $preview
+  ) {
+    total
+    items {
+      ...RecipeReviewFields
+    }
+  }
+}

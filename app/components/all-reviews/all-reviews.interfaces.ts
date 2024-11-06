@@ -1,16 +1,8 @@
-import { StarRating } from "../review-histogram/review-histogram.interfaces";
+import type { PageRecipe } from "lib/__generated/sdk";
 export interface IAllReviews {
-  buttonLabel: string;
+  recipe: PageRecipe;
+  allReviewsCount?: number;
   modalLabel: string;
-  reviews: IReview[];
-  labelSortAsc: string;
-  labelSortDesc: string;
-  stars: StarRating[];
-  reviewDetails: {
-    key: string;
-    label: string;
-    rate: number;
-  }[];
   className?: string;
   buttonClassName?: string;
 }

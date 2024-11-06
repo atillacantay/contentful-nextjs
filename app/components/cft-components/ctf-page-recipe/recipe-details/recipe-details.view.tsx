@@ -1,7 +1,11 @@
 import Stack from "@/components/common/stack";
 import FormIngredients from "@/components/form-ingredients";
-import type { PageRecipe } from "lib/__generated/sdk";
+import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
+import type { PageRecipe, Query } from "lib/__generated/sdk";
+import { client } from "lib/client";
+import { getLocale } from "next-intl/server";
 import dynamic from "next/dynamic";
+import { draftMode } from "next/headers";
 import PreparationSteps from "./preparation-steps.component";
 import RecipeDetailHeader from "./recipe-detail-header.component";
 import RecipeDetailReviews from "./recipe-detail-reviews.component";
@@ -10,13 +14,26 @@ const RelatedRecipes = dynamic(() =>
   import("./related-recipes.component").then((module) => module.default)
 );
 
-const RecipeDetail = ({
-  recipe,
-  recipeDetailReviews,
-}: {
-  recipe: PageRecipe;
-  recipeDetailReviews?: React.ComponentProps<typeof RecipeDetailReviews>;
-}): JSX.Element => {
+const getAllRecipeReviews = async (slug?: string) => {
+  const locale = await getLocale();
+  const activeLocale = mapLocaleToContentfulLocale(locale);
+  const { isEnabled } = await draftMode();
+
+  const data = await client.recipeReviews({
+    slug: slug!,
+    preview: isEnabled,
+    locale: activeLocale,
+    limit: 3,
+  });
+
+  return (data as Query).recipeReviewCollection;
+};
+
+const RecipeDetail = async ({ recipe }: { recipe: PageRecipe }) => {
+  const allReviewsCollection = await getAllRecipeReviews(recipe.slug);
+  const allReviews = allReviewsCollection?.items.filter(Boolean);
+  const allReviewsCount = allReviewsCollection?.total;
+
   const preparationSteps =
     recipe.preparationStepsCollection?.items.filter(Boolean);
   const ingredients = recipe.ingredientsCollection?.items.filter(Boolean);
@@ -43,7 +60,11 @@ const RecipeDetail = ({
       <RelatedRecipes relatedRecipes={relatedRecipes} />
 
       <div className="px-4 lg:container lg:mx-auto mb-12 lg:mb-16">
-        {/* <RecipeDetailReviews {...ModelRecipeDetailReviews} /> */}
+        <RecipeDetailReviews
+          recipe={recipe}
+          allReviews={allReviews}
+          allReviewsCount={allReviewsCount}
+        />
       </div>
     </>
   );

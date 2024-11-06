@@ -100,6 +100,7 @@ type AssetLinkingCollections {
   pageRecipeCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageRecipeCollection
   pageShopCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageShopCollection
   preparationStepCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PreparationStepCollection
+  recipeReviewCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): RecipeReviewCollection
   seoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SeoCollection
   sliderItemCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): SliderItemCollection
 }
@@ -173,6 +174,7 @@ type ComponentAuthorLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   pageArticleCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageArticleCollectionOrder], preview: Boolean, skip: Int = 0): PageArticleCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
+  recipeReviewCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsRecipeReviewCollectionOrder], preview: Boolean, skip: Int = 0): RecipeReviewCollection
 }
 
 enum ComponentAuthorLinkingCollectionsPageArticleCollectionOrder {
@@ -225,6 +227,33 @@ enum ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
+}
+
+enum ComponentAuthorLinkingCollectionsRecipeReviewCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  isApproved_ASC
+  isApproved_DESC
+  ratingAccuracy_ASC
+  ratingAccuracy_DESC
+  ratingDifficulty_ASC
+  ratingDifficulty_DESC
+  ratingIngredients_ASC
+  ratingIngredients_DESC
+  ratingOverall_ASC
+  ratingOverall_DESC
+  ratingTaste_ASC
+  ratingTaste_DESC
+  recipeId_ASC
+  recipeId_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentAuthorOrder {
@@ -1967,6 +1996,7 @@ type PageRecipeLinkingCollections {
   featuredRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeLinkingCollectionsFeaturedRecipeCollectionOrder], preview: Boolean, skip: Int = 0): FeaturedRecipeCollection
   itemShowcaseCollection(limit: Int = 100, locale: String, order: [PageRecipeLinkingCollectionsItemShowcaseCollectionOrder], preview: Boolean, skip: Int = 0): ItemShowcaseCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
+  recipeReviewCollection(limit: Int = 100, locale: String, order: [PageRecipeLinkingCollectionsRecipeReviewCollectionOrder], preview: Boolean, skip: Int = 0): RecipeReviewCollection
 }
 
 enum PageRecipeLinkingCollectionsFeaturedRecipeCollectionOrder {
@@ -2022,6 +2052,33 @@ enum PageRecipeLinkingCollectionsPageRecipeCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
+}
+
+enum PageRecipeLinkingCollectionsRecipeReviewCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  isApproved_ASC
+  isApproved_DESC
+  ratingAccuracy_ASC
+  ratingAccuracy_DESC
+  ratingDifficulty_ASC
+  ratingDifficulty_DESC
+  ratingIngredients_ASC
+  ratingIngredients_DESC
+  ratingOverall_ASC
+  ratingOverall_DESC
+  ratingTaste_ASC
+  ratingTaste_DESC
+  recipeId_ASC
+  recipeId_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum PageRecipeOrder {
@@ -2688,6 +2745,8 @@ type Query {
   pageShopCollection(limit: Int = 100, locale: String, order: [PageShopOrder], preview: Boolean, skip: Int = 0, where: PageShopFilter): PageShopCollection
   preparationStep(id: String!, locale: String, preview: Boolean): PreparationStep
   preparationStepCollection(limit: Int = 100, locale: String, order: [PreparationStepOrder], preview: Boolean, skip: Int = 0, where: PreparationStepFilter): PreparationStepCollection
+  recipeReview(id: String!, locale: String, preview: Boolean): RecipeReview
+  recipeReviewCollection(limit: Int = 100, locale: String, order: [RecipeReviewOrder], preview: Boolean, skip: Int = 0, where: RecipeReviewFilter): RecipeReviewCollection
   section(id: String!, locale: String, preview: Boolean): Section
   sectionCollection(limit: Int = 100, locale: String, order: [SectionOrder], preview: Boolean, skip: Int = 0, where: SectionFilter): SectionCollection
   seo(id: String!, locale: String, preview: Boolean): Seo
@@ -2698,6 +2757,147 @@ type Query {
   sliderItemCollection(limit: Int = 100, locale: String, order: [SliderItemOrder], preview: Boolean, skip: Int = 0, where: SliderItemFilter): SliderItemCollection
   socialItem(id: String!, locale: String, preview: Boolean): SocialItem
   socialItemCollection(limit: Int = 100, locale: String, order: [SocialItemOrder], preview: Boolean, skip: Int = 0, where: SocialItemFilter): SocialItemCollection
+}
+
+"""
+[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/recipeReview)
+"""
+type RecipeReview implements Entry & _Node {
+  _id: ID!
+  author(locale: String, preview: Boolean, where: ComponentAuthorFilter): ComponentAuthor
+  content(locale: String): String
+  contentfulMetadata: ContentfulMetadata!
+  imagesCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): AssetCollection
+  internalName(locale: String): String
+  isApproved(locale: String): Boolean
+  linkedFrom(allowedLocales: [String]): RecipeReviewLinkingCollections
+  ratingAccuracy(locale: String): Int
+  ratingDifficulty(locale: String): Int
+  ratingIngredients(locale: String): Int
+  ratingOverall(locale: String): Int
+  ratingTaste(locale: String): Int
+  recipe(locale: String, preview: Boolean, where: PageRecipeFilter): PageRecipe
+  recipeId(locale: String): String
+  sys: Sys!
+}
+
+type RecipeReviewCollection {
+  items: [RecipeReview]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input RecipeReviewFilter {
+  AND: [RecipeReviewFilter]
+  OR: [RecipeReviewFilter]
+  author: cfComponentAuthorNestedFilter
+  author_exists: Boolean
+  content: String
+  content_contains: String
+  content_exists: Boolean
+  content_in: [String]
+  content_not: String
+  content_not_contains: String
+  content_not_in: [String]
+  contentfulMetadata: ContentfulMetadataFilter
+  imagesCollection_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  isApproved: Boolean
+  isApproved_exists: Boolean
+  isApproved_not: Boolean
+  ratingAccuracy: Int
+  ratingAccuracy_exists: Boolean
+  ratingAccuracy_gt: Int
+  ratingAccuracy_gte: Int
+  ratingAccuracy_in: [Int]
+  ratingAccuracy_lt: Int
+  ratingAccuracy_lte: Int
+  ratingAccuracy_not: Int
+  ratingAccuracy_not_in: [Int]
+  ratingDifficulty: Int
+  ratingDifficulty_exists: Boolean
+  ratingDifficulty_gt: Int
+  ratingDifficulty_gte: Int
+  ratingDifficulty_in: [Int]
+  ratingDifficulty_lt: Int
+  ratingDifficulty_lte: Int
+  ratingDifficulty_not: Int
+  ratingDifficulty_not_in: [Int]
+  ratingIngredients: Int
+  ratingIngredients_exists: Boolean
+  ratingIngredients_gt: Int
+  ratingIngredients_gte: Int
+  ratingIngredients_in: [Int]
+  ratingIngredients_lt: Int
+  ratingIngredients_lte: Int
+  ratingIngredients_not: Int
+  ratingIngredients_not_in: [Int]
+  ratingOverall: Int
+  ratingOverall_exists: Boolean
+  ratingOverall_gt: Int
+  ratingOverall_gte: Int
+  ratingOverall_in: [Int]
+  ratingOverall_lt: Int
+  ratingOverall_lte: Int
+  ratingOverall_not: Int
+  ratingOverall_not_in: [Int]
+  ratingTaste: Int
+  ratingTaste_exists: Boolean
+  ratingTaste_gt: Int
+  ratingTaste_gte: Int
+  ratingTaste_in: [Int]
+  ratingTaste_lt: Int
+  ratingTaste_lte: Int
+  ratingTaste_not: Int
+  ratingTaste_not_in: [Int]
+  recipe: cfPageRecipeNestedFilter
+  recipeId: String
+  recipeId_contains: String
+  recipeId_exists: Boolean
+  recipeId_in: [String]
+  recipeId_not: String
+  recipeId_not_contains: String
+  recipeId_not_in: [String]
+  recipe_exists: Boolean
+  sys: SysFilter
+}
+
+type RecipeReviewLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum RecipeReviewOrder {
+  internalName_ASC
+  internalName_DESC
+  isApproved_ASC
+  isApproved_DESC
+  ratingAccuracy_ASC
+  ratingAccuracy_DESC
+  ratingDifficulty_ASC
+  ratingDifficulty_DESC
+  ratingIngredients_ASC
+  ratingIngredients_DESC
+  ratingOverall_ASC
+  ratingOverall_DESC
+  ratingTaste_ASC
+  ratingTaste_DESC
+  recipeId_ASC
+  recipeId_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 """

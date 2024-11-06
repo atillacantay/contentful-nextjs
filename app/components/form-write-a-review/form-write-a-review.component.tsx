@@ -1,29 +1,37 @@
 "use client";
 
-import { clsxm } from "@/utils/twMerge.utils";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { createPortal } from "react-dom";
-
+import ContentfulImage from "@/components/cft-components/cft-image";
 import Button from "@/components/common/button";
 import Modal from "@/components/common/modal";
 import Stack from "@/components/common/stack/stack.component";
 import Text from "@/components/common/typography/text";
 import Rate from "@/components/rate/rate.component";
-
 import useReviews from "@/hooks/useReviews";
 import IconAdd from "@/public/assets/icons/add.svg";
 import TrashIcon from "@/public/assets/icons/close.svg";
-import { ArgsFormWriteAReview } from "./form-write-a-review.interfaces";
+import { clsxm } from "@/utils/twMerge.utils";
+import { PageRecipe } from "lib/__generated/sdk";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
+
+interface FormWriteAReviewProps {
+  recipe: PageRecipe;
+  modalLabel: string;
+  className?: string;
+  buttonClassName?: string;
+}
 
 const FormWriteAReview = ({
-  buttonLabel,
+  recipe,
   modalLabel,
-  details,
-  formLabels,
   className,
   buttonClassName,
-  apiData: { authorId, parentId, relatedId, relatedObjectType, cultureCode },
-}: ArgsFormWriteAReview): JSX.Element => {
+}: // apiData: { authorId, parentId, relatedId, relatedObjectType, cultureCode },
+FormWriteAReviewProps): JSX.Element => {
+  const t = useTranslations();
+  const format = useFormatter();
+  const locale = useLocale();
   const [isFormWriteAReviewShown, setFormWriteAReviewShown] =
     useState<boolean>(false);
   const [rating, setRating] = useState<number>(0);
@@ -55,11 +63,11 @@ const FormWriteAReview = ({
     number,
     React.Dispatch<React.SetStateAction<number>>
   ][] = [
-    [formLabels.overallRating, rating, setRating],
-    [formLabels.ingredients, ingredients, setIngredients],
-    [formLabels.accuracy, accuracy, setAccuracy],
-    [formLabels.difficulty, difficulty, setDifficulty],
-    [formLabels.taste, taste, setTaste],
+    [t("common.overallRating"), rating, setRating],
+    [t("common.ingredients"), ingredients, setIngredients],
+    [t("common.accuracy"), accuracy, setAccuracy],
+    [t("common.difficulty"), difficulty, setDifficulty],
+    [t("common.taste"), taste, setTaste],
   ];
 
   const addImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -95,28 +103,28 @@ const FormWriteAReview = ({
     if (isFormWriteAReviewShown === false) clearAll();
   }, [isFormWriteAReviewShown]);
 
-  const submit = () => {
-    if (!isValid) return;
+  // const submit = () => {
+  //   if (!isValid) return;
 
-    add(
-      {
-        content: userReview,
-        ratingOverall: rating,
-        ratingIngredients: ingredients,
-        ratingAccuracy: accuracy,
-        ratingDifficulty: difficulty,
-        ratingTaste: taste,
-        authorId,
-        parentId,
-        relatedId,
-        relatedObjectType,
-        images: Object.values(imagesToUpload),
-      },
-      cultureCode
-    ).finally(() => {
-      setFormWriteAReviewShown(false);
-    });
-  };
+  //   add(
+  //     {
+  //       content: userReview,
+  //       ratingOverall: rating,
+  //       ratingIngredients: ingredients,
+  //       ratingAccuracy: accuracy,
+  //       ratingDifficulty: difficulty,
+  //       ratingTaste: taste,
+  //       authorId,
+  //       parentId,
+  //       relatedId,
+  //       relatedObjectType,
+  //       images: Object.values(imagesToUpload),
+  //     },
+  //     cultureCode
+  //   ).finally(() => {
+  //     setFormWriteAReviewShown(false);
+  //   });
+  // };
 
   const render = (
     <div data-cmp="form-write-a-review" className={className}>
@@ -130,7 +138,7 @@ const FormWriteAReview = ({
           )}
           onClick={() => setFormWriteAReviewShown(true)}
         >
-          {buttonLabel}
+          {t("common.writeAReview")}
         </Button>
         {isFormWriteAReviewShown ? (
           <Modal
@@ -141,48 +149,57 @@ const FormWriteAReview = ({
           >
             <Modal.Body className="max-sm:bg-[rgb(250,250,250)] dark:max-sm:bg-goki_dark border-t dark:border-custom2_dark pt-10">
               <div className="bg-light-600 pb-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
-                {details.imageURL ? (
-                  <img
-                    src={details.imageURL}
-                    alt={details.title}
+                {recipe.image && (
+                  <ContentfulImage
+                    src={recipe.image.url || ""}
+                    alt={
+                      recipe.image.description || recipe.title || "Recipe Image"
+                    }
+                    width={recipe.image.width}
+                    height={recipe.image.height}
                     className="md:w-[100px] md:h-[100px] object-cover rounded-xl"
                     sizes="(min-width: 768px) 200px, 100vw"
                   />
-                ) : (
-                  <></>
                 )}
                 <div className="grow flex flex-col space-y-2 md:space-y-3">
-                  {details.rating ? (
-                    <Rate rate={details.rating} hideRateText>
+                  {recipe.rating && (
+                    <Rate rate={recipe.rating} hideRateText>
                       <Text
                         size="sm"
                         weight="light"
                         className="ltr:ml-2 rtl:mr-2 leading-3"
                       >
-                        {details.ratingLabel}
+                        {t("common.overallRatingWithCount", {
+                          rating: format.number(Number(recipe.rating), {
+                            numberingSystem:
+                              locale === "ar" ? "arab" : undefined,
+                          }),
+                        })}
                       </Text>
                     </Rate>
-                  ) : (
-                    <></>
                   )}
                   <Text weight="semibold" size="sm">
-                    {details.title}
+                    {recipe.title}
                   </Text>
                   <div className="flex items-center">
-                    {details.avatarURL ? (
+                    {recipe.author?.avatar && (
                       <div className="relative overflow-hidden bg-white dark:bg-goki_dark shadow-md shrink-0 rounded-full w-6 h-6">
-                        <img
+                        <ContentfulImage
                           className="block w-full object-cover max-w-full h-full"
-                          src={details.avatarURL}
-                          alt={details.author}
+                          src={recipe.author?.avatar.url || ""}
+                          width={recipe.author.avatar.width}
+                          height={recipe.author.avatar.height}
+                          alt={
+                            recipe.author?.avatar.description ||
+                            recipe.author.name ||
+                            "User Avatar"
+                          }
                           draggable="false"
                         />
                       </div>
-                    ) : (
-                      <></>
                     )}
                     <Text className="ltr:ml-2 rtl:mr-2 text-xs">
-                      {details.author}
+                      {recipe.author?.name}
                     </Text>
                   </div>
                 </div>
@@ -234,17 +251,17 @@ const FormWriteAReview = ({
               </>
 
               <div className="py-8 space-y-4 border-b dark:border-custom2_dark">
-                <Text weight="semibold">{formLabels.yourReview}</Text>
+                <Text weight="semibold">{t("common.yourReview")}</Text>
                 <textarea
                   className=" w-full rounded-xl border border-[rgba(25,25,25,1)] p-4 dark:bg-custom2_dark dark:text-[rgba(255,255,255,0.5)] focus:outline-none"
-                  placeholder={formLabels.yourReviewInputPlaceholder}
+                  placeholder={t("common.yourReviewInputPlaceholder")}
                   value={userReview}
                   onChange={(e) => setUserReview(e.target.value)}
                 ></textarea>
               </div>
 
               <div className="py-8 space-y-4">
-                <Text weight="semibold">{formLabels.photos}</Text>
+                <Text weight="semibold">{t("common.photos")}</Text>
                 <Stack alignItems="center" spacing={4} className="mb-4">
                   {Object.entries(imagesToUpload).map(([src], key) => (
                     <span className="relative" key={key}>
@@ -272,7 +289,7 @@ const FormWriteAReview = ({
                       >
                         <IconAdd width={24} height={24} className="inline" />
                         <span className="inline text-primary_red text-sm pl-1">
-                          {formLabels.photosUploadLimit}
+                          {t("common.photosUploadLimit")}
                         </span>
                       </label>
                       <input
@@ -293,7 +310,7 @@ const FormWriteAReview = ({
                 className="text-primary_red underline cursor-pointer px-0"
                 onClick={clearAll}
               >
-                {formLabels.clearAll}
+                {t("common.clearAll")}
               </Button>
               <Button
                 variant="contained"
@@ -305,9 +322,9 @@ const FormWriteAReview = ({
                 size="lg"
                 type="submit"
                 disabled={!isValid}
-                onClick={submit}
+                // onClick={submit}
               >
-                {formLabels.submit}
+                {t("common.submitReview")}
               </Button>
             </Modal.Footer>
           </Modal>
