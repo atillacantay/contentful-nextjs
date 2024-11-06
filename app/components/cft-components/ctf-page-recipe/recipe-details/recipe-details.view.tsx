@@ -1,7 +1,11 @@
 import Stack from "@/components/common/stack";
 import FormIngredients from "@/components/form-ingredients";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
-import type { PageRecipe, Query } from "lib/__generated/sdk";
+import {
+  RecipeReviewOrder,
+  type PageRecipe,
+  type Query,
+} from "lib/__generated/sdk";
 import { client } from "lib/client";
 import { getLocale } from "next-intl/server";
 import dynamic from "next/dynamic";
@@ -24,6 +28,7 @@ const getAllRecipeReviews = async (slug?: string) => {
     preview: isEnabled,
     locale: activeLocale,
     limit: 3,
+    order: RecipeReviewOrder.SysFirstPublishedAtAsc,
   });
 
   return (data as Query).recipeReviewCollection;

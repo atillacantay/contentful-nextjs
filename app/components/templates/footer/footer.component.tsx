@@ -17,21 +17,28 @@ const Footer = (props: FooterType) => {
   const legalLinks = props?.legalLinksCollection?.items.filter(Boolean);
 
   const renderNavigationLinks = (
+    category?: string,
     links?: NavigationLinkItem[]
   ): JSX.Element[] => {
     return links
       ?.map((link, idx) => {
+        const slug = link.page?.slug;
+        const isLandingPage = link.page?.__typename === "Page";
+        const href = `/${!isLandingPage ? `${category}/` : ""}${slug}`;
         return (
           <li key={idx}>
             <Link
-              href={link?.url || ""}
+              href={href}
               className="block pt-3 text-white/80 dark:text-white/80"
             >
               {link?.title}
             </Link>
             {link?.navigationLinkItemCollection && (
               <ul className="pl-4">
-                {renderNavigationLinks(link.navigationLinkItemCollection.items)}
+                {renderNavigationLinks(
+                  slug,
+                  link.navigationLinkItemCollection.items
+                )}
               </ul>
             )}
           </li>
@@ -43,11 +50,12 @@ const Footer = (props: FooterType) => {
   const renderFooter = () => {
     return navigationLinks
       ?.map((menu, idx) => {
+        const slug = menu.page?.slug;
         return (
           <Stack direction="col" key={idx}>
             <details className="w-full md:hidden">
               <summary className="relative flex w-full justify-between items-center cursor-pointer max-sm:gap-4">
-                <Link href={menu.url || ""} target="_self">
+                <Link href={`/${slug}`} target="_self">
                   <Header
                     as="h3"
                     weight="medium"
@@ -63,12 +71,13 @@ const Footer = (props: FooterType) => {
               </summary>
               <ul>
                 {renderNavigationLinks(
+                  slug,
                   menu.navigationLinkItemCollection?.items
                 )}
               </ul>
             </details>
             <div className="hidden md:flex flex-col items-stretch justify-start max-sm:gap-4">
-              <Link href={menu.url || ""} target="_self">
+              <Link href={`/${slug}`} target="_self">
                 <Header
                   as="h3"
                   weight="medium"
@@ -82,6 +91,7 @@ const Footer = (props: FooterType) => {
               </Link>
               <ul>
                 {renderNavigationLinks(
+                  slug,
                   menu.navigationLinkItemCollection?.items
                 )}
               </ul>
@@ -157,8 +167,8 @@ const Footer = (props: FooterType) => {
             direction="col"
             spacing={4}
           >
-            {legalLinks?.map((legalLink) => (
-              <Link key={legalLink._id} href={legalLink.url || ""}>
+            {legalLinks?.map((legalLink, key) => (
+              <Link key={key} href={legalLink.page?.slug || ""}>
                 <Text as="span" className="text-white/80 dark:text-white/80">
                   {legalLink.title}
                 </Text>

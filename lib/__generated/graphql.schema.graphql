@@ -569,7 +569,6 @@ type Footer implements Entry & _Node {
   legalLinksCollection(limit: Int = 100, locale: String, order: [FooterLegalLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): FooterLegalLinksCollection
   linkedFrom(allowedLocales: [String]): FooterLinkingCollections
   menuLinksCollection(limit: Int = 100, locale: String, order: [FooterMenuLinksCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): FooterMenuLinksCollection
-  navigationLinks(locale: String, preview: Boolean): Entry
   socialItemsCollection(limit: Int = 100, locale: String, order: [FooterSocialItemsCollectionOrder], preview: Boolean, skip: Int = 0, where: SocialItemFilter): FooterSocialItemsCollection
   sys: Sys!
 }
@@ -603,7 +602,6 @@ input FooterFilter {
   legalLinksCollection_exists: Boolean
   menuLinks: cfNavigationLinkItemNestedFilter
   menuLinksCollection_exists: Boolean
-  navigationLinks_exists: Boolean
   socialItems: cfSocialItemNestedFilter
   socialItemsCollection_exists: Boolean
   sys: SysFilter
@@ -1189,6 +1187,7 @@ type NavigationLinkItem implements Entry & _Node {
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): NavigationLinkItemLinkingCollections
   navigationLinkItemCollection(limit: Int = 100, locale: String, order: [NavigationLinkItemNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0, where: NavigationLinkItemFilter): NavigationLinkItemNavigationLinkItemCollection
+  page(locale: String, preview: Boolean): NavigationLinkItemPage
   sys: Sys!
   title(locale: String): String
   url(locale: String): String
@@ -1214,6 +1213,7 @@ input NavigationLinkItemFilter {
   internalName_not_in: [String]
   navigationLinkItem: cfNavigationLinkItemNestedFilter
   navigationLinkItemCollection_exists: Boolean
+  page_exists: Boolean
   sys: SysFilter
   title: String
   title_contains: String
@@ -1309,6 +1309,8 @@ enum NavigationLinkItemOrder {
   url_ASC
   url_DESC
 }
+
+union NavigationLinkItemPage = Page | PageRecipeCategory | PageShopCategory
 
 """
 [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/page)
@@ -1570,6 +1572,7 @@ input PageFilter {
 type PageLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   mainNavigationCollection(limit: Int = 100, locale: String, order: [PageLinkingCollectionsMainNavigationCollectionOrder], preview: Boolean, skip: Int = 0): MainNavigationCollection
+  navigationLinkItemCollection(limit: Int = 100, locale: String, order: [PageLinkingCollectionsNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinkItemCollection
 }
 
 enum PageLinkingCollectionsMainNavigationCollectionOrder {
@@ -1583,6 +1586,23 @@ enum PageLinkingCollectionsMainNavigationCollectionOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
+}
+
+enum PageLinkingCollectionsNavigationLinkItemCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
 }
 
 """
@@ -1790,7 +1810,25 @@ input PageRecipeCategoryFilter {
 
 type PageRecipeCategoryLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  navigationLinkItemCollection(limit: Int = 100, locale: String, order: [PageRecipeCategoryLinkingCollectionsNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinkItemCollection
   pageRecipeCollection(limit: Int = 100, locale: String, order: [PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder], preview: Boolean, skip: Int = 0): PageRecipeCollection
+}
+
+enum PageRecipeCategoryLinkingCollectionsNavigationLinkItemCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
 }
 
 enum PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder {
@@ -2291,7 +2329,25 @@ input PageShopCategoryFilter {
 
 type PageShopCategoryLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+  navigationLinkItemCollection(limit: Int = 100, locale: String, order: [PageShopCategoryLinkingCollectionsNavigationLinkItemCollectionOrder], preview: Boolean, skip: Int = 0): NavigationLinkItemCollection
   pageShopCollection(limit: Int = 100, locale: String, order: [PageShopCategoryLinkingCollectionsPageShopCollectionOrder], preview: Boolean, skip: Int = 0): PageShopCollection
+}
+
+enum PageShopCategoryLinkingCollectionsNavigationLinkItemCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+  url_ASC
+  url_DESC
 }
 
 enum PageShopCategoryLinkingCollectionsPageShopCollectionOrder {
@@ -3719,6 +3775,7 @@ input cfNavigationLinkItemNestedFilter {
   internalName_not_contains: String
   internalName_not_in: [String]
   navigationLinkItemCollection_exists: Boolean
+  page_exists: Boolean
   sys: SysFilter
   title: String
   title_contains: String

@@ -45,12 +45,14 @@ query recipeReviews(
   $locale: String
   $preview: Boolean
   $limit: Int
+  $order: [RecipeReviewOrder]
 ) {
   recipeReviewCollection(
     locale: $locale
     limit: $limit
     where: { recipe: { slug: $slug } }
     preview: $preview
+    order: $order
   ) {
     total
     items {

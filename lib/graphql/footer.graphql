@@ -8,22 +8,41 @@ query footer($locale: String, $preview: Boolean) {
           url
         }
       }
-      menuLinksCollection {
+      menuLinksCollection(limit: 8) {
         items {
-          url
+          page {
+            ... on Page {
+              slug
+            }
+          }
           title
-          navigationLinkItemCollection {
+          navigationLinkItemCollection(limit: 15) {
             items {
+              page {
+                ... on Page {
+                  __typename
+                  slug
+                }
+                ... on PageRecipeCategory {
+                  slug
+                }
+                ... on PageShopCategory {
+                  slug
+                }
+              }
               title
-              url
             }
           }
         }
       }
       legalLinksCollection {
         items {
-          _id
-          url
+          page {
+            ... on Page {
+              _id
+              slug
+            }
+          }
           title
         }
       }
