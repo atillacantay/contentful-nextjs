@@ -627,8 +627,6 @@ enum FooterLegalLinksCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 type FooterLinkingCollections {
@@ -655,8 +653,6 @@ enum FooterMenuLinksCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 enum FooterOrder {
@@ -1190,7 +1186,6 @@ type NavigationLinkItem implements Entry & _Node {
   page(locale: String, preview: Boolean): NavigationLinkItemPage
   sys: Sys!
   title(locale: String): String
-  url(locale: String): String
 }
 
 type NavigationLinkItemCollection {
@@ -1222,13 +1217,6 @@ input NavigationLinkItemFilter {
   title_not: String
   title_not_contains: String
   title_not_in: [String]
-  url: String
-  url_contains: String
-  url_exists: Boolean
-  url_in: [String]
-  url_not: String
-  url_not_contains: String
-  url_not_in: [String]
 }
 
 type NavigationLinkItemLinkingCollections {
@@ -1265,8 +1253,6 @@ enum NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 type NavigationLinkItemNavigationLinkItemCollection {
@@ -1289,8 +1275,6 @@ enum NavigationLinkItemNavigationLinkItemCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 enum NavigationLinkItemOrder {
@@ -1306,8 +1290,6 @@ enum NavigationLinkItemOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 union NavigationLinkItemPage = Page | PageRecipeCategory | PageShopCategory
@@ -1601,8 +1583,6 @@ enum PageLinkingCollectionsNavigationLinkItemCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 """
@@ -1827,8 +1807,6 @@ enum PageRecipeCategoryLinkingCollectionsNavigationLinkItemCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 enum PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder {
@@ -2346,8 +2324,6 @@ enum PageShopCategoryLinkingCollectionsNavigationLinkItemCollectionOrder {
   sys_publishedVersion_DESC
   title_ASC
   title_DESC
-  url_ASC
-  url_DESC
 }
 
 enum PageShopCategoryLinkingCollectionsPageShopCollectionOrder {
@@ -3784,13 +3760,6 @@ input cfNavigationLinkItemNestedFilter {
   title_not: String
   title_not_contains: String
   title_not_in: [String]
-  url: String
-  url_contains: String
-  url_exists: Boolean
-  url_in: [String]
-  url_not: String
-  url_not_contains: String
-  url_not_in: [String]
 }
 
 input cfPageArticleNestedFilter {

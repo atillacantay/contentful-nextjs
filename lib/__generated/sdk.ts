@@ -1002,9 +1002,7 @@ export enum FooterLegalLinksCollectionOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 export type FooterLinkingCollections = {
@@ -1040,9 +1038,7 @@ export enum FooterMenuLinksCollectionOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 export enum FooterOrder {
@@ -1709,7 +1705,6 @@ export type NavigationLinkItem = Entry & _Node & {
   page?: Maybe<NavigationLinkItemPage>;
   sys: Sys;
   title?: Maybe<Scalars['String']['output']>;
-  url?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -1748,12 +1743,6 @@ export type NavigationLinkItemTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
-/** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/navigationLinkItem) */
-export type NavigationLinkItemUrlArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type NavigationLinkItemCollection = {
   __typename?: 'NavigationLinkItemCollection';
   items: Array<Maybe<NavigationLinkItem>>;
@@ -1784,13 +1773,6 @@ export type NavigationLinkItemFilter = {
   title_not?: InputMaybe<Scalars['String']['input']>;
   title_not_contains?: InputMaybe<Scalars['String']['input']>;
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  url?: InputMaybe<Scalars['String']['input']>;
-  url_contains?: InputMaybe<Scalars['String']['input']>;
-  url_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  url_not?: InputMaybe<Scalars['String']['input']>;
-  url_not_contains?: InputMaybe<Scalars['String']['input']>;
-  url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type NavigationLinkItemLinkingCollections = {
@@ -1853,9 +1835,7 @@ export enum NavigationLinkItemLinkingCollectionsNavigationLinkItemCollectionOrde
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 export type NavigationLinkItemNavigationLinkItemCollection = {
@@ -1878,9 +1858,7 @@ export enum NavigationLinkItemNavigationLinkItemCollectionOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 export enum NavigationLinkItemOrder {
@@ -1895,9 +1873,7 @@ export enum NavigationLinkItemOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 export type NavigationLinkItemPage = Page | PageRecipeCategory | PageShopCategory;
@@ -2377,9 +2353,7 @@ export enum PageLinkingCollectionsNavigationLinkItemCollectionOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 /** [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/pageMagazine) */
@@ -2862,9 +2836,7 @@ export enum PageRecipeCategoryLinkingCollectionsNavigationLinkItemCollectionOrde
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 export enum PageRecipeCategoryLinkingCollectionsPageRecipeCollectionOrder {
@@ -3641,9 +3613,7 @@ export enum PageShopCategoryLinkingCollectionsNavigationLinkItemCollectionOrder 
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC'
+  TitleDesc = 'title_DESC'
 }
 
 export enum PageShopCategoryLinkingCollectionsPageShopCollectionOrder {
@@ -6036,13 +6006,6 @@ export type CfNavigationLinkItemNestedFilter = {
   title_not?: InputMaybe<Scalars['String']['input']>;
   title_not_contains?: InputMaybe<Scalars['String']['input']>;
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  url?: InputMaybe<Scalars['String']['input']>;
-  url_contains?: InputMaybe<Scalars['String']['input']>;
-  url_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  url_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  url_not?: InputMaybe<Scalars['String']['input']>;
-  url_not_contains?: InputMaybe<Scalars['String']['input']>;
-  url_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type CfPageArticleNestedFilter = {
