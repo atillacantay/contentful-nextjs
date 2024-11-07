@@ -21,7 +21,7 @@ const SliderMainGql = async ({ id }: SliderMainGqlProps) => {
   });
 
   const slider = data?.sliderCollection?.items?.[0] as SliderType;
-  const slides = slider?.sliderItemCollection?.items?.filter(Boolean);
+  const slides = slider?.sliderItemCollection?.items;
 
   return <Slider slides={slides} />;
 };

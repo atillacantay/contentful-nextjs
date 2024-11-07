@@ -17,7 +17,7 @@ interface ProductImageProps {
 
 const ProductImage = ({ product }: ProductImageProps) => {
   const { imagesCollection } = product;
-  const images = imagesCollection?.items.filter(Boolean);
+  const images = imagesCollection?.items;
 
   const Image = ({ image }: { image: Asset }) => (
     <ContentfulImage

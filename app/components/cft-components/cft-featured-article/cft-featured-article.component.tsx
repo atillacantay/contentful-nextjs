@@ -8,7 +8,7 @@ import { headers } from "next/headers";
 const CtfFeaturedArticle = async (featuredArticle: FeaturedArticle) => {
   const headerList = await headers();
   const pathname = headerList.get("x-pathname");
-  const pathSegments = pathname?.split("/").filter(Boolean);
+  const pathSegments = pathname?.split("/");
   const pageType = pathSegments?.[1];
 
   if (!featuredArticle.article) return;

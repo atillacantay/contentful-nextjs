@@ -38,7 +38,7 @@ const ArticleOfDay = ({
           className="lg:flex-row lg:items-center flex"
         >
           <div className="lg:rounded-2xl overflow-hidden lg:w-2/3 image-section">
-            <Link href={`/articles/${slug}`} title={title}>
+            <Link href={`/magazines/${slug}`} title={title}>
               <ContentfulImage
                 src={image?.url || ""}
                 alt={image?.description}

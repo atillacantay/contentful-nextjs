@@ -14,10 +14,10 @@ import { useFormatter, useTranslations } from "next-intl";
 const Footer = (props: FooterType) => {
   const t = useTranslations();
   const format = useFormatter();
-  const navigationLinks = props?.menuLinksCollection?.items.filter(Boolean);
-  const socialItems = props?.socialItemsCollection?.items.filter(Boolean);
+  const navigationLinks = props?.menuLinksCollection?.items;
+  const socialItems = props?.socialItemsCollection?.items;
   const followLabel = props?.followLabel;
-  const legalLinks = props?.legalLinksCollection?.items.filter(Boolean);
+  const legalLinks = props?.legalLinksCollection?.items;
 
   const renderNavigationLinks = (
     category?: string,

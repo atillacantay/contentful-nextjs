@@ -1,4 +1,3 @@
-// import RecipeDetailReviews from "@/components/cft-components/ctf-page-recipe/recipe-details/recipe-detail-reviews.component";
 import ContentfulImage from "@/components/cft-components/cft-image";
 import Button from "@/components/common/button";
 import Card from "@/components/common/card";
@@ -32,7 +31,7 @@ const ArticlePage = async ({ article }: { article: PageArticle }) => {
     featuredArticlesCollection,
   } = article;
   const { firstPublishedAt } = sys;
-  const featuredArticles = featuredArticlesCollection?.items?.filter(Boolean);
+  const featuredArticles = featuredArticlesCollection?.items;
   const t = await getTranslations();
   const format = await getFormatter();
   const session = await getSession();
@@ -69,17 +68,19 @@ const ArticlePage = async ({ article }: { article: PageArticle }) => {
               justifyContent="between"
               className="mb-4"
             >
-              <Rate rate={3.9} hideRateText>
-                <Text
-                  size="md"
-                  weight="light"
-                  className="ltr:ml-2 rtl:mr-2 leading-3"
-                >
-                  {t("common.overallRatingWithCount", {
-                    rating: format.number(Number(rating)),
-                  })}
-                </Text>
-              </Rate>
+              {rating && (
+                <Rate rate={rating} hideRateText>
+                  <Text
+                    size="md"
+                    weight="light"
+                    className="ltr:ml-2 rtl:mr-2 leading-3"
+                  >
+                    {t("common.overallRatingWithCount", {
+                      rating: format.number(Number(rating)),
+                    })}
+                  </Text>
+                </Rate>
+              )}
               <Stack className="max-lg:hidden">
                 <Button
                   className="font-medium text-primary_red"
@@ -229,9 +230,6 @@ const ArticlePage = async ({ article }: { article: PageArticle }) => {
         </div>
       </div>
       {session && <FeaturedArticles featuredArticles={featuredArticles} />}
-      {/* <div className="px-4 my-8 md:my-12 lg:mb-16 md:container md:mx-auto">
-        <RecipeDetailReviews {...recipeDetailReviews} />
-      </div> */}
     </>
   );
 };

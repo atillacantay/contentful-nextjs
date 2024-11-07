@@ -7,7 +7,7 @@ interface CftPageProps {
 
 const CtfPage = ({ page }: CftPageProps) => {
   const { sectionCollection } = page || {};
-  const sections = sectionCollection?.items?.filter(Boolean);
+  const sections = sectionCollection?.items;
 
   return (
     <>

@@ -37,7 +37,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
     sugar,
     fiber,
   } = product;
-  const alsoViewedProducts = alsoViewedCollection?.items.filter(Boolean);
+  const alsoViewedProducts = alsoViewedCollection?.items;
 
   const propertiesMap = new Map([
     [format.number(Number(productNetWeight)), "common.size"],

@@ -36,13 +36,12 @@ const getAllRecipeReviews = async (slug?: string) => {
 
 const RecipeDetail = async ({ recipe }: { recipe: PageRecipe }) => {
   const allReviewsCollection = await getAllRecipeReviews(recipe.slug);
-  const allReviews = allReviewsCollection?.items.filter(Boolean);
+  const allReviews = allReviewsCollection?.items;
   const allReviewsCount = allReviewsCollection?.total;
 
-  const preparationSteps =
-    recipe.preparationStepsCollection?.items.filter(Boolean);
-  const ingredients = recipe.ingredientsCollection?.items.filter(Boolean);
-  const relatedRecipes = recipe.relatedRecipesCollection?.items.filter(Boolean);
+  const preparationSteps = recipe.preparationStepsCollection?.items;
+  const ingredients = recipe.ingredientsCollection?.items;
+  const relatedRecipes = recipe.relatedRecipesCollection?.items;
 
   return (
     <>

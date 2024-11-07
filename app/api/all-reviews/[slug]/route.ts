@@ -43,7 +43,7 @@ export const GET = async (
     preview: isEnabled,
     limit: Number(limit),
   });
-  const reviews = (data as Query).recipeReviewCollection?.items.filter(Boolean);
+  const reviews = (data as Query).recipeReviewCollection?.items;
 
   if (!reviews) {
     return NextResponse.error();

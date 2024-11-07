@@ -25,7 +25,7 @@ const CardReview = ({
   const format = useFormatter();
   const locale = useLocale();
   const { firstPublishedAt } = sys;
-  const images = imagesCollection?.items.filter(Boolean);
+  const images = imagesCollection?.items;
 
   return (
     <Card className={clsxm("!shadow-custom_shadow_1", className)}>
