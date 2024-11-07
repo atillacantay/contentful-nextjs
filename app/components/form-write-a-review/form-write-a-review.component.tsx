@@ -126,224 +126,217 @@ FormWriteAReviewProps): JSX.Element => {
   //   });
   // };
 
-  const render = (
-    <div data-cmp="form-write-a-review" className={className}>
-      <>
-        <Button
-          variant="contained"
-          size="lg"
-          className={clsxm(
-            "inline text-white max-md:w-full bg-primary_red max-sm:py-4",
-            buttonClassName
+  const renderModal = (
+    <Modal
+      show={isFormWriteAReviewShown}
+      title={modalLabel}
+      onClose={() => setFormWriteAReviewShown(false)}
+      align="middle"
+    >
+      <Modal.Body className="max-sm:bg-[rgb(250,250,250)] dark:max-sm:bg-goki_dark border-t dark:border-custom2_dark pt-10">
+        <div className="bg-light-600 pb-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
+          {recipe.image && (
+            <ContentfulImage
+              src={recipe.image.url || ""}
+              alt={recipe.image.description || recipe.title || "Recipe Image"}
+              width={recipe.image.width}
+              height={recipe.image.height}
+              className="md:w-[100px] md:h-[100px] object-cover rounded-xl"
+              sizes="(min-width: 768px) 200px, 100vw"
+            />
           )}
-          onClick={() => setFormWriteAReviewShown(true)}
-        >
-          {t("common.writeAReview")}
-        </Button>
-        {isFormWriteAReviewShown ? (
-          <Modal
-            show={isFormWriteAReviewShown}
-            title={modalLabel}
-            onClose={() => setFormWriteAReviewShown(false)}
-            align="middle"
-          >
-            <Modal.Body className="max-sm:bg-[rgb(250,250,250)] dark:max-sm:bg-goki_dark border-t dark:border-custom2_dark pt-10">
-              <div className="bg-light-600 pb-4 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
-                {recipe.image && (
+          <div className="grow flex flex-col space-y-2 md:space-y-3">
+            {recipe.rating && (
+              <Rate rate={recipe.rating} hideRateText>
+                <Text
+                  size="sm"
+                  weight="light"
+                  className="ltr:ml-2 rtl:mr-2 leading-3"
+                >
+                  {t("common.overallRatingWithCount", {
+                    rating: format.number(Number(recipe.rating), {
+                      numberingSystem: locale === "ar" ? "arab" : undefined,
+                    }),
+                  })}
+                </Text>
+              </Rate>
+            )}
+            <Text weight="semibold" size="sm">
+              {recipe.title}
+            </Text>
+            <div className="flex items-center">
+              {recipe.author?.avatar && (
+                <div className="relative overflow-hidden bg-white dark:bg-goki_dark shadow-md shrink-0 rounded-full w-6 h-6">
                   <ContentfulImage
-                    src={recipe.image.url || ""}
+                    className="block w-full object-cover max-w-full h-full"
+                    src={recipe.author?.avatar.url || ""}
+                    width={recipe.author.avatar.width}
+                    height={recipe.author.avatar.height}
                     alt={
-                      recipe.image.description || recipe.title || "Recipe Image"
+                      recipe.author?.avatar.description ||
+                      recipe.author.name ||
+                      "User Avatar"
                     }
-                    width={recipe.image.width}
-                    height={recipe.image.height}
-                    className="md:w-[100px] md:h-[100px] object-cover rounded-xl"
-                    sizes="(min-width: 768px) 200px, 100vw"
+                    draggable="false"
                   />
-                )}
-                <div className="grow flex flex-col space-y-2 md:space-y-3">
-                  {recipe.rating && (
-                    <Rate rate={recipe.rating} hideRateText>
-                      <Text
-                        size="sm"
-                        weight="light"
-                        className="ltr:ml-2 rtl:mr-2 leading-3"
-                      >
-                        {t("common.overallRatingWithCount", {
-                          rating: format.number(Number(recipe.rating), {
-                            numberingSystem:
-                              locale === "ar" ? "arab" : undefined,
-                          }),
-                        })}
-                      </Text>
-                    </Rate>
-                  )}
-                  <Text weight="semibold" size="sm">
-                    {recipe.title}
-                  </Text>
-                  <div className="flex items-center">
-                    {recipe.author?.avatar && (
-                      <div className="relative overflow-hidden bg-white dark:bg-goki_dark shadow-md shrink-0 rounded-full w-6 h-6">
-                        <ContentfulImage
-                          className="block w-full object-cover max-w-full h-full"
-                          src={recipe.author?.avatar.url || ""}
-                          width={recipe.author.avatar.width}
-                          height={recipe.author.avatar.height}
-                          alt={
-                            recipe.author?.avatar.description ||
-                            recipe.author.name ||
-                            "User Avatar"
-                          }
-                          draggable="false"
-                        />
-                      </div>
-                    )}
-                    <Text className="ltr:ml-2 rtl:mr-2 text-xs">
-                      {recipe.author?.name}
-                    </Text>
-                  </div>
                 </div>
-              </div>
+              )}
+              <Text className="ltr:ml-2 rtl:mr-2 text-xs">
+                {recipe.author?.name}
+              </Text>
+            </div>
+          </div>
+        </div>
 
-              <>
-                {scores.map(([label, state, setState], key) => (
+        <>
+          {scores.map(([label, state, setState], key) => (
+            <div
+              className="py-8 max-sm:space-y-4 border-b dark:border-custom2_dark flex md:items-center max-sm:flex-col"
+              key={"star-div" + key}
+            >
+              <Text weight="semibold" className="grow">
+                {label}
+              </Text>
+              <div className="flex [&:hover_div:not(:hover)>svg]:text-[#FED236]">
+                {[1, 2, 3, 4, 5].map((num, key) => (
                   <div
-                    className="py-8 max-sm:space-y-4 border-b dark:border-custom2_dark flex md:items-center max-sm:flex-col"
-                    key={"star-div" + key}
+                    key={"star" + key}
+                    onClick={() => setState(num)}
+                    className={`ltr:pr-4 rtl:pl-4 [&:hover~div>svg]:!text-[#e8e8e8]`}
                   >
-                    <Text weight="semibold" className="grow">
-                      {label}
-                    </Text>
-                    <div className="flex [&:hover_div:not(:hover)>svg]:text-[#FED236]">
-                      {[1, 2, 3, 4, 5].map((num, key) => (
-                        <div
-                          key={"star" + key}
-                          onClick={() => setState(num)}
-                          className={`ltr:pr-4 rtl:pl-4 [&:hover~div>svg]:!text-[#e8e8e8]`}
-                        >
-                          <svg
-                            width="32"
-                            height="32"
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`cursor-pointer hover:text-[#FED236] ${
-                              num <= state ? "text-[#FED236]" : "text-[#e8e8e8]"
-                            }`}
-                          >
-                            <g clipPath="url(#clip0_870_38290)">
-                              <path
-                                d="M14.3938 1.17313C14.6188 0.4745 15.2688 0 16 0C16.7313 0 17.3813 0.4745 17.6063 1.17313L20.7313 11H30.3375C31.2563 11 32 11.7438 32 12.6625C32 13.1938 31.7438 13.6938 31.2563 14.0063L23.1625 19.8937L26.3375 30.325C26.5938 31.1625 25.9688 32 25.1 32C24.8125 32 24.5312 31.9063 24.3062 31.725L16 25.2687L7.69375 31.725C7.46875 31.9063 7.13125 32 6.9 32C6.02875 32 5.40625 31.1625 5.65938 30.325L8.8375 19.8937L0.68875 14.0063C0.25625 13.6938 0 13.1938 0 12.6625C0 11.7438 0.74375 11 1.66188 11H11.2688L14.3938 1.17313Z"
-                                fill="currentColor"
-                              />
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_870_38290">
-                                <rect width="32" height="32" fill="white" />
-                              </clipPath>
-                            </defs>
-                          </svg>
-                        </div>
-                      ))}
-                    </div>
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`cursor-pointer hover:text-[#FED236] ${
+                        num <= state ? "text-[#FED236]" : "text-[#e8e8e8]"
+                      }`}
+                    >
+                      <g clipPath="url(#clip0_870_38290)">
+                        <path
+                          d="M14.3938 1.17313C14.6188 0.4745 15.2688 0 16 0C16.7313 0 17.3813 0.4745 17.6063 1.17313L20.7313 11H30.3375C31.2563 11 32 11.7438 32 12.6625C32 13.1938 31.7438 13.6938 31.2563 14.0063L23.1625 19.8937L26.3375 30.325C26.5938 31.1625 25.9688 32 25.1 32C24.8125 32 24.5312 31.9063 24.3062 31.725L16 25.2687L7.69375 31.725C7.46875 31.9063 7.13125 32 6.9 32C6.02875 32 5.40625 31.1625 5.65938 30.325L8.8375 19.8937L0.68875 14.0063C0.25625 13.6938 0 13.1938 0 12.6625C0 11.7438 0.74375 11 1.66188 11H11.2688L14.3938 1.17313Z"
+                          fill="currentColor"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_870_38290">
+                          <rect width="32" height="32" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
                   </div>
                 ))}
+              </div>
+            </div>
+          ))}
+        </>
+
+        <div className="py-8 space-y-4 border-b dark:border-custom2_dark">
+          <Text weight="semibold">{t("common.yourReview")}</Text>
+          <textarea
+            className=" w-full rounded-xl border border-[rgba(25,25,25,1)] p-4 dark:bg-custom2_dark dark:text-[rgba(255,255,255,0.5)] focus:outline-none"
+            placeholder={t("common.yourReviewInputPlaceholder")}
+            value={userReview}
+            onChange={(e) => setUserReview(e.target.value)}
+          ></textarea>
+        </div>
+
+        <div className="py-8 space-y-4">
+          <Text weight="semibold">{t("common.photos")}</Text>
+          <Stack alignItems="center" spacing={4} className="mb-4">
+            {Object.entries(imagesToUpload).map(([src], key) => (
+              <span className="relative" key={key}>
+                <img
+                  src={src}
+                  width={56}
+                  height={56}
+                  className="w-14 h-14 rounded-xl object-cover peer hover:filte hover:grayscale cursor-pointer"
+                  onClick={() => removeImage(src)}
+                />
+                <TrashIcon
+                  className="hidden peer-hover:block absolute top-[14px] left-[14px] text-white pointer-events-none"
+                  width={28}
+                  height={28}
+                />
+              </span>
+            ))}
+            {Object.entries(imagesToUpload)?.length > 2 ? (
+              <></>
+            ) : (
+              <>
+                <label
+                  htmlFor="input-file"
+                  className="inline-block rounded-full bg-primary_red_alt p-4 cursor-pointer !w-fit"
+                >
+                  <IconAdd width={24} height={24} className="inline" />
+                  <span className="inline text-primary_red text-sm pl-1">
+                    {t("common.photosUploadLimit")}
+                  </span>
+                </label>
+                <input
+                  id="input-file"
+                  type="file"
+                  className="hidden"
+                  onChange={addImage}
+                  accept="image/png, image/jpeg, image/jpg"
+                  key={Object.entries(imagesToUpload)?.length}
+                />
               </>
-
-              <div className="py-8 space-y-4 border-b dark:border-custom2_dark">
-                <Text weight="semibold">{t("common.yourReview")}</Text>
-                <textarea
-                  className=" w-full rounded-xl border border-[rgba(25,25,25,1)] p-4 dark:bg-custom2_dark dark:text-[rgba(255,255,255,0.5)] focus:outline-none"
-                  placeholder={t("common.yourReviewInputPlaceholder")}
-                  value={userReview}
-                  onChange={(e) => setUserReview(e.target.value)}
-                ></textarea>
-              </div>
-
-              <div className="py-8 space-y-4">
-                <Text weight="semibold">{t("common.photos")}</Text>
-                <Stack alignItems="center" spacing={4} className="mb-4">
-                  {Object.entries(imagesToUpload).map(([src], key) => (
-                    <span className="relative" key={key}>
-                      <img
-                        src={src}
-                        width={56}
-                        height={56}
-                        className="w-14 h-14 rounded-xl object-cover peer hover:filte hover:grayscale cursor-pointer"
-                        onClick={() => removeImage(src)}
-                      />
-                      <TrashIcon
-                        className="hidden peer-hover:block absolute top-[14px] left-[14px] text-white pointer-events-none"
-                        width={28}
-                        height={28}
-                      />
-                    </span>
-                  ))}
-                  {Object.entries(imagesToUpload)?.length > 2 ? (
-                    <></>
-                  ) : (
-                    <>
-                      <label
-                        htmlFor="input-file"
-                        className="inline-block rounded-full bg-primary_red_alt p-4 cursor-pointer !w-fit"
-                      >
-                        <IconAdd width={24} height={24} className="inline" />
-                        <span className="inline text-primary_red text-sm pl-1">
-                          {t("common.photosUploadLimit")}
-                        </span>
-                      </label>
-                      <input
-                        id="input-file"
-                        type="file"
-                        className="hidden"
-                        onChange={addImage}
-                        accept="image/png, image/jpeg, image/jpg"
-                        key={Object.entries(imagesToUpload)?.length}
-                      />
-                    </>
-                  )}
-                </Stack>
-              </div>
-            </Modal.Body>
-            <Modal.Footer className="justify-between border-t dark:border-custom2_dark">
-              <Button
-                className="text-primary_red underline cursor-pointer px-0"
-                onClick={clearAll}
-              >
-                {t("common.clearAll")}
-              </Button>
-              <Button
-                variant="contained"
-                className={clsxm(
-                  "place-self-end text-base",
-                  isValid && "bg-primary_red",
-                  !isValid && "bg-black/25 cursor-default"
-                )}
-                size="lg"
-                type="submit"
-                disabled={!isValid}
-                // onClick={submit}
-              >
-                {t("common.submitReview")}
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        ) : (
-          <></>
-        )}
-      </>
-    </div>
+            )}
+          </Stack>
+        </div>
+      </Modal.Body>
+      <Modal.Footer className="justify-between border-t dark:border-custom2_dark">
+        <Button
+          className="text-primary_red underline cursor-pointer px-0"
+          onClick={clearAll}
+        >
+          {t("common.clearAll")}
+        </Button>
+        <Button
+          variant="contained"
+          className={clsxm(
+            "place-self-end text-base",
+            isValid && "bg-primary_red",
+            !isValid && "bg-black/25 cursor-default"
+          )}
+          size="lg"
+          type="submit"
+          disabled={!isValid}
+          // onClick={submit}
+        >
+          {t("common.submitReview")}
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      const portalRoot = document.getElementById("portal-form-write-a-review");
+      if (portalRoot && isFormWriteAReviewShown) {
+        createPortal(renderModal, portalRoot);
+      }
+    }
+  }, [isFormWriteAReviewShown, renderModal]);
+
   return (
-    <>
-      {render}
-      {Array.from(
-        document?.getElementsByClassName("portal-form-write-a-review")
-      )?.map((el, key) =>
-        createPortal(render, el, `portal-form-write-a-review-${key}`)
-      )}
-    </>
+    <div data-cmp="form-write-a-review" className={className}>
+      <Button
+        variant="contained"
+        size="lg"
+        className={clsxm(
+          "inline text-white max-md:w-full bg-primary_red max-sm:py-4",
+          buttonClassName
+        )}
+        onClick={() => setFormWriteAReviewShown(true)}
+      >
+        {t("common.writeAReview")}
+      </Button>
+      {isFormWriteAReviewShown && renderModal}
+    </div>
   );
 };
 
