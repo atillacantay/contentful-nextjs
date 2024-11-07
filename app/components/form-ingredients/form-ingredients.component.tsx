@@ -21,8 +21,8 @@ import { useTranslations } from "next-intl";
 interface IFormIngredients extends ComponentProps<"div"> {
   className?: string;
   noQuantitySelector?: boolean;
-  servingSize: number;
-  ingredients: Ingredient[];
+  servingSize?: number;
+  ingredients?: Ingredient[];
   noMobileView?: boolean;
 }
 
@@ -37,7 +37,7 @@ const FormIngredients = ({
   const { add } = useIngredientShoppingList();
   const t = useTranslations();
   const [isFooterOpen, setIsFooterOpen] = useState(false);
-  const [servingSizeState, setServingSizeState] = useState(servingSize);
+  const [servingSizeState, setServingSizeState] = useState(servingSize || 0);
 
   const handleDecrease = () => {
     setServingSizeState((prevServingSize) =>
@@ -112,14 +112,14 @@ const FormIngredients = ({
       </Stack>
 
       <Stack className="flex-1 max-h-[calc(100vh-231px)] pb-4">
-        {isFooterOpen && (
+        {isFooterOpen && ingredients && ingredients.length > 0 ? (
           <Stack className="pt-6 px-4 overflow-scroll w-full">
             <FormIngredientsList
               ingredients={ingredients}
               servingSize={servingSizeState}
             />
           </Stack>
-        )}
+        ) : null}
       </Stack>
       <Stack className="px-4 pb-4 hidden">
         <Button
@@ -179,12 +179,14 @@ const FormIngredients = ({
           </Stack>
         </Card.Header>
         <Card.Content>
-          <div className="mb-8">
-            <FormIngredientsList
-              ingredients={ingredients}
-              servingSize={servingSizeState}
-            />
-          </div>
+          {ingredients && ingredients.length > 0 ? (
+            <div className="mb-8">
+              <FormIngredientsList
+                ingredients={ingredients}
+                servingSize={servingSizeState}
+              />
+            </div>
+          ) : null}
           <Button
             variant="contained"
             className="hidden bg-primary_red dark:bg-white dark:text-black"

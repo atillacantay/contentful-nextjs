@@ -84,7 +84,8 @@ const AllReviews = ({
     () =>
       reviews
         ?.sort(
-          (reviewA, reviewB) => reviewB.ratingOverall - reviewA.ratingOverall
+          (reviewA, reviewB) =>
+            (reviewB.ratingOverall || 0) - (reviewA.ratingOverall || 0)
         )
         .sort(() => {
           if (sort === "desc") return 0;

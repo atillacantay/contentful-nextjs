@@ -1,4 +1,4 @@
-import { ArgsFormWriteAReview } from "@/components/form-write-a-review/form-write-a-review.interfaces";
+// import { ArgsFormWriteAReview } from "@/components/form-write-a-review/form-write-a-review.interfaces";
 import useWebApi from "./useWebApi";
 
 const useReviews = () => {
@@ -18,7 +18,7 @@ const useReviews = () => {
       ratingTaste: number;
       images: File[];
     },
-    cultureCode: ArgsFormWriteAReview["apiData"]["cultureCode"]
+    cultureCode: any["apiData"]["cultureCode"]
   ) =>
     await post(
       "comment/add?cultureCode=" + cultureCode,
