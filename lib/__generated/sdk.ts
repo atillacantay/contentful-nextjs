@@ -7702,7 +7702,7 @@ export const RecipeReviewsDocument = gql`
   recipeReviewCollection(
     locale: $locale
     limit: $limit
-    where: {recipe: {slug: $slug}}
+    where: {recipe: {slug: $slug}, isApproved: true}
     preview: $preview
     order: $order
   ) {

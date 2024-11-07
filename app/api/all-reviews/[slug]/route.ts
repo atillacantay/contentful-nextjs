@@ -2,10 +2,9 @@ import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { Query, RecipeReview } from "lib/__generated/sdk";
 import { getCurrentLocale } from "lib/api/utils";
 import { client } from "lib/client";
-import { NextApiRequest } from "next";
 import { getTranslations } from "next-intl/server";
 import { draftMode } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { calculateRates, calculateStarPercentages } from "./utils";
 
 export interface AllReviewsResponse {
@@ -22,7 +21,7 @@ export interface AllReviewsResponse {
 }
 
 export const GET = async (
-  request: NextApiRequest,
+  request: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) => {
   const slug = (await context.params).slug;
