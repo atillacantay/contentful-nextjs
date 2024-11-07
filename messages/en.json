@@ -2,6 +2,7 @@
   "common": {
     "oppositeLanguage": "العربية",
     "oppositeLanguageShort": "ع",
+    "language": "Language",
     "homepage": "Homepage",
     "logoImageAltText": "Logo",
     "save": "Save",
@@ -72,7 +73,7 @@
     "instagram": "Instagram"
   },
   "legal": {
-    "copyright": "© Copyright {{ year }}"
+    "copyright": "© { year } Goody Kitchen All rights Reserved"
   },
   "error": {
     "code": "{{code}} error",

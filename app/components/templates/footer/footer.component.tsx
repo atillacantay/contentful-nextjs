@@ -9,8 +9,11 @@ import type {
   Footer as FooterType,
   NavigationLinkItem,
 } from "lib/__generated/sdk";
+import { useFormatter, useTranslations } from "next-intl";
 
 const Footer = (props: FooterType) => {
+  const t = useTranslations();
+  const format = useFormatter();
   const navigationLinks = props?.menuLinksCollection?.items.filter(Boolean);
   const socialItems = props?.socialItemsCollection?.items.filter(Boolean);
   const followLabel = props?.followLabel;
@@ -150,17 +153,11 @@ const Footer = (props: FooterType) => {
             </div>
           </Stack>
 
-          <Stack className="py-4 px-4 md:px-0 lg:hidden  border-b border-red-300 border-opacity-10 justify-between">
+          <Stack className="py-4 px-4 md:px-0 lg:hidden border-b border-red-300 border-opacity-10 justify-between">
             <Text color="white" weight="light">
-              {" "}
-              Language:{" "}
+              {t("common.language")}:
             </Text>
-            <Link href="#" target="_self">
-              <Text className="text-white/80 dark:text-white/80" weight="light">
-                {" "}
-                English
-              </Text>
-            </Link>
+            <LanguageChanger noIcon />
           </Stack>
           <Stack
             className="pt-4 lg:flex-row lg:items-center lg:py-4 py-6  text-base  px-4 md:px-0 lg:gap-12 text-white/80 dark:text-white/80"
@@ -168,7 +165,7 @@ const Footer = (props: FooterType) => {
             spacing={4}
           >
             {legalLinks?.map((legalLink, key) => (
-              <Link key={key} href={legalLink.page?.slug || ""}>
+              <Link key={key} href={`/${legalLink.page?.slug}`}>
                 <Text as="span" className="text-white/80 dark:text-white/80">
                   {legalLink.title}
                 </Text>
@@ -178,10 +175,15 @@ const Footer = (props: FooterType) => {
               as="span"
               className="lg:order-first text-white/80 dark:text-white/80"
             >
-              &copy; {new Date().getFullYear()} Goody Kitchen All rights
-              Reserved
+              {t("legal.copyright", {
+                year: format.dateTime(new Date(), {
+                  year: "numeric",
+                }),
+              })}
             </Text>
-            <LanguageChanger />
+            <div className="hidden md:flex lg:ml-auto lg:rtl:mr-auto lg:rtl:ml-0">
+              <LanguageChanger />
+            </div>
           </Stack>
         </div>
       </footer>

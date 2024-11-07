@@ -8,7 +8,11 @@ import { EventKeys, pushEventToDataLayer } from "@/utils/event-utils";
 import { useLocale, useTranslations } from "next-intl";
 import { useSelectedLayoutSegments } from "next/navigation";
 
-const LanguageChanger = () => {
+interface LanguageChangerProps {
+  noIcon?: boolean;
+}
+
+const LanguageChanger = ({ noIcon }: LanguageChangerProps) => {
   const t = useTranslations();
   const { push } = useRouter();
   const currentLocale = useLocale();
@@ -23,23 +27,21 @@ const LanguageChanger = () => {
   };
 
   return (
-    <Stack
-      className="hidden md:flex lg:ml-auto lg:rtl:mr-auto lg:rtl:ml-0 text-white"
-      spacing={2}
-      onClick={handleLocaleChange}
-    >
+    <Stack className="text-white" spacing={2} onClick={handleLocaleChange}>
       <Text
         className="text-white/80 dark:text-white/80 cursor-pointer"
         weight="light"
       >
         {t("common.oppositeLanguage")}
       </Text>
-      <GlobeIcon
-        width={24}
-        height={24}
-        fill="white"
-        className="opacity-80 cursor-pointer"
-      />
+      {!noIcon && (
+        <GlobeIcon
+          width={24}
+          height={24}
+          fill="white"
+          className="opacity-80 cursor-pointer"
+        />
+      )}
     </Stack>
   );
 };
