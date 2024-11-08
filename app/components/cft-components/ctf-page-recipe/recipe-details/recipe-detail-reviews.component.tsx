@@ -4,8 +4,9 @@ import Star from "@/components/common/star";
 import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 import { clsxm } from "@/utils/twMerge.utils";
+import { getSession } from "@auth0/nextjs-auth0";
 import type { PageRecipe, RecipeReview } from "lib/__generated/sdk";
-import { useFormatter, useTranslations } from "next-intl";
+import { getFormatter, getTranslations } from "next-intl/server";
 import dynamic from "next/dynamic";
 
 const FormWriteAReview = dynamic(
@@ -19,18 +20,24 @@ interface RecipeDetailReviewsProps {
   allReviewsCount?: number;
 }
 
-const RecipeDetailReviews = ({
+const RecipeDetailReviews = async ({
   recipe,
   allReviews,
   allReviewsCount,
-}: RecipeDetailReviewsProps): JSX.Element => {
+}: RecipeDetailReviewsProps) => {
   const { rating } = recipe;
-  const format = useFormatter();
-  const t = useTranslations();
+  const format = await getFormatter();
+  const t = await getTranslations();
+  const session = await getSession();
 
   const ActionButtons = () => (
     <>
-      <FormWriteAReview recipe={recipe} modalLabel={t("common.writeAReview")} />
+      {session && (
+        <FormWriteAReview
+          recipe={recipe}
+          modalLabel={t("common.writeAReview")}
+        />
+      )}
       <AllReviews
         recipe={recipe}
         allReviewsCount={allReviewsCount}
