@@ -2,7 +2,7 @@ import CtfPage from "@/components/cft-components/ctf-page";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { generatePageMetadata } from "@/utils/metadata";
 import type { Page } from "lib/__generated/sdk";
-import { client } from "lib/client";
+import { client } from "lib/graphql";
 import type { Metadata, NextPage } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";

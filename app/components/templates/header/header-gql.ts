@@ -1,5 +1,5 @@
 import type { Query } from "lib/__generated/sdk";
-import { client } from "lib/client";
+import { client } from "lib/graphql";
 import { draftMode } from "next/headers";
 
 export async function getHeaderData(locale: string) {

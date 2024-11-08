@@ -5,7 +5,7 @@ import CtfPageShop from "@/components/cft-components/ctf-page-shop";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { generatePageMetadata } from "@/utils/metadata";
 import { Query } from "lib/__generated/sdk";
-import { client } from "lib/client";
+import { client } from "lib/graphql";
 import { Metadata, NextPage } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";

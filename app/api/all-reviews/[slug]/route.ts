@@ -1,7 +1,7 @@
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { Query, RecipeReview } from "lib/__generated/sdk";
 import { getCurrentLocale } from "lib/api/utils";
-import { client } from "lib/client";
+import { client } from "lib/graphql";
 import { getTranslations } from "next-intl/server";
 import { draftMode } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";

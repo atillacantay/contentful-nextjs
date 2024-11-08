@@ -6,7 +6,7 @@ import {
   PageRecipeQueryVariables,
   Query,
 } from "lib/__generated/sdk";
-import { client } from "lib/client";
+import { client } from "lib/graphql";
 import { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";

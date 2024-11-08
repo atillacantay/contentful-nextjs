@@ -6,7 +6,7 @@ import {
   type PageRecipe,
   type Query,
 } from "lib/__generated/sdk";
-import { client } from "lib/client";
+import { client } from "lib/graphql";
 import { getLocale } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { draftMode } from "next/headers";

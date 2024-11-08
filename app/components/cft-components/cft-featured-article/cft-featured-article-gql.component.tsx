@@ -1,6 +1,6 @@
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import type { FeaturedArticle } from "lib/__generated/sdk";
-import { client } from "lib/client";
+import { client } from "lib/graphql";
 import { getLocale } from "next-intl/server";
 import { draftMode } from "next/headers";
 import CtfFeaturedArticle from "./cft-featured-article.component";
