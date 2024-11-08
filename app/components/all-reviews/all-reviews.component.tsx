@@ -231,7 +231,10 @@ const AllReviews = ({
       <Button
         variant="outlined"
         size="lg"
-        className={clsxm("text-primary_red font-medium", buttonClassName)}
+        className={clsxm(
+          "text-primary_red max-md:w-full font-medium",
+          buttonClassName
+        )}
         onClick={() => setIsAllReviewsModalOpen(true)}
       >
         {t("common.showAllReviewsWithCount", {

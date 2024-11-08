@@ -79,6 +79,7 @@ const RecipeDetailReviews = ({
         ))}
       </Stack>
       <Stack spacing={4} direction="col" className="md:hidden mt-8">
+        <ActionButtons />
         <div className="portal-form-write-a-review"></div>
         <div className="portal-all-reviews"></div>
         {/* In development it may be disappered but it's okay.
