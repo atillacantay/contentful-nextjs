@@ -31,15 +31,13 @@ const RecipeDetailReviews = ({
   const ActionButtons = () => (
     <>
       <FormWriteAReview recipe={recipe} modalLabel={t("common.writeAReview")} />
-      {allReviewsCount && allReviewsCount > 3 ? (
-        <AllReviews
-          recipe={recipe}
-          allReviewsCount={allReviewsCount}
-          modalLabel={t("common.allReviews", {
-            count: format.number(Number(allReviewsCount)),
-          })}
-        />
-      ) : null}
+      <AllReviews
+        recipe={recipe}
+        allReviewsCount={allReviewsCount}
+        modalLabel={t("common.allReviews", {
+          count: format.number(Number(allReviewsCount)),
+        })}
+      />
     </>
   );
 

@@ -21,12 +21,10 @@ export interface AllReviewsResponse {
 }
 
 export const GET = async (
-  request: NextRequest,
+  _: NextRequest,
   context: { params: Promise<{ slug: string }> }
 ) => {
   const slug = (await context.params).slug;
-  const { searchParams } = new URL(request.url);
-  const limit = searchParams.get("limit");
 
   if (!slug) {
     return NextResponse.error();
@@ -34,13 +32,12 @@ export const GET = async (
 
   const locale = await getCurrentLocale();
   const t = await getTranslations({ locale });
-  const activeLocale = mapLocaleToContentfulLocale(locale);
+  const activeLocale = mapLocaleToContentfulLocale(locale as string);
   const { isEnabled } = await draftMode();
   const data = await client.recipeReviews({
     slug,
     locale: activeLocale,
     preview: isEnabled,
-    limit: Number(limit),
   });
   const reviews = (data as Query).recipeReviewCollection?.items;
 
