@@ -28,7 +28,7 @@ const getAllRecipeReviews = async (slug?: string) => {
     preview: isEnabled,
     locale: activeLocale,
     limit: 3,
-    order: RecipeReviewOrder.SysFirstPublishedAtAsc,
+    order: RecipeReviewOrder.SysFirstPublishedAtDesc,
   });
 
   return (data as Query).recipeReviewCollection;

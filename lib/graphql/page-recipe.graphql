@@ -32,6 +32,7 @@ fragment PageRecipeFields on PageRecipe {
   sys {
     id
   }
+  _id
   slug
   title
   description

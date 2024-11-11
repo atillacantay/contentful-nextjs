@@ -6,11 +6,12 @@ import Modal from "@/components/common/modal";
 import Stack from "@/components/common/stack/stack.component";
 import Text from "@/components/common/typography/text";
 import Rate from "@/components/rate/rate.component";
-import useReviews from "@/hooks/useReviews";
 import IconAdd from "@/public/assets/icons/add.svg";
 import TrashIcon from "@/public/assets/icons/close.svg";
 import { clsxm } from "@/utils/twMerge.utils";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { PageRecipe } from "lib/__generated/sdk";
+import { addReview } from "lib/api/reviews";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
@@ -32,6 +33,7 @@ FormWriteAReviewProps): JSX.Element => {
   const t = useTranslations();
   const format = useFormatter();
   const locale = useLocale();
+  const user = useUser();
   const [isFormWriteAReviewShown, setFormWriteAReviewShown] =
     useState<boolean>(false);
   const [rating, setRating] = useState<number>(0);
@@ -43,7 +45,6 @@ FormWriteAReviewProps): JSX.Element => {
     {}
   );
   const [userReview, setUserReview] = useState<string>("");
-  const { add } = useReviews();
 
   const isValid = useMemo(
     () =>
@@ -103,28 +104,29 @@ FormWriteAReviewProps): JSX.Element => {
     if (isFormWriteAReviewShown === false) clearAll();
   }, [isFormWriteAReviewShown]);
 
-  // const submit = () => {
-  //   if (!isValid) return;
+  const submit = async () => {
+    if (!isValid) return;
+    const formData = new FormData();
+    if (user.user?.org_id) {
+      formData.append("authorId", user.user.org_id);
+    }
+    formData.append("content", userReview);
+    formData.append("relatedId", recipe.sys.id);
+    formData.append("ratingOverall", rating.toString());
+    formData.append("ratingIngredients", ingredients.toString());
+    formData.append("ratingAccuracy", accuracy.toString());
+    formData.append("ratingDifficulty", difficulty.toString());
+    formData.append("ratingTaste", taste.toString());
+    Object.values(imagesToUpload).map((file, index) => {
+      formData.append(`images-${index}`, file, file.name);
+    });
 
-  //   add(
-  //     {
-  //       content: userReview,
-  //       ratingOverall: rating,
-  //       ratingIngredients: ingredients,
-  //       ratingAccuracy: accuracy,
-  //       ratingDifficulty: difficulty,
-  //       ratingTaste: taste,
-  //       authorId,
-  //       parentId,
-  //       relatedId,
-  //       relatedObjectType,
-  //       images: Object.values(imagesToUpload),
-  //     },
-  //     cultureCode
-  //   ).finally(() => {
-  //     setFormWriteAReviewShown(false);
-  //   });
-  // };
+    try {
+      await addReview(formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const renderModal = (
     <Modal
@@ -305,7 +307,7 @@ FormWriteAReviewProps): JSX.Element => {
           size="lg"
           type="submit"
           disabled={!isValid}
-          // onClick={submit}
+          onClick={submit}
         >
           {t("common.submitReview")}
         </Button>

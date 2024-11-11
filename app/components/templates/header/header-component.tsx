@@ -134,6 +134,7 @@ const HeaderComponent = ({
                     onClick={toggleUserMenu}
                     className="cursor-pointer rounded-full h-[32px] w-[32px] object-cover"
                     alt={user.name || "avatar"}
+                    unoptimized
                   />
                 );
 
