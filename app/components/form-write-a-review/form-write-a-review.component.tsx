@@ -3,9 +3,11 @@
 import ContentfulImage from "@/components/cft-components/cft-image";
 import Button from "@/components/common/button";
 import Modal from "@/components/common/modal";
+import Spinner from "@/components/common/spinner";
 import Stack from "@/components/common/stack/stack.component";
 import Text from "@/components/common/typography/text";
 import Rate from "@/components/rate/rate.component";
+import { useMutation } from "@/hooks/useMutation";
 import IconAdd from "@/public/assets/icons/add.svg";
 import TrashIcon from "@/public/assets/icons/close.svg";
 import { clsxm } from "@/utils/twMerge.utils";
@@ -34,6 +36,11 @@ FormWriteAReviewProps): JSX.Element => {
   const format = useFormatter();
   const locale = useLocale();
   const user = useUser();
+  const { data, isLoading, error, mutate } = useMutation(addReview, {
+    onSuccess: () => setFormWriteAReviewShown(false),
+  });
+  console.log({ data, error });
+
   const [isFormWriteAReviewShown, setFormWriteAReviewShown] =
     useState<boolean>(false);
   const [rating, setRating] = useState<number>(0);
@@ -107,8 +114,8 @@ FormWriteAReviewProps): JSX.Element => {
   const submit = async () => {
     if (!isValid) return;
     const formData = new FormData();
-    if (user.user?.org_id) {
-      formData.append("authorId", user.user.org_id);
+    if (user.user?.sub) {
+      formData.append("authorId", user.user.sub);
     }
     formData.append("content", userReview);
     formData.append("relatedId", recipe.sys.id);
@@ -122,7 +129,7 @@ FormWriteAReviewProps): JSX.Element => {
     });
 
     try {
-      await addReview(formData);
+      mutate(formData);
     } catch (error) {
       console.log(error);
     }
@@ -309,6 +316,8 @@ FormWriteAReviewProps): JSX.Element => {
           disabled={!isValid}
           onClick={submit}
         >
+          {isLoading && <Spinner size={6} />}
+
           {t("common.submitReview")}
         </Button>
       </Modal.Footer>
