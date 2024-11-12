@@ -39,7 +39,6 @@ FormWriteAReviewProps): JSX.Element => {
   const { data, isLoading, error, mutate } = useMutation(addReview, {
     onSuccess: () => setFormWriteAReviewShown(false),
   });
-  console.log({ data, error });
 
   const [isFormWriteAReviewShown, setFormWriteAReviewShown] =
     useState<boolean>(false);
