@@ -20,7 +20,7 @@ const SliderMainGql = async ({ id }: SliderMainGqlProps) => {
     locale: activeLocale,
   });
 
-  const slider = data?.sliderCollection?.items?.[0] as SliderType;
+  const slider = data?.slider as SliderType;
   const slides = slider?.sliderItemCollection?.items;
 
   return <Slider slides={slides} />;

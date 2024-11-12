@@ -7042,10 +7042,10 @@ export type SliderQueryVariables = Exact<{
 }>;
 
 
-export type SliderQuery = { __typename?: 'Query', sliderCollection?: { __typename?: 'SliderCollection', items: Array<(
-      { __typename?: 'Slider' }
-      & SliderFieldsFragment
-    )> } };
+export type SliderQuery = { __typename?: 'Query', slider?: (
+    { __typename?: 'Slider' }
+    & SliderFieldsFragment
+  ) };
 
 export const FeaturedArticleFieldsFragmentDoc = gql`
     fragment FeaturedArticleFields on FeaturedArticle {
@@ -7926,15 +7926,8 @@ export const SectionQueryDocument = gql`
     ${SectionFieldsFragmentDoc}`;
 export const SliderDocument = gql`
     query slider($id: String!, $locale: String, $preview: Boolean) {
-  sliderCollection(
-    limit: 1
-    locale: $locale
-    where: {sys: {id: $id}}
-    preview: $preview
-  ) {
-    items {
-      ...SliderFields
-    }
+  slider(locale: $locale, id: $id, preview: $preview) {
+    ...SliderFields
   }
 }
     ${SliderFieldsFragmentDoc}`;
