@@ -36,7 +36,7 @@ FormWriteAReviewProps): JSX.Element => {
   const format = useFormatter();
   const locale = useLocale();
   const user = useUser();
-  const { data, isLoading, error, mutate } = useMutation(addReview, {
+  const { isLoading, error, mutate } = useMutation(addReview, {
     onSuccess: () => setFormWriteAReviewShown(false),
   });
 
@@ -296,23 +296,28 @@ FormWriteAReviewProps): JSX.Element => {
           </Stack>
         </div>
       </Modal.Body>
-      <Modal.Footer className="justify-between border-t dark:border-custom2_dark">
+      <Modal.Footer className="justify-between border-t dark:border-custom2_dark items-center">
         <Button
           className="text-primary_red underline cursor-pointer px-0"
           onClick={clearAll}
         >
           {t("common.clearAll")}
         </Button>
+        {error ? (
+          <Text className="text-primary_red">{error?.message}</Text>
+        ) : (
+          <></>
+        )}
         <Button
           variant="contained"
           className={clsxm(
             "place-self-end text-base",
             isValid && "bg-primary_red",
-            !isValid && "bg-black/25 cursor-default"
+            (!isValid || isLoading) && "bg-black/25 cursor-default"
           )}
           size="lg"
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
           onClick={submit}
         >
           {isLoading && <Spinner size={6} />}

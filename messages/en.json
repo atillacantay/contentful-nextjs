@@ -78,6 +78,7 @@
   "error": {
     "code": "{{code}} error",
     "componentNotFound": "Component not found.",
-    "somethingWentWrong": "Something went wrong, check your url and try again"
+    "somethingWentWrong": "Something went wrong, check your url and try again",
+    "invalidDataProvided": "Invalid data provided"
   }
 }

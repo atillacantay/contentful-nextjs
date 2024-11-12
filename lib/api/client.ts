@@ -4,6 +4,11 @@ interface FetchOptions extends RequestInit {
   body?: BodyInit | null;
 }
 
+interface ErrorBody {
+  success: boolean;
+  error: string;
+}
+
 export async function apiClient<T>(
   endpoint: string,
   options: FetchOptions = {}
@@ -17,7 +22,8 @@ export async function apiClient<T>(
   });
 
   if (!response.ok) {
-    throw new Error(`API request failed: ${response.statusText}`);
+    const errorBody: ErrorBody = await response.json();
+    throw new Error(`${errorBody?.error || response.statusText}`);
   }
 
   return response.json() as Promise<T>;

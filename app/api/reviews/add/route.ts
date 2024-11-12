@@ -2,22 +2,30 @@ import { client } from "lib/api/contentful/client";
 import { createLinkObject } from "lib/api/contentful/utils/create-link-object";
 import { createMultipleLinkObject } from "lib/api/contentful/utils/create-multiple-link-object";
 import { uploadAsset } from "lib/api/contentful/utils/upload-asset";
+import { getCurrentLocale } from "lib/api/utils";
+import { getTranslations } from "next-intl/server";
 import { NextResponse, type NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
+  const locale = getCurrentLocale();
+  const t = await getTranslations({ locale });
+
   const formData = await request.formData();
   const authorId = formData.get("authorId");
   const content = formData.get("content");
   const relatedId = formData.get("relatedId");
-  const ratingOverall = formData.get("ratingOverall");
-  const ratingIngredients = formData.get("ratingIngredients");
-  const ratingAccuracy = formData.get("ratingAccuracy");
-  const ratingDifficulty = formData.get("ratingDifficulty");
-  const ratingTaste = formData.get("ratingTaste");
+  const ratingOverall = Number(formData.get("ratingOverall"));
+  const ratingIngredients = Number(formData.get("ratingIngredients"));
+  const ratingAccuracy = Number(formData.get("ratingAccuracy"));
+  const ratingDifficulty = Number(formData.get("ratingDifficulty"));
+  const ratingTaste = Number(formData.get("ratingTaste"));
 
-  if (!relatedId || !authorId || !content || !ratingOverall) {
+  if (!relatedId || !authorId || !content || ratingOverall <= 0) {
     return new NextResponse(
-      JSON.stringify({ success: false, error: "Invalid data provided." }),
+      JSON.stringify({
+        success: false,
+        error: t("error.invalidDataProvided"),
+      }),
       {
         status: 500,
       }

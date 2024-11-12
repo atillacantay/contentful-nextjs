@@ -78,6 +78,7 @@
   "error": {
     "code": "خطأ {{code}}",
     "componentNotFound": "المكون غير موجود",
-    "somethingWentWrong": "حدث خطأ ما، تحقق من عنوان URL الخاص بك وحاول مرة أخرى"
+    "somethingWentWrong": "حدث خطأ ما، تحقق من عنوان URL الخاص بك وحاول مرة أخرى",
+    "invalidDataProvided": "البيانات المقدمة غير صالحة"
   }
 }
