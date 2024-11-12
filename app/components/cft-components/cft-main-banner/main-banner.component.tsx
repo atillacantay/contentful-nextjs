@@ -31,9 +31,9 @@ const MainBanner = ({
         <ContentfulImage
           src={image?.url || ""}
           alt={image?.title || image?.description || "Masterclass Main Banner"}
-          width={image?.width}
-          height={image?.height}
-          className="object-center object-cover pointer-events-none h-full rounded-xl absolute left-0"
+          fill
+          loading="eager"
+          className="object-center object-cover pointer-events-none rounded-xl"
         />
         <div className="cursor-default rounded-xl bg-black/40 py-8 md:py-20 w-full h-full flex justify-start relative z-[1]">
           <div className="md:grow-[0.5] md:max-w-[50%]">
