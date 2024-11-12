@@ -37,6 +37,12 @@ const FeaturedMagazine = dynamic(() =>
   )
 );
 
+const MainBanner = dynamic(() =>
+  import("@/components/cft-components/cft-main-banner").then(
+    (module) => module.default
+  )
+);
+
 interface ComponentResolverProps {
   component: any;
 }
@@ -47,6 +53,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   featuredrecipe: FeaturedRecipe,
   featuredarticle: FeaturedArticle,
   featuredmagazine: FeaturedMagazine,
+  mainbanner: MainBanner,
 };
 
 const ComponentResolver: React.FC<ComponentResolverProps> = ({ component }) => {

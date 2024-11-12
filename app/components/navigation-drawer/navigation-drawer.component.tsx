@@ -24,7 +24,7 @@ const navIcons: Record<string, FC<SVGProps<SVGElement>>> = {
   recipes: RecipeIcon,
   foodies: FoodiesIcon,
   shop: ShoppingBagIcon,
-  masterclass: MasterclassIcon,
+  "master-classes": MasterclassIcon,
   magazines: ArticlesIcon,
   pastapedia: PastapediaIcon,
 };

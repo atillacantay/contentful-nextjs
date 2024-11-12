@@ -95,6 +95,7 @@ type AssetLinkingCollections {
   componentAuthorCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentAuthorCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
   ingredientCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): IngredientCollection
+  mainBannerCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): MainBannerCollection
   pageArticleCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageArticleCollection
   pageMagazineCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageMagazineCollection
   pageRecipeCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageRecipeCollection
@@ -230,6 +231,8 @@ enum ComponentAuthorLinkingCollectionsPageRecipeCollectionOrder {
 }
 
 enum ComponentAuthorLinkingCollectionsRecipeReviewCollectionOrder {
+  authorId_ASC
+  authorId_DESC
   internalName_ASC
   internalName_DESC
   isApproved_ASC
@@ -244,8 +247,6 @@ enum ComponentAuthorLinkingCollectionsRecipeReviewCollectionOrder {
   ratingOverall_DESC
   ratingTaste_ASC
   ratingTaste_DESC
-  recipeId_ASC
-  recipeId_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -1097,6 +1098,97 @@ enum ItemShowcaseOrder {
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
 scalar JSON
+
+"""
+[See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/mainBanner)
+"""
+type MainBanner implements Entry & _Node {
+  _id: ID!
+  contentfulMetadata: ContentfulMetadata!
+  image(locale: String, preview: Boolean): Asset
+  internalName(locale: String): String
+  linkedFrom(allowedLocales: [String]): MainBannerLinkingCollections
+  subtitle1(locale: String): String
+  subtitle2(locale: String): String
+  subtitle3(locale: String): String
+  sys: Sys!
+  title(locale: String): String
+}
+
+type MainBannerCollection {
+  items: [MainBanner]!
+  limit: Int!
+  skip: Int!
+  total: Int!
+}
+
+input MainBannerFilter {
+  AND: [MainBannerFilter]
+  OR: [MainBannerFilter]
+  contentfulMetadata: ContentfulMetadataFilter
+  image_exists: Boolean
+  internalName: String
+  internalName_contains: String
+  internalName_exists: Boolean
+  internalName_in: [String]
+  internalName_not: String
+  internalName_not_contains: String
+  internalName_not_in: [String]
+  subtitle1: String
+  subtitle1_contains: String
+  subtitle1_exists: Boolean
+  subtitle1_in: [String]
+  subtitle1_not: String
+  subtitle1_not_contains: String
+  subtitle1_not_in: [String]
+  subtitle2: String
+  subtitle2_contains: String
+  subtitle2_exists: Boolean
+  subtitle2_in: [String]
+  subtitle2_not: String
+  subtitle2_not_contains: String
+  subtitle2_not_in: [String]
+  subtitle3: String
+  subtitle3_contains: String
+  subtitle3_exists: Boolean
+  subtitle3_in: [String]
+  subtitle3_not: String
+  subtitle3_not_contains: String
+  subtitle3_not_in: [String]
+  sys: SysFilter
+  title: String
+  title_contains: String
+  title_exists: Boolean
+  title_in: [String]
+  title_not: String
+  title_not_contains: String
+  title_not_in: [String]
+}
+
+type MainBannerLinkingCollections {
+  entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
+}
+
+enum MainBannerOrder {
+  internalName_ASC
+  internalName_DESC
+  subtitle1_ASC
+  subtitle1_DESC
+  subtitle2_ASC
+  subtitle2_DESC
+  subtitle3_ASC
+  subtitle3_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+  title_ASC
+  title_DESC
+}
 
 """
 [See type definition](https://app.contentful.com/spaces/wa6vhmn3d2y6/content_types/mainNavigation)
@@ -2071,6 +2163,8 @@ enum PageRecipeLinkingCollectionsPageRecipeCollectionOrder {
 }
 
 enum PageRecipeLinkingCollectionsRecipeReviewCollectionOrder {
+  authorId_ASC
+  authorId_DESC
   internalName_ASC
   internalName_DESC
   isApproved_ASC
@@ -2085,8 +2179,6 @@ enum PageRecipeLinkingCollectionsRecipeReviewCollectionOrder {
   ratingOverall_DESC
   ratingTaste_ASC
   ratingTaste_DESC
-  recipeId_ASC
-  recipeId_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -2757,6 +2849,8 @@ type Query {
   ingredientCollection(limit: Int = 100, locale: String, order: [IngredientOrder], preview: Boolean, skip: Int = 0, where: IngredientFilter): IngredientCollection
   itemShowcase(id: String!, locale: String, preview: Boolean): ItemShowcase
   itemShowcaseCollection(limit: Int = 100, locale: String, order: [ItemShowcaseOrder], preview: Boolean, skip: Int = 0, where: ItemShowcaseFilter): ItemShowcaseCollection
+  mainBanner(id: String!, locale: String, preview: Boolean): MainBanner
+  mainBannerCollection(limit: Int = 100, locale: String, order: [MainBannerOrder], preview: Boolean, skip: Int = 0, where: MainBannerFilter): MainBannerCollection
   mainNavigation(id: String!, locale: String, preview: Boolean): MainNavigation
   mainNavigationCollection(limit: Int = 100, locale: String, order: [MainNavigationOrder], preview: Boolean, skip: Int = 0, where: MainNavigationFilter): MainNavigationCollection
   navigationLinkItem(id: String!, locale: String, preview: Boolean): NavigationLinkItem
@@ -2797,6 +2891,7 @@ type Query {
 type RecipeReview implements Entry & _Node {
   _id: ID!
   author(locale: String, preview: Boolean, where: ComponentAuthorFilter): ComponentAuthor
+  authorId(locale: String): String
   content(locale: String): String
   contentfulMetadata: ContentfulMetadata!
   imagesCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): AssetCollection
@@ -2809,7 +2904,6 @@ type RecipeReview implements Entry & _Node {
   ratingOverall(locale: String): Int
   ratingTaste(locale: String): Int
   recipe(locale: String, preview: Boolean, where: PageRecipeFilter): PageRecipe
-  recipeId(locale: String): String
   sys: Sys!
 }
 
@@ -2824,6 +2918,13 @@ input RecipeReviewFilter {
   AND: [RecipeReviewFilter]
   OR: [RecipeReviewFilter]
   author: cfComponentAuthorNestedFilter
+  authorId: String
+  authorId_contains: String
+  authorId_exists: Boolean
+  authorId_in: [String]
+  authorId_not: String
+  authorId_not_contains: String
+  authorId_not_in: [String]
   author_exists: Boolean
   content: String
   content_contains: String
@@ -2890,13 +2991,6 @@ input RecipeReviewFilter {
   ratingTaste_not: Int
   ratingTaste_not_in: [Int]
   recipe: cfPageRecipeNestedFilter
-  recipeId: String
-  recipeId_contains: String
-  recipeId_exists: Boolean
-  recipeId_in: [String]
-  recipeId_not: String
-  recipeId_not_contains: String
-  recipeId_not_in: [String]
   recipe_exists: Boolean
   sys: SysFilter
 }
@@ -2906,6 +3000,8 @@ type RecipeReviewLinkingCollections {
 }
 
 enum RecipeReviewOrder {
+  authorId_ASC
+  authorId_DESC
   internalName_ASC
   internalName_DESC
   isApproved_ASC
@@ -2920,8 +3016,6 @@ enum RecipeReviewOrder {
   ratingOverall_DESC
   ratingTaste_ASC
   ratingTaste_DESC
-  recipeId_ASC
-  recipeId_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC

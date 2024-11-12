@@ -18,7 +18,7 @@ const iconsMap: Record<string, any> = {
   recipes: RecipeIcon,
   foodies: FoodiesIcon,
   shop: ShoppingBagIcon,
-  masterclass: MasterclassIcon,
+  "master-classes": MasterclassIcon,
   magazines: ArticlesIcon,
   pastapedia: PastapediaLogo,
 };

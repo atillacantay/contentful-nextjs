@@ -39,7 +39,7 @@ export const ModelHeaderSearch: React.ComponentProps<typeof HeaderSearch> = {
     },
     {
       webApiPath: "search/masterclass?cultureCode=en-US",
-      icon: "masterclass",
+      icon: "master-classes",
       label: "Masterclass",
       searchCategoryType: "masterclass",
       resultMap: {

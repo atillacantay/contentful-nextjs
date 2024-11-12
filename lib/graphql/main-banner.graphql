@@ -1,0 +1,19 @@
+query mainBanner($id: String!, $locale: String, $preview: Boolean) {
+  mainBanner(locale: $locale, id: $id, preview: $preview) {
+    __typename
+    sys {
+      id
+    }
+    title
+    image {
+      url
+      title
+      description
+      width
+      height
+    }
+    subtitle1
+    subtitle2
+    subtitle3
+  }
+}

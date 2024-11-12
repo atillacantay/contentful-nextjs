@@ -15,12 +15,12 @@ const GetIconByLabel = ({
 } & React.ComponentProps<"svg">) => {
   if (icon === "article") return <ArticlesIcon {...props} />;
   if (icon === "recipe") return <RecipeIcon {...props} />;
-  if (icon === "masterclass") return <MasterclassIcon {...props} />;
+  if (icon === "master-classes") return <MasterclassIcon {...props} />;
   if (icon === "foodies") return <FoodiesIcon {...props} />;
   if (icon === "product") return <ShoppingBagIcon {...props} />;
 };
 interface ICategoryTag {
-  icon?: "article" | "masterclass" | "foodies" | "product" | "recipe";
+  icon?: "article" | "master-classes" | "foodies" | "product" | "recipe";
   label?: string;
   selected?: boolean;
   value?: string;
