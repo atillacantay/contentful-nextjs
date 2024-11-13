@@ -1,6 +1,5 @@
 import type { Maybe } from "graphql/jsutils/Maybe";
 import type { MainNavigation as MainNavigationType } from "lib/__generated/sdk";
-import { Fragment } from "react";
 import NavigationItem from "./navigation-item";
 
 const MainNavigation = (props: Maybe<MainNavigationType> | undefined) => {
@@ -26,9 +25,7 @@ const MainNavigation = (props: Maybe<MainNavigationType> | undefined) => {
     >
       <ul className="lg:container mx-auto flex items-center justify-around space-x-0 capitalize">
         {navigations?.map((item) => (
-          <Fragment key={item?.sys.id}>
-            <NavigationItem item={item} />
-          </Fragment>
+          <NavigationItem key={item?.sys.id} item={item} />
         ))}
       </ul>
     </nav>

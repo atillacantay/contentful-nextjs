@@ -59,6 +59,7 @@ const NavigationItem = ({ item }: NavigationItemProps) => {
                 "dark:text-white",
                 shouldUseLogo && "w-auto h-[87px]"
               )}
+              alt={item.title}
             />
           </span>
         )}
