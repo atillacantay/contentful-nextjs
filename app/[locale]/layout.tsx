@@ -8,6 +8,7 @@ import ReactQueryProvider from "@/providers/react-query-provider";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { clsxm } from "@/utils/twMerge.utils";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -89,6 +90,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
               </ReactQueryProvider>
             </Suspense>
           </NextIntlClientProvider>
+          <SpeedInsights />
         </body>
       </UserProvider>
     </html>
