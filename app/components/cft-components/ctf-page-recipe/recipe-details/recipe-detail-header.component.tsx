@@ -30,7 +30,7 @@ const RecipeDetailHeader = ({
 
   return (
     <Stack direction="col" className="h-2/6 pb-8 lg:flex-row lg:gap-4">
-      <div className="relative overflow-hidden lg:w-1/2 max-lg:mb-8 min-h-[150px]">
+      <div className="relative overflow-hidden lg:w-1/2 max-lg:mb-8">
         <div
           className="absolute inset-0 lg:hidden"
           style={{
@@ -42,10 +42,11 @@ const RecipeDetailHeader = ({
           <HeaderMini />
         </Stack>
         <ContentfulImage
-          className="block w-full lg:rounded-2xl object-cover"
+          className="block w-full lg:rounded-2xl"
           src={image?.url || ""}
           priority
-          fill
+          width={image?.width}
+          height={image?.height}
           alt={image?.description || title || "Recipe Image"}
         />
       </div>
