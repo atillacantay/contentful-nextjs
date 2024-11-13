@@ -59,6 +59,7 @@ const NavigationItem = ({ item }: NavigationItemProps) => {
                 "dark:text-white",
                 shouldUseLogo && "w-auto h-[87px]"
               )}
+              aria-label={item.title}
               alt={item.title}
             />
           </span>
