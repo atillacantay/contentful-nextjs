@@ -42,11 +42,10 @@ const RecipeDetailHeader = ({
           <HeaderMini />
         </Stack>
         <ContentfulImage
-          className="block w-full lg:rounded-2xl"
+          className="block w-full lg:rounded-2xl object-cover"
           src={image?.url || ""}
-          width={image?.width}
-          height={image?.height}
           priority
+          fill
           alt={image?.description || title || "Recipe Image"}
         />
       </div>
