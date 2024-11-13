@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
   },
   images: {
     loader: "custom",
+    deviceSizes: [
+      50, 110, 187, 230, 288, 320, 383, 456, 554, 640, 768, 1024, 1170, 1280,
+      1600, 1920, 2048,
+    ],
     formats: ["image/avif", "image/webp"],
   },
   experimental: {
