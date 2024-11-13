@@ -1,3 +1,4 @@
+import ContentfulImage from "@/components/cft-components/cft-image";
 import Badge from "@/components/common/badge";
 import Card from "@/components/common/card";
 import Stack from "@/components/common/stack";
@@ -6,6 +7,7 @@ import Header from "@/components/common/typography/header";
 import Text from "@/components/common/typography/text";
 import { Link } from "@/i18n/routing";
 import Recipe from "@/public/assets/icons/recipe.svg";
+import { getAuthorAvatarAlt } from "@/utils/client-metadata";
 import type { PageRecipe } from "lib/__generated/sdk";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 
@@ -53,7 +55,7 @@ const RecipeCard = ({
         <Card.Media
           className="h-full"
           src={image?.url || ""}
-          alt={image?.title || title || ""}
+          alt={image?.title || image?.description || title || ""}
           width={image?.width}
           height={image?.height}
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -73,10 +75,11 @@ const RecipeCard = ({
           </Link>
           <Stack direction="row" alignItems="center" justifyContent="between">
             <Stack direction="row" alignItems="center" className="gap-2">
-              <img
-                src={author?.avatar?.url}
+              <ContentfulImage
+                src={author?.avatar?.url || ""}
                 width={24}
                 height={24}
+                alt={getAuthorAvatarAlt(author)}
                 className="rounded-full w-[24px] h-[24px]"
               />
               <Text className="text-xs" color={textColor}>

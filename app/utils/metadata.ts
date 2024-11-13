@@ -1,5 +1,5 @@
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
-import {
+import type {
   PageQuery,
   PageQueryVariables,
   PageRecipeQuery,
