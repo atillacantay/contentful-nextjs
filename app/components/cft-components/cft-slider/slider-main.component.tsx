@@ -43,7 +43,7 @@ const useTimerCalculator = (
 
 const TimerDisplay = React.memo<{ date: string }>(({ date }) => {
   const [days, hours, minutes, seconds] = useTimerCalculator(date);
-  const t = useTranslations("common");
+  const t = useTranslations();
   return (
     <Stack
       direction="row"
@@ -62,7 +62,7 @@ const TimerDisplay = React.memo<{ date: string }>(({ date }) => {
           {days}
         </Text>
         <Text className="text-sm sm:text-md" color="white">
-          {t("days")}
+          {t("common.days")}
         </Text>
       </Stack>
       <Stack
@@ -75,7 +75,7 @@ const TimerDisplay = React.memo<{ date: string }>(({ date }) => {
           {hours}
         </Text>
         <Text className="text-sm sm:text-md" color="white">
-          {t("hours")}
+          {t("common.hours")}
         </Text>
       </Stack>
       <Stack
@@ -88,7 +88,7 @@ const TimerDisplay = React.memo<{ date: string }>(({ date }) => {
           {minutes}
         </Text>
         <Text className="text-sm sm:text-md" color="white">
-          {t("minutes")}
+          {t("common.minutes")}
         </Text>
       </Stack>
       <Stack
@@ -101,7 +101,7 @@ const TimerDisplay = React.memo<{ date: string }>(({ date }) => {
           {seconds}
         </Text>
         <Text className="text-sm sm:text-md" color="white">
-          {t("seconds")}
+          {t("common.seconds")}
         </Text>
       </Stack>
     </Stack>
