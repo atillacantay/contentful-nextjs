@@ -43,68 +43,92 @@ const useTimerCalculator = (
 
 const TimerDisplay = React.memo<{ date: string }>(({ date }) => {
   const [days, hours, minutes, seconds] = useTimerCalculator(date);
+  const [domReady, setDomReady] = useState(false);
   const t = useTranslations();
+
+  useEffect(() => {
+    setDomReady(true);
+  }, []);
+
   return (
-    <Stack
-      direction="row"
-      alignItems="center"
-      justifyContent="center"
-      spacing={2}
-      className="sm:gap-4"
-    >
+    domReady && (
       <Stack
-        direction="col"
+        direction="row"
         alignItems="center"
         justifyContent="center"
-        className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
+        spacing={2}
+        className="sm:gap-4"
       >
-        <Text className="text-base sm:text-3xl" weight="semibold" color="white">
-          {days}
-        </Text>
-        <Text className="text-sm sm:text-md" color="white">
-          {t("common.days")}
-        </Text>
+        <Stack
+          direction="col"
+          alignItems="center"
+          justifyContent="center"
+          className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
+        >
+          <Text
+            className="text-base sm:text-3xl"
+            weight="semibold"
+            color="white"
+          >
+            {days}
+          </Text>
+          <Text className="text-sm sm:text-md" color="white">
+            {t("common.days")}
+          </Text>
+        </Stack>
+        <Stack
+          direction="col"
+          alignItems="center"
+          justifyContent="center"
+          className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
+        >
+          <Text
+            className="text-base sm:text-3xl"
+            weight="semibold"
+            color="white"
+          >
+            {hours}
+          </Text>
+          <Text className="text-sm sm:text-md" color="white">
+            {t("common.hours")}
+          </Text>
+        </Stack>
+        <Stack
+          direction="col"
+          alignItems="center"
+          justifyContent="center"
+          className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
+        >
+          <Text
+            className="text-base sm:text-3xl"
+            weight="semibold"
+            color="white"
+          >
+            {minutes}
+          </Text>
+          <Text className="text-sm sm:text-md" color="white">
+            {t("common.minutes")}
+          </Text>
+        </Stack>
+        <Stack
+          direction="col"
+          alignItems="center"
+          justifyContent="center"
+          className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
+        >
+          <Text
+            className="text-base sm:text-3xl"
+            weight="semibold"
+            color="white"
+          >
+            {seconds}
+          </Text>
+          <Text className="text-sm sm:text-md" color="white">
+            {t("common.seconds")}
+          </Text>
+        </Stack>
       </Stack>
-      <Stack
-        direction="col"
-        alignItems="center"
-        justifyContent="center"
-        className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
-      >
-        <Text className="text-base sm:text-3xl" weight="semibold" color="white">
-          {hours}
-        </Text>
-        <Text className="text-sm sm:text-md" color="white">
-          {t("common.hours")}
-        </Text>
-      </Stack>
-      <Stack
-        direction="col"
-        alignItems="center"
-        justifyContent="center"
-        className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
-      >
-        <Text className="text-base sm:text-3xl" weight="semibold" color="white">
-          {minutes}
-        </Text>
-        <Text className="text-sm sm:text-md" color="white">
-          {t("common.minutes")}
-        </Text>
-      </Stack>
-      <Stack
-        direction="col"
-        alignItems="center"
-        justifyContent="center"
-        className="bg-white/40 py-3 px-2 sm:px-4 rounded-xl"
-      >
-        <Text className="text-base sm:text-3xl" weight="semibold" color="white">
-          {seconds}
-        </Text>
-        <Text className="text-sm sm:text-md" color="white">
-          {t("common.seconds")}
-        </Text>
-      </Stack>
-    </Stack>
+    )
   );
 });
 
