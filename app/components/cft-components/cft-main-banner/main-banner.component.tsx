@@ -6,20 +6,26 @@ import Certificate from "@/public/assets/icons/certificate.svg";
 import Check from "@/public/assets/icons/check.svg";
 import IconScroll from "@/public/assets/icons/chevron-down.svg";
 import { clsxm } from "@/utils/twMerge.utils";
+import { getSession } from "@auth0/nextjs-auth0";
 import { MainBanner as MainBannerType } from "lib/__generated/sdk";
+import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
 interface MainBannerProps extends MainBannerType {
   className?: string;
 }
 
-const MainBanner = ({
+const MainBanner = async ({
   className,
   title,
   image,
   subtitle1,
   subtitle2,
   subtitle3,
-}: MainBannerProps): JSX.Element => {
+}: MainBannerProps) => {
+  const t = await getTranslations();
+  const session = await getSession();
+
   return (
     <div className="md:container md:mx-auto lg:my-6">
       <div
@@ -107,16 +113,18 @@ const MainBanner = ({
                 </div>
               </div>
 
-              <div className="mt-2 flex justify-between">
-                <Button
-                  as="a"
-                  href="#"
-                  variant="contained"
-                  className="w-full md:w-fit py-4 md:px-6 bg-primary_red"
-                >
-                  Login/Register
-                </Button>
-              </div>
+              {!session && (
+                <div className="mt-2 flex justify-between">
+                  <Button
+                    as={Link}
+                    href={"/api/auth/login"}
+                    variant="contained"
+                    className="w-full md:w-fit py-4 md:px-6 bg-primary_red"
+                  >
+                    {t("common.loginRegister")}
+                  </Button>
+                </div>
+              )}
               <IconScroll
                 className="text-white mx-auto my-6 md:hidden"
                 width={24}
