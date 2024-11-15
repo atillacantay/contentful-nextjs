@@ -4,7 +4,6 @@ import { getHeaderData } from "@/components/templates/header/header-gql";
 import { getMainNavigationData } from "@/components/templates/navigation/navigation-gql";
 import { ContentfulContentProvider } from "@/contentful-context";
 import { routing } from "@/i18n/routing";
-import ReactQueryProvider from "@/providers/react-query-provider";
 import { mapLocaleToContentfulLocale } from "@/utils/local-mapping";
 import { clsxm } from "@/utils/twMerge.utils";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
@@ -63,31 +62,29 @@ export default async function RootLayout({ children, params }: LayoutProps) {
         <body>
           <NextIntlClientProvider messages={messages}>
             <Suspense>
-              <ReactQueryProvider>
-                <ContentfulContentProvider>
-                  <div className={clsxm("group/layout")}>
-                    <Stack className="sticky top-0 z-20" direction="col">
-                      {headerData && (
-                        <Header
-                          {...headerData}
-                          navigationItems={headerNavigationData?.itemsCollection?.items.filter(
-                            Boolean
-                          )}
-                          userMenu={{ ...headerData.userMenu, isAuth: false }}
-                        />
-                      )}
-                    </Stack>
-                    <div id="layout-header-after" />
-                    {headerNavigationData && (
-                      <HeaderNavigation {...headerNavigationData} />
+              <ContentfulContentProvider>
+                <div className={clsxm("group/layout")}>
+                  <Stack className="sticky top-0 z-20" direction="col">
+                    {headerData && (
+                      <Header
+                        {...headerData}
+                        navigationItems={headerNavigationData?.itemsCollection?.items.filter(
+                          Boolean
+                        )}
+                        userMenu={{ ...headerData.userMenu, isAuth: false }}
+                      />
                     )}
-                    <main className="bg-zinc-50 dark:bg-goki_dark print:bg-white">
-                      {children}
-                    </main>
-                    {footerData && <Footer {...footerData} />}
-                  </div>
-                </ContentfulContentProvider>
-              </ReactQueryProvider>
+                  </Stack>
+                  <div id="layout-header-after" />
+                  {headerNavigationData && (
+                    <HeaderNavigation {...headerNavigationData} />
+                  )}
+                  <main className="bg-zinc-50 dark:bg-goki_dark print:bg-white">
+                    {children}
+                  </main>
+                  {footerData && <Footer {...footerData} />}
+                </div>
+              </ContentfulContentProvider>
             </Suspense>
           </NextIntlClientProvider>
           <SpeedInsights />
