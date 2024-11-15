@@ -21,7 +21,7 @@ const ProductImage = ({ product }: ProductImageProps) => {
 
   const Image = ({ image }: { image: Asset }) => (
     <ContentfulImage
-      className="block lg:w-full max-lg:max-h-[633px] mx-auto lg:rounded-2xl"
+      className="object-center object-contain mx-auto swiper-lazy"
       src={image.url || ""}
       width={image.width}
       height={image.height}
@@ -33,19 +33,15 @@ const ProductImage = ({ product }: ProductImageProps) => {
   return (
     images && (
       <Stack className="overflow-hidden lg:w-1/2">
-        {images.length > 1 ? (
-          <Stack className="[&_.navigation-sub-next]:pr-8  [&_.navigation-sub-prev]:pl-8">
-            <WrapperSwiper>
-              {images?.map((image, idx: number) => (
-                <SwiperSlide key={idx}>
-                  <Image image={image} />
-                </SwiperSlide>
-              ))}
-            </WrapperSwiper>
-          </Stack>
-        ) : (
-          <Image image={images[0]} />
-        )}
+        <Stack className="[&_.navigation-sub-next]:pr-8  [&_.navigation-sub-prev]:pl-8">
+          <WrapperSwiper>
+            {images?.map((image, idx: number) => (
+              <SwiperSlide key={idx}>
+                <Image image={image} />
+              </SwiperSlide>
+            ))}
+          </WrapperSwiper>
+        </Stack>
       </Stack>
     )
   );

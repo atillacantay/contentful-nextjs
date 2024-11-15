@@ -105,7 +105,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
               className="mb-4"
             >
               {rating && <Rate rate={rating} />}
-              <Stack className="max-lg:hidden">
+              <Stack className="hidden">
                 <Button
                   className="font-medium text-primary_red"
                   startIcon={<Heart fontSize={24} />}

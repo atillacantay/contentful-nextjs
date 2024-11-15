@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { NextResponse, type NextRequest } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-  const locale = getCurrentLocale();
+  const locale = await getCurrentLocale();
   const t = await getTranslations({ locale });
 
   const formData = await request.formData();
